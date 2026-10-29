@@ -1,0 +1,36 @@
+$ python scripts/medir_gemini_nube.py https://quechua-api.onrender.com --n 120 --espera 2  (GEMINI_MODELO=gemini-3.5-flash-lite)
+{
+ "url_api": "https://quechua-api.onrender.com",
+ "momento_utc": "2026-10-29T22:35:38+00:00",
+ "modelo": "gemini-3.5-flash-lite",
+ "regla": "v2 (medir_fidelidad.evaluar_fidelidad)",
+ "consultas": 120,
+ "afirmativas": 120,
+ "redactadas_por_gemini": 90,
+ "contradiccion_potencial": 0,
+ "contradiccion_potencial_pct": 0.0,
+ "sustituidas_por_fragmento_literal": 30,
+ "sustituidas_pct": 25.0,
+ "motivos_de_sustitucion": {
+  "verificador: forma o glosa ausentes del fragmento": 10,
+  "cuota agotada": 20
+ },
+ "errores_429": 20,
+ "latencia_servidor_ms": {
+  "p50": 772.1,
+  "p95": 1016.6,
+  "media": 736
+ },
+ "errores_http": 0
+}
+
+
+$ 5 consultas de prueba con Flash-Lite
+GEMINI_MODELO=gemini-3.5-flash-lite (Render), 5 consultas afirmativas, origen humo
+¿cómo se dice zorro en quechua wanka? -> En quechua wanka, «zorro» se dice Atuq. | redactado_por=gemini motivo=None | cliente 1298 ms, servidor 1089.0 ms
+how do you say fox in Wanka Quechua? -> In Wanka Quechua, «zorro» is Atuq. | redactado_por=gemini motivo=None | cliente 1023 ms, servidor 860.0 ms
+¿cómo se dice perro en quechua wanka? -> En quechua wanka, «perro» se dice Allqu, ashuti. | redactado_por=gemini motivo=None | cliente 977 ms, servidor 806.5 ms
+¿cómo se dice agua en quechua wanka? -> AGUA: Yaku. (agua clara) Chuyaq yaku. (agua (293274822-diccionario-quechua-Wanka-docx.pdf, | redactado_por=extractivo motivo=verificador: forma o glosa ausentes del fragmento | cliente 1210 ms, servidor 861.7 ms
+¿cómo se dice casa en quechua wanka? -> En quechua wanka, «casa» se dice Wasi. | redactado_por=gemini motivo=None | cliente 1194 ms, servidor 1036.4 ms
+
+Referencia Qwen local (B11): 0/109 contradicciones, 11/120 sustituidas, P50 2594 ms, P95 2681 ms

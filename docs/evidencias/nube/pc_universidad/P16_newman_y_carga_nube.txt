@@ -1,0 +1,34 @@
+$ npx newman run Asistente_Quechua_Wanka.postman_collection.json -e Asistente_Quechua_Wanka.nube.postman_environment.json
+  GET https://quechua-api.onrender.com/api/estado [200 OK, 1.24kB, 209ms]
+  POST https://quechua-api.onrender.com/api/consultas [200 OK, 1.77kB, 523ms]
+  POST https://quechua-api.onrender.com/api/consultas [200 OK, 1.53kB, 166ms]
+  POST https://quechua-api.onrender.com/api/consultas [200 OK, 1.86kB, 566ms]
+  GET https://quechua-api.onrender.com/api/historial [200 OK, 3.36kB, 206ms]
+  POST https://quechua-api.onrender.com/api/fuentes [201 Created, 1.17kB, 157ms]
+  GET https://quechua-api.onrender.com/api/fuentes [200 OK, 4.75kB, 135ms]
+  GET https://quechua-api.onrender.com/api/fuentes/05e7d724-81ac-4375-9a1e-c4bb96d0a521 [200 OK, 1.17kB, 141ms]
+  PUT https://quechua-api.onrender.com/api/fuentes/05e7d724-81ac-4375-9a1e-c4bb96d0a521 [200 OK, 1.18kB, 143ms]
+  POST https://quechua-api.onrender.com/api/fuentes [422 Unprocessable Entity, 901B, 139ms]
+  DELETE https://quechua-api.onrender.com/api/fuentes/05e7d724-81ac-4375-9a1e-c4bb96d0a521 [204 No Content, 767B, 137ms]
+  DELETE https://quechua-api.onrender.com/api/fuentes/no-existe [404 Not Found, 819B, 133ms]
+  GET https://quechua-api.onrender.com/api/corpus/documentos [200 OK, 1.21kB, 132ms]
+  POST https://quechua-api.onrender.com/api/corpus/documentos [422 Unprocessable Entity, 889B, 133ms]
+  POST https://quechua-api.onrender.com/api/corpus/reindexar [200 OK, 1.21kB, 8.4s]
+│                requests │                15 │                0 │
+│              assertions │                39 │                0 │
+│ average response time: 758ms [min: 132ms, max: 8.4s, s.d.: 2s] │
+
+$ python scripts/humo_nube.py https://quechua-api.onrender.com --carga 500 --lote 25 --espera 2   (TOKEN_PRUEBAS en entorno, origen carga)
+consultas = 500
+duracion_s = 265.7
+tps_incluyendo_esperas = 1.88
+tps_sin_esperas = 2.22
+p50_ms = 484.4
+p95_ms = 623.5
+media_ms = 451.3
+errores = 0
+codigos = {'200': 500}
+consultas_por_origen_tras_la_carga = {'carga': 500, 'usuario': 6, 'humo': 2}
+base_demostracion = True
+Nota: durante la carga Gemini respondia 404 (gemini-2.5-flash retirado): se uso el respaldo extractivo; mide API + Neon, sin cuota de Gemini.
+Nota: las 6 consultas `usuario` son las 3 consultas de Newman x 2 corridas (Newman no envia token de pruebas).

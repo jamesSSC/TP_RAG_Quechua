@@ -1,0 +1,822 @@
+{
+ "url_api": "https://quechua-api.onrender.com",
+ "momento_utc": "2026-10-29_2219",
+ "token_pruebas_usado": true,
+ "casos": [
+  {
+   "id": "C-01",
+   "historia": "HU-03/HU-07",
+   "entrada": "¿cómo se dice zorro en quechua wanka?",
+   "esperado": {
+    "abstenida": false
+   },
+   "obtenido": {
+    "estado": 200,
+    "abstenida": false,
+    "texto": "ZORRO: Atuq. (293274822-diccionario-quechua-Wanka-docx.pdf, p. 37)",
+    "via_respaldo": "similitud",
+    "similitud_maxima": 0.6095,
+    "probabilidad_cobertura": 0.9995,
+    "probabilidad_pasajes": null,
+    "redactado_por": "extractivo",
+    "motivo_redaccion": "tiempo agotado (15 s)",
+    "latencia_servidor_ms": 15197.2,
+    "pasajes": 0,
+    "cita": "293274822-diccionario-quechua-Wanka-docx.pdf, p. 37"
+   },
+   "primer_intento_ms": 15432.3,
+   "p50_ms": 15396.0,
+   "p95_ms": 15590.6,
+   "estado": "APROBADO"
+  },
+  {
+   "id": "C-03",
+   "historia": "HU-05",
+   "entrada": "how do you say fox in Wanka Quechua?",
+   "esperado": {
+    "abstenida": false
+   },
+   "obtenido": {
+    "estado": 200,
+    "abstenida": false,
+    "texto": "ZORRO: Atuq. (293274822-diccionario-quechua-Wanka-docx.pdf, p. 37)",
+    "via_respaldo": "similitud",
+    "similitud_maxima": 0.6095,
+    "probabilidad_cobertura": 1.0,
+    "probabilidad_pasajes": null,
+    "redactado_por": "extractivo",
+    "motivo_redaccion": "tiempo agotado (15 s)",
+    "latencia_servidor_ms": 15264.3,
+    "pasajes": 0,
+    "cita": "293274822-diccionario-quechua-Wanka-docx.pdf, p. 37"
+   },
+   "primer_intento_ms": 15410.5,
+   "p50_ms": 15476.6,
+   "p95_ms": 15503.5,
+   "estado": "APROBADO"
+  },
+  {
+   "id": "C-02",
+   "historia": "HU-06",
+   "entrada": "¿cómo se dice criptomoneda en quechua wanka?",
+   "esperado": {
+    "abstenida": true
+   },
+   "obtenido": {
+    "estado": 200,
+    "abstenida": true,
+    "texto": "No dispongo de respaldo documental para esa consulta en el corpus indexado. No propongo ninguna traducción, para evitar introducir una forma no documentada.",
+    "via_respaldo": null,
+    "similitud_maxima": 0.0502,
+    "probabilidad_cobertura": 0.0,
+    "probabilidad_pasajes": null,
+    "redactado_por": null,
+    "motivo_redaccion": null,
+    "latencia_servidor_ms": 11.1,
+    "pasajes": 0
+   },
+   "primer_intento_ms": 157.3,
+   "p50_ms": 154.5,
+   "p95_ms": 171.3,
+   "estado": "APROBADO"
+  },
+  {
+   "id": "HU-04",
+   "historia": "HU-04/RF-15",
+   "entrada": "¿Qué sufijo se usa para marcar localización espacial o temporal?",
+   "esperado": {
+    "abstenida": true,
+    "pasajes": true
+   },
+   "obtenido": {
+    "estado": 200,
+    "abstenida": true,
+    "texto": "No tengo una respuesta confirmada para esa consulta. Estos pasajes del corpus podrían tratarla; léelos y juzga tú.",
+    "via_respaldo": null,
+    "similitud_maxima": 0.2781,
+    "probabilidad_cobertura": 0.5119,
+    "probabilidad_pasajes": 0.8005,
+    "redactado_por": null,
+    "motivo_redaccion": null,
+    "latencia_servidor_ms": 97.7,
+    "pasajes": 3
+   },
+   "primer_intento_ms": 234.1,
+   "p50_ms": 201.1,
+   "p95_ms": 208.7,
+   "estado": "APROBADO"
+  },
+  {
+   "id": "C-05",
+   "historia": "HU-06",
+   "entrada": "¿Cuál es el procedimiento para renovar un pasaporte?",
+   "esperado": {
+    "abstenida": true
+   },
+   "obtenido": {
+    "estado": 200,
+    "abstenida": true,
+    "texto": "No dispongo de respaldo documental para esa consulta en el corpus indexado. No propongo ninguna traducción, para evitar introducir una forma no documentada.",
+    "via_respaldo": null,
+    "similitud_maxima": 0.2971,
+    "probabilidad_cobertura": 0.0167,
+    "probabilidad_pasajes": null,
+    "redactado_por": null,
+    "motivo_redaccion": null,
+    "latencia_servidor_ms": 52.7,
+    "pasajes": 0
+   },
+   "primer_intento_ms": 193.9,
+   "p50_ms": 199.1,
+   "p95_ms": 208.2,
+   "estado": "APROBADO"
+  },
+  {
+   "id": "C-07-vacia",
+   "historia": "Validacion",
+   "entrada": "",
+   "esperado": {
+    "estado": 422
+   },
+   "obtenido": {
+    "estado": 422
+   },
+   "primer_intento_ms": 125.9,
+   "p50_ms": 130.9,
+   "p95_ms": 193.2,
+   "estado": "APROBADO"
+  },
+  {
+   "id": "C-07-larga",
+   "historia": "Validacion",
+   "entrada": "aaaaaaaaaaaaaaaaaaaa... (301 caracteres)",
+   "esperado": {
+    "estado": 422
+   },
+   "obtenido": {
+    "estado": 422
+   },
+   "primer_intento_ms": 124.7,
+   "p50_ms": 121.1,
+   "p95_ms": 130.4,
+   "estado": "APROBADO"
+  },
+  {
+   "id": "HU-08.1-cubierta",
+   "historia": "HU-08.1",
+   "entrada": "¿cómo se dice zorro en quechua wanka?",
+   "obtenido": {
+    "texto": "¿cómo se dice zorro en quechua wanka?",
+    "caracteristicas": {
+     "similitud_maxima": 0.6095310757848071,
+     "margen_top1_top2": 0.39973594245077615,
+     "similitud_media_top5": 0.24035453904555962,
+     "dispersion_top5": 0.18802233882088415,
+     "similitud_prosa_maxima": 0.11333412895923514,
+     "similitud_prosa_media_top3": 0.11122471045981537,
+     "palabras_compartidas_prosa": 1.0,
+     "proporcion_compartida_prosa": 0.3333333333333333,
+     "terminos_consulta": 1.0,
+     "proporcion_fuera_vocabulario": 0.0,
+     "coincidencia_lema": 1.0
+    },
+    "cobertura": {
+     "probabilidad": 0.9994571211998647,
+     "corte": 0.25,
+     "decision": "con respaldo probable",
+     "bloquearia_respuesta": false
+    },
+    "pasajes": {
+     "probabilidad": 0.9981737458551642,
+     "corte": 0.5,
+     "decision": "mostrar pasajes"
+    }
+   },
+   "primer_intento_ms": 176.8,
+   "p50_ms": 197.7,
+   "p95_ms": 287.2,
+   "estado": "APROBADO"
+  },
+  {
+   "id": "HU-08.1-fuera",
+   "historia": "HU-08.1",
+   "entrada": "¿cómo se dice criptomoneda en quechua wanka?",
+   "obtenido": {
+    "texto": "¿cómo se dice criptomoneda en quechua wanka?",
+    "caracteristicas": {
+     "similitud_maxima": 0.05016882127644186,
+     "margen_top1_top2": 0.0014590980972927284,
+     "similitud_media_top5": 0.04260735800930022,
+     "dispersion_top5": 0.005783260576783741,
+     "similitud_prosa_maxima": 0.03737887556064772,
+     "similitud_prosa_media_top3": 0.03428621139115766,
+     "palabras_compartidas_prosa": 0.0,
+     "proporcion_compartida_prosa": 0.0,
+     "terminos_consulta": 1.0,
+     "proporcion_fuera_vocabulario": 1.0,
+     "coincidencia_lema": 0.0
+    },
+    "cobertura": {
+     "probabilidad": 1.0725609585259604e-05,
+     "corte": 0.25,
+     "decision": "sin respaldo probable",
+     "bloquearia_respuesta": true
+    },
+    "pasajes": {
+     "probabilidad": 1.6521657148910805e-05,
+     "corte": 0.5,
+     "decision": "retirar pasajes"
+    }
+   },
+   "primer_intento_ms": 203.4,
+   "p50_ms": 143.4,
+   "p95_ms": 204.5,
+   "estado": "APROBADO"
+  }
+ ],
+ "endpoints": {
+  "historial": {
+   "estado": 200,
+   "primer_intento_ms": 152.6,
+   "p50_ms": 148.3,
+   "p95_ms": 155.2,
+   "muestra": [
+    {
+     "consulta": "¿Cuál es el procedimiento para renovar un pasaporte?",
+     "respuesta": "No dispongo de respaldo documental para esa consulta en el corpus indexado. No propongo ninguna traducción, para evitar introducir una forma no documentada.",
+     "abstenida": true,
+     "similitud_maxima": 0.2971,
+     "via_respaldo": null,
+     "momento": "2026-10-29T22:22:11.921705Z",
+     "probabilidad_cobertura": 0.016747105343672696
+    },
+    {
+     "consulta": "¿Cuál es el procedimiento para renovar un pasaporte?",
+     "respuesta": "No dispongo de respaldo documental para esa consulta en el corpus indexado. No propongo ninguna traducción, para evitar introducir una forma no documentada.",
+     "abstenida": true,
+     "similitud_maxima": 0.2971,
+     "via_respaldo": null,
+     "momento": "2026-10-29T22:22:11.715458Z",
+     "probabilidad_cobertura": 0.016747105343672696
+    },
+    {
+     "consulta": "¿Cuál es el procedimiento para renovar un pasaporte?",
+     "respuesta": "No dispongo de respaldo documental para esa consulta en el corpus indexado. No propongo ninguna traducción, para evitar introducir una forma no documentada.",
+     "abstenida": true,
+     "similitud_maxima": 0.2971,
+     "via_respaldo": null,
+     "momento": "2026-10-29T22:22:11.508866Z",
+     "probabilidad_cobertura": 0.016747105343672696
+    }
+   ]
+  },
+  "demanda": {
+   "estado": 200,
+   "primer_intento_ms": 199.7,
+   "p50_ms": 192.8,
+   "p95_ms": 213.7,
+   "muestra": {
+    "minimo": 100,
+    "modo": "real",
+    "aviso": null,
+    "por_origen": {
+     "carga": 500,
+     "humo": 35,
+     "usuario": 6
+    },
+    "estadisticas": {
+     "total": 6,
+     "abstenidas": 2,
+     "abstenciones_por_predictor": 0,
+     "probabilidad_cobertura_media": 0.6629389486656208,
+     "latencia_media_ms": 244.81666666666663,
+     "latencia_p95_ms": 393.3,
+     "por_idioma": {
+      "en": 2,
+      "es": 4
+     },
+     "por_via": {
+      "lema": 2,
+      "similitud": 2,
+      "abstencion": 2
+     },
+     "respaldo_por_documento": {
+      "293274822-diccionario-quechua-Wanka-docx.pdf": 4
+     },
+     "origen": "procedimientos almacenados"
+    },
+    "suficiente": false,
+    "mensaje": "Historial insuficiente: hay 6 consultas registradas y se necesitan al menos 100. No se emite priorización. Otras 535 consultas de prueba no cuentan como demanda real.",
+    "prioridades": []
+   }
+  },
+  "demanda_con_sinteticas": {
+   "estado": 200,
+   "primer_intento_ms": 205.8,
+   "p50_ms": 205.2,
+   "p95_ms": 305.0,
+   "muestra": {
+    "minimo": 100,
+    "modo": "demostracion",
+    "aviso": "Demostración con 535 consultas generadas por la prueba de carga; no es demanda real",
+    "por_origen": {
+     "carga": 500,
+     "humo": 35,
+     "usuario": 6
+    },
+    "estadisticas": {
+     "total": 541,
+     "abstenidas": 186,
+     "abstenciones_por_predictor": 0,
+     "probabilidad_cobertura_media": 0.7237839649573652,
+     "latencia_media_ms": 650.0635859519408,
+     "latencia_p95_ms": 521.7,
+     "por_idioma": {
+      "es": 450,
+      "en": 91
+     },
+     "por_via": {
+      "lema": 87,
+      "abstencion": 186,
+      "similitud": 268
+     },
+     "respaldo_por_documento": {
+      "293274822-diccionario-quechua-Wanka-docx.pdf": 355,
+      "vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf": 83
+     },
+     "origen": "procedimientos almacenados"
+    },
+    "suficiente": true,
+    "mensaje": null,
+    "terminos_distintos_no_cubiertos": 3,
+    "prioridades": [
+     {
+      "termino": "criptomoneda",
+      "consultas": 91,
+      "probabilidad_cobertura_media": 1.0725609585259604e-05,
+      "demanda_insatisfecha": 90.999,
+      "diagnostico": "ampliar el corpus"
+     },
+     {
+      "termino": "que sufijo se usa para marcar localizacion espacial o temporal",
+      "consultas": 89,
+      "probabilidad_cobertura_media": 0.5118897703558368,
+      "demanda_insatisfecha": 43.4418,
+      "diagnostico": "revisar la recuperación"
+     },
+     {
+      "termino": "cual es el procedimiento para renovar un pasaporte",
+      "consultas": 6,
+      "probabilidad_cobertura_media": 0.016747105343672696,
+      "demanda_insatisfecha": 5.8995,
+      "diagnostico": "ampliar el corpus"
+     }
+    ]
+   }
+  },
+  "modelos": {
+   "estado": 200,
+   "primer_intento_ms": 136.6,
+   "p50_ms": 124.2,
+   "p95_ms": 127.1,
+   "muestra": [
+    {
+     "clave": "cobertura",
+     "disponible": true,
+     "nombre": "Predictor de cobertura documental",
+     "historia": "HU-08.1",
+     "requisito": "RF-14",
+     "algoritmo": "Regresion logistica (scikit-learn), caracteristicas estandarizadas",
+     "entrenado": "2026-10-29T03:58:10+00:00",
+     "n_entrenamiento": 415,
+     "corte_operacion": 0.25,
+     "validacion_cruzada": {
+      "n": 415,
+      "auc_roc": 0.9961,
+      "exactitud": 0.9518,
+      "precision": 0.9851,
+      "sensibilidad": 0.9429,
+      "especificidad": 0.9704,
+      "f1": 0.9635,
+      "matriz_confusion": {
+       "vp": 264,
+       "fp": 4,
+       "vn": 131,
+       "fn": 16
+      },
+      "corte": 0.5
+     },
+     "coeficientes": {
+      "similitud_maxima": 1.0218,
+      "margen_top1_top2": 0.9852,
+      "similitud_media_top5": -0.0317,
+      "dispersion_top5": 1.2429,
+      "similitud_prosa_maxima": 0.7584,
+      "similitud_prosa_media_top3": -0.8283,
+      "palabras_compartidas_prosa": 1.2113,
+      "proporcion_compartida_prosa": 1.0978,
+      "terminos_consulta": -1.1049,
+      "proporcion_fuera_vocabulario": -1.8264,
+      "coincidencia_lema": 1.5836
+     },
+     "comparacion": {
+      "regresion_logistica": {
+       "n": 415,
+       "auc_roc": 0.9961,
+       "exactitud": 0.9518,
+       "precision": 0.9851,
+       "sensibilidad": 0.9429,
+       "especificidad": 0.9704,
+       "f1": 0.9635,
+       "matriz_confusion": {
+        "vp": 264,
+        "fp": 4,
+        "vn": 131,
+        "fn": 16
+       },
+       "corte": 0.5
+      },
+      "bosque_aleatorio": {
+       "n": 415,
+       "auc_roc": 0.9922,
+       "exactitud": 0.9566,
+       "precision": 0.9816,
+       "sensibilidad": 0.9536,
+       "especificidad": 0.963,
+       "f1": 0.9674,
+       "matriz_confusion": {
+        "vp": 267,
+        "fp": 5,
+        "vn": 130,
+        "fn": 13
+       },
+       "corte": 0.5
+      },
+      "linea_base_mayoritaria": {
+       "n": 415,
+       "auc_roc": 0.5,
+       "exactitud": 0.6747,
+       "precision": 0.6747,
+       "sensibilidad": 1.0,
+       "especificidad": 0.0,
+       "f1": 0.8058,
+       "matriz_confusion": {
+        "vp": 280,
+        "fp": 135,
+        "vn": 0,
+        "fn": 0
+       },
+       "corte": 0.5
+      },
+      "regla_umbral_pmv1": {
+       "n": 415,
+       "auc_roc": 0.9089,
+       "exactitud": 0.8771,
+       "precision": 1.0,
+       "sensibilidad": 0.8179,
+       "especificidad": 1.0,
+       "f1": 0.8998,
+       "matriz_confusion": {
+        "vp": 229,
+        "fp": 0,
+        "vn": 135,
+        "fn": 51
+       },
+       "corte": 0.5
+      }
+     },
+     "por_particion": {
+      "A": {
+       "n": 120,
+       "prob_media": 0.9946,
+       "aciertos_corte_05": 120
+      },
+      "B": {
+       "n": 60,
+       "prob_media": 0.9969,
+       "aciertos_corte_05": 60
+      },
+      "C": {
+       "n": 28,
+       "prob_media": 0.0198,
+       "aciertos_corte_05": 27
+      },
+      "D": {
+       "n": 40,
+       "prob_media": 0.9888,
+       "aciertos_corte_05": 40
+      },
+      "E": {
+       "n": 60,
+       "prob_media": 0.7496,
+       "aciertos_corte_05": 44
+      },
+      "F": {
+       "n": 107,
+       "prob_media": 0.068,
+       "aciertos_corte_05": 104
+      }
+     },
+     "roc": {
+      "fpr": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0074,
+       0.0074,
+       0.0148,
+       0.0148,
+       0.037,
+       0.037,
+       0.0444,
+       0.0444,
+       0.0519,
+       0.0519,
+       0.0593,
+       0.0593,
+       0.0667,
+       0.0667,
+       0.1259,
+       0.1259,
+       0.1926,
+       0.1926,
+       1.0
+      ],
+      "tpr": [
+       0.0,
+       0.0036,
+       0.1214,
+       0.1286,
+       0.1357,
+       0.1429,
+       0.3,
+       0.3071,
+       0.3393,
+       0.3464,
+       0.3857,
+       0.3929,
+       0.4143,
+       0.4286,
+       0.65,
+       0.6571,
+       0.7643,
+       0.7714,
+       0.9214,
+       0.9214,
+       0.9321,
+       0.9321,
+       0.9429,
+       0.9429,
+       0.9571,
+       0.9571,
+       0.9607,
+       0.9607,
+       0.9786,
+       0.9786,
+       0.9893,
+       0.9893,
+       0.9929,
+       0.9929,
+       0.9964,
+       0.9964,
+       1.0,
+       1.0
+      ]
+     }
+    },
+    {
+     "clave": "pasajes",
+     "disponible": true,
+     "nombre": "Predictor de relevancia de pasajes",
+     "historia": "HU-04",
+     "requisito": "RF-15",
+     "algoritmo": "Regresion logistica (scikit-learn), caracteristicas estandarizadas",
+     "entrenado": "2026-10-29T03:58:10+00:00",
+     "n_entrenamiento": 167,
+     "corte_operacion": 0.5,
+     "validacion_cruzada": {
+      "n": 167,
+      "auc_roc": 0.9804,
+      "exactitud": 0.9222,
+      "precision": 0.8507,
+      "sensibilidad": 0.95,
+      "especificidad": 0.9065,
+      "f1": 0.8976,
+      "matriz_confusion": {
+       "vp": 57,
+       "fp": 10,
+       "vn": 97,
+       "fn": 3
+      },
+      "corte": 0.5
+     },
+     "coeficientes": {
+      "similitud_maxima": 0.0332,
+      "margen_top1_top2": 0.4117,
+      "similitud_media_top5": -0.6861,
+      "dispersion_top5": 1.0787,
+      "similitud_prosa_maxima": 0.7722,
+      "similitud_prosa_media_top3": -0.0016,
+      "palabras_compartidas_prosa": 1.603,
+      "proporcion_compartida_prosa": 1.4654,
+      "terminos_consulta": -0.7946,
+      "proporcion_fuera_vocabulario": -1.3392,
+      "coincidencia_lema": 0.0
+     },
+     "comparacion": {
+      "regresion_logistica": {
+       "n": 167,
+       "auc_roc": 0.9804,
+       "exactitud": 0.9222,
+       "precision": 0.8507,
+       "sensibilidad": 0.95,
+       "especificidad": 0.9065,
+       "f1": 0.8976,
+       "matriz_confusion": {
+        "vp": 57,
+        "fp": 10,
+        "vn": 97,
+        "fn": 3
+       },
+       "corte": 0.5
+      },
+      "bosque_aleatorio": {
+       "n": 167,
+       "auc_roc": 0.9732,
+       "exactitud": 0.9162,
+       "precision": 0.8594,
+       "sensibilidad": 0.9167,
+       "especificidad": 0.9159,
+       "f1": 0.8871,
+       "matriz_confusion": {
+        "vp": 55,
+        "fp": 9,
+        "vn": 98,
+        "fn": 5
+       },
+       "corte": 0.5
+      },
+      "linea_base_mayoritaria": {
+       "n": 167,
+       "auc_roc": 0.5,
+       "exactitud": 0.6407,
+       "precision": 0.0,
+       "sensibilidad": 0.0,
+       "especificidad": 1.0,
+       "f1": 0.0,
+       "matriz_confusion": {
+        "vp": 0,
+        "fp": 0,
+        "vn": 107,
+        "fn": 60
+       },
+       "corte": 0.5
+      },
+      "regla_palabras_pmv1": {
+       "n": 167,
+       "auc_roc": 0.6877,
+       "exactitud": 0.6467,
+       "precision": 0.5051,
+       "sensibilidad": 0.8333,
+       "especificidad": 0.5421,
+       "f1": 0.6289,
+       "matriz_confusion": {
+        "vp": 50,
+        "fp": 49,
+        "vn": 58,
+        "fn": 10
+       },
+       "corte": 0.5
+      }
+     },
+     "regla_mas_modelo": {
+      "corte": 0.5,
+      "cobertura_E": 0.8,
+      "falsos_positivos_F": 0.0935,
+      "f1": 0.8136
+     },
+     "roc": {
+      "fpr": [
+       0.0,
+       0.0,
+       0.0,
+       0.0093,
+       0.0093,
+       0.0187,
+       0.0187,
+       0.028,
+       0.028,
+       0.0374,
+       0.0374,
+       0.0654,
+       0.0654,
+       0.0841,
+       0.0841,
+       0.0935,
+       0.0935,
+       0.1215,
+       0.1215,
+       0.243,
+       0.243,
+       1.0
+      ],
+      "tpr": [
+       0.0,
+       0.0167,
+       0.6833,
+       0.6833,
+       0.7167,
+       0.7167,
+       0.7833,
+       0.7833,
+       0.8167,
+       0.8167,
+       0.8333,
+       0.8333,
+       0.9167,
+       0.9167,
+       0.9333,
+       0.9333,
+       0.95,
+       0.95,
+       0.9833,
+       0.9833,
+       1.0,
+       1.0
+      ]
+     }
+    }
+   ]
+  }
+ },
+ "arranque_en_frio_ms": 240.8,
+ "estado": {
+  "fragmentos_indexados": 3605,
+  "umbral_abstencion": 0.48,
+  "generador_disponible": true,
+  "base_datos_disponible": true,
+  "modelo": "gemini-3.8-flash",
+  "predictores_disponibles": true,
+  "consistencia": {
+   "estado": "ok",
+   "avisos": []
+  },
+  "consultas_por_origen": {
+   "carga": 500,
+   "usuario": 6,
+   "humo": 5
+  },
+  "base_demostracion": true,
+  "entorno": "staging",
+  "motor_base_datos": "postgres",
+  "origen_corpus": "postgres",
+  "generador": "gemini",
+  "modelos_ml": {
+   "cobertura_hu08_1": true,
+   "pasajes_rf15": true
+  },
+  "documentos_corpus": 8
+ },
+ "crud_fuentes": {
+  "pasos": {
+   "crear": {
+    "estado": 201,
+    "ms": 150.3
+   },
+   "listar": {
+    "estado": 200,
+    "ms": 141.0,
+    "total": 9
+   },
+   "actualizar": {
+    "estado": 200,
+    "ms": 155.9
+   },
+   "eliminar": {
+    "estado": 204,
+    "ms": 146.7
+   },
+   "tras_eliminar": {
+    "estado": 404
+   }
+  },
+  "estado": "APROBADO"
+ },
+ "rechazados": []
+}

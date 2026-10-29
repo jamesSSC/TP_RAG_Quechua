@@ -152,6 +152,7 @@ export default function App() {
 
             <Respuesta resultado={resultado} />
             <Historial
+              enLaNube={Boolean(estado?.entorno && estado.entorno !== "local")}
               entradas={historial.entradas}
               disponible={historial.disponible}
               onBorrar={borrar}

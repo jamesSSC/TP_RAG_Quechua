@@ -1,0 +1,24 @@
+{
+ "url_api": "https://quechua-api.onrender.com",
+ "momento_utc": "2026-10-29_2210",
+ "token_pruebas_usado": true,
+ "consultas": 500,
+ "lote": 25,
+ "espera_entre_lotes_s": 2.0,
+ "duracion_s": 265.7,
+ "tps_incluyendo_esperas": 1.88,
+ "tps_sin_esperas": 2.22,
+ "p50_ms": 484.4,
+ "p95_ms": 623.5,
+ "media_ms": 451.3,
+ "errores": 0,
+ "codigos": {
+  "200": 500
+ },
+ "consultas_por_origen_tras_la_carga": {
+  "carga": 500,
+  "usuario": 6,
+  "humo": 2
+ },
+ "base_demostracion": true
+}

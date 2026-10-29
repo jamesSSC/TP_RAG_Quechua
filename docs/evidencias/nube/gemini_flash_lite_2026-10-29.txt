@@ -1,0 +1,6 @@
+GEMINI_MODELO=gemini-3.5-flash-lite (Render), 5 consultas afirmativas, origen humo
+¿cómo se dice zorro en quechua wanka? -> En quechua wanka, «zorro» se dice Atuq. | redactado_por=gemini motivo=None | cliente 1298 ms, servidor 1089.0 ms
+how do you say fox in Wanka Quechua? -> In Wanka Quechua, «zorro» is Atuq. | redactado_por=gemini motivo=None | cliente 1023 ms, servidor 860.0 ms
+¿cómo se dice perro en quechua wanka? -> En quechua wanka, «perro» se dice Allqu, ashuti. | redactado_por=gemini motivo=None | cliente 977 ms, servidor 806.5 ms
+¿cómo se dice agua en quechua wanka? -> AGUA: Yaku. (agua clara) Chuyaq yaku. (agua (293274822-diccionario-quechua-Wanka-docx.pdf, | redactado_por=extractivo motivo=verificador: forma o glosa ausentes del fragmento | cliente 1210 ms, servidor 861.7 ms
+¿cómo se dice casa en quechua wanka? -> En quechua wanka, «casa» se dice Wasi. | redactado_por=gemini motivo=None | cliente 1194 ms, servidor 1036.4 ms

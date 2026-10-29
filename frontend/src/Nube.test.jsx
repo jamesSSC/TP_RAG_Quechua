@@ -112,3 +112,14 @@ describe("despliegue en la nube", () => {
     expect((await screen.findByTestId("redactado-por")).textContent).toBe("Redactado por: Gemini");
   });
 });
+
+describe("textos de la nube", () => {
+  it("no menciona Ollama ni 'este equipo' en staging", async () => {
+    simularApi(ESTADO_NUBE);
+    render(<App />);
+    await screen.findByTestId("pie-entorno");
+    expect(screen.getByTestId("estado-generador").textContent).toContain("Gemini configurado");
+    expect(screen.queryByTestId("estado-ollama")).toBeNull();
+    expect(screen.queryByTestId("aviso-sin-ollama")).toBeNull();
+  });
+});

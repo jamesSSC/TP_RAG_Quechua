@@ -4,7 +4,13 @@ function etiquetaDeEstado(entrada) {
   return "respondida";
 }
 
-export default function Historial({ entradas, disponible = true, onBorrar, borrando = false }) {
+export default function Historial({
+  entradas,
+  disponible = true,
+  onBorrar,
+  borrando = false,
+  enLaNube = false,
+}) {
   const confirmarBorrado = () => {
     if (window.confirm("¿Borrar todo el historial de consultas de este equipo?")) onBorrar();
   };
@@ -26,8 +32,9 @@ export default function Historial({ entradas, disponible = true, onBorrar, borra
       </div>
 
       <p className="historial__privacidad">
-        No se guardan datos personales; las consultas se almacenan solo en este equipo y puedes
-        borrarlas.
+        {enLaNube
+          ? "No se guardan datos personales. En la versión en la nube las consultas se guardan en la base de datos del servicio, compartida por todos los visitantes."
+          : "No se guardan datos personales; las consultas se almacenan solo en este equipo y puedes borrarlas."}
       </p>
 
       {!disponible && (

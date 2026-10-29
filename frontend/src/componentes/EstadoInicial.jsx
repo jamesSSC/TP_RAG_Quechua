@@ -23,16 +23,32 @@ export default function EstadoInicial({ estado }) {
     );
   }
   const hayOllama = Boolean(estado.generador_disponible);
+  // En la nube (ADR-032) no hay Ollama: redacta Gemini o el extractivo sin modelo.
+  const enLaNube = estado.generador === "gemini" || estado.generador === "extractivo";
+  const nombreGenerador = estado.generador === "gemini" ? "Gemini" : "Extractivo";
   return (
     <section className="estado" aria-label="Estado del sistema" data-testid="estado-inicial">
       <h2 className="estado__titulo">Estado del sistema</h2>
       <ul className="estado__lista">
-        <Indicador
-          testId="estado-ollama"
-          nombre="Ollama"
-          ok={hayOllama}
-          detalle={hayOllama ? "responde" : "no responde"}
-        />
+        {enLaNube ? (
+          <Indicador
+            testId="estado-generador"
+            nombre="Redacción"
+            ok={hayOllama}
+            detalle={
+              hayOllama
+                ? `${nombreGenerador} configurado`
+                : "sin clave: fragmento literal citado"
+            }
+          />
+        ) : (
+          <Indicador
+            testId="estado-ollama"
+            nombre="Ollama"
+            ok={hayOllama}
+            detalle={hayOllama ? "responde" : "no responde"}
+          />
+        )}
         <Indicador
           testId="estado-modelo"
           nombre="Modelo"
@@ -52,7 +68,7 @@ export default function EstadoInicial({ estado }) {
           detalle={estado.base_datos_disponible ? "conectada" : "sin base: no se guarda el historial"}
         />
       </ul>
-      {!hayOllama && (
+      {!hayOllama && !enLaNube && (
         <output className="estado__aviso" data-testid="aviso-sin-ollama">
           Ollama no responde: las respuestas muestran el fragmento literal con su documento y página,
           sin redacción. Para activar la redacción inicie Ollama y descargue el modelo {estado.modelo}.

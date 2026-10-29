@@ -1,0 +1,18 @@
+$ python scripts/humo_nube.py https://quechua-api.onrender.com   (origen humo, GEMINI_MODELO=gemini-3.8-flash)
+estado primer intento ms = 240.8
+C-01             APROBADO  primer=15432.3 p50=15396.0 p95=15590.6 | redactado_por=extractivo motivo=tiempo agotado (15 s) cita=293274822-diccionario-quechua-Wanka-docx.pdf, p. 37
+C-03             APROBADO  primer=15410.5 p50=15476.6 p95=15503.5 | redactado_por=extractivo motivo=tiempo agotado (15 s) cita=293274822-diccionario-quechua-Wanka-docx.pdf, p. 37
+C-02             APROBADO  primer=157.3 p50=154.5 p95=171.3 | redactado_por=None motivo=None cita=None
+HU-04            APROBADO  primer=234.1 p50=201.1 p95=208.7 | redactado_por=None motivo=None cita=None
+C-05             APROBADO  primer=193.9 p50=199.1 p95=208.2 | redactado_por=None motivo=None cita=None
+C-07-vacia       APROBADO  primer=125.9 p50=130.9 p95=193.2 | redactado_por=None motivo=None cita=None
+C-07-larga       APROBADO  primer=124.7 p50=121.1 p95=130.4 | redactado_por=None motivo=None cita=None
+HU-08.1-cubierta APROBADO  primer=176.8 p50=197.7 p95=287.2 | redactado_por=None motivo=None cita=None
+HU-08.1-fuera    APROBADO  primer=203.4 p50=143.4 p95=204.5 | redactado_por=None motivo=None cita=None
+GET historial                200 p50=148.3 p95=155.2
+GET demanda                  200 p50=192.8 p95=213.7
+GET demanda_con_sinteticas   200 p50=205.2 p95=305.0
+GET modelos                  200 p50=124.2 p95=127.1
+CRUD fuentes APROBADO {'crear': 201, 'listar': 200, 'actualizar': 200, 'eliminar': 204, 'tras_eliminar': 404}
+rechazados = []
+Gemini 3.8 Flash (plan gratuito): 1 redaccion OK (10.9 s), 1 HTTP 503, resto tiempo agotado (15 s) -> fragmento literal citado (salvaguarda D-6).

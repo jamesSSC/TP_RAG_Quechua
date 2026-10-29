@@ -1,0 +1,115 @@
+newman
+
+Asistente de consulta del quechua wanka
+
+□ 1. Sistema
+└ Estado del sistema
+  GET https://quechua-api.onrender.com/api/estado [200 OK, 1.24kB, 209ms]
+  √  Responde 200
+  √  El corpus esta indexado
+  √  El generador esta disponible
+  √  La base de datos esta conectada
+  √  El umbral es el calibrado
+
+□ 2. Consulta del corpus
+└ HU-03 y HU-07: consulta con respaldo documental
+  POST https://quechua-api.onrender.com/api/consultas [200 OK, 1.77kB, 523ms]
+  √  Responde 200
+  √  No se abstiene
+  √  Cita al menos un fragmento
+  √  RNF-08: cada fragmento indica documento y pagina
+  √  Incluye el aviso de alcance
+
+└ HU-06: abstencion ante consulta sin respaldo
+  POST https://quechua-api.onrender.com/api/consultas [200 OK, 1.53kB, 166ms]
+  √  Responde 200
+  √  Se abstiene
+  √  No propone ningun fragmento
+  √  La similitud queda por debajo del umbral
+
+└ HU-05: consulta en ingles con traduccion previa
+  POST https://quechua-api.onrender.com/api/consultas [200 OK, 1.86kB, 566ms]
+  √  Responde 200
+  √  Detecta el ingles
+  √  Registra con que termino se busco
+  √  No se abstiene
+
+└ RF-11: historial de la sesion
+  GET https://quechua-api.onrender.com/api/historial [200 OK, 3.36kB, 206ms]
+  √  Responde 200
+  √  Devuelve las consultas registradas
+  √  Registra tambien las abstenciones
+
+□ 3. Gestion de fuentes (CRUD)
+└ Crear fuente
+  POST https://quechua-api.onrender.com/api/fuentes [201 Created, 1.17kB, 157ms]
+  √  Responde 201
+  √  Calcula la cobertura de extraccion
+
+└ Listar fuentes
+  GET https://quechua-api.onrender.com/api/fuentes [200 OK, 4.75kB, 135ms]
+  √  Responde 200
+  √  Devuelve al menos una fuente
+
+└ Obtener fuente por identificador
+  GET https://quechua-api.onrender.com/api/fuentes/05e7d724-81ac-4375-9a1e-c4bb96d0a521 [200 OK, 1.17kB, 141ms]
+  √  Responde 200
+  √  Es la fuente solicitada
+
+└ Actualizar fuente
+  PUT https://quechua-api.onrender.com/api/fuentes/05e7d724-81ac-4375-9a1e-c4bb96d0a521 [200 OK, 1.18kB, 143ms]
+  √  Responde 200
+  √  Aplica el cambio
+  √  Recalcula la cobertura
+
+└ RNF-11: rechazar fuente sin licenciamiento
+  POST https://quechua-api.onrender.com/api/fuentes [422 Unprocessable Entity, 901B, 139ms]
+  √  Rechaza con 422
+
+└ Eliminar fuente
+  DELETE https://quechua-api.onrender.com/api/fuentes/05e7d724-81ac-4375-9a1e-c4bb96d0a521 [204 No Content, 767B, 137ms]
+  √  Responde 204
+
+└ Eliminar fuente inexistente
+  DELETE https://quechua-api.onrender.com/api/fuentes/no-existe [404 Not Found, 819B, 133ms]
+  √  Responde 404
+
+□ 4. Corpus documental
+└ Listar documentos indexados
+  GET https://quechua-api.onrender.com/api/corpus/documentos [200 OK, 1.21kB, 132ms]
+  √  Responde 200
+  √  Hay documentos en el corpus
+  √  Informa del total de fragmentos
+
+└ RF-01: incorporar documento PDF
+  ┌
+  │ 'Form param `archivo`, file load error: missing file s
+  │ ource'
+  └
+  POST https://quechua-api.onrender.com/api/corpus/documentos [422 Unprocessable Entity, 889B, 133ms]
+  √  Pendiente: seleccionar un PDF en la pestana Body y reenviar
+
+└ RF-13: reconstruir el indice
+  POST https://quechua-api.onrender.com/api/corpus/reindexar [200 OK, 1.21kB, 8.4s]
+  √  Responde 200
+  √  El indice conserva los fragmentos
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                15 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                15 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 0 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │                39 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 12.6s                                      │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 12.1kB (approx)                           │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 758ms [min: 132ms, max: 8.4s, s.d.: 2s] │
+└────────────────────────────────────────────────────────────────┘

@@ -49,7 +49,7 @@ class GeminiGenerador(GeneradorTextoPort):
     def __init__(
         self,
         clave: str = "",
-        modelo: str = "gemini-3.8-flash",
+        modelo: str = "gemini-3.5-flash-lite",
         temperatura: float = 0.1,
         timeout: float = 15.0,
         cliente: httpx.Client | None = None,
