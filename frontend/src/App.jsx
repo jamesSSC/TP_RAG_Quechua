@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { borrarHistorial, consultar, obtenerEstado, obtenerHistorial } from "./api";
 import CajaConsulta from "./componentes/CajaConsulta";
+import EstadoInicial from "./componentes/EstadoInicial";
 import GestionCorpus from "./componentes/GestionCorpus";
 import GestionFuentes from "./componentes/GestionFuentes";
 import Historial from "./componentes/Historial";
@@ -118,6 +119,7 @@ export default function App() {
       <main className="contenido">
         {vista === "consulta" ? (
           <>
+            <EstadoInicial estado={estado} />
             <CajaConsulta onConsultar={lanzarConsulta} cargando={cargando} />
 
             {error && (

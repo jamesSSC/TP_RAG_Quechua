@@ -1,0 +1,11 @@
+{
+  "arranque_s": 43.6,
+  "generador_disponible": false,
+  "base_datos_disponible": true,
+  "fragmentos_indexados": 3605,
+  "consulta_http": 200,
+  "abstenida": false,
+  "tiene_documento_y_pagina": true,
+  "aviso_de_generacion": true,
+  "la_respuesta_es_el_fragmento_literal": true
+}

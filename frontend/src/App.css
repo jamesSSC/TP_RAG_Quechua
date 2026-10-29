@@ -719,3 +719,14 @@ button { min-width: 44px; }
 .campo--casilla { min-height: 44px; display: flex; align-items: center; gap: 0.5rem; }
 input[type="checkbox"] { width: 1.5rem; height: 1.5rem; }
 .origenes__control { min-height: 44px; display: flex; align-items: center; gap: 0.5rem; }
+
+/* Estado inicial (B14) */
+.estado { margin: 0 0 1rem; padding: 0.75rem 1rem; border: 1px solid var(--borde); border-radius: 10px; background: var(--papel-hundido); }
+.estado__titulo { margin: 0 0 0.4rem; font-size: 1em; }
+.estado__lista { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; margin: 0; padding: 0; list-style: none; }
+.estado__item { display: flex; gap: 0.4rem; align-items: baseline; }
+.estado__item--ok .estado__marca { color: #2f6b3a; }
+.estado__item--aviso .estado__marca { color: var(--abstencion); }
+.estado__nombre { font-weight: 600; }
+.estado__detalle { color: var(--tinta-suave); }
+.estado__aviso { margin-top: 0.6rem; padding: 0.5rem 0.75rem; border: 1px solid var(--abstencion); border-radius: 6px; color: var(--abstencion); font-weight: 600; }

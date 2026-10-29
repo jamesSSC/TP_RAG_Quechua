@@ -1,0 +1,65 @@
+{
+  "arranque_frio_s": 43.61,
+  "estado_frio": {
+    "fragmentos_indexados": 3605,
+    "consistencia": {
+      "estado": "ok",
+      "avisos": []
+    }
+  },
+  "datos_creada": true,
+  "documentos_antes": 8,
+  "ingesta_http": 200,
+  "ingesta": {
+    "paginas_totales": 37,
+    "fragmentos_nuevos": 2360,
+    "total_indexado": 5965
+  },
+  "estado_tras_ingesta": {
+    "fragmentos_indexados": 5965,
+    "consistencia": {
+      "estado": "ok",
+      "avisos": []
+    }
+  },
+  "arranque_caliente_s": 2.06,
+  "estado_reabierto": {
+    "fragmentos_indexados": 5965,
+    "consistencia": {
+      "estado": "ok",
+      "avisos": []
+    }
+  },
+  "documentos_despues": 9,
+  "documento_listado": true,
+  "fuente_listada": true,
+  "consulta_http": 200,
+  "consulta_documentos_recuperados": [],
+  "consulta_claves": [
+    "abstencion_por_predictor",
+    "abstenida",
+    "aviso",
+    "aviso_generacion",
+    "consulta_id",
+    "consulta_traducida",
+    "generador_invocado",
+    "idioma",
+    "latencia_ms",
+    "lecturas_traduccion",
+    "pasajes",
+    "probabilidad_cobertura",
+    "probabilidad_pasajes",
+    "respaldo",
+    "similitud_maxima",
+    "texto",
+    "traduccion_usada",
+    "umbral",
+    "via_respaldo"
+  ],
+  "archivos_datos": [
+    "documentos",
+    "documentos\\copia-prueba-bug01.pdf",
+    "documentos\\manifiesto.json",
+    "fragmentos_v3.jsonl"
+  ]
+}
