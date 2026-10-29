@@ -28,7 +28,6 @@ sys.path.insert(0, str(RAIZ / "src"))
 
 PUERTO_API = 8000
 PUERTO_WEB = 5173
-MODELO = "qwen3.5:4b"
 DEPENDENCIAS = (
     "fastapi",
     "uvicorn",
@@ -113,19 +112,50 @@ def comprobar_datos_fuera_de_git(carpeta_datos: Path, ruta_corpus: Path) -> list
     ]
 
 
-def comprobar_modelos(carpeta: Path) -> list[Resultado]:
+TAMANO_MINIMO_MODELO = 256  # bytes: un joblib valido ocupa mas que esto
+
+
+def _cargar_joblib(ruta: Path):
+    import joblib
+
+    return joblib.load(ruta)
+
+
+def comprobar_modelo(
+    nombre: str, ruta: Path, cargar: Callable[[Path], object] = _cargar_joblib
+) -> Resultado:
+    """Existe, no esta vacio ni truncado y se puede cargar."""
+    ayuda = "python scripts/entrenar_predictores.py"
+    if not ruta.is_file():
+        return Resultado(nombre, False, f"no existe {ruta.name}: {ayuda}")
+    tamano = ruta.stat().st_size
+    if tamano < TAMANO_MINIMO_MODELO:
+        return Resultado(
+            nombre, False, f"{ruta.name} esta vacio o truncado ({tamano} bytes): {ayuda}"
+        )
+    try:
+        cargar(ruta)
+    except Exception as exc:  # noqa: BLE001
+        return Resultado(
+            nombre, False, f"{ruta.name} no se puede cargar ({type(exc).__name__}): {ayuda}"
+        )
+    return Resultado(nombre, True, f"{ruta.name} ({tamano / 1024:.0f} KB) se carga bien")
+
+
+def comprobar_modelos(
+    carpeta: Path, cargar: Callable[[Path], object] = _cargar_joblib
+) -> list[Resultado]:
     return [
-        comprobar_archivo(
-            "Modelo de cobertura",
-            carpeta / "cobertura.joblib",
-            ayuda="python scripts/entrenar_predictores.py",
-        ),
-        comprobar_archivo(
-            "Modelo de relevancia de pasajes",
-            carpeta / "relevancia_pasajes.joblib",
-            ayuda="python scripts/entrenar_predictores.py",
+        comprobar_modelo("Modelo de cobertura", carpeta / "cobertura.joblib", cargar),
+        comprobar_modelo(
+            "Modelo de relevancia de pasajes", carpeta / "relevancia_pasajes.joblib", cargar
         ),
     ]
+
+
+def _es_el_modelo(nombre: str, modelo: str) -> bool:
+    """Exactamente el modelo configurado; sin etiqueta, Ollama lo publica como `:latest`."""
+    return nombre == modelo or (":" not in modelo and nombre == f"{modelo}:latest")
 
 
 def comprobar_ollama(
@@ -146,7 +176,7 @@ def comprobar_ollama(
             )
         ]
     nombres = [m.get("name", "") for m in etiquetas.get("models", [])]
-    if not any(n == modelo or n.startswith(modelo.split(":")[0] + ":") for n in nombres):
+    if not any(_es_el_modelo(n, modelo) for n in nombres):
         return [
             Resultado(
                 f"Ollama con {modelo}",
@@ -294,8 +324,8 @@ def reunir(args: argparse.Namespace) -> list[Resultado]:
     if not args.sin_precalentar:
         from adapters.out.generacion.ollama_generador import OllamaGenerador
 
-        precalentar = OllamaGenerador(url_base=c.ollama_url, modelo=MODELO).precalentar
-    resultados += comprobar_ollama(c.ollama_url, MODELO, _json, precalentar)
+        precalentar = OllamaGenerador(url_base=c.ollama_url, modelo=c.ollama_modelo).precalentar
+    resultados += comprobar_ollama(c.ollama_url, c.ollama_modelo, _json, precalentar)
 
     if args.postgres:
         resultados.append(comprobar_postgres(_conectar_postgres))
