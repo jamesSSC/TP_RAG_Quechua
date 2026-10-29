@@ -114,52 +114,11 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
         log.info("[CASO-USO] ConsultarCorpus: idioma=%s", idioma.value)
 
         if not idioma.soportado:
-            log.info("[GENERADOR] NO invocado (idioma no soportado)")
-            return self._registrar(
-                t0,
-                consulta,
-                Respuesta(
-                    consulta_id=consulta.id,
-                    texto=MENSAJE_IDIOMA,
-                    abstenida=True,
-                    idioma=idioma,
-                ),
-            )
+            return self._registrar(t0, consulta, self._respuesta_idioma_no_soportado(consulta))
 
-        if self._traductor is not None:
-            # Se traduce la consulta ya depurada, es decir el termino solo y no la pregunta
-            # completa. Traducir la frase entera devuelve el fraseo en espanol ("como se
-            # dice X en quechua de Wanka"), que reintroduce en la consulta las palabras que
-            # la depuracion existe para eliminar y hunde la similitud del fragmento.
-            termino = self._depurador.depurar(consulta.texto)
-            candidatas = self._traductor.candidatas(termino, aproximar=idioma is Idioma.INGLES)
-
-            # Una palabra inglesa suelta ("love") no trae ninguna marca funcional que
-            # contar, de modo que el detector la asume espanola y nunca se traducia. Si el
-            # termino no encabeza ninguna entrada del corpus pero si figura en la tabla
-            # como palabra inglesa, la evidencia lexica pesa mas que la heuristica.
-            if (
-                candidatas
-                and idioma is Idioma.ESPANOL
-                and termino not in candidatas
-                and not self._indice.es_lema(termino)
-            ):
-                idioma = Idioma.INGLES
-                consulta.idioma = idioma
-                candidatas = self._traductor.candidatas(termino, aproximar=True)
-
-            consulta.variantes = candidatas
-            log.info("[TRADUCTOR] lecturas candidatas=%d", len(candidatas))
-
+        idioma = self._traducir(consulta, idioma)
         recuperados, origen = self._recuperar_con_variantes(consulta)
-        if recuperados and consulta.variantes:
-            # Se informa de la variante que realmente sostiene la respuesta, no de la
-            # primera de la lista: las candidatas salen en orden alfabetico, de modo que
-            # "boiled corn" anunciaba haber buscado "comijn" cuando el fragmento que
-            # respondia lo habia encontrado "mote".
-            ganadora = origen.get(recuperados[0].id)
-            if ganadora and ganadora != consulta.texto:
-                consulta.texto_traducido = ganadora
+        self._anotar_lectura_ganadora(consulta, recuperados, origen)
         log.info(
             "[INDICE] k=%d recuperados=%d sim_max=%.3f%s",
             self._k,
@@ -177,119 +136,191 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
 
         prediccion = self._predecir(consulta, recuperados)
         p_cobertura = prediccion["cobertura"]
-        abstencion_por_predictor = (
+        if self._abstiene_por_predictor(veredicto, p_cobertura):
+            return self._registrar(
+                t0,
+                consulta,
+                self._respuesta_por_predictor(consulta, idioma, veredicto, p_cobertura),
+            )
+
+        if not veredicto.responder:
+            return self._registrar(
+                t0,
+                consulta,
+                self._respuesta_sin_respaldo(consulta, idioma, veredicto, prediccion),
+            )
+
+        respaldo = self._seleccionar_respaldo(veredicto, recuperados)
+        return self._registrar(
+            t0,
+            consulta,
+            self._respuesta_con_respaldo(consulta, idioma, veredicto, respaldo, p_cobertura),
+        )
+
+    # --- Pasos de _resolver: cada uno conserva exactamente el comportamiento anterior ---
+
+    @staticmethod
+    def _respuesta_idioma_no_soportado(consulta: Consulta) -> Respuesta:
+        log.info("[GENERADOR] NO invocado (idioma no soportado)")
+        return Respuesta(
+            consulta_id=consulta.id,
+            texto=MENSAJE_IDIOMA,
+            abstenida=True,
+            idioma=consulta.idioma,
+        )
+
+    def _traducir(self, consulta: Consulta, idioma: Idioma) -> Idioma:
+        """Traduce solo la consulta (RN-05) y devuelve el idioma efectivo."""
+        if self._traductor is None:
+            return idioma
+        # Se traduce la consulta ya depurada, es decir el termino solo y no la pregunta
+        # completa. Traducir la frase entera devuelve el fraseo en espanol ("como se
+        # dice X en quechua de Wanka"), que reintroduce en la consulta las palabras que
+        # la depuracion existe para eliminar y hunde la similitud del fragmento.
+        termino = self._depurador.depurar(consulta.texto)
+        candidatas = self._traductor.candidatas(termino, aproximar=idioma is Idioma.INGLES)
+
+        # Una palabra inglesa suelta ("love") no trae ninguna marca funcional que
+        # contar, de modo que el detector la asume espanola y nunca se traducia. Si el
+        # termino no encabeza ninguna entrada del corpus pero si figura en la tabla
+        # como palabra inglesa, la evidencia lexica pesa mas que la heuristica.
+        if (
+            candidatas
+            and idioma is Idioma.ESPANOL
+            and termino not in candidatas
+            and not self._indice.es_lema(termino)
+        ):
+            idioma = Idioma.INGLES
+            consulta.idioma = idioma
+            candidatas = self._traductor.candidatas(termino, aproximar=True)
+
+        consulta.variantes = candidatas
+        log.info("[TRADUCTOR] lecturas candidatas=%d", len(candidatas))
+        return idioma
+
+    @staticmethod
+    def _anotar_lectura_ganadora(consulta: Consulta, recuperados, origen: dict) -> None:
+        if not (recuperados and consulta.variantes):
+            return
+        # Se informa de la variante que realmente sostiene la respuesta, no de la
+        # primera de la lista: las candidatas salen en orden alfabetico, de modo que
+        # "boiled corn" anunciaba haber buscado "comijn" cuando el fragmento que
+        # respondia lo habia encontrado "mote".
+        ganadora = origen.get(recuperados[0].id)
+        if ganadora and ganadora != consulta.texto:
+            consulta.texto_traducido = ganadora
+
+    def _abstiene_por_predictor(self, veredicto, p_cobertura) -> bool:
+        """RN-06: el predictor puede añadir una abstencion, nunca quitarla."""
+        abstiene = (
             veredicto.responder and p_cobertura is not None and p_cobertura < self._p_min_cobertura
         )
-        if abstencion_por_predictor:
-            # RN-06: el predictor puede añadir una abstencion, nunca quitarla.
+        if abstiene:
             log.info(
                 "[PREDICTOR] cobertura=%.3f < %.2f -> abstencion",
                 p_cobertura,
                 self._p_min_cobertura,
             )
-            return self._registrar(
-                t0,
-                consulta,
-                Respuesta(
-                    consulta_id=consulta.id,
-                    texto=MENSAJE_PREDICTOR[idioma],
-                    abstenida=True,
-                    idioma=idioma,
-                    similitud_maxima=veredicto.similitud_maxima,
-                    consulta_traducida=consulta.texto_traducido,
-                    probabilidad_cobertura=p_cobertura,
-                    abstencion_por_predictor=True,
-                ),
-            )
+        return abstiene
 
-        if not veredicto.responder:
-            # Antes de abstenerse del todo se busca en la prosa, que se consulta aparte
-            # porque las entradas de diccionario, mucho mas cortas, copan siempre las
-            # primeras posiciones. Lo recuperado no se afirma: se entrega literal y citado.
-            lexica = self._clasificador.es_lexica(consulta.texto)
-            if lexica:
-                # D-1: ante una peticion de termino no se ofrecen parrafos de prosa.
-                log.info("[CASO-USO] consulta lexica: sin pasajes de prosa")
-            pasajes = (
-                []
-                if lexica
-                else self._evaluador.ofrecer_pasajes(
-                    self._indice.recuperar_prosa(consulta.texto_para_recuperar, k=3),
-                    # El solapamiento se mide contra la consulta depurada, no contra la
-                    # cruda: "en quechua wanka" acompana a casi toda consulta y a ningun
-                    # pasaje distingue, de modo que sin depurar bastaba esa palabra para
-                    # sacar el prologo del libro ante cualquier termino no cubierto.
-                    consulta=self._depurador.depurar(consulta.texto_para_recuperar),
-                )
-            )
-            p_pasajes = None
-            if pasajes and self._predictor_pasajes is not None and prediccion["vector"]:
-                # RF-15: el segundo modelo estima si los pasajes tratan de verdad la pregunta.
-                # Solo puede retirarlos; los que muestra siguen rotulados "no es una respuesta".
-                p_pasajes = self._predictor_pasajes.probabilidad(prediccion["vector"])
-                if p_pasajes is not None and p_pasajes < self._p_min_pasajes:
-                    log.info(
-                        "[PREDICTOR] pasajes=%.3f < %.2f -> se retiran",
-                        p_pasajes,
-                        self._p_min_pasajes,
-                    )
-                    pasajes = []
-            log.info("[GENERADOR] NO invocado (sin respaldo)")
-            log.info("[CASO-USO] pasajes de prosa ofrecidos=%d (no es una respuesta)", len(pasajes))
-            return self._registrar(
-                t0,
-                consulta,
-                Respuesta(
-                    consulta_id=consulta.id,
-                    texto=(MENSAJE_CON_PASAJES if pasajes else MENSAJE_SIN_RESPALDO)[idioma],
-                    abstenida=True,
-                    idioma=idioma,
-                    similitud_maxima=veredicto.similitud_maxima,
-                    consulta_traducida=consulta.texto_traducido,
-                    pasajes=pasajes,
-                    probabilidad_cobertura=p_cobertura,
-                    probabilidad_pasajes=p_pasajes,
-                ),
-            )
+    @staticmethod
+    def _respuesta_por_predictor(consulta, idioma, veredicto, p_cobertura) -> Respuesta:
+        return Respuesta(
+            consulta_id=consulta.id,
+            texto=MENSAJE_PREDICTOR[idioma],
+            abstenida=True,
+            idioma=idioma,
+            similitud_maxima=veredicto.similitud_maxima,
+            consulta_traducida=consulta.texto_traducido,
+            probabilidad_cobertura=p_cobertura,
+            abstencion_por_predictor=True,
+        )
 
+    def _pasajes_de_prosa(self, consulta: Consulta) -> list:
+        """Antes de abstenerse del todo se busca en la prosa, que se consulta aparte porque
+        las entradas de diccionario, mucho mas cortas, copan siempre las primeras posiciones.
+        Lo recuperado no se afirma: se entrega literal y citado."""
+        if self._clasificador.es_lexica(consulta.texto):
+            # D-1: ante una peticion de termino no se ofrecen parrafos de prosa.
+            log.info("[CASO-USO] consulta lexica: sin pasajes de prosa")
+            return []
+        return self._evaluador.ofrecer_pasajes(
+            self._indice.recuperar_prosa(consulta.texto_para_recuperar, k=3),
+            # El solapamiento se mide contra la consulta depurada, no contra la
+            # cruda: "en quechua wanka" acompana a casi toda consulta y a ningun
+            # pasaje distingue, de modo que sin depurar bastaba esa palabra para
+            # sacar el prologo del libro ante cualquier termino no cubierto.
+            consulta=self._depurador.depurar(consulta.texto_para_recuperar),
+        )
+
+    def _filtrar_pasajes_por_predictor(self, pasajes: list, prediccion: dict):
+        """RF-15: el segundo modelo estima si los pasajes tratan de verdad la pregunta.
+        Solo puede retirarlos; los que muestra siguen rotulados "no es una respuesta".
+        Devuelve (pasajes, probabilidad)."""
+        if not (pasajes and self._predictor_pasajes is not None and prediccion["vector"]):
+            return pasajes, None
+        p_pasajes = self._predictor_pasajes.probabilidad(prediccion["vector"])
+        if p_pasajes is not None and p_pasajes < self._p_min_pasajes:
+            log.info(
+                "[PREDICTOR] pasajes=%.3f < %.2f -> se retiran", p_pasajes, self._p_min_pasajes
+            )
+            return [], p_pasajes
+        return pasajes, p_pasajes
+
+    def _respuesta_sin_respaldo(self, consulta, idioma, veredicto, prediccion) -> Respuesta:
+        pasajes, p_pasajes = self._filtrar_pasajes_por_predictor(
+            self._pasajes_de_prosa(consulta), prediccion
+        )
+        log.info("[GENERADOR] NO invocado (sin respaldo)")
+        log.info("[CASO-USO] pasajes de prosa ofrecidos=%d (no es una respuesta)", len(pasajes))
+        return Respuesta(
+            consulta_id=consulta.id,
+            texto=(MENSAJE_CON_PASAJES if pasajes else MENSAJE_SIN_RESPALDO)[idioma],
+            abstenida=True,
+            idioma=idioma,
+            similitud_maxima=veredicto.similitud_maxima,
+            consulta_traducida=consulta.texto_traducido,
+            pasajes=pasajes,
+            probabilidad_cobertura=prediccion["cobertura"],
+            probabilidad_pasajes=p_pasajes,
+        )
+
+    def _seleccionar_respaldo(self, veredicto, recuperados: list) -> list:
         if veredicto.por_lema:
             # ADR-021, condicion 3: por la via de lema el generador recibe SOLO las entradas
             # cuyo lema coincide con el termino consultado.
-            respaldo = [r for r in recuperados if r.coincidencia_lema]
-        else:
-            respaldo = [
-                r
-                for r in recuperados
-                if r.coincidencia_lema or r.puntuacion.valor >= self._evaluador.umbral
-            ]
+            return [r for r in recuperados if r.coincidencia_lema]
+        return [
+            r
+            for r in recuperados
+            if r.coincidencia_lema or r.puntuacion.valor >= self._evaluador.umbral
+        ]
+
+    def _redactar(self, consulta: Consulta, respaldo: list, idioma: Idioma):
+        """Devuelve (texto, aviso). D-6: sin redactor se muestra el fragmento literal con su
+        cita; nunca un error del servicio ni una forma que no este en el corpus."""
         log.info("[GENERADOR] invocado (%d fragmentos de respaldo)", len(respaldo))
-        aviso_generacion = None
         try:
-            texto = self._generador.redactar(consulta.texto, respaldo, idioma)
+            return self._generador.redactar(consulta.texto, respaldo, idioma), None
         except GeneradorNoDisponible as exc:
-            # D-6: sin redactor se muestra el fragmento literal con su cita; nunca un error
-            # del servicio ni una forma que no este en el corpus.
             log.warning("[GENERADOR] fallo: %s -> plantilla literal", type(exc).__name__)
             primero = respaldo[0]
-            texto = f"{primero.texto} ({primero.procedencia.citar()})"
-            aviso_generacion = AVISO_GENERACION
+            return f"{primero.texto} ({primero.procedencia.citar()})", AVISO_GENERACION
 
-        return self._registrar(
-            t0,
-            consulta,
-            Respuesta(
-                consulta_id=consulta.id,
-                texto=texto,
-                respaldo=respaldo,
-                abstenida=False,
-                idioma=idioma,
-                similitud_maxima=veredicto.similitud_maxima,
-                consulta_traducida=consulta.texto_traducido,
-                via_respaldo=veredicto.via_respaldo,
-                generador_invocado=True,
-                aviso_generacion=aviso_generacion,
-                probabilidad_cobertura=p_cobertura,
-            ),
+    def _respuesta_con_respaldo(self, consulta, idioma, veredicto, respaldo, p_cobertura):
+        texto, aviso_generacion = self._redactar(consulta, respaldo, idioma)
+        return Respuesta(
+            consulta_id=consulta.id,
+            texto=texto,
+            respaldo=respaldo,
+            abstenida=False,
+            idioma=idioma,
+            similitud_maxima=veredicto.similitud_maxima,
+            consulta_traducida=consulta.texto_traducido,
+            via_respaldo=veredicto.via_respaldo,
+            generador_invocado=True,
+            aviso_generacion=aviso_generacion,
+            probabilidad_cobertura=p_cobertura,
         )
 
     def caracteristicas(self, texto_consulta: str) -> CaracteristicasConsulta:
