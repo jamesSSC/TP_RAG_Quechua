@@ -71,3 +71,30 @@ def test_la_base_se_elige_por_variable_de_entorno(entorno):
     _, _, monkeypatch = entorno
     monkeypatch.setenv("BASE_DATOS", "postgres")
     assert Configuracion(_env_file=None).base_datos == "postgres"
+
+
+def test_el_generador_se_elige_por_configuracion(monkeypatch):
+    assert Configuracion(_env_file=None).generador == "ollama"
+    monkeypatch.setenv("GENERADOR", "literal")
+    assert Configuracion(_env_file=None).generador == "literal"
+
+
+def test_sqlite_espera_los_bloqueos_y_usa_wal(entorno):
+    """Consultas simultaneas escriben el historial sin 'database is locked'."""
+    from sqlalchemy import create_engine as crear
+
+    tmp_path, config, monkeypatch = entorno
+    motores = []
+
+    def espia(url, **opciones):
+        motor = crear(url, **opciones)
+        motores.append((motor, opciones))
+        return motor
+
+    monkeypatch.setattr(modulo, "create_engine", espia)
+    monkeypatch.setattr(modulo, "configuracion", config())
+    modulo.Contenedor(generador="literal")
+    motor, opciones = motores[0]
+    assert opciones["connect_args"]["timeout"] >= 30
+    with motor.connect() as c:
+        assert c.exec_driver_sql("PRAGMA journal_mode").scalar().lower() == "wal"

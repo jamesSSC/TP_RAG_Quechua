@@ -115,3 +115,16 @@ def test_traducir_sin_traductor_no_cambia_el_idioma():
     caso, _, _ = _caso(0.9)
     caso._traductor = None
     assert caso._traducir(_consulta(), Idioma.ESPANOL) is Idioma.ESPANOL
+
+
+@pytest.mark.salvaguarda
+def test_un_fallo_al_registrar_no_tumba_la_respuesta():
+    """Si el historial no se puede escribir, la consulta se responde igual."""
+    caso, _, repo = _caso(0.61, p_cob=0.97)
+
+    def falla(consulta, respuesta):
+        raise RuntimeError("database is locked")
+
+    repo.registrar = falla
+    r = caso.ejecutar("¿cómo se dice zorro en quechua wanka?")
+    assert not r.abstenida and r.respaldo  # sigue citando documento y pagina

@@ -1,0 +1,78 @@
+{
+  "herramienta": "Locust 2.47.0 (headless, bucle cerrado sin espera)",
+  "endpoint": "POST /api/consultas",
+  "generador": "literal (sin modelo)",
+  "origen_registrado": "carga",
+  "consultas": "las de evaluacion_v2.json (versionado)",
+  "despues_de_la_correccion": [
+    {
+      "usuarios": 1,
+      "duracion_s": 60,
+      "solicitudes": 5448,
+      "solicitudes_por_minuto": 5448,
+      "p50_ms": 10.0,
+      "p95_ms": 16.0,
+      "maximo_ms": 48.86970017105341,
+      "fallos": 0,
+      "tasa_de_errores_pct": 0.0
+    },
+    {
+      "usuarios": 5,
+      "duracion_s": 60,
+      "solicitudes": 8128,
+      "solicitudes_por_minuto": 8128,
+      "p50_ms": 33.0,
+      "p95_ms": 61.0,
+      "maximo_ms": 154.55259988084435,
+      "fallos": 0,
+      "tasa_de_errores_pct": 0.0
+    },
+    {
+      "usuarios": 10,
+      "duracion_s": 60,
+      "solicitudes": 8015,
+      "solicitudes_por_minuto": 8015,
+      "p50_ms": 70.0,
+      "p95_ms": 100.0,
+      "maximo_ms": 1179.9350001383573,
+      "fallos": 0,
+      "tasa_de_errores_pct": 0.0
+    }
+  ],
+  "antes_de_la_correccion": [
+    {
+      "usuarios": 1,
+      "duracion_s": 60,
+      "solicitudes": 3138,
+      "solicitudes_por_minuto": 3138,
+      "p50_ms": 18.0,
+      "p95_ms": 24.0,
+      "maximo_ms": 58.81029996089637,
+      "fallos": 0,
+      "tasa_de_errores_pct": 0.0
+    },
+    {
+      "usuarios": 5,
+      "duracion_s": 60,
+      "solicitudes": 3738,
+      "solicitudes_por_minuto": 3738,
+      "p50_ms": 34.0,
+      "p95_ms": 120.0,
+      "maximo_ms": 6035.860999953002,
+      "fallos": 4,
+      "tasa_de_errores_pct": 0.107
+    },
+    {
+      "usuarios": 10,
+      "duracion_s": 60,
+      "solicitudes": 3846,
+      "solicitudes_por_minuto": 3846,
+      "p50_ms": 34.0,
+      "p95_ms": 180.0,
+      "maximo_ms": 6030.745299998671,
+      "fallos": 34,
+      "tasa_de_errores_pct": 0.884
+    }
+  ],
+  "causa_de_los_errores_antes": "database is locked (SQLite) al registrar el historial desde varios hilos: HTTP 500"
+}
