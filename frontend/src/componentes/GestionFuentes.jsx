@@ -90,9 +90,17 @@ export default function GestionFuentes() {
         acepta.
       </p>
 
-      {error && <p className="error">{error}</p>}
+      {error && (
+        <p id="error-fuentes" role="alert" className="error">
+          {error}
+        </p>
+      )}
 
-      <form className="formulario" onSubmit={guardar}>
+      <form
+        className="formulario"
+        onSubmit={guardar}
+        aria-describedby={error ? "error-fuentes" : undefined}
+      >
         <h3 className="formulario__titulo">
           {editando ? "Editar fuente" : "Registrar nueva fuente"}
         </h3>

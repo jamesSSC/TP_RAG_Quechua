@@ -6,7 +6,7 @@
   --borde: #ded5c7;
   --acento: #8a5a2b;
   --acento-claro: #f5ede2;
-  --abstencion: #9a6a1f;
+  --abstencion: #86581a;  /* contraste >= 4,5:1 sobre el papel */
   --abstencion-fondo: #fdf6e6;
   --error: #9b2c22;
 

@@ -1,0 +1,119 @@
+{
+  "consultar": {
+    "infracciones": 1,
+    "nodos": 2,
+    "reglas": [
+      {
+        "regla": "label-content-name-mismatch",
+        "impacto": "serious",
+        "nodos": 2,
+        "selectores": [
+          "button[aria-label=\"Reducir tamaño del texto\"]",
+          "button[aria-label=\"Aumentar tamaño del texto\"]"
+        ]
+      }
+    ],
+    "objetivos_menores_44px": {
+      "cantidad": 8,
+      "ejemplos": [
+        "button.tamano__boton 48x37",
+        "button.tamano__boton 44x37",
+        "button.caja__ejemplo 64x32",
+        "button.caja__ejemplo 60x32",
+        "button.caja__ejemplo 63x32",
+        "button.caja__ejemplo 57x32",
+        "button.historial__borrar 121x32"
+      ]
+    }
+  },
+  "fuentes": {
+    "infracciones": 1,
+    "nodos": 2,
+    "reglas": [
+      {
+        "regla": "label-content-name-mismatch",
+        "impacto": "serious",
+        "nodos": 2,
+        "selectores": [
+          "button[aria-label=\"Reducir tamaño del texto\"]",
+          "button[aria-label=\"Aumentar tamaño del texto\"]"
+        ]
+      }
+    ],
+    "objetivos_menores_44px": {
+      "cantidad": 11,
+      "ejemplos": [
+        "button.tamano__boton 48x37",
+        "button.tamano__boton 44x37",
+        "input.- 738x41",
+        "input.- 362x41",
+        "input.- 362x43",
+        "button.boton boton--principal 147x40"
+      ]
+    }
+  },
+  "incorporar": {
+    "infracciones": 1,
+    "nodos": 2,
+    "reglas": [
+      {
+        "regla": "label-content-name-mismatch",
+        "impacto": "serious",
+        "nodos": 2,
+        "selectores": [
+          "button[aria-label=\"Reducir tamaño del texto\"]",
+          "button[aria-label=\"Aumentar tamaño del texto\"]"
+        ]
+      }
+    ],
+    "objetivos_menores_44px": {
+      "cantidad": 10,
+      "ejemplos": [
+        "button.tamano__boton 48x37",
+        "button.tamano__boton 44x37",
+        "input.- 738x44",
+        "input.- 738x41",
+        "input.- 362x41",
+        "select.- 738x43",
+        "button.boton boton--principal 176x40",
+        "button.boton 157x40"
+      ]
+    }
+  },
+  "prediccion": {
+    "infracciones": 2,
+    "nodos": 3,
+    "reglas": [
+      {
+        "regla": "color-contrast",
+        "impacto": "serious",
+        "nodos": 1,
+        "selectores": [
+          "output"
+        ]
+      },
+      {
+        "regla": "label-content-name-mismatch",
+        "impacto": "serious",
+        "nodos": 2,
+        "selectores": [
+          "button[aria-label=\"Reducir tamaño del texto\"]",
+          "button[aria-label=\"Aumentar tamaño del texto\"]"
+        ]
+      }
+    ],
+    "objetivos_menores_44px": {
+      "cantidad": 9,
+      "ejemplos": [
+        "button.tamano__boton 48x37",
+        "button.tamano__boton 44x37",
+        "button.caja__ejemplo 285x32",
+        "button.caja__ejemplo 341x32",
+        "button.caja__ejemplo 306x32",
+        "button.caja__ejemplo 446x32",
+        "input.- 780x26",
+        "button.boton 780x40"
+      ]
+    }
+  }
+}

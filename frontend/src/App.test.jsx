@@ -87,9 +87,9 @@ describe("tamaño del texto", () => {
     instalarFetch(() => json(respuestaBase));
     const { container } = render(<App />);
     const raiz = () => container.querySelector(".aplicacion");
-    const menos = screen.getByRole("button", { name: "Reducir tamaño del texto" });
-    const mas = screen.getByRole("button", { name: "Aumentar tamaño del texto" });
-    const reset = screen.getByRole("button", { name: "Restablecer tamaño del texto" });
+    const menos = screen.getByRole("button", { name: /reducir tamaño del texto/i });
+    const mas = screen.getByRole("button", { name: /aumentar tamaño del texto/i });
+    const reset = screen.getByRole("button", { name: /restablecer tamaño del texto/i });
 
     expect(raiz()).toHaveClass("aplicacion--normal");
     expect(reset).toBeDisabled();
@@ -126,7 +126,7 @@ describe("tamaño del texto", () => {
     });
     const otro = render(<App />);
     expect(otro.container.querySelector(".aplicacion")).toHaveClass("aplicacion--normal");
-    fireEvent.click(screen.getByRole("button", { name: "Aumentar tamaño del texto" }));
+    fireEvent.click(screen.getByRole("button", { name: /aumentar tamaño del texto/i }));
     expect(otro.container.querySelector(".aplicacion")).toHaveClass("aplicacion--grande");
     await waitFor(() => expect(screen.getByText(/fragmentos indexados/)).toBeInTheDocument());
   });
