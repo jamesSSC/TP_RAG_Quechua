@@ -1,0 +1,7 @@
+backend\scripts\humo_bloque7.py: 2 coincidencias
+docs\11_CASOS_VIDEO_Y_CAPTURAS.md: 4 coincidencias
+docs\evidencias\2026-10-01_ba74edb_pc-rtx4060\humo_bloque7.json: 2 coincidencias
+docs\evidencias\pmv2\postgres\transacciones.csv: 101 coincidencias
+docs\evidencias\pmv2\transacciones.csv: 101 coincidencias
+frontend\src\componentes\PanelPrediccion.jsx: 2 coincidencias
+archivos revisados: 374 · archivos con coincidencias: 6

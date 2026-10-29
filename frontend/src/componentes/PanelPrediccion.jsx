@@ -6,7 +6,7 @@ import Probabilidad from "./Probabilidad";
 const EJEMPLOS = [
   "¿cómo se dice zorro en quechua wanka?",
   "¿cómo se dice criptomoneda en quechua wanka?",
-  "¿Qué sufijo se usa para marcar localización espacial o temporal?",
+  "¿Para qué sirven los sufijos en la gramática?",
   "¿Cómo se conjugan los verbos en la forma negativa del presente?",
 ];
 

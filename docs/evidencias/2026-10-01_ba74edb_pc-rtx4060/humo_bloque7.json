@@ -46,7 +46,7 @@
   },
   {
     "caso": "C-05",
-    "consulta": "¿Qué referencia temporal implica la acción expresada por el verbo nominalizado?",
+    "consulta": "[prosa:P001]",
     "status": 200,
     "abstenida": true,
     "via_respaldo": null,
