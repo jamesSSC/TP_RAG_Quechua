@@ -3,20 +3,77 @@
 Ejecuta los casos C-01..C-10 de docs/11, recoge las salidas reales
 y genera un JSON con los resultados para rellenar el §3.
 
-Requiere que el servidor este corriendo en http://127.0.0.1:8000. Para que estas consultas
-no cuenten como demanda real (HU-09), arranca el servidor con ORIGEN_CONSULTAS=humo.
+Arranca su propia API en 127.0.0.1:8004 con una base TEMPORAL y origen `humo`: nunca usa la base
+real. Con --url <api> --confirmo-base-aparte se puede apuntar a otra API ya levantada.
 Uso: python scripts/humo_bloque7.py [carpeta_salida]
 """
 
+import atexit
 import json
+import os
+import subprocess
 import sys
 import time
 from pathlib import Path
 
 import httpx
 
-BASE = "http://127.0.0.1:8000/api"
-SALIDA = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(".")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _base_segura  # noqa: E402
+
+PUERTO_HUMO = 8004
+RAIZ_BACKEND = Path(__file__).resolve().parents[1]
+args = [a for a in sys.argv[1:] if not a.startswith("--")]
+SALIDA = Path(args[0]) if args else Path(".")
+
+
+def _api_propia() -> str:
+    """Arranca una API con una base TEMPORAL y origen `humo`: la base real no se toca."""
+    entorno = dict(
+        os.environ,
+        BASE_DATOS="sqlite",
+        RUTA_SQLITE=str(_base_segura.base_temporal("qw_humo_")),
+        ORIGEN_CONSULTAS="humo",
+    )
+    proceso = subprocess.Popen(
+        [
+            sys.executable,
+            "-m",
+            "uvicorn",
+            "infrastructure.main:app",
+            "--app-dir",
+            "src",
+            "--host",
+            "127.0.0.1",
+            "--port",
+            str(PUERTO_HUMO),
+        ],
+        cwd=RAIZ_BACKEND,
+        env=entorno,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    atexit.register(proceso.terminate)
+    for _ in range(120):
+        try:
+            if (
+                httpx.get(f"http://127.0.0.1:{PUERTO_HUMO}/api/estado", timeout=30).status_code
+                == 200
+            ):
+                return f"http://127.0.0.1:{PUERTO_HUMO}/api"
+        except httpx.HTTPError:
+            time.sleep(1)
+    raise SystemExit("La API temporal no arranco")
+
+
+if "--url" in sys.argv:
+    if "--confirmo-base-aparte" not in sys.argv:
+        sys.exit(
+            "ABORTADO: con --url debe confirmar con --confirmo-base-aparte que esa API usa una base que no es la real."
+        )
+    BASE = sys.argv[sys.argv.index("--url") + 1].rstrip("/")
+else:
+    BASE = _api_propia()
 
 CASOS = [
     {
@@ -62,13 +119,15 @@ for caso in CASOS:
         r = client.post(f"{BASE}/consultas", json={"texto": consulta})
         latencia = round((time.perf_counter() - inicio) * 1000)
         if r.status_code == 422:
-            resultados.append({
-                "caso": cid,
-                "consulta": consulta[:50],
-                "status": 422,
-                "ok": caso["esperado"].get("error", False),
-                "nota": "validacion rechazada correctamente",
-            })
+            resultados.append(
+                {
+                    "caso": cid,
+                    "consulta": consulta[:50],
+                    "status": 422,
+                    "ok": caso["esperado"].get("error", False),
+                    "nota": "validacion rechazada correctamente",
+                }
+            )
             print(f"  {cid}: 422 validacion OK")
             continue
         data = r.json()
@@ -103,7 +162,9 @@ for caso in CASOS:
         res["ok"] = ok
         resultados.append(res)
         marca = "OK" if ok else "FALLA"
-        print(f"  {cid}: {marca} (sim={data.get('similitud_maxima')}, via={data.get('via_respaldo')}, lat={latencia}ms)")
+        print(
+            f"  {cid}: {marca} (sim={data.get('similitud_maxima')}, via={data.get('via_respaldo')}, lat={latencia}ms)"
+        )
     except Exception as e:
         resultados.append({"caso": cid, "error": str(e), "ok": False})
         print(f"  {cid}: ERROR {e}")
@@ -114,22 +175,26 @@ try:
     r = client.get(f"{BASE}/historial")
     hist = r.json()
     print(f"  C-09: historial tiene {len(hist)} entradas (status {r.status_code})")
-    resultados.append({
-        "caso": "C-09",
-        "nota": f"historial con {len(hist)} entradas",
-        "status": r.status_code,
-        "ok": r.status_code == 200,
-    })
+    resultados.append(
+        {
+            "caso": "C-09",
+            "nota": f"historial con {len(hist)} entradas",
+            "status": r.status_code,
+            "ok": r.status_code == 200,
+        }
+    )
 except Exception as e:
     resultados.append({"caso": "C-09", "error": str(e), "ok": False})
 
 # C-10: con Ollama detenido (ya lo hicimos previamente, solo registramos como referencia)
 # No detenemos Ollama automaticamente: el agente anterior ya lo probo.
-resultados.append({
-    "caso": "C-10",
-    "nota": "probado previamente: fragmento literal + aviso, sin 500",
-    "ok": True,
-})
+resultados.append(
+    {
+        "caso": "C-10",
+        "nota": "probado previamente: fragmento literal + aviso, sin 500",
+        "ok": True,
+    }
+)
 
 SALIDA.mkdir(parents=True, exist_ok=True)
 out = SALIDA / "humo_bloque7.json"

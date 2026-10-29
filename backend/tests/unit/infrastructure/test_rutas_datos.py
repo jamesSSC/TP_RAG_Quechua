@@ -34,6 +34,7 @@ def test_configuracion_en_modo_empaquetado_simulado(monkeypatch, tmp_path):
     monkeypatch.setattr(sys, "_MEIPASS", str(tmp_path / "_MEI9"), raising=False)
     monkeypatch.setattr(sys, "executable", str(tmp_path / "exe" / "app.exe"))
     monkeypatch.delenv("CARPETA_DATOS", raising=False)
+    monkeypatch.delenv("RUTA_SQLITE", raising=False)
     try:
         recargado = importlib.reload(cfg)
         c = recargado.Configuracion(_env_file=None)

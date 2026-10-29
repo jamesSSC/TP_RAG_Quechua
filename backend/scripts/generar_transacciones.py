@@ -33,6 +33,10 @@ RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ / "src"))
 sys.path.insert(0, str(RAIZ / "scripts"))
 
+import _base_segura  # noqa: E402
+
+_base_segura.fijar_base_por_defecto()  # antes de importar la configuracion
+
 from entrenar_predictores import cargar_conjunto  # noqa: E402
 
 from infrastructure.config import configuracion  # noqa: E402
@@ -54,12 +58,8 @@ def carga(n: int, contenedor: Contenedor) -> list[dict]:
         {"origen": f["particion"], "consulta": f["consulta"], "etiqueta": f["etiqueta"]}
         for f in cargar_conjunto()
     ]
-    tabla_es_en = json.loads(
-        (RAIZ / "data" / "traduccion_es_en.json").read_text(encoding="utf-8")
-    )
-    lemas = sorted(
-        lema for lema in contenedor.indice._lemario if lema.isalpha() and len(lema) > 2
-    )
+    tabla_es_en = json.loads((RAIZ / "data" / "traduccion_es_en.json").read_text(encoding="utf-8"))
+    lemas = sorted(lema for lema in contenedor.indice._lemario if lema.isalpha() and len(lema) > 2)
     rng.shuffle(lemas)
     for lema in lemas:
         if len(filas) >= n:
@@ -93,6 +93,7 @@ def percentil(valores: list[float], q: float) -> float:
 
 
 def main(n: int, salida: Path) -> None:
+    _base_segura.verificar(configuracion)
     salida.mkdir(parents=True, exist_ok=True)
     # HU-09: lo que esta corrida registra es sintetico y se rotula como `carga`.
     contenedor = Contenedor(generador="literal", origen=OrigenConsulta.CARGA)
@@ -114,9 +115,11 @@ def main(n: int, salida: Path) -> None:
                 else ("abstiene_con_pasajes" if r.pasajes else "abstiene"),
                 "via": r.via_respaldo or "",
                 "similitud_maxima": round(r.similitud_maxima, 4),
-                "p_cobertura": "" if r.probabilidad_cobertura is None
+                "p_cobertura": ""
+                if r.probabilidad_cobertura is None
                 else round(r.probabilidad_cobertura, 4),
-                "p_pasajes": "" if r.probabilidad_pasajes is None
+                "p_pasajes": ""
+                if r.probabilidad_pasajes is None
                 else round(r.probabilidad_pasajes, 4),
                 "abstencion_por_predictor": int(r.abstencion_por_predictor),
                 "documento": r.respaldo[0].procedencia.documento if r.respaldo else "",
@@ -175,5 +178,7 @@ def main(n: int, salida: Path) -> None:
 
 if __name__ == "__main__":
     total = int(sys.argv[1]) if len(sys.argv) > 1 else 800
-    carpeta = Path(sys.argv[2]) if len(sys.argv) > 2 else RAIZ.parent / "docs" / "evidencias" / "pmv2"
+    carpeta = (
+        Path(sys.argv[2]) if len(sys.argv) > 2 else RAIZ.parent / "docs" / "evidencias" / "pmv2"
+    )
     main(total, carpeta)

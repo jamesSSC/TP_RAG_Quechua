@@ -18,7 +18,7 @@ const VACIA = {
   derivado_ocr: false,
 };
 
-const NUMERICOS = ["paginas_totales", "paginas_con_texto"];
+const NUMERICOS = new Set(["paginas_totales", "paginas_con_texto"]);
 
 export default function GestionFuentes() {
   const [fuentes, setFuentes] = useState([]);
@@ -38,11 +38,9 @@ export default function GestionFuentes() {
   useEffect(recargar, []);
 
   const cambiar = (campo) => (evento) => {
-    const valor = NUMERICOS.includes(campo)
-      ? Number(evento.target.value)
-      : campo === "derivado_ocr"
-        ? evento.target.checked
-        : evento.target.value;
+    let valor = evento.target.value;
+    if (NUMERICOS.has(campo)) valor = Number(valor);
+    else if (campo === "derivado_ocr") valor = evento.target.checked;
     setFormulario((previo) => ({ ...previo, [campo]: valor }));
   };
 
@@ -184,11 +182,11 @@ export default function GestionFuentes() {
         </div>
       </form>
 
-      {cargando ? (
-        <p className="cargando">Cargando fuentes…</p>
-      ) : fuentes.length === 0 ? (
+      {cargando && <p className="cargando">Cargando fuentes…</p>}
+      {!cargando && fuentes.length === 0 && (
         <p className="fuentes__vacio">Todavía no hay fuentes registradas.</p>
-      ) : (
+      )}
+      {!cargando && fuentes.length > 0 && (
         <ul className="fuentes__lista">
           {fuentes.map((f) => (
             <li key={f.id} className="fuente">

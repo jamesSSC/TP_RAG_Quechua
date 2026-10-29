@@ -30,6 +30,28 @@ class AnalizarDemandaUseCase(AnalizarDemandaPort):
         self._depurador = depurador or DepuradorConsulta()
         self._minimo = minimo
 
+    def _priorizar(self, incluir_sinteticas: bool) -> list[dict]:
+        grupos: dict[str, list[float | None]] = defaultdict(list)
+        for texto, probabilidad in self._repositorio.abstenciones_con_prediccion(
+            incluir_sinteticas=incluir_sinteticas
+        ):
+            grupos[self._depurador.depurar(texto)].append(probabilidad)
+        return [self._prioridad(termino, probs) for termino, probs in grupos.items()]
+
+    @staticmethod
+    def _prioridad(termino: str, probabilidades: list[float | None]) -> dict:
+        conocidas = [p for p in probabilidades if p is not None]
+        p_media = sum(conocidas) / len(conocidas) if conocidas else None
+        peso = 1.0 - p_media if p_media is not None else 0.5
+        ampliar = p_media is None or p_media < 0.5
+        return {
+            "termino": termino,
+            "consultas": len(probabilidades),
+            "probabilidad_cobertura_media": p_media,
+            "demanda_insatisfecha": round(len(probabilidades) * peso, 4),
+            "diagnostico": "ampliar el corpus" if ampliar else "revisar la recuperación",
+        }
+
     def ejecutar(self, top: int = 15, incluir_sinteticas: bool = False) -> dict:
         """Por defecto solo cuenta la demanda real (origen `usuario`). Con
         `incluir_sinteticas` prioriza tambien con las consultas de prueba y lo rotula como
@@ -68,30 +90,7 @@ class AnalizarDemandaUseCase(AnalizarDemandaPort):
                 "prioridades": [],
             }
 
-        grupos: dict[str, list[float | None]] = defaultdict(list)
-        for texto, probabilidad in self._repositorio.abstenciones_con_prediccion(
-            incluir_sinteticas=incluir_sinteticas
-        ):
-            grupos[self._depurador.depurar(texto)].append(probabilidad)
-
-        prioridades = []
-        for termino, probabilidades in grupos.items():
-            conocidas = [p for p in probabilidades if p is not None]
-            p_media = sum(conocidas) / len(conocidas) if conocidas else None
-            peso = 1.0 - p_media if p_media is not None else 0.5
-            prioridades.append(
-                {
-                    "termino": termino,
-                    "consultas": len(probabilidades),
-                    "probabilidad_cobertura_media": p_media,
-                    "demanda_insatisfecha": round(len(probabilidades) * peso, 4),
-                    "diagnostico": (
-                        "ampliar el corpus"
-                        if p_media is None or p_media < 0.5
-                        else "revisar la recuperación"
-                    ),
-                }
-            )
+        prioridades = self._priorizar(incluir_sinteticas)
         prioridades.sort(key=lambda p: (-p["demanda_insatisfecha"], p["termino"]))
         return {
             **base,
