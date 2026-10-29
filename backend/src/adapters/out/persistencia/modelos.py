@@ -44,6 +44,10 @@ class ConsultaORM(Base):
     abstencion_por_predictor: Mapped[bool] = mapped_column(Boolean, default=False)
     pasajes_ofrecidos: Mapped[int] = mapped_column(Integer, default=0)
     latencia_ms: Mapped[float | None] = mapped_column(Float, nullable=True)
+    # HU-09 (ADR-013): usuario | carga | arnes | humo. Solo `usuario` cuenta como demanda real.
+    origen: Mapped[str] = mapped_column(
+        String(10), nullable=False, default="usuario", server_default="usuario"
+    )
 
     respaldos: Mapped[list["RespaldoORM"]] = relationship(
         back_populates="consulta", cascade="all, delete-orphan", lazy="selectin"
@@ -79,3 +83,6 @@ COLUMNAS_PMV2 = {
     "pasajes_ofrecidos": "INTEGER DEFAULT 0",
     "latencia_ms": "FLOAT",
 }
+
+# HU-09: columna de origen en las bases creadas antes de existir. Mismo mecanismo que arriba.
+COLUMNAS_HU09 = {"origen": "VARCHAR(10) NOT NULL DEFAULT 'usuario'"}

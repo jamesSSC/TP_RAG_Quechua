@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+from typing import Literal
 
 from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -51,6 +52,9 @@ class Configuracion(BaseSettings):
     ollama_modelo: str = "qwen3.5:4b"
 
     umbral_abstencion: float = 0.48
+    # Origen con el que este proceso registra las consultas (HU-09). Lo fija el servidor:
+    # `usuario` salvo en las corridas de prueba (carga, arnes, humo). La API no lo acepta.
+    origen_consultas: Literal["usuario", "carga", "arnes", "humo"] = "usuario"
     fragmentos_recuperados: int = 5
     # Corpus base (solo lectura, viaja en el paquete) y copia modificable (BUG-01). La copia
     # se hace en el primer arranque; en desarrollo ambos coinciden en backend/data/.

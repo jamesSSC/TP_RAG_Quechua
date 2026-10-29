@@ -20,7 +20,8 @@ class PredecirFake(PredecirConsultaPort):
 
 
 class DemandaFake(AnalizarDemandaPort):
-    def ejecutar(self, top=15):
+    def ejecutar(self, top=15, incluir_sinteticas=False):
+        self.ultimo = incluir_sinteticas
         return {"suficiente": True, "prioridades": [{"termino": "dron"}][:top]}
 
 
@@ -56,3 +57,12 @@ def test_get_demanda_y_503_sin_base_de_datos():
         {"termino": "dron"}
     ]
     assert _cliente(con_base_datos=False).get("/api/analitica/demanda").status_code == 503
+
+
+def test_demanda_no_incluye_sinteticas_por_defecto_y_las_pide_explicitamente():
+    cliente = _cliente()
+    fake = cliente.app.state.contenedor.analizar_demanda
+    cliente.get("/api/analitica/demanda")
+    assert fake.ultimo is False
+    cliente.get("/api/analitica/demanda?incluir_sinteticas=true")
+    assert fake.ultimo is True

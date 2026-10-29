@@ -3,7 +3,8 @@
 Ejecuta los casos C-01..C-10 de docs/11, recoge las salidas reales
 y genera un JSON con los resultados para rellenar el §3.
 
-Requiere que el servidor este corriendo en http://127.0.0.1:8000.
+Requiere que el servidor este corriendo en http://127.0.0.1:8000. Para que estas consultas
+no cuenten como demanda real (HU-09), arranca el servidor con ORIGEN_CONSULTAS=humo.
 Uso: python scripts/humo_bloque7.py [carpeta_salida]
 """
 

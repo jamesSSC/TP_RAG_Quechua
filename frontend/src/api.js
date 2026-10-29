@@ -104,4 +104,5 @@ export const predecir = (texto) =>
 
 export const obtenerModelos = () => pedir("/api/modelos");
 
-export const obtenerDemanda = (top = 15) => pedir(`/api/analitica/demanda?top=${top}`);
+export const obtenerDemanda = (top = 15, incluirSinteticas = false) =>
+  pedir(`/api/analitica/demanda?top=${top}${incluirSinteticas ? "&incluir_sinteticas=true" : ""}`);

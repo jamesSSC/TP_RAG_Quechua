@@ -30,24 +30,48 @@ class AnalizarDemandaUseCase(AnalizarDemandaPort):
         self._depurador = depurador or DepuradorConsulta()
         self._minimo = minimo
 
-    def ejecutar(self, top: int = 15) -> dict:
-        estadisticas = self._repositorio.estadisticas()
+    def ejecutar(self, top: int = 15, incluir_sinteticas: bool = False) -> dict:
+        """Por defecto solo cuenta la demanda real (origen `usuario`). Con
+        `incluir_sinteticas` prioriza tambien con las consultas de prueba y lo rotula como
+        demostracion: nunca es el modo predeterminado."""
+        por_origen = self._repositorio.conteo_por_origen()
+        sinteticas = sum(n for origen, n in por_origen.items() if origen != "usuario")
+        demostracion = incluir_sinteticas and sinteticas > 0
+        estadisticas = self._repositorio.estadisticas(incluir_sinteticas=incluir_sinteticas)
         total = estadisticas["total"]
-        log.info("[CASO-USO] AnalizarDemanda: %d consultas registradas", total)
+        log.info("[CASO-USO] AnalizarDemanda: %d consultas contadas (%s)", total, por_origen)
+        base = {
+            "minimo": self._minimo,
+            "modo": "demostracion" if demostracion else "real",
+            "aviso": (
+                f"Demostración con {sinteticas} consultas generadas por la prueba de carga; "
+                "no es demanda real"
+                if demostracion
+                else None
+            ),
+            "por_origen": por_origen,
+            "estadisticas": estadisticas,
+        }
         if total < self._minimo:
+            ajenas = (
+                f" Otras {sinteticas} consultas de prueba no cuentan como demanda real."
+                if sinteticas and not incluir_sinteticas
+                else ""
+            )
             return {
+                **base,
                 "suficiente": False,
-                "minimo": self._minimo,
                 "mensaje": (
                     f"Historial insuficiente: hay {total} consultas registradas y se necesitan "
-                    f"al menos {self._minimo}. No se emite priorización."
+                    f"al menos {self._minimo}. No se emite priorización.{ajenas}"
                 ),
-                "estadisticas": estadisticas,
                 "prioridades": [],
             }
 
         grupos: dict[str, list[float | None]] = defaultdict(list)
-        for texto, probabilidad in self._repositorio.abstenciones_con_prediccion():
+        for texto, probabilidad in self._repositorio.abstenciones_con_prediccion(
+            incluir_sinteticas=incluir_sinteticas
+        ):
             grupos[self._depurador.depurar(texto)].append(probabilidad)
 
         prioridades = []
@@ -70,10 +94,9 @@ class AnalizarDemandaUseCase(AnalizarDemandaPort):
             )
         prioridades.sort(key=lambda p: (-p["demanda_insatisfecha"], p["termino"]))
         return {
+            **base,
             "suficiente": True,
-            "minimo": self._minimo,
             "mensaje": None,
-            "estadisticas": estadisticas,
             "terminos_distintos_no_cubiertos": len(prioridades),
             "prioridades": prioridades[:top],
         }

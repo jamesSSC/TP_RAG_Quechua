@@ -36,9 +36,12 @@ def modelos(puerto: PredecirConsultaPort = Depends(dependencias.predecir_consult
 @router.get("/analitica/demanda", tags=["prediccion"])
 def demanda(
     top: int = 15,
+    incluir_sinteticas: bool = False,
     puerto: AnalizarDemandaPort = Depends(dependencias.analizar_demanda),
 ):
-    """HU-09: demanda insatisfecha ponderada por el modelo de cobertura."""
+    """HU-09: demanda insatisfecha ponderada por el modelo de cobertura. Solo cuenta la demanda
+    real; `incluir_sinteticas=true` prioriza tambien con consultas de prueba y lo rotula como
+    demostracion."""
     log.info("[REST] GET /api/analitica/demanda")
     log.info("[PUERTO-IN] AnalizarDemandaPort.ejecutar")
-    return puerto.ejecutar(top)
+    return puerto.ejecutar(top, incluir_sinteticas)

@@ -305,3 +305,35 @@ describe("respuesta", () => {
     expect(within(lista).getByText("zorra")).toBeInTheDocument();
   });
 });
+
+describe("base de demostración (HU-09)", () => {
+  const estado = (extra) =>
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((url) =>
+        url.endsWith("/api/estado")
+          ? json({
+              fragmentos_indexados: 3605,
+              umbral_abstencion: 0.48,
+              generador_disponible: true,
+              base_datos_disponible: true,
+              modelo: "qwen3.5:4b",
+              ...extra,
+            })
+          : json([]),
+      ),
+    );
+
+  it("la cabecera avisa cuando la base es de demostración", async () => {
+    estado({ base_demostracion: true, consultas_por_origen: { carga: 800 } });
+    render(<App />);
+    expect(await screen.findByTestId("base-demostracion")).toHaveTextContent(/demostración/);
+  });
+
+  it("no avisa con una base de demanda real", async () => {
+    estado({ base_demostracion: false });
+    render(<App />);
+    await screen.findByText(/fragmentos indexados/);
+    expect(screen.queryByTestId("base-demostracion")).toBeNull();
+  });
+});
