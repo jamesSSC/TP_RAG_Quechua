@@ -24,12 +24,9 @@ class VerificarConsistenciaDatos:
         self._fuentes = repositorio_fuentes
         self._almacen = almacen
 
-    def ejecutar(self) -> list[str]:
-        con_fragmentos = set(self._corpus.documentos())
-        fuentes = {f.nombre_archivo for f in self._fuentes.listar()} if self._fuentes else None
-        pdfs = set(self._almacen.listar()) if self._almacen else None
-
-        avisos: list[str] = []
+    @staticmethod
+    def _avisos_de_fuentes(fuentes, pdfs, con_fragmentos) -> list[str]:
+        avisos = []
         for nombre in sorted(fuentes or ()):
             if nombre not in con_fragmentos:
                 avisos.append(f"La fuente '{nombre}' no tiene fragmentos en el corpus")
@@ -37,11 +34,25 @@ class VerificarConsistenciaDatos:
                 avisos.append(
                     f"La fuente '{nombre}' no tiene su PDF guardado en la carpeta de datos"
                 )
+        return avisos
+
+    @staticmethod
+    def _avisos_de_pdfs(fuentes, pdfs, con_fragmentos) -> list[str]:
+        avisos = []
         for nombre in sorted(pdfs or ()):
             if nombre not in con_fragmentos:
                 avisos.append(f"El PDF guardado '{nombre}' no tiene fragmentos en el corpus")
             if fuentes is not None and nombre not in fuentes:
                 avisos.append(f"El PDF guardado '{nombre}' no tiene fuente registrada")
+        return avisos
+
+    def ejecutar(self) -> list[str]:
+        con_fragmentos = set(self._corpus.documentos())
+        fuentes = {f.nombre_archivo for f in self._fuentes.listar()} if self._fuentes else None
+        pdfs = set(self._almacen.listar()) if self._almacen else None
+
+        avisos = self._avisos_de_fuentes(fuentes, pdfs, con_fragmentos)
+        avisos += self._avisos_de_pdfs(fuentes, pdfs, con_fragmentos)
         for aviso in avisos:
             log.warning("[CONSISTENCIA] AVISO: %s", aviso)
         return avisos

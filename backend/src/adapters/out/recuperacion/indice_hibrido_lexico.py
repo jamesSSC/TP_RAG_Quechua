@@ -10,6 +10,8 @@ from domain.entities.fragmento import Fragmento, FragmentoRecuperado, TipoFragme
 from domain.services.depurador_consulta import DepuradorConsulta
 from domain.value_objects.puntuacion_similitud import PuntuacionSimilitud
 
+SIN_INDICE = "El indice no ha sido construido; invoque indexar() primero"
+
 # Lema de una entrada lexicografica: la parte en mayusculas que precede a los dos puntos,
 # como en "PERRO: Allqu, ashuti." Un mismo fragmento puede contener mas de una entrada.
 PATRON_LEMA = re.compile(r"([A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑ\s\-]*?)\s*:")
@@ -97,7 +99,7 @@ class IndiceHibridoLexico(IndiceRecuperacionPort):
     def recuperar(self, consulta: str, k: int = 5) -> list[FragmentoRecuperado]:
         e = self._estado
         if e is None:
-            raise RuntimeError("El indice no ha sido construido; invoque indexar() primero")
+            raise RuntimeError(SIN_INDICE)
 
         puntuaciones = self._puntuar(e, consulta)
         k = min(k, len(e.fragmentos))
@@ -123,7 +125,7 @@ class IndiceHibridoLexico(IndiceRecuperacionPort):
         """Puntuacion E4 de la consulta frente a todo el indice. Expuesto aparte de
         recuperar() porque el barrido de calibracion del umbral necesita el vector completo."""
         if self._estado is None:
-            raise RuntimeError("El indice no ha sido construido; invoque indexar() primero")
+            raise RuntimeError(SIN_INDICE)
         return self._puntuar(self._estado, consulta)
 
     def _puntuar(self, e: _Estado, consulta: str) -> np.ndarray:
@@ -142,7 +144,7 @@ class IndiceHibridoLexico(IndiceRecuperacionPort):
     def recuperar_prosa(self, consulta: str, k: int = 3) -> list[FragmentoRecuperado]:
         e = self._estado
         if e is None:
-            raise RuntimeError("El indice no ha sido construido; invoque indexar() primero")
+            raise RuntimeError(SIN_INDICE)
 
         posiciones = [
             i for i, f in enumerate(e.fragmentos) if f.tipo is not TipoFragmento.LEXICOGRAFICO

@@ -1,0 +1,23 @@
+{
+ "herramienta": "OWASP ZAP 2.17.0, automation framework (openapi + spider + spiderAjax + passive scan); escaneo base, sin escaneo activo",
+ "objetivo": "http://127.0.0.1:8000 (API + SPA servida por el backend), rama test/carga-http en worktree aislado, base SQLite temporal",
+ "fecha": "2026-10-29",
+ "alertas": [
+  {
+   "riesgo": "Medium (High)",
+   "nombre": "CSP: style-src unsafe-inline",
+   "plugin": "10055",
+   "instancias": 4
+  },
+  {
+   "riesgo": "Informational (Medium)",
+   "nombre": "Modern Web Application",
+   "plugin": "10109",
+   "instancias": 5
+  }
+ ],
+ "por_riesgo": {
+  "Medium": 1,
+  "Informational": 1
+ }
+}

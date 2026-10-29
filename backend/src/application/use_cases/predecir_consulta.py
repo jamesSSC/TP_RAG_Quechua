@@ -40,19 +40,26 @@ class PredecirConsultaUseCase(PredecirConsultaPort):
             "cobertura": {
                 "probabilidad": p_cob,
                 "corte": self._corte_cobertura,
-                "decision": None
-                if p_cob is None
-                else ("con respaldo probable" if p_cob >= 0.5 else "sin respaldo probable"),
+                "decision": self._decision_cobertura(p_cob),
                 "bloquearia_respuesta": p_cob is not None and p_cob < self._corte_cobertura,
             },
             "pasajes": {
                 "probabilidad": p_pas,
                 "corte": self._corte_pasajes,
-                "decision": None
-                if p_pas is None
-                else ("mostrar pasajes" if p_pas >= self._corte_pasajes else "retirar pasajes"),
+                "decision": self._decision_pasajes(p_pas),
             },
         }
+
+    @staticmethod
+    def _decision_cobertura(p) -> str | None:
+        if p is None:
+            return None
+        return "con respaldo probable" if p >= 0.5 else "sin respaldo probable"
+
+    def _decision_pasajes(self, p) -> str | None:
+        if p is None:
+            return None
+        return "mostrar pasajes" if p >= self._corte_pasajes else "retirar pasajes"
 
     def modelos(self) -> list[dict]:
         return [
