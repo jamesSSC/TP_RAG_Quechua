@@ -20,6 +20,7 @@ from sqlalchemy.orm import sessionmaker
 from adapters.out.documentos.almacen_documentos_disco import AlmacenDocumentosDisco
 from adapters.out.documentos.corpus_jsonl import CorpusJsonl
 from adapters.out.documentos.extractor_pdf import ExtractorPdf
+from adapters.out.generacion.generador_extractivo import GeneradorExtractivo
 from adapters.out.generacion.generador_literal import GeneradorLiteral
 from adapters.out.generacion.ollama_generador import OllamaGenerador
 from adapters.out.idioma.detector_idioma_heuristico import (
@@ -79,6 +80,9 @@ class Contenedor:
         self.generador = OllamaGenerador(
             url_base=configuracion.ollama_url, modelo=configuracion.ollama_modelo
         )
+        if configuracion.modo_redaccion == "extractiva":
+            # ADR-028: el modelo solo extrae {forma, glosa}; se verifican contra el fragmento.
+            self.generador = GeneradorExtractivo(self.generador)
         if generador == "literal" or (generador == "auto" and not self.generador.disponible()):
             # Sin modelo (CLI, pruebas, equipo sin Ollama) la respuesta se compone con el
             # texto literal del fragmento; la salvaguarda no cambia: el generador solo

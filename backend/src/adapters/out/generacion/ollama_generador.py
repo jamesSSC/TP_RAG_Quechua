@@ -1,8 +1,17 @@
+import json
+import logging
+
 import httpx
 
 from application.ports.out.generador_texto_port import GeneradorNoDisponible, GeneradorTextoPort
 from domain.entities.fragmento import FragmentoRecuperado
 from domain.value_objects.idioma import Idioma
+
+log = logging.getLogger("rag.generador")
+
+# Tope de tokens de la redaccion y de su reintento cuando Ollama informa done_reason == "length".
+LIMITE_TOKENS = 300
+LIMITE_TOKENS_REINTENTO = 900
 
 INSTRUCCION = {
     Idioma.ESPANOL: (
@@ -107,21 +116,56 @@ class OllamaGenerador(GeneradorTextoPort):
         instruccion = INSTRUCCION.get(idioma, INSTRUCCION[Idioma.ESPANOL])
         prompt = f"{instruccion}\n\nFragmentos:\n{contexto}\n\nConsulta: {consulta}\n\nRespuesta:"
 
+        texto, razon = self._generar(prompt, LIMITE_TOKENS)
+        if razon == "length":
+            # La respuesta topo con el limite de tokens: nunca se entrega recortada. Se reintenta
+            # una vez con mas margen y, si vuelve a toparse, se descarta (el caso de uso muestra
+            # entonces el fragmento literal con su aviso).
+            log.warning("[GENERADOR] respuesta truncada (done_reason=length); se reintenta")
+            texto, razon = self._generar(prompt, LIMITE_TOKENS_REINTENTO)
+            if razon == "length":
+                raise GeneradorNoDisponible("respuesta truncada (done_reason=length)")
+        return texto
+
+    def extraer(self, consulta: str, fragmentos: list[FragmentoRecuperado], idioma: Idioma) -> dict:
+        """Extraccion restringida (ADR-028): el modelo devuelve solo JSON con `forma` y `glosa`,
+        copiadas de los fragmentos. No redacta nada; lo verifica quien lo llama."""
+        contexto = "\n\n".join(f"[Fragmento {i}] {f.texto}" for i, f in enumerate(fragmentos, 1))
+        prompt = (
+            "Del fragmento del diccionario extrae la correspondencia que responde a la consulta.\n"
+            'Devuelve SOLO un JSON con dos campos: {"forma": ..., "glosa": ...}.\n'
+            "- forma: la(s) forma(s) en quechua wanka COPIADA(S) letra por letra del fragmento.\n"
+            "- glosa: la palabra castellana del fragmento a la que corresponde.\n"
+            "No traduzcas, no corrijas, no completes ni agregues nada ajeno al fragmento.\n\n"
+            f"Fragmentos:\n{contexto}\n\nConsulta: {consulta}\n\nJSON:"
+        )
+        texto, razon = self._generar(prompt, LIMITE_TOKENS, formato="json")
+        if razon == "length":
+            raise GeneradorNoDisponible("extraccion truncada (done_reason=length)")
+        datos = json.loads(texto)
+        if not isinstance(datos, dict):
+            raise ValueError("la extraccion no es un objeto JSON")
+        return datos
+
+    def _generar(self, prompt: str, num_predict: int, formato: str | None = None):
+        """Llama a Ollama y devuelve (texto, done_reason)."""
+        cuerpo = {
+            "model": self._modelo,
+            "prompt": prompt,
+            "stream": False,
+            "think": False,
+            "keep_alive": self._permanencia,
+            "options": {"temperature": self._temperatura, "num_predict": num_predict},
+        }
+        if formato:
+            cuerpo["format"] = formato
         try:
             respuesta = httpx.post(
-                f"{self._url_base}/api/generate",
-                json={
-                    "model": self._modelo,
-                    "prompt": prompt,
-                    "stream": False,
-                    "think": False,
-                    "keep_alive": self._permanencia,
-                    "options": {"temperature": self._temperatura, "num_predict": 300},
-                },
-                timeout=self._timeout,
+                f"{self._url_base}/api/generate", json=cuerpo, timeout=self._timeout
             )
             respuesta.raise_for_status()
-            return respuesta.json()["response"].strip()
+            datos = respuesta.json()
+            return datos["response"].strip(), datos.get("done_reason")
         except (httpx.HTTPError, KeyError, ValueError) as exc:
             # Incluye tiempo agotado (httpx.TimeoutException) y respuesta malformada.
             raise GeneradorNoDisponible(f"{type(exc).__name__}: {exc}") from exc

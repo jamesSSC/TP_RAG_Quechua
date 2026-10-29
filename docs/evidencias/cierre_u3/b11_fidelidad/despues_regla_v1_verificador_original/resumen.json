@@ -1,0 +1,19 @@
+{
+  "consultas": 120,
+  "respuestas_redactadas": 120,
+  "con_aviso_de_generacion": 0,
+  "contradiccion_potencial": 2,
+  "contradiccion_potencial_pct": 1.7,
+  "cortadas_done_reason_length": 0,
+  "cortadas_pct": 0.0,
+  "tokens_maximos": 31,
+  "latencia_ms": {
+    "media": 2607,
+    "p50": 2604,
+    "p95": 2672,
+    "max": 2772
+  },
+  "mitigacion_adr_028": true,
+  "extracciones_aceptadas": 118,
+  "extracciones_descartadas": 2
+}

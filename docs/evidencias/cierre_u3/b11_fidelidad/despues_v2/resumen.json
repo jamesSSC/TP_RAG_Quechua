@@ -1,0 +1,21 @@
+{
+  "consultas": 120,
+  "regla": "v2",
+  "respuestas_evaluadas": 103,
+  "fragmentos_literales": 17,
+  "con_aviso_de_generacion": 0,
+  "contradiccion_potencial": 0,
+  "contradiccion_potencial_pct": 0.0,
+  "cortadas_done_reason_length": 0,
+  "cortadas_pct": 0.0,
+  "tokens_maximos": 31,
+  "latencia_ms": {
+    "media": 2601,
+    "p50": 2595,
+    "p95": 2681,
+    "max": 2758
+  },
+  "mitigacion_adr_028": true,
+  "extracciones_aceptadas": 103,
+  "extracciones_descartadas": 17
+}
