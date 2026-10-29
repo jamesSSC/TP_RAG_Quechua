@@ -1,0 +1,20 @@
+$ python scripts/sembrar_nube.py data/fragmentos_v3.jsonl --rotulo "corpus reconstruido, no v3"  (DATABASE_URL desde backend\.env, no se imprime)
+[SEMBRAR] corpus fragmentos_v3.jsonl: 3605 fragmentos, sha256 d6200ed9e992e7dc3bfc740ec69195606ffb8f022d044d202d43ce562e47470a
+[SEMBRAR] rotulo: corpus reconstruido, no v3
+[SEMBRAR] esquema y procedimientos instalados
+[SEMBRAR] fragmentos nuevos: 3605
+[SEMBRAR] fuentes nuevas: 8
+[SEMBRAR] conteos: fragmentos=3605 fuentes=8 consultas=0
+     2351 fragmentos    37 paginas  293274822-diccionario-quechua-Wanka-docx.pdf
+       24 fragmentos     6 paginas  Diccionario_Huanca_Quechua_Castellano_Ca.pdf
+        2 fragmentos     1 paginas  Lamina de alfabeto - quechua wanka.pdf
+      204 fragmentos   109 paginas  Saberes_y_Haceres_VII_1_Quechua_Wanka.pdf
+       32 fragmentos    31 paginas  Tarjetas con relatos - quechua wanka.pdf
+       71 fragmentos    35 paginas  cancionero-wanka_comprimido.pdf
+      119 fragmentos   104 paginas  diccionario-visual-quechua-wanka_comprimido.pdf
+      802 fragmentos   277 paginas  vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf
+[SEMBRAR] rutinas: fn_conteo_por_origen (FUNCTION), fn_demanda_insatisfecha (FUNCTION), fn_fragmentos_por_documento (FUNCTION), fn_respaldo_por_documento (FUNCTION), fn_resumen_demanda (FUNCTION), sp_borrar_historial (PROCEDURE), sp_registrar_consulta (PROCEDURE)
+$ (segunda ejecucion: idempotencia)
+[SEMBRAR] fragmentos nuevos: 0
+[SEMBRAR] fuentes nuevas: 0
+[SEMBRAR] conteos: fragmentos=3605 fuentes=8 consultas=0
