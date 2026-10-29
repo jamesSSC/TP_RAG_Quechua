@@ -41,6 +41,7 @@ def test_la_interfaz_lleva_csp_sin_recursos_de_terceros():
     csp = _cliente().get("/").headers["Content-Security-Policy"]
     assert "default-src 'self'" in csp and "frame-ancestors 'none'" in csp
     assert "http" not in csp  # ningun origen externo permitido
+    assert "unsafe-inline" not in csp and "unsafe-eval" not in csp
 
 
 def test_la_documentacion_interactiva_queda_fuera_de_la_csp_estricta():

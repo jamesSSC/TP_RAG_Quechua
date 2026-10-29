@@ -710,3 +710,5 @@ img, video { max-width: 100%; }
   list-style: none;
 }
 .origenes__control { display: block; margin: 0.25rem 0 0.75rem; }
+
+output { display: block; }

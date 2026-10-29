@@ -3,9 +3,10 @@ la API, y las reglas pasivas de un escaner (p. ej. OWASP ZAP) las esperan."""
 
 from starlette.middleware.base import BaseHTTPMiddleware
 
-# La interfaz compilada no usa recursos de terceros (RS-03): todo sale del mismo origen.
+# La interfaz compilada no usa recursos de terceros (RS-03): todo sale del mismo origen. Sin
+# 'unsafe-inline': el CSS sale a un archivo y React aplica `style` por CSSOM, que la CSP permite.
 CSP_INTERFAZ = (
-    "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; "
+    "default-src 'self'; script-src 'self'; style-src 'self'; "
     "img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; "
     "frame-ancestors 'none'; form-action 'self'"
 )

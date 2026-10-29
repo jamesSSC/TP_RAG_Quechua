@@ -64,7 +64,7 @@ def test_con_base_datos_postgres_cablea_el_repositorio_de_procedimientos(entorno
     assert type(contenedor.repositorio_consultas) is RepositorioConsultasPostgres
     assert len(instalados) == 1  # los procedimientos se instalan al arrancar
     assert pedidas[0][0].startswith("postgresql+psycopg://")
-    assert pedidas[0][1] == {"pool_pre_ping": True}
+    assert pedidas[0][1]["pool_pre_ping"] is True
 
 
 def test_la_base_se_elige_por_variable_de_entorno(entorno):
@@ -98,3 +98,19 @@ def test_sqlite_espera_los_bloqueos_y_usa_wal(entorno):
     assert opciones["connect_args"]["timeout"] >= 30
     with motor.connect() as c:
         assert c.exec_driver_sql("PRAGMA journal_mode").scalar().lower() == "wal"
+
+
+def test_los_errores_de_base_de_datos_no_muestran_los_parametros(entorno):
+    from sqlalchemy import create_engine as crear
+
+    tmp_path, config, monkeypatch = entorno
+    opciones_vistas = []
+
+    def espia(url, **opciones):
+        opciones_vistas.append(opciones)
+        return crear(url, **{k: v for k, v in opciones.items()})
+
+    monkeypatch.setattr(modulo, "create_engine", espia)
+    monkeypatch.setattr(modulo, "configuracion", config())
+    modulo.Contenedor(generador="literal")
+    assert opciones_vistas[0]["hide_parameters"] is True

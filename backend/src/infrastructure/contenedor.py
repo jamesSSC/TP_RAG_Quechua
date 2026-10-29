@@ -202,7 +202,8 @@ class Contenedor:
                 if configuracion.base_datos == "sqlite"
                 else {"pool_pre_ping": True}
             )
-            motor = create_engine(configuracion.url_base_datos, **opciones)
+            # hide_parameters: los mensajes de error no incluyen los valores (texto de la consulta).
+            motor = create_engine(configuracion.url_base_datos, hide_parameters=True, **opciones)
             if configuracion.base_datos == "sqlite":
                 # WAL: las lecturas no bloquean a la escritura y varias consultas simultaneas
                 # pueden registrar su historial sin "database is locked".

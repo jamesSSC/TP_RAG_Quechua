@@ -115,6 +115,11 @@ function PrediccionMl({ resultado }) {
   );
 }
 
+function tituloDeLaRespuesta(abstenida, hayPasajes) {
+  if (!abstenida) return "Respuesta";
+  return hayPasajes ? "Sin respuesta confirmada" : "Sin respaldo documental";
+}
+
 export default function Respuesta({ resultado }) {
   if (!resultado) return null;
 
@@ -138,19 +143,15 @@ export default function Respuesta({ resultado }) {
       aria-live="polite"
     >
       <h2 className="respuesta__titulo">
-        {abstenida
-          ? hayPasajes
-            ? "Sin respuesta confirmada"
-            : "Sin respaldo documental"
-          : "Respuesta"}
+        {tituloDeLaRespuesta(abstenida, hayPasajes)}
       </h2>
 
       <Traduccion lecturas={lecturas} usada={usada ?? traducida} />
 
       {avisoGeneracion && (
-        <p className="respuesta__aviso-generacion" role="status">
+        <output className="respuesta__aviso-generacion">
           {avisoGeneracion}
-        </p>
+        </output>
       )}
 
       {/* En una abstencion solo hay un mensaje de ausencia: ninguna forma destacada. */}
