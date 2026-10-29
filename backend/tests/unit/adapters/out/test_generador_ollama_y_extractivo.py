@@ -168,3 +168,21 @@ def test_la_plantilla_usa_la_forma_tal_como_esta_en_el_fragmento(monkeypatch):
     texto = g.redactar("consulta", _dos_entradas(), Idioma.ESPANOL)
     assert "Añalla, mishki" in texto and "«miel»" in texto
     assert g.aceptadas == 1
+
+
+@pytest.mark.salvaguarda
+@pytest.mark.parametrize("forma", ["Allqu ashuti", "domestico", "doméstico", "perro doméstico"])
+def test_formas_fusionadas_o_castellano_entre_parentesis_muestran_el_fragmento_literal(
+    monkeypatch, forma
+):
+    texto = "PERRO: Allqu, ashuti (perro doméstico)."
+    fragmentos = [
+        FragmentoRecuperado(
+            fragmento=Fragmento("p", texto, Procedencia(DOC, 28), TipoFragmento.LEXICOGRAFICO),
+            puntuacion=PuntuacionSimilitud(0.6),
+        )
+    ]
+    g, _ = _extractivo(monkeypatch, _json(forma, "perro"))
+    salida = g.redactar("consulta", fragmentos, Idioma.ESPANOL)
+    assert salida.startswith("PERRO: Allqu, ashuti") and "se dice" not in salida
+    assert (g.aceptadas, g.descartadas) == (0, 1)
