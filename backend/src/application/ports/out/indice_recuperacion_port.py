@@ -35,3 +35,11 @@ class IndiceRecuperacionPort(ABC):
         llegaria a mostrarse. No es abstracto: un indice que no distinga tipos puede no
         ofrecer prosa sin dejar de cumplir el puerto."""
         return []
+
+    def proporcion_fuera_de_vocabulario(self, consulta: str) -> float:
+        """Parte de los terminos de la consulta depurada que no aparece en ningun fragmento.
+
+        Es una de las senales de los modelos predictivos del PMV2: "criptomoneda" no
+        figura en el corpus y "perro" si. No es abstracto por la misma razon que
+        recuperar_prosa: un indice que no la calcule devuelve 0 y el predictor la ignora."""
+        return 0.0

@@ -1,0 +1,24 @@
+digraph G {
+  rankdir=LR; fontname="DejaVu Sans"; node[fontname="DejaVu Sans",fontsize=10,shape=box3d,style=filled,fillcolor="#F7F7F7"]; edge[fontname="DejaVu Sans",fontsize=9];
+  label="Diagrama de despliegue UML — PMV1 + PMV2 (equipo local, sin servicios en la nube)"; labelloc=t; fontsize=14;
+  subgraph cluster_pc { label="«device» PC de referencia · Windows 11 · RTX 4060 8 GB · 32 GB RAM"; style=filled; fillcolor="#EAF3FB"; fontsize=11;
+    nav [label="«execution environment»\nNavegador web\nSPA React 19 + Vite (interfaz/)",fillcolor="#FFFFFF"];
+    subgraph cluster_srv { label="«execution environment» QuechuaWankaWeb.exe / Python 3.12 · Uvicorn :8000"; style=filled; fillcolor="#FFF6E5";
+      api [label="«component»\nFastAPI · adaptadores REST\n/api/consultas · /api/predicciones\n/api/modelos · /api/analitica/demanda",fillcolor="#FFFFFF",shape=component];
+      core [label="«component»\nNúcleo hexagonal\ndomain + application",fillcolor="#E8F5E9",shape=component];
+      idx [label="«artifact»\nfragmentos_v3.jsonl\níndice TF-IDF en memoria",shape=note,fillcolor="#FFFFFF"];
+      ml [label="«artifact»\nmodelos/cobertura.joblib\nmodelos/relevancia_pasajes.joblib",shape=note,fillcolor="#FFFFFF"];
+      tab [label="«artifact»\ntraduccion_en_es.json",shape=note,fillcolor="#FFFFFF"];
+    }
+    oll [label="«execution environment»\nOllama :11434\nQwen3.5-4B Q4_K_M (GPU)",fillcolor="#FFFFFF"];
+    db [label="«database»\nSQLite quechua_wanka.db\n(por defecto)",shape=cylinder,fillcolor="#FFFFFF"];
+  }
+  pg [label="«device» Servidor de BD (opcional)\nPostgreSQL 16\nprocedimientos almacenados",shape=cylinder,fillcolor="#FDECEA"];
+  mov [label="«device» Android ARM64 (PMV3)\nquechua-wanka-movil · Flutter\níndice exportado sin red",fillcolor="#F2F2F2"];
+  nav -> api [label="HTTP/JSON 127.0.0.1"];
+  api -> core; core -> idx; core -> ml; core -> tab;
+  core -> oll [label="HTTP local"];
+  core -> db [label="SQLAlchemy"];
+  core -> pg [label="psycopg · CALL sp_*",style=dashed];
+  idx -> mov [label="exportar_indice_movil.py",style=dotted];
+}

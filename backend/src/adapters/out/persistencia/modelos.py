@@ -36,6 +36,14 @@ class ConsultaORM(Base):
     similitud_maxima: Mapped[float] = mapped_column(Float, nullable=False)
     # "similitud" | "lema"; NULL en una abstencion. Sin datos personales en este modelo.
     via_respaldo: Mapped[str | None] = mapped_column(String(10), nullable=True)
+    # PMV2: lo que estimaron los modelos predictivos, junto con el resultado real, para poder
+    # auditarlos y reentrenarlos (HU-08.1, escenario "registra la prediccion junto con el
+    # resultado real").
+    probabilidad_cobertura: Mapped[float | None] = mapped_column(Float, nullable=True)
+    probabilidad_pasajes: Mapped[float | None] = mapped_column(Float, nullable=True)
+    abstencion_por_predictor: Mapped[bool] = mapped_column(Boolean, default=False)
+    pasajes_ofrecidos: Mapped[int] = mapped_column(Integer, default=0)
+    latencia_ms: Mapped[float | None] = mapped_column(Float, nullable=True)
 
     respaldos: Mapped[list["RespaldoORM"]] = relationship(
         back_populates="consulta", cascade="all, delete-orphan", lazy="selectin"
@@ -60,3 +68,14 @@ class RespaldoORM(Base):
     derivado_ocr: Mapped[bool] = mapped_column(Boolean, default=False)
 
     consulta: Mapped[ConsultaORM] = relationship(back_populates="respaldos")
+
+
+# Columnas que el PMV2 añadio a una tabla que ya existe en las bases creadas por el PMV1.
+# create_all() no altera tablas existentes, de modo que se añaden al arrancar.
+COLUMNAS_PMV2 = {
+    "probabilidad_cobertura": "FLOAT",
+    "probabilidad_pasajes": "FLOAT",
+    "abstencion_por_predictor": "BOOLEAN DEFAULT FALSE",
+    "pasajes_ofrecidos": "INTEGER DEFAULT 0",
+    "latencia_ms": "FLOAT",
+}

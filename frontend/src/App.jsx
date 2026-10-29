@@ -5,6 +5,7 @@ import CajaConsulta from "./componentes/CajaConsulta";
 import GestionCorpus from "./componentes/GestionCorpus";
 import GestionFuentes from "./componentes/GestionFuentes";
 import Historial from "./componentes/Historial";
+import PanelPrediccion from "./componentes/PanelPrediccion";
 import Respuesta from "./componentes/Respuesta";
 import TamanoTexto from "./componentes/TamanoTexto";
 import { guardarTamano, leerTamano, TAMANOS } from "./tamanoTexto";
@@ -93,6 +94,12 @@ export default function App() {
         >
           Incorporar documentos
         </button>
+        <button
+          className={`pestana ${vista === "prediccion" ? "pestana--activa" : ""}`}
+          onClick={() => setVista("prediccion")}
+        >
+          Predicción ML
+        </button>
       </nav>
 
       <main className="contenido">
@@ -126,6 +133,8 @@ export default function App() {
               onBorrar={borrar}
             />
           </>
+        ) : vista === "prediccion" ? (
+          <PanelPrediccion />
         ) : vista === "fuentes" ? (
           <GestionFuentes />
         ) : (
@@ -138,6 +147,7 @@ export default function App() {
           <span>
             {estado.fragmentos_indexados.toLocaleString("es-PE")} fragmentos indexados ·
             umbral de abstención {estado.umbral_abstencion} · modelo {estado.modelo} ·
+            {estado.predictores_disponibles ? " predictores ML activos ·" : ""}
             procesamiento local
           </span>
         ) : (

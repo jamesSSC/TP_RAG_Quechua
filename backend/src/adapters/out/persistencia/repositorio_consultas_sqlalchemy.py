@@ -1,6 +1,6 @@
 import logging
 
-from sqlalchemy import func, select
+from sqlalchemy import case, func, select
 from sqlalchemy.orm import Session, sessionmaker
 
 from adapters.out.persistencia.modelos import ConsultaORM, RespaldoORM
@@ -37,6 +37,11 @@ class RepositorioConsultasSqlAlchemy(RepositorioConsultasPort):
                     abstenida=respuesta.abstenida,
                     similitud_maxima=respuesta.similitud_maxima,
                     via_respaldo=respuesta.via_respaldo,
+                    probabilidad_cobertura=respuesta.probabilidad_cobertura,
+                    probabilidad_pasajes=respuesta.probabilidad_pasajes,
+                    abstencion_por_predictor=respuesta.abstencion_por_predictor,
+                    pasajes_ofrecidos=len(respuesta.pasajes),
+                    latencia_ms=respuesta.latencia_ms,
                     respaldos=[
                         RespaldoORM(
                             fragmento_id=r.id,
@@ -77,6 +82,73 @@ class RepositorioConsultasSqlAlchemy(RepositorioConsultasPort):
             ).all()
             return [self._a_dominio(r)[0] for r in registros]
 
+    def estadisticas(self) -> dict:
+        """Agregados del historial para la analitica del PMV2 (HU-09). Se calculan en la base
+        de datos, no trayendo las filas a memoria."""
+        with self._sesion() as s:
+            total, abstenidas, por_predictor, p_media, lat_media = s.execute(
+                select(
+                    func.count(ConsultaORM.id),
+                    func.coalesce(func.sum(case((ConsultaORM.abstenida.is_(True), 1), else_=0)), 0),
+                    func.coalesce(
+                        func.sum(
+                            case((ConsultaORM.abstencion_por_predictor.is_(True), 1), else_=0)
+                        ),
+                        0,
+                    ),
+                    func.avg(ConsultaORM.probabilidad_cobertura),
+                    func.avg(ConsultaORM.latencia_ms),
+                )
+            ).one()
+            por_idioma = dict(
+                s.execute(
+                    select(ConsultaORM.idioma, func.count()).group_by(ConsultaORM.idioma)
+                ).all()
+            )
+            por_via = {
+                (via or "abstencion"): n
+                for via, n in s.execute(
+                    select(ConsultaORM.via_respaldo, func.count()).group_by(
+                        ConsultaORM.via_respaldo
+                    )
+                ).all()
+            }
+            por_documento = dict(
+                s.execute(
+                    select(
+                        RespaldoORM.documento, func.count(func.distinct(RespaldoORM.consulta_id))
+                    )
+                    .group_by(RespaldoORM.documento)
+                    .order_by(func.count(func.distinct(RespaldoORM.consulta_id)).desc())
+                ).all()
+            )
+            latencias = sorted(
+                v for v in s.scalars(select(ConsultaORM.latencia_ms)).all() if v is not None
+            )
+        return {
+            "total": int(total or 0),
+            "abstenidas": int(abstenidas or 0),
+            "abstenciones_por_predictor": int(por_predictor or 0),
+            "probabilidad_cobertura_media": float(p_media) if p_media is not None else None,
+            "latencia_media_ms": float(lat_media) if lat_media is not None else None,
+            "latencia_p95_ms": latencias[int(0.95 * (len(latencias) - 1))] if latencias else None,
+            "por_idioma": por_idioma,
+            "por_via": por_via,
+            "respaldo_por_documento": por_documento,
+        }
+
+    def abstenciones_con_prediccion(self, limite: int = 5000) -> list[tuple[str, float | None]]:
+        with self._sesion() as s:
+            return [
+                (texto, p)
+                for texto, p in s.execute(
+                    select(ConsultaORM.texto, ConsultaORM.probabilidad_cobertura)
+                    .where(ConsultaORM.abstenida.is_(True))
+                    .order_by(ConsultaORM.momento.desc())
+                    .limit(limite)
+                ).all()
+            ]
+
     def total_registradas(self) -> int:
         with self._sesion() as s:
             return s.scalar(select(func.count()).select_from(ConsultaORM)) or 0
@@ -111,5 +183,8 @@ class RepositorioConsultasSqlAlchemy(RepositorioConsultasPort):
             similitud_maxima=r.similitud_maxima,
             momento=r.momento,
             via_respaldo=r.via_respaldo,
+            probabilidad_cobertura=r.probabilidad_cobertura,
+            probabilidad_pasajes=r.probabilidad_pasajes,
+            abstencion_por_predictor=bool(r.abstencion_por_predictor),
         )
         return consulta, respuesta

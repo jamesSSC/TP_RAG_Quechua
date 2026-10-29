@@ -48,6 +48,10 @@ class RespuestaSalida(BaseModel):
     traduccion_usada: str | None = None
     generador_invocado: bool = False
     aviso_generacion: str | None = None
+    # PMV2: probabilidades estimadas por los modelos predictivos (None si no hay modelo).
+    probabilidad_cobertura: float | None = None
+    probabilidad_pasajes: float | None = None
+    abstencion_por_predictor: bool = False
 
 
 class EntradaHistorial(BaseModel):
@@ -57,6 +61,7 @@ class EntradaHistorial(BaseModel):
     similitud_maxima: float
     via_respaldo: str | None = None
     momento: datetime
+    probabilidad_cobertura: float | None = None
 
 
 class FuenteEntrada(BaseModel):
@@ -99,3 +104,4 @@ class EstadoSistema(BaseModel):
     generador_disponible: bool
     base_datos_disponible: bool
     modelo: str
+    predictores_disponibles: bool = False

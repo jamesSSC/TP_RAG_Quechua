@@ -55,4 +55,11 @@ def consultar(
         traduccion_usada=respuesta.consulta_traducida,
         generador_invocado=respuesta.generador_invocado,
         aviso_generacion=respuesta.aviso_generacion,
+        probabilidad_cobertura=_redondear(respuesta.probabilidad_cobertura),
+        probabilidad_pasajes=_redondear(respuesta.probabilidad_pasajes),
+        abstencion_por_predictor=respuesta.abstencion_por_predictor,
     )
+
+
+def _redondear(valor: float | None) -> float | None:
+    return None if valor is None else round(valor, 4)

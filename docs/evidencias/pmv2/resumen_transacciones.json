@@ -1,0 +1,66 @@
+{
+  "transacciones": 800,
+  "base_datos": "sqlite",
+  "duracion_s": 15.37,
+  "transacciones_por_segundo": 52.1,
+  "latencia_ms": {
+    "media": 15.75,
+    "p50": 13.9,
+    "p95": 27.7,
+    "max": 53.1
+  },
+  "por_origen": {
+    "lema_es": {
+      "responde": 308
+    },
+    "lema_en": {
+      "responde": 77
+    },
+    "A": {
+      "responde": 120
+    },
+    "F": {
+      "abstiene": 100,
+      "abstiene_con_pasajes": 7
+    },
+    "E": {
+      "responde": 9,
+      "abstiene_con_pasajes": 48,
+      "abstiene": 3
+    },
+    "B": {
+      "responde": 60
+    },
+    "D": {
+      "responde": 40
+    },
+    "C": {
+      "abstiene": 28
+    }
+  },
+  "falsos_positivos_en_negativas_etiquetadas": 0,
+  "respondidas_lema_es": "308/308",
+  "abstenciones_por_predictor": 0,
+  "estadisticas_base_datos": {
+    "total": 800,
+    "abstenidas": 186,
+    "abstenciones_por_predictor": 0,
+    "probabilidad_cobertura_media": 0.8160996227646576,
+    "latencia_media_ms": 15.752,
+    "latencia_p95_ms": 27.7,
+    "por_idioma": {
+      "en": 147,
+      "es": 653
+    },
+    "por_via": {
+      "abstencion": 186,
+      "lema": 76,
+      "similitud": 538
+    },
+    "respaldo_por_documento": {
+      "293274822-diccionario-quechua-Wanka-docx.pdf": 606,
+      "vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf": 9
+    }
+  },
+  "generador": "literal (sin Ollama): mide recuperacion, prediccion y persistencia"
+}

@@ -1,0 +1,8 @@
+digraph N { rankdir=LR; node[shape=box,style="rounded,filled",fillcolor="#F7F7F7",fontname="DejaVu Sans",fontsize=10]; edge[fontname="DejaVu Sans",fontsize=8.5];
+ label="Flujo de navegación de pantallas (aplicación web)"; labelloc=t; fontname="DejaVu Sans"; fontsize=13;
+ ini [label="Inicio\n(pestañas)",fillcolor="#1F3864",fontcolor=white];
+ c [label="Consultar\nHU-03 · HU-05"]; r1 [label="Respuesta con fuente\n+ P(respaldo) ML\nHU-06 · HU-07 · HU-08.1"]; r2 [label="Sin respaldo\n(abstención)\nHU-06"]; r3 [label="Pasajes «no es una respuesta»\n+ P(pasajes) ML\nHU-04"]; h [label="Historial\nRF-11 · borrar"];
+ f [label="Fuentes del corpus\nCRUD · HU-01"]; i [label="Incorporar documentos\ningesta PDF · reindexar\nHU-01 · HU-02"];
+ p [label="Predicción ML\nHU-08.1 · HU-04",fillcolor="#FFF6E5"]; p1 [label="Probar los 2 modelos\nprobabilidades + características",fillcolor="#FFF6E5"]; p2 [label="Métricas: ROC, matriz,\ncomparación con línea base",fillcolor="#FFF6E5"]; p3 [label="Analítica de demanda\nHU-09 (≥ 100 consultas)",fillcolor="#FFF6E5"];
+ ini->c; ini->f; ini->i; ini->p; c->r1[label="sim ≥ τ y P ≥ 0,25"]; c->r2[label="sin respaldo"]; c->r3[label="prosa y P ≥ 0,5"]; r1->h; r2->h; r3->h; p->p1; p->p2; p->p3;
+}

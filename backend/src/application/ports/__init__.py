@@ -24,7 +24,13 @@ _reindexar = import_module(_entrada + "reindexar_corpus_port")
 ReindexarCorpusPort = _reindexar.ReindexarCorpusPort
 EstadoCorpus = _reindexar.EstadoCorpus
 
+PredecirConsultaPort = import_module(_entrada + "predecir_consulta_port").PredecirConsultaPort
+
+AnalizarDemandaPort = import_module(_entrada + "analizar_demanda_port").AnalizarDemandaPort
+
 __all__ = [
+    "AnalizarDemandaPort",
+    "PredecirConsultaPort",
     "ConsultarCorpusPort",
     "ConsultarHistorialPort",
     "EstadoCorpus",
