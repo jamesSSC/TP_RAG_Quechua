@@ -80,7 +80,7 @@ class Configuracion(BaseSettings):
     generador: Literal["ollama", "literal", "auto", "extractivo", "gemini"] = "ollama"
     # ADR-032. La clave es un secreto del servicio (panel de Render); nunca se registra.
     gemini_api_key: str = ""
-    gemini_modelo: str = "gemini-2.5-flash"
+    gemini_modelo: str = "gemini-3.8-flash"
     gemini_timeout: float = 15.0
     # Secreto que autoriza a las pruebas contra la nube a registrar sus consultas como `carga` o
     # `humo` (cabeceras X-Token-Pruebas y X-Origen-Consultas). Vacio: desactivado.

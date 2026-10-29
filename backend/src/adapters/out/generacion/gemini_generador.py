@@ -27,6 +27,8 @@ from domain.value_objects.idioma import Idioma
 log = logging.getLogger("rag.generador")
 
 URL_API = "https://generativelanguage.googleapis.com/v1beta"
+# Tokens extra para el razonamiento interno de los modelos Gemini 3.x (nivel "low").
+MARGEN_RAZONAMIENTO = 1024
 
 # BYOK: clave que el usuario aporta en la cabecera X-Gemini-Key de UNA peticion. La fija el
 # middleware de infrastructure/main.py y caduca con la peticion.
@@ -47,7 +49,7 @@ class GeminiGenerador(GeneradorTextoPort):
     def __init__(
         self,
         clave: str = "",
-        modelo: str = "gemini-2.5-flash",
+        modelo: str = "gemini-3.8-flash",
         temperatura: float = 0.1,
         timeout: float = 15.0,
         cliente: httpx.Client | None = None,
@@ -88,7 +90,12 @@ class GeminiGenerador(GeneradorTextoPort):
         if self._modelo.startswith("gemini-2.5"):
             configuracion["thinkingConfig"] = {"thinkingBudget": 0}
         elif self._modelo.startswith("gemini-3"):
-            configuracion["thinkingConfig"] = {"thinkingLevel": "minimal"}
+            # Gemini 3.x no admite "minimal" en todos los modelos (3.8 Flash devuelve error):
+            # "low" es el nivel minimo comun. Sus tokens de razonamiento cuentan contra
+            # maxOutputTokens, de modo que se suma un margen; el JSON visible sigue acotado y un
+            # MAX_TOKENS se trata igual que en Ollama (fragmento literal).
+            configuracion["thinkingConfig"] = {"thinkingLevel": "low"}
+            configuracion["maxOutputTokens"] = LIMITE_TOKENS + MARGEN_RAZONAMIENTO
         cuerpo = {
             "contents": [{"role": "user", "parts": [{"text": prompt}]}],
             "generationConfig": configuracion,

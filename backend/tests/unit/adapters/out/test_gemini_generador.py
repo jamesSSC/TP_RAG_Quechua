@@ -179,3 +179,14 @@ def test_si_el_modelo_rechaza_la_configuracion_de_razonamiento_se_reintenta_sin_
     assert gemini.extraer("zorro", [_zorro()], Idioma.ESPANOL)["forma"] == "Atuq"
     assert "thinkingConfig" in json.loads(peticiones[0].content)["generationConfig"]
     assert "thinkingConfig" not in json.loads(peticiones[1].content)["generationConfig"]
+
+
+def test_gemini_3_usa_razonamiento_bajo_con_margen_de_salida():
+    gemini, peticiones = _gemini(
+        lambda _: httpx.Response(200, json=_respuesta_gemini({"forma": "Atuq", "glosa": "ZORRO"}))
+    )
+    gemini._modelo = "gemini-3.8-flash"
+    gemini.extraer("zorro", [_zorro()], Idioma.ESPANOL)
+    config = json.loads(peticiones[0].content)["generationConfig"]
+    assert config["thinkingConfig"] == {"thinkingLevel": "low"}
+    assert config["maxOutputTokens"] > 300
