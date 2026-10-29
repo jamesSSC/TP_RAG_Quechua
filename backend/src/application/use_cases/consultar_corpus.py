@@ -424,7 +424,19 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
         respuesta.umbral = self._evaluador.umbral
         respuesta.lecturas_traduccion = list(consulta.variantes)
         if self._repositorio is not None:
-            self._repositorio.registrar(consulta, respuesta)
+            try:
+                self._repositorio.registrar(consulta, respuesta)
+            except Exception as exc:  # noqa: BLE001
+                # El historial no es critico: si no se puede escribir (base bloqueada, disco
+                # lleno) la consulta se responde igual, con su documento y pagina.
+                # Sin el texto de la consulta (dato del usuario): id, causa y traza bastan.
+                log.warning(
+                    "[REPOSITORIO] no se pudo registrar consulta_id=%s: %s",
+                    consulta.id,
+                    type(exc).__name__,
+                    exc_info=True,
+                )
+                return respuesta
             log.info(
                 "[REPOSITORIO] registrada consulta_id=%s abstenida=%s",
                 consulta.id,

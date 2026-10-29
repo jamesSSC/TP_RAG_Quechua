@@ -1,0 +1,8 @@
+﻿{
+    "suficiente":  false,
+    "consultas_contadas_como_demanda_real":  0,
+    "modo":  "real",
+    "por_origen":  {
+                       "carga":  21771
+                   }
+}

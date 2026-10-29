@@ -14,7 +14,7 @@ incremento movil, se resuelve aqui sin tocar el nucleo ni los casos de uso.
 
 import logging
 
-from sqlalchemy import create_engine, inspect, text
+from sqlalchemy import create_engine, event, inspect, text
 from sqlalchemy.orm import sessionmaker
 
 from adapters.out.documentos.almacen_documentos_disco import AlmacenDocumentosDisco
@@ -193,11 +193,21 @@ class Contenedor:
             # levantar la comprobacion de hilo que trae por defecto; PostgreSQL no la
             # necesita ni la admite.
             opciones = (
-                {"connect_args": {"check_same_thread": False}}
+                # `timeout`: espera de hasta 30 s a que se libere un bloqueo de escritura.
+                {"connect_args": {"check_same_thread": False, "timeout": 30}}
                 if configuracion.base_datos == "sqlite"
                 else {"pool_pre_ping": True}
             )
-            motor = create_engine(configuracion.url_base_datos, **opciones)
+            # hide_parameters: los mensajes de error no incluyen los valores (texto de la consulta).
+            motor = create_engine(configuracion.url_base_datos, hide_parameters=True, **opciones)
+            if configuracion.base_datos == "sqlite":
+                # WAL: las lecturas no bloquean a la escritura y varias consultas simultaneas
+                # pueden registrar su historial sin "database is locked".
+                @event.listens_for(motor, "connect")
+                def _wal(conexion, _registro):
+                    conexion.execute("PRAGMA journal_mode=WAL")
+                    conexion.execute("PRAGMA synchronous=NORMAL")
+
             with motor.connect() as conexion:
                 conexion.execute(text("SELECT 1"))
             Base.metadata.create_all(motor)

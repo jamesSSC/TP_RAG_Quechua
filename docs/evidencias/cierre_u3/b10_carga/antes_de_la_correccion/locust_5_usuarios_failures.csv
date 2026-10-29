@@ -1,0 +1,2 @@
+Method,Name,Error,Occurrences,First Seen,Last Seen
+POST,POST /api/consultas,CatchResponseError('HTTP 500'),4,2026-10-29T10:59:31Z,2026-10-29T10:59:51Z

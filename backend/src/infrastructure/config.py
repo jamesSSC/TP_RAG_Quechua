@@ -52,6 +52,9 @@ class Configuracion(BaseSettings):
     ollama_modelo: str = "qwen3.5:4b"
 
     umbral_abstencion: float = 0.48
+    # Generador: "ollama" (modelo), "literal" (fragmento literal sin modelo, para pruebas de carga
+    # que miden la API y no la GPU) o "auto" (Ollama si responde).
+    generador: Literal["ollama", "literal", "auto"] = "ollama"
     # Origen con el que este proceso registra las consultas (HU-09). Lo fija el servidor:
     # `usuario` salvo en las corridas de prueba (carga, arnes, humo). La API no lo acepta.
     origen_consultas: Literal["usuario", "carga", "arnes", "humo"] = "usuario"

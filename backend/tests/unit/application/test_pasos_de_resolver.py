@@ -115,3 +115,33 @@ def test_traducir_sin_traductor_no_cambia_el_idioma():
     caso, _, _ = _caso(0.9)
     caso._traductor = None
     assert caso._traducir(_consulta(), Idioma.ESPANOL) is Idioma.ESPANOL
+
+
+@pytest.mark.salvaguarda
+def test_un_fallo_al_registrar_no_tumba_la_respuesta():
+    """Si el historial no se puede escribir, la consulta se responde igual."""
+    caso, _, repo = _caso(0.61, p_cob=0.97)
+
+    def falla(consulta, respuesta):
+        raise RuntimeError("database is locked")
+
+    repo.registrar = falla
+    r = caso.ejecutar("¿cómo se dice zorro en quechua wanka?")
+    assert not r.abstenida and r.respaldo  # sigue citando documento y pagina
+
+
+def test_el_aviso_de_registro_fallido_lleva_id_causa_y_traza_sin_el_texto(caplog):
+    caso, _, repo = _caso(0.61, p_cob=0.97)
+
+    def falla(consulta, respuesta):
+        raise RuntimeError("database is locked")
+
+    repo.registrar = falla
+    texto = "¿cómo se dice zorro en quechua wanka?"
+    with caplog.at_level("WARNING"):
+        caso.ejecutar(texto)
+    registro = next(r for r in caplog.records if "no se pudo registrar" in r.getMessage())
+    mensaje = registro.getMessage()
+    assert "consulta_id=" in mensaje and "RuntimeError" in mensaje
+    assert registro.exc_info is not None and "database is locked" in str(registro.exc_info[1])
+    assert texto not in mensaje
