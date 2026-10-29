@@ -21,11 +21,46 @@ const ESTADO_NUBE = {
   documentos_corpus: 8,
 };
 
+const RESPUESTA_ZORRO = {
+  consulta_id: "c1",
+  texto: "En quechua wanka, «ZORRO» se dice Atuq.",
+  abstenida: false,
+  idioma: "es",
+  similitud_maxima: 0.6095,
+  aviso: "Consulta sobre fuentes documentales publicadas.",
+  respaldo: [
+    {
+      fragmento_id: "f1",
+      texto: "ZORRO: Atuq.",
+      documento: "diccionario.pdf",
+      pagina: 37,
+      puntuacion: 0.6095,
+      similitud: 0.6095,
+      derivado_ocr: false,
+      coincidencia_lema: true,
+    },
+  ],
+  pasajes: [],
+  via_respaldo: "similitud",
+  umbral: 0.48,
+  latencia_ms: 12,
+  lecturas_traduccion: [],
+  generador_invocado: true,
+  redactado_por: "gemini",
+  motivo_redaccion: null,
+};
+
 function simularApi(estado) {
   const llamadas = [];
   globalThis.fetch = vi.fn(async (url, opciones = {}) => {
     llamadas.push({ url, opciones });
-    const cuerpo = url.endsWith("/api/estado") ? estado : url.endsWith("/api/historial") ? [] : {};
+    const cuerpo = url.endsWith("/api/estado")
+      ? estado
+      : url.endsWith("/api/historial")
+        ? []
+        : url.endsWith("/api/consultas")
+          ? RESPUESTA_ZORRO
+          : {};
     return { ok: true, status: 200, json: async () => cuerpo };
   });
   return llamadas;
@@ -74,5 +109,6 @@ describe("despliegue en la nube", () => {
     const consulta = llamadas.find((l) => l.url.endsWith("/api/consultas"));
     expect(consulta.opciones.headers["X-Gemini-Key"]).toBe("clave-propia");
     expect(guardar.mock.calls.flat().join(" ")).not.toContain("clave-propia");
+    expect((await screen.findByTestId("redactado-por")).textContent).toBe("Redactado por: Gemini");
   });
 });
