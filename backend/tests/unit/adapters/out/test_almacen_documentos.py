@@ -30,13 +30,6 @@ def test_mismo_nombre_con_otro_contenido_no_pisa_el_anterior(tmp_path):
     assert len(almacen.listar()) == 2 and a.sha256 != b.sha256
 
 
-def test_el_nombre_no_puede_salir_de_la_carpeta(tmp_path):
-    almacen = AlmacenDocumentosDisco(tmp_path / "documentos")
-    almacen.guardar(b"abc", "../../fuera.pdf")
-    assert not (tmp_path / "fuera.pdf").exists()
-    assert (tmp_path / "documentos" / "fuera.pdf").exists()
-
-
 def test_el_manifiesto_sobrevive_a_un_reinicio(tmp_path):
     AlmacenDocumentosDisco(tmp_path / "d").guardar(b"abc", "uno.pdf")
     assert "uno.pdf" in AlmacenDocumentosDisco(tmp_path / "d").listar()

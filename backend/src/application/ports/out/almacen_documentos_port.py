@@ -19,3 +19,8 @@ class AlmacenDocumentosPort(ABC):
     @abstractmethod
     def listar(self) -> dict[str, str]:
         """Nombre del archivo guardado -> SHA-256."""
+
+
+class ErrorAlmacenDocumentos(ValueError):
+    """El documento no puede guardarse (nombre no admitido, demasiado grande, sin permisos).
+    Es un error de dominio: la API lo devuelve como 4xx y no como un fallo del servidor."""

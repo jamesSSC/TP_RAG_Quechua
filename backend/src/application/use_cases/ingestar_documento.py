@@ -1,4 +1,5 @@
 import logging
+from dataclasses import replace
 from datetime import date
 
 from application.ports import IngestarDocumentoPort, ResultadoIngesta
@@ -68,6 +69,11 @@ class IngestarDocumentoUseCase(IngestarDocumentoPort):
                 guardado.sha256[:12],
                 guardado.duplicado,
             )
+            # El almacen puede haber cambiado el nombre (colision o PDF ya guardado): fuente y
+            # fragmentos usan el nombre con el que el documento quedo guardado.
+            if guardado.nombre != nombre_archivo:
+                documento = replace(documento, nombre_archivo=guardado.nombre)
+                fuente = replace(fuente, nombre_archivo=guardado.nombre)
 
         fragmentos = self._segmentador.segmentar(documento, tipo, derivado_ocr)
         nuevos = self._corpus.agregar(fragmentos)

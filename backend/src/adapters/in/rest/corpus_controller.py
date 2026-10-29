@@ -12,6 +12,19 @@ log = logging.getLogger("rag.rest")
 router = APIRouter(prefix="/api")
 
 TAMANO_MAXIMO = 60 * 1024 * 1024
+TAMANO_BLOQUE = 1024 * 1024
+
+
+async def _leer_con_tope(archivo: UploadFile) -> bytes:
+    """Lee por bloques y corta en cuanto se supera el tope, sin cargar todo en memoria."""
+    partes: list[bytes] = []
+    total = 0
+    while bloque := await archivo.read(TAMANO_BLOQUE):
+        total += len(bloque)
+        if total > TAMANO_MAXIMO:
+            raise HTTPException(413, "El archivo supera el tamano maximo admitido (60 MB)")
+        partes.append(bloque)
+    return b"".join(partes)
 
 
 def _a_salida(estado: EstadoCorpus) -> DocumentosCorpus:
@@ -33,9 +46,7 @@ async def ingestar_documento(
     if not archivo.filename or not archivo.filename.lower().endswith(".pdf"):
         raise HTTPException(422, "Solo se admiten archivos PDF")
 
-    contenido = await archivo.read()
-    if len(contenido) > TAMANO_MAXIMO:
-        raise HTTPException(413, "El archivo supera el tamano maximo admitido (60 MB)")
+    contenido = await _leer_con_tope(archivo)
 
     try:
         tipo_fragmento = TipoFragmento(tipo)
