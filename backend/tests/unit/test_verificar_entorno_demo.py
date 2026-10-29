@@ -44,10 +44,39 @@ def test_datos_fuera_de_git_distinguen_criticos_de_avisos(tmp_path):
     assert not prosa.ok and not prosa.critico and prosa.simbolo == "⚠"
 
 
+def _joblib_falso(tmp_path, nombre, contenido=b"x" * 1000):
+    (tmp_path / nombre).write_bytes(contenido)
+
+
 def test_modelos_ausentes_son_criticos(tmp_path):
-    (tmp_path / "cobertura.joblib").write_bytes(b"1")
-    cob, pas = v.comprobar_modelos(tmp_path)
+    _joblib_falso(tmp_path, "cobertura.joblib")
+    cob, pas = v.comprobar_modelos(tmp_path, cargar=lambda ruta: object())
     assert cob.ok and not pas.ok and pas.critico
+
+
+def test_modelo_vacio_o_truncado_da_error(tmp_path):
+    _joblib_falso(tmp_path, "cobertura.joblib", b"")
+    _joblib_falso(tmp_path, "relevancia_pasajes.joblib", b"abc")
+    cob, pas = v.comprobar_modelos(tmp_path, cargar=lambda ruta: object())
+    assert not cob.ok and cob.critico and "vacio" in cob.detalle
+    assert not pas.ok and "truncado" in pas.detalle
+
+
+def test_modelo_corrupto_que_no_carga_da_error(tmp_path):
+    _joblib_falso(tmp_path, "cobertura.joblib")
+    _joblib_falso(tmp_path, "relevancia_pasajes.joblib")
+
+    def corrupto(ruta):
+        raise ValueError("pickle roto")
+
+    cob, pas = v.comprobar_modelos(tmp_path, cargar=corrupto)
+    assert not cob.ok and cob.critico and "no se puede cargar" in cob.detalle
+    assert "pickle roto" not in cob.detalle
+
+
+def test_los_modelos_reales_del_repositorio_cargan():
+    carpeta = Path(__file__).resolve().parents[2] / "modelos"
+    assert all(r.ok for r in v.comprobar_modelos(carpeta)), "modelos versionados invalidos"
 
 
 def _etiquetas(*nombres):
@@ -60,6 +89,22 @@ def test_ollama_con_el_modelo_y_precalentado():
         "http://x", "qwen3.5:4b", _etiquetas("qwen3.5:4b"), lambda: llamado.append(1) or True
     )
     assert [x.ok for x in r] == [True, True] and llamado == [1]
+
+
+def test_ollama_exige_exactamente_el_modelo_configurado():
+    # Otra etiqueta de la misma familia NO sirve.
+    r = v.comprobar_ollama("http://x", "qwen3.5:4b", _etiquetas("qwen3.5:9b", "qwen3.5:latest"))
+    assert not r[0].ok and "qwen3.5:4b" in r[0].detalle
+    assert v.comprobar_ollama("http://x", "qwen3.5:4b", _etiquetas("qwen3.5:4b"))[0].ok
+
+
+def test_ollama_con_otro_modelo_configurado():
+    assert v.comprobar_ollama("http://x", "otro:7b", _etiquetas("otro:7b"))[0].ok
+    assert not v.comprobar_ollama("http://x", "otro:7b", _etiquetas("qwen3.5:4b"))[0].ok
+
+
+def test_ollama_sin_etiqueta_acepta_latest():
+    assert v.comprobar_ollama("http://x", "mistral", _etiquetas("mistral:latest"))[0].ok
 
 
 def test_ollama_sin_el_modelo_es_critico_y_no_precalienta():
