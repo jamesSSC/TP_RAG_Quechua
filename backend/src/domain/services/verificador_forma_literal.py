@@ -7,6 +7,10 @@ SEPARADOR_DE_FORMAS = re.compile(r"\s*(?:,|;|/)\s*")
 # Un token es una secuencia sin espacios ni signos de puntuacion; los apostrofos y guiones de las
 # formas quechuas forman parte del token.
 SEPARADORES_DE_TOKEN = re.compile(r"[\s,;:.()\[\]¿?¡!\"«»]+")
+# Signos que separan una forma de otra dentro del cuerpo de una entrada: una forma no los cruza.
+SEPARADORES_DE_FORMA = re.compile(r"[,;.:\n]+")
+# Un cuerpo con frases de ejemplo no permite distinguir formas de oraciones: se descarta.
+SIGNOS_DE_FRASE = "¿?¡!"
 
 
 @dataclass(frozen=True)
@@ -21,14 +25,39 @@ def _tokens(texto: str) -> list[str]:
     return [t for t in SEPARADORES_DE_TOKEN.split(texto) if t]
 
 
-def _contiene_secuencia(tokens: list[str], buscada: list[str]) -> list[str] | None:
-    """Devuelve la secuencia completa de tokens del cuerpo que coincide (solo mayusculas
-    normalizadas), o None. Limites de palabra: nunca una subcadena de un token."""
+def _segmentos_de_formas(cuerpo: str) -> list[list[str]] | None:
+    """Formas candidatas de una entrada: el cuerpo sin los segmentos entre parentesis (glosas y
+    aclaraciones en castellano), partido por comas, puntos y punto y coma. Devuelve None si la
+    estructura no es fiable (parentesis sin cerrar o frases de ejemplo): nunca se adivina."""
+    if any(signo in cuerpo for signo in SIGNOS_DE_FRASE):
+        return None
+    fuera, profundidad = [], 0
+    for caracter in cuerpo:
+        if caracter == "(":
+            profundidad += 1
+            fuera.append(";")  # el parentesis tambien corta una forma
+        elif caracter == ")":
+            profundidad -= 1
+            if profundidad < 0:
+                return None
+            fuera.append(";")
+        elif profundidad == 0:
+            fuera.append(caracter)
+    if profundidad != 0:
+        return None
+    segmentos = [_tokens(s) for s in SEPARADORES_DE_FORMA.split("".join(fuera))]
+    return [s for s in segmentos if s]
+
+
+def _en_un_segmento(segmentos: list[list[str]], buscada: list[str]) -> list[str] | None:
+    """Secuencia completa de tokens, contigua DENTRO de un solo segmento (solo mayusculas
+    normalizadas). Nunca una subcadena de un token ni una secuencia que salte puntuacion."""
     n = len(buscada)
     clave = [t.lower() for t in buscada]
-    for i in range(len(tokens) - n + 1):
-        if [t.lower() for t in tokens[i : i + n]] == clave:
-            return tokens[i : i + n]
+    for segmento in segmentos:
+        for i in range(len(segmento) - n + 1):
+            if [t.lower() for t in segmento[i : i + n]] == clave:
+                return segmento[i : i + n]
     return None
 
 
@@ -38,9 +67,11 @@ class VerificadorFormaLiteral:
     cuadra, lo descarta y quien llama muestra el fragmento literal.
 
     - La glosa debe ser el lema castellano de una entrada (sin distinguir mayusculas; si acentos).
-    - Cada forma debe ser un token completo o una secuencia completa de tokens del cuerpo de ESA
-      misma entrada: nada de subcadenas ("Atu" no vale por "Atuq") ni formas de otra entrada.
+    - Cada forma debe ser un token completo o una secuencia contigua de tokens de UN segmento del
+      cuerpo de esa misma entrada: no cruza comas, puntos, punto y coma ni parentesis, y el texto
+      entre parentesis (castellano) no cuenta como forma.
     - La forma no puede ser el propio lema castellano de la entrada.
+    - Si el cuerpo trae parentesis sin cerrar o frases de ejemplo, no se distingue y se descarta.
     - Solo se normalizan mayusculas y espacios; las letras quechuas se comparan tal cual.
     Solo usa la biblioteca estandar."""
 
@@ -68,12 +99,14 @@ class VerificadorFormaLiteral:
         lema = [t.lower() for t in _tokens(entrada.lema)]
         if [t.lower() for t in glosa_tokens] != lema:
             return None
-        cuerpo = _tokens(entrada.cuerpo)
+        segmentos = _segmentos_de_formas(entrada.cuerpo)
+        if segmentos is None:
+            return None
         encontradas = []
         for forma in formas:
             if [t.lower() for t in forma] == lema:
                 return None  # la forma es el propio lema castellano
-            coincidencia = _contiene_secuencia(cuerpo, forma)
+            coincidencia = _en_un_segmento(segmentos, forma)
             if coincidencia is None:
                 return None
             encontradas.append(" ".join(coincidencia))

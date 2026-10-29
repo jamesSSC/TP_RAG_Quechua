@@ -115,3 +115,52 @@ def test_vacio_o_ausente_se_rechaza(forma, glosa):
 
 def test_sin_fragmentos_no_se_acepta_nada():
     assert not v.verificar("Atuq", "zorro", [])
+
+
+# --- Re-auditoria del PR #13: formas fusionadas y castellano entre parentesis ---
+
+PERRO = ["PERRO: Allqu, ashuti."]
+
+
+@pytest.mark.salvaguarda
+def test_rechaza_dos_formas_fusionadas_sin_la_coma():
+    assert not v.verificar("Allqu ashuti", "perro", PERRO)
+    assert v.verificar("Allqu, ashuti", "perro", PERRO)
+    assert v.verificar("Allqu", "perro", PERRO) and v.verificar("ashuti", "perro", PERRO)
+
+
+@pytest.mark.salvaguarda
+@pytest.mark.parametrize("cuerpo", ["Atuq. Wayqu.", "Atuq; Wayqu.", "Atuq (nota) Wayqu."])
+def test_una_forma_no_cruza_puntos_ni_punto_y_coma_ni_parentesis(cuerpo):
+    assert not v.verificar("Atuq Wayqu", "zorro", [f"ZORRO: {cuerpo}"])
+
+
+@pytest.mark.salvaguarda
+def test_acepta_una_secuencia_contigua_dentro_de_un_solo_segmento():
+    assert v.verificar("Kunfisay Puklu", "confesar", ["CONFESAR: Kunfisay Puklu, Atuq."])
+    assert not v.verificar("Puklu Atuq", "confesar", ["CONFESAR: Kunfisay Puklu, Atuq."])
+
+
+@pytest.mark.salvaguarda
+@pytest.mark.parametrize("forma", ["doméstico", "perro doméstico", "domestico"])
+def test_el_castellano_entre_parentesis_no_cuenta_como_forma(forma):
+    assert not v.verificar(forma, "perro", ["PERRO: Allqu (perro doméstico)."])
+
+
+@pytest.mark.salvaguarda
+def test_la_forma_antes_o_despues_de_un_parentesis_si_se_acepta():
+    assert v.verificar("Allqu", "perro", ["PERRO: Allqu (perro doméstico)."])
+    assert v.verificar("Ushtuchiy", "ensartar", ["ENSARTAR: Ushtuchiy (ensartar cuentas)"])
+
+
+@pytest.mark.salvaguarda
+@pytest.mark.parametrize(
+    "cuerpo",
+    [
+        "Ayka (¿ Cuántos años tienes?) ¿Aykataq watayki?",  # frases de ejemplo: no se distingue
+        "Allqu (perro",  # parentesis sin cerrar
+        "Allqu perro) mansos",  # parentesis sin abrir
+    ],
+)
+def test_si_la_estructura_no_permite_distinguir_se_descarta(cuerpo):
+    assert not v.verificar("Allqu", "perro", [f"PERRO: {cuerpo}"])
