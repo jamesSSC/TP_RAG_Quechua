@@ -38,32 +38,6 @@ test("HU-01 · registrar, editar y eliminar una fuente (CRUD)", async ({ page })
   await expect(fila).toHaveCount(0);
 });
 
-test("HU-02 · incorporar un PDF ya registrado en el corpus y reindexar", async ({ page }) => {
-  // Se usa una COPIA RENOMBRADA de un PDF del corpus ya registrado en MANIFIESTO.yaml
-  // (el diccionario de 37 paginas): el identificador de fragmento depende del nombre.
-  const pdf = readFileSync(join(CORPUS_PDF, "293274822-diccionario-quechua-Wanka-docx.pdf"));
-  await pestana(page, "Incorporar documentos").click();
-  await page.locator('input[type="file"]').setInputFiles({
-    name: "copia-e2e-hu02.pdf",
-    mimeType: "application/pdf",
-    buffer: pdf,
-  });
-  await page.getByLabel("Título", { exact: true }).fill("Copia de prueba E2E (PDF ya registrado)");
-  await page.getByLabel("Entidad publicadora").fill("Prueba local");
-  await page.getByLabel("Licenciamiento").fill("Uso interno de prueba");
-  await page.getByRole("button", { name: "Incorporar al corpus" }).click();
-  await expect(page.locator(".ingesta")).toContainText("incorporados");
-  await capturar(page, "HU-02_incorporar_pdf_resultado", page.locator(".ingesta"));
-
-  await page.getByRole("button", { name: "Reconstruir índice" }).click();
-  await expect(page.getByText("copia-e2e-hu02.pdf")).toBeVisible();
-  await capturar(
-    page,
-    "HU-02_documentos_indexados_tras_reindexar",
-    page.getByText("copia-e2e-hu02.pdf"),
-  );
-});
-
 test("HU-03 y HU-07 · una palabra con documento y página", async ({ page }) => {
   const r = await consultar(page, "¿cómo se dice zorro en quechua wanka?");
   expect(r.status()).toBe(200);
@@ -84,6 +58,8 @@ test("HU-04 · contenido cultural", async ({ page }) => {
 test("HU-05 · consulta en inglés", async ({ page }) => {
   await consultar(page, "how do you say fox in Wanka Quechua?");
   await capturar(page, "HU-05_consulta_en_ingles_con_traduccion_de_la_consulta");
+  await expect(page.locator(".respaldo__origen").first()).toContainText(/\.pdf — página \d+/);
+  await capturar(page, "HU-05_documento_y_pagina_de_la_respuesta_en_ingles", page.locator(".respaldo__origen"));
 });
 
 test("HU-06 · sin respaldo no hay respuesta", async ({ page }) => {
@@ -112,6 +88,8 @@ test("RF-15 · pasajes con la segunda probabilidad", async ({ page }) => {
   await consultar(page, "¿Cómo se forma el plural en los sustantivos?");
   await expect(page.getByText(/no es una respuesta/).first()).toBeVisible();
   await capturar(page, "RF-15_pasajes_de_prosa_rotulados", page.getByText(/no es una respuesta/));
+  await expect(page.locator(".pasajes__origen").first()).toContainText(/\.pdf — página \d+/);
+  await capturar(page, "RF-15_pasaje_con_documento_y_pagina", page.locator(".pasajes__origen"));
   await capturar(page, "RF-15_probabilidad_de_los_pasajes", page.getByTestId("prediccion-ml"));
 });
 
@@ -142,19 +120,70 @@ test("Validación · consulta vacía y demasiado larga no llegan a la API", asyn
 
 test("Validación 422 y Swagger · la API rechaza una consulta inválida", async ({ page }) => {
   await page.goto("http://127.0.0.1:8000/docs");
-  await expect(page.locator(".swagger-ui")).toBeVisible({ timeout: 60_000 });
-  await capturar(page, "Swagger_documentacion_de_la_API");
+  // La documentacion interactiva carga su interfaz desde un CDN: se espera a que pinte las operaciones.
+  const cargo = await page
+    .locator(".swagger-ui .opblock")
+    .first()
+    .waitFor({ timeout: 30_000 })
+    .then(() => true)
+    .catch(() => false);
 
-  await page.locator("[id^='operations-'][id*='api_consultas_post']").first().click();
-  await page.getByRole("button", { name: "Try it out" }).click();
-  await page.locator("textarea.body-param__text").fill('{"texto": ""}');
-  await page.getByRole("button", { name: "Execute" }).click();
-  await expect(
-    page.locator(".live-responses-table td.response-col_status:not(.col_header)").first(),
-  ).toHaveText("422", { timeout: 30_000 });
+  if (cargo) {
+    await expect(page.getByText("LOADING", { exact: true })).toHaveCount(0);
+    await capturar(page, "Swagger_documentacion_de_la_API");
+    await page.locator("[id^='operations-'][id*='api_consultas_post']").first().click();
+    await page.getByRole("button", { name: "Try it out" }).click();
+    await page.locator("textarea.body-param__text").fill('{"texto": ""}');
+    await page.getByRole("button", { name: "Execute" }).click();
+    await expect(
+      page.locator(".live-responses-table td.response-col_status:not(.col_header)").first(),
+    ).toHaveText("422", { timeout: 30_000 });
+    await capturar(
+      page,
+      "validacion_422_respuesta_de_la_API_en_Swagger",
+      page.locator(".live-responses-table"),
+    );
+    return;
+  }
+
+  // Sin CDN: el esquema OpenAPI formateado hace de documentacion y el 422 se pide por la API.
+  const esquema = await (await page.request.get("http://127.0.0.1:8000/openapi.json")).json();
+  await page.setContent(
+    `<pre style="font:14px monospace;padding:16px">${JSON.stringify(
+      { info: esquema.info, rutas: Object.keys(esquema.paths) },
+      null,
+      2,
+    )}</pre>`,
+  );
+  await capturar(page, "Swagger_documentacion_de_la_API");
+  const r = await page.request.post("http://127.0.0.1:8000/api/consultas", { data: { texto: "" } });
+  expect(r.status()).toBe(422);
+  await page.setContent(`<pre style="font:14px monospace;padding:16px">422\n${await r.text()}</pre>`);
+  await capturar(page, "validacion_422_respuesta_de_la_API_en_Swagger");
+});
+
+test("HU-02 · incorporar un PDF ya registrado en el corpus y reindexar", async ({ page }) => {
+  // Se usa una COPIA RENOMBRADA de un PDF del corpus ya registrado en MANIFIESTO.yaml
+  // (el diccionario de 37 paginas): el identificador de fragmento depende del nombre.
+  const pdf = readFileSync(join(CORPUS_PDF, "293274822-diccionario-quechua-Wanka-docx.pdf"));
+  await pestana(page, "Incorporar documentos").click();
+  await page.locator('input[type="file"]').setInputFiles({
+    name: "copia-e2e-hu02.pdf",
+    mimeType: "application/pdf",
+    buffer: pdf,
+  });
+  await page.getByLabel("Título", { exact: true }).fill("Copia de prueba E2E (PDF ya registrado)");
+  await page.getByLabel("Entidad publicadora").fill("Prueba local");
+  await page.getByLabel("Licenciamiento").fill("Uso interno de prueba");
+  await page.getByRole("button", { name: "Incorporar al corpus" }).click();
+  await expect(page.locator(".ingesta")).toContainText("incorporados");
+  await capturar(page, "HU-02_incorporar_pdf_resultado", page.locator(".ingesta"));
+
+  await page.getByRole("button", { name: "Reconstruir índice" }).click();
+  await expect(page.getByText("copia-e2e-hu02.pdf")).toBeVisible();
   await capturar(
     page,
-    "validacion_422_respuesta_de_la_API_en_Swagger",
-    page.locator(".live-responses-table"),
+    "HU-02_documentos_indexados_tras_reindexar",
+    page.getByText("copia-e2e-hu02.pdf"),
   );
 });
