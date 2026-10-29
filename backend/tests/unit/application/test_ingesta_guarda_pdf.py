@@ -47,3 +47,22 @@ def test_sin_licenciamiento_no_se_guarda_nada():
     with pytest.raises(ValueError):
         _caso(almacen).ejecutar(b"%PDF", "prueba.pdf", TipoFragmento.LEXICOGRAFICO, "T", "E", " ")
     assert almacen.guardados == []
+
+
+class AlmacenQueRenombra(AlmacenFalso):
+    def guardar(self, contenido, nombre):
+        super().guardar(contenido, nombre)
+        return DocumentoAlmacenado(nombre="prueba-ab12cd34.pdf", sha256="h", duplicado=False)
+
+
+def test_fuente_y_fragmentos_usan_el_nombre_que_devuelve_el_almacen():
+    corpus = CorpusFalso()
+    caso = IngestarDocumentoUseCase(
+        extractor=ExtractorFalso(_documento([(1, PAGINA_DICCIONARIO)])),
+        corpus=corpus,
+        indice=IndiceFalso(),
+        almacen_documentos=AlmacenQueRenombra(),
+    )
+    r = caso.ejecutar(b"%PDF", "prueba.pdf", TipoFragmento.LEXICOGRAFICO, "T", "E", "L")
+    assert r.fuente.nombre_archivo == "prueba-ab12cd34.pdf"
+    assert corpus.documentos() == ["prueba-ab12cd34.pdf"]
