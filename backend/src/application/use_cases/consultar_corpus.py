@@ -19,6 +19,7 @@ from domain.services.clasificador_consulta import ClasificadorConsulta
 from domain.services.depurador_consulta import DepuradorConsulta
 from domain.services.evaluador_confianza import EvaluadorConfianza
 from domain.value_objects.idioma import Idioma
+from domain.value_objects.origen_consulta import OrigenConsulta
 
 log = logging.getLogger("rag.caso_uso")
 
@@ -84,6 +85,7 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
         predictor_pasajes: PredictorPort | None = None,
         probabilidad_minima_cobertura: float = 0.0,
         probabilidad_minima_pasajes: float = 0.0,
+        origen: OrigenConsulta = OrigenConsulta.USUARIO,
     ):
         self._indice = indice
         self._generador = generador
@@ -94,6 +96,8 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
         self._depurador = depurador or DepuradorConsulta()
         self._clasificador = clasificador or ClasificadorConsulta(self._depurador)
         self._k = k
+        # Lo fija quien construye el caso de uso (servidor o script), nunca el cliente.
+        self._origen = origen
         # PMV2 (RF-14 y RF-15). Ambos predictores solo pueden AÑADIR abstenciones o retirar
         # pasajes (RN-06): nunca convierten en respuesta lo que la regla del umbral rechaza.
         self._predictor_cobertura = predictor_cobertura
@@ -106,7 +110,7 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
 
     def _resolver(self, texto_consulta: str, t0: float) -> Respuesta:
         idioma = self._detector.detectar(texto_consulta)
-        consulta = Consulta(texto=texto_consulta, idioma=idioma)
+        consulta = Consulta(texto=texto_consulta, idioma=idioma, origen=self._origen)
         log.info("[CASO-USO] ConsultarCorpus: idioma=%s", idioma.value)
 
         if not idioma.soportado:
@@ -174,9 +178,7 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
         prediccion = self._predecir(consulta, recuperados)
         p_cobertura = prediccion["cobertura"]
         abstencion_por_predictor = (
-            veredicto.responder
-            and p_cobertura is not None
-            and p_cobertura < self._p_min_cobertura
+            veredicto.responder and p_cobertura is not None and p_cobertura < self._p_min_cobertura
         )
         if abstencion_por_predictor:
             # RN-06: el predictor puede añadir una abstencion, nunca quitarla.

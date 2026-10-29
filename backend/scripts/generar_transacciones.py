@@ -35,6 +35,7 @@ sys.path.insert(0, str(RAIZ / "scripts"))
 from entrenar_predictores import cargar_conjunto  # noqa: E402
 
 from infrastructure.config import configuracion  # noqa: E402
+from domain.value_objects.origen_consulta import OrigenConsulta  # noqa: E402
 from infrastructure.contenedor import Contenedor  # noqa: E402
 
 SEMILLA = 2026
@@ -80,7 +81,8 @@ def percentil(valores: list[float], q: float) -> float:
 
 def main(n: int, salida: Path) -> None:
     salida.mkdir(parents=True, exist_ok=True)
-    contenedor = Contenedor(generador="literal")
+    # HU-09: lo que esta corrida registra es sintetico y se rotula como `carga`.
+    contenedor = Contenedor(generador="literal", origen=OrigenConsulta.CARGA)
     uc = contenedor.consultar_corpus
     filas = carga(n, contenedor)
     print(f"[CARGA] {len(filas)} transacciones · base de datos: {configuracion.base_datos}")

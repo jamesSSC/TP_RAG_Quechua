@@ -94,3 +94,30 @@ def test_el_procedimiento_rechaza_una_respuesta_sin_respaldo(repo):
                     "'similitud',NULL,NULL,FALSE,0,1.0,'[]'::jsonb)"
                 )
             )
+
+
+def test_origen_por_procedimiento_filtra_resumen_y_demanda(repo):
+    from domain.value_objects.origen_consulta import OrigenConsulta
+
+    for texto, origen in [("uno", OrigenConsulta.USUARIO)] + [
+        (f"carga {i}", OrigenConsulta.CARGA) for i in range(3)
+    ]:
+        c = Consulta(texto=texto, origen=origen)
+        r = Respuesta(consulta_id=c.id, texto="sin respaldo", abstenida=True)
+        r.probabilidad_cobertura, r.latencia_ms = 0.1, 1.0
+        repo.registrar(c, r)
+
+    assert repo.conteo_por_origen() == {"usuario": 1, "carga": 3}
+    assert repo.estadisticas()["total"] == 1
+    assert repo.estadisticas(incluir_sinteticas=True)["total"] == 4
+    assert [t for t, _ in repo.abstenciones_con_prediccion()] == ["uno"]
+    assert len(repo.abstenciones_con_prediccion(incluir_sinteticas=True)) == 4
+    # La llamada anterior al origen (15 argumentos) sigue valiendo y registra `usuario`.
+    with repo._sesion() as s, s.begin():
+        s.execute(
+            text(
+                "CALL sp_registrar_consulta('y','t','es',NULL,now(),'r',TRUE,0.1,NULL,"
+                "NULL,NULL,FALSE,0,1.0,'[]'::jsonb)"
+            )
+        )
+    assert repo.conteo_por_origen()["usuario"] == 2

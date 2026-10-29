@@ -51,7 +51,7 @@ class RepositorioConsultasPostgres(RepositorioConsultasSqlAlchemy):
                 text(
                     "CALL sp_registrar_consulta(:id, :texto, :idioma, :traducido, :momento, "
                     ":respuesta, :abstenida, :similitud, :via, :p_cob, :p_pas, :abst_pred, "
-                    ":pasajes, :latencia, CAST(:respaldos AS JSONB))"
+                    ":pasajes, :latencia, CAST(:respaldos AS JSONB), :origen)"
                 ),
                 {
                     "id": consulta.id,
@@ -69,6 +69,7 @@ class RepositorioConsultasPostgres(RepositorioConsultasSqlAlchemy):
                     "pasajes": len(respuesta.pasajes),
                     "latencia": respuesta.latencia_ms,
                     "respaldos": json.dumps(respaldos, ensure_ascii=False),
+                    "origen": consulta.origen.value,
                 },
             )
 
@@ -78,11 +79,24 @@ class RepositorioConsultasPostgres(RepositorioConsultasSqlAlchemy):
         log.info("[REPOSITORIO] historial borrado por procedimiento (%d consultas)", borradas)
         return int(borradas)
 
-    def estadisticas(self) -> dict:
-        base = super().estadisticas()
+    def conteo_por_origen(self) -> dict[str, int]:
         with self._sesion() as s:
-            fila = s.execute(text("SELECT * FROM fn_resumen_demanda()")).mappings().one()
-            documentos = s.execute(text("SELECT * FROM fn_respaldo_por_documento()")).all()
+            return {
+                o: int(n) for o, n in s.execute(text("SELECT * FROM fn_conteo_por_origen()")).all()
+            }
+
+    def estadisticas(self, incluir_sinteticas: bool = False) -> dict:
+        base = super().estadisticas(incluir_sinteticas)
+        solo_usuario = not incluir_sinteticas
+        with self._sesion() as s:
+            fila = (
+                s.execute(text("SELECT * FROM fn_resumen_demanda(:solo)"), {"solo": solo_usuario})
+                .mappings()
+                .one()
+            )
+            documentos = s.execute(
+                text("SELECT * FROM fn_respaldo_por_documento(:solo)"), {"solo": solo_usuario}
+            ).all()
         base.update(
             {
                 "total": int(fila["total"]),
@@ -97,11 +111,14 @@ class RepositorioConsultasPostgres(RepositorioConsultasSqlAlchemy):
         )
         return base
 
-    def abstenciones_con_prediccion(self, limite: int = 5000) -> list[tuple[str, float | None]]:
+    def abstenciones_con_prediccion(
+        self, limite: int = 5000, incluir_sinteticas: bool = False
+    ) -> list[tuple[str, float | None]]:
         with self._sesion() as s:
             return [
                 (t, p)
                 for t, p in s.execute(
-                    text("SELECT * FROM fn_demanda_insatisfecha(:limite)"), {"limite": limite}
+                    text("SELECT * FROM fn_demanda_insatisfecha(:limite, :solo)"),
+                    {"limite": limite, "solo": not incluir_sinteticas},
                 ).all()
             ]

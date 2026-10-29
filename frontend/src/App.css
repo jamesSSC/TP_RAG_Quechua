@@ -691,3 +691,22 @@ img, video { max-width: 100%; }
 .barras__pista { background: var(--papel-hundido); border-radius: 4px; height: 0.7rem; }
 .barras__relleno { display: block; height: 100%; background: var(--acento); border-radius: 4px; }
 .barras__valor { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* HU-09: rotulos de demostracion y conteo por origen */
+.aviso-demostracion {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--abstencion);
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--abstencion);
+}
+.origenes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+.origenes__control { display: block; margin: 0.25rem 0 0.75rem; }

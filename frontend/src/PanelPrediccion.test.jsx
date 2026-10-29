@@ -33,9 +33,23 @@ function json(cuerpo) {
 function instalar() {
   globalThis.fetch = vi.fn((url) => {
     if (url.endsWith("/api/modelos")) return json([modelo("cobertura"), modelo("pasajes")]);
+    if (url.includes("/api/analitica/demanda") && url.includes("incluir_sinteticas=true"))
+      return json({
+        suficiente: true,
+        modo: "demostracion",
+        aviso:
+          "Demostración con 800 consultas generadas por la prueba de carga; no es demanda real",
+        por_origen: { usuario: 99, carga: 800 },
+        estadisticas: { total: 899, abstenidas: 186, respaldo_por_documento: {} },
+        terminos_distintos_no_cubiertos: 0,
+        prioridades: [],
+      });
     if (url.includes("/api/analitica/demanda"))
       return json({
         suficiente: true,
+        modo: "real",
+        aviso: null,
+        por_origen: { usuario: 800 },
         estadisticas: { total: 800, abstenidas: 186, respaldo_por_documento: { "dic.pdf": 606 } },
         terminos_distintos_no_cubiertos: 1,
         prioridades: [
@@ -105,5 +119,27 @@ describe("PMV2 · panel de predicción", () => {
     );
     expect(screen.getByTestId("prediccion-ml")).toBeTruthy();
     expect(screen.getByText(/RN-06/)).toBeTruthy();
+  });
+
+  it("muestra el conteo por origen y no rotula demostración por defecto", async () => {
+    instalar();
+    render(<PanelPrediccion />);
+    const lista = await screen.findByTestId("por-origen");
+    expect(lista.textContent).toContain("usuario (demanda real): 800");
+    expect(screen.queryByTestId("aviso-demostracion")).toBeNull();
+  });
+
+  it("la demostración es opcional y se rotula como no real", async () => {
+    instalar();
+    render(<PanelPrediccion />);
+    fireEvent.click(await screen.findByLabelText(/Ver demostración/));
+    const aviso = await screen.findByTestId("aviso-demostracion");
+    expect(aviso.textContent).toBe(
+      "Demostración con 800 consultas generadas por la prueba de carga; no es demanda real",
+    );
+    expect(screen.getByTestId("por-origen").textContent).toContain("carga (sintética): 800");
+    expect(
+      globalThis.fetch.mock.calls.some(([u]) => u.includes("incluir_sinteticas=true")),
+    ).toBe(true);
   });
 });

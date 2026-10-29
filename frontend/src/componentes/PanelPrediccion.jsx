@@ -151,7 +151,14 @@ function TarjetaModelo({ modelo }) {
   );
 }
 
-function Demanda({ demanda }) {
+const NOMBRES_ORIGEN = {
+  usuario: "usuario (demanda real)",
+  carga: "carga (sintética)",
+  arnes: "arnés (sintética)",
+  humo: "humo (sintética)",
+};
+
+function Demanda({ demanda, sinteticas, onSinteticas }) {
   if (!demanda) return null;
   const e = demanda.estadisticas ?? {};
   const documentos = Object.entries(e.respaldo_por_documento ?? {});
@@ -159,6 +166,26 @@ function Demanda({ demanda }) {
   return (
     <section className="demanda" data-testid="demanda">
       <h2 className="panel__titulo">Analítica de demanda (HU-09)</h2>
+      {demanda.modo === "demostracion" && (
+        <p className="aviso-demostracion" role="status" data-testid="aviso-demostracion">
+          {demanda.aviso}
+        </p>
+      )}
+      <ul className="origenes" aria-label="Consultas por origen" data-testid="por-origen">
+        {Object.entries(demanda.por_origen ?? {}).map(([origen, n]) => (
+          <li key={origen}>
+            {NOMBRES_ORIGEN[origen] ?? origen}: <strong>{n}</strong>
+          </li>
+        ))}
+      </ul>
+      <label className="origenes__control">
+        <input
+          type="checkbox"
+          checked={sinteticas}
+          onChange={(e) => onSinteticas(e.target.checked)}
+        />{" "}
+        Ver demostración con las consultas de prueba (no es demanda real)
+      </label>
       <div className="cifras">
         <div className="cifra"><span>Consultas registradas</span><strong>{e.total ?? 0}</strong></div>
         <div className="cifra"><span>Abstenciones</span><strong>{e.abstenidas ?? 0}</strong></div>
@@ -222,12 +249,21 @@ export default function PanelPrediccion() {
   const [prediccion, setPrediccion] = useState(null);
   const [modelos, setModelos] = useState([]);
   const [demanda, setDemanda] = useState(null);
+  const [sinteticas, setSinteticas] = useState(false);
   const [error, setError] = useState(null);
   const [cargando, setCargando] = useState(false);
 
+  const cargarDemanda = (incluir) =>
+    obtenerDemanda(15, incluir).then(setDemanda).catch(() => setDemanda(null));
+
   const cargar = () => {
     obtenerModelos().then(setModelos).catch((e) => setError(e.message));
-    obtenerDemanda().then(setDemanda).catch(() => setDemanda(null));
+    cargarDemanda(sinteticas);
+  };
+
+  const alternarSinteticas = (incluir) => {
+    setSinteticas(incluir);
+    cargarDemanda(incluir);
   };
 
   useEffect(cargar, []);
@@ -333,7 +369,7 @@ export default function PanelPrediccion() {
         ))}
       </section>
 
-      <Demanda demanda={demanda} />
+      <Demanda demanda={demanda} sinteticas={sinteticas} onSinteticas={alternarSinteticas} />
       <button type="button" className="boton" onClick={cargar}>
         Actualizar métricas y demanda
       </button>

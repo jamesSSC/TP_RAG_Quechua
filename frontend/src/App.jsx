@@ -75,6 +75,13 @@ export default function App() {
         <TamanoTexto indice={tamano} onCambiar={cambiarTamano} />
       </header>
 
+      {estado?.base_demostracion && (
+        <p className="aviso-demostracion" role="status" data-testid="base-demostracion">
+          Base de demostración: la mayoría de las consultas guardadas son generadas por pruebas, no
+          demanda real.
+        </p>
+      )}
+
       <nav className="pestanas">
         <button
           className={`pestana ${vista === "consulta" ? "pestana--activa" : ""}`}

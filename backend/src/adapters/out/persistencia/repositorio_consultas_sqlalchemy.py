@@ -1,6 +1,6 @@
 import logging
 
-from sqlalchemy import case, func, select
+from sqlalchemy import case, func, select, true
 from sqlalchemy.orm import Session, sessionmaker
 
 from adapters.out.persistencia.modelos import ConsultaORM, RespaldoORM
@@ -9,6 +9,7 @@ from domain.entities.consulta import Consulta
 from domain.entities.fragmento import Fragmento, FragmentoRecuperado, TipoFragmento
 from domain.entities.respuesta import Respuesta
 from domain.value_objects.idioma import Idioma
+from domain.value_objects.origen_consulta import OrigenConsulta
 from domain.value_objects.procedencia import Procedencia
 from domain.value_objects.puntuacion_similitud import PuntuacionSimilitud
 
@@ -42,6 +43,7 @@ class RepositorioConsultasSqlAlchemy(RepositorioConsultasPort):
                     abstencion_por_predictor=respuesta.abstencion_por_predictor,
                     pasajes_ofrecidos=len(respuesta.pasajes),
                     latencia_ms=respuesta.latencia_ms,
+                    origen=consulta.origen.value,
                     respaldos=[
                         RespaldoORM(
                             fragmento_id=r.id,
@@ -82,9 +84,25 @@ class RepositorioConsultasSqlAlchemy(RepositorioConsultasPort):
             ).all()
             return [self._a_dominio(r)[0] for r in registros]
 
-    def estadisticas(self) -> dict:
+    @staticmethod
+    def _solo_reales(incluir_sinteticas: bool):
+        """Filtro de origen: sin `incluir_sinteticas` solo cuenta la demanda real."""
+        return true() if incluir_sinteticas else ConsultaORM.origen == OrigenConsulta.USUARIO.value
+
+    def conteo_por_origen(self) -> dict[str, int]:
+        with self._sesion() as s:
+            return {
+                origen: int(n)
+                for origen, n in s.execute(
+                    select(ConsultaORM.origen, func.count()).group_by(ConsultaORM.origen)
+                ).all()
+            }
+
+    def estadisticas(self, incluir_sinteticas: bool = False) -> dict:
         """Agregados del historial para la analitica del PMV2 (HU-09). Se calculan en la base
-        de datos, no trayendo las filas a memoria."""
+        de datos, no trayendo las filas a memoria. Solo cuentan las consultas de origen
+        `usuario`, salvo que se pidan tambien las sinteticas."""
+        filtro = self._solo_reales(incluir_sinteticas)
         with self._sesion() as s:
             total, abstenidas, por_predictor, p_media, lat_media = s.execute(
                 select(
@@ -98,19 +116,21 @@ class RepositorioConsultasSqlAlchemy(RepositorioConsultasPort):
                     ),
                     func.avg(ConsultaORM.probabilidad_cobertura),
                     func.avg(ConsultaORM.latencia_ms),
-                )
+                ).where(filtro)
             ).one()
             por_idioma = dict(
                 s.execute(
-                    select(ConsultaORM.idioma, func.count()).group_by(ConsultaORM.idioma)
+                    select(ConsultaORM.idioma, func.count())
+                    .where(filtro)
+                    .group_by(ConsultaORM.idioma)
                 ).all()
             )
             por_via = {
                 (via or "abstencion"): n
                 for via, n in s.execute(
-                    select(ConsultaORM.via_respaldo, func.count()).group_by(
-                        ConsultaORM.via_respaldo
-                    )
+                    select(ConsultaORM.via_respaldo, func.count())
+                    .where(filtro)
+                    .group_by(ConsultaORM.via_respaldo)
                 ).all()
             }
             por_documento = dict(
@@ -118,12 +138,16 @@ class RepositorioConsultasSqlAlchemy(RepositorioConsultasPort):
                     select(
                         RespaldoORM.documento, func.count(func.distinct(RespaldoORM.consulta_id))
                     )
+                    .join(ConsultaORM, ConsultaORM.id == RespaldoORM.consulta_id)
+                    .where(filtro)
                     .group_by(RespaldoORM.documento)
                     .order_by(func.count(func.distinct(RespaldoORM.consulta_id)).desc())
                 ).all()
             )
             latencias = sorted(
-                v for v in s.scalars(select(ConsultaORM.latencia_ms)).all() if v is not None
+                v
+                for v in s.scalars(select(ConsultaORM.latencia_ms).where(filtro)).all()
+                if v is not None
             )
         return {
             "total": int(total or 0),
@@ -137,13 +161,16 @@ class RepositorioConsultasSqlAlchemy(RepositorioConsultasPort):
             "respaldo_por_documento": por_documento,
         }
 
-    def abstenciones_con_prediccion(self, limite: int = 5000) -> list[tuple[str, float | None]]:
+    def abstenciones_con_prediccion(
+        self, limite: int = 5000, incluir_sinteticas: bool = False
+    ) -> list[tuple[str, float | None]]:
         with self._sesion() as s:
             return [
                 (texto, p)
                 for texto, p in s.execute(
                     select(ConsultaORM.texto, ConsultaORM.probabilidad_cobertura)
                     .where(ConsultaORM.abstenida.is_(True))
+                    .where(self._solo_reales(incluir_sinteticas))
                     .order_by(ConsultaORM.momento.desc())
                     .limit(limite)
                 ).all()
@@ -161,6 +188,7 @@ class RepositorioConsultasSqlAlchemy(RepositorioConsultasPort):
             idioma=Idioma(r.idioma),
             momento=r.momento,
             texto_traducido=r.texto_traducido,
+            origen=OrigenConsulta(r.origen or "usuario"),
         )
         respaldo = [
             FragmentoRecuperado(

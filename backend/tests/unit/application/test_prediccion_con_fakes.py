@@ -144,11 +144,14 @@ class RepositorioDemanda(RepositorioFake):
         super().__init__()
         self._total, self._abst = total, abstenciones
 
-    def estadisticas(self):
+    def estadisticas(self, incluir_sinteticas=False):
         return {"total": self._total, "abstenidas": len(self._abst)}
 
-    def abstenciones_con_prediccion(self, limite=5000):
+    def abstenciones_con_prediccion(self, limite=5000, incluir_sinteticas=False):
         return self._abst
+
+    def conteo_por_origen(self):
+        return {"usuario": self._total}
 
 
 def test_hu09_historial_insuficiente_no_emite_priorizacion():

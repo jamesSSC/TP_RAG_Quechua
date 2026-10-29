@@ -111,3 +111,6 @@ class EstadoSistema(BaseModel):
     modelo: str
     predictores_disponibles: bool = False
     consistencia: ConsistenciaDatos | None = None
+    # HU-09: consultas registradas por origen y rotulo de base de demostracion.
+    consultas_por_origen: dict[str, int] = {}
+    base_demostracion: bool = False

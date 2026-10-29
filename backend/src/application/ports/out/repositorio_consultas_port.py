@@ -24,11 +24,18 @@ class RepositorioConsultasPort(ABC):
     @abstractmethod
     def total_registradas(self) -> int: ...
 
-    def estadisticas(self) -> dict:
-        """Agregados del historial (HU-09). No es abstracto: un repositorio que no los
-        calcule deja la analitica sin datos sin romper la consulta."""
+    def estadisticas(self, incluir_sinteticas: bool = False) -> dict:
+        """Agregados del historial (HU-09). Por defecto solo cuentan las consultas de origen
+        `usuario`. No es abstracto: un repositorio que no los calcule deja la analitica sin
+        datos sin romper la consulta."""
         raise NotImplementedError
 
-    def abstenciones_con_prediccion(self, limite: int = 5000) -> list[tuple[str, float | None]]:
+    def abstenciones_con_prediccion(
+        self, limite: int = 5000, incluir_sinteticas: bool = False
+    ) -> list[tuple[str, float | None]]:
         """Texto de cada consulta abstenida y la probabilidad de cobertura que se estimo."""
+        raise NotImplementedError
+
+    def conteo_por_origen(self) -> dict[str, int]:
+        """Consultas registradas por origen (usuario, carga, arnes, humo), sin filtrar."""
         raise NotImplementedError

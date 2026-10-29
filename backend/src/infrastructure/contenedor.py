@@ -25,7 +25,7 @@ from adapters.out.generacion.ollama_generador import OllamaGenerador
 from adapters.out.idioma.detector_idioma_heuristico import (
     DetectorIdiomaHeuristico,
 )
-from adapters.out.persistencia.modelos import COLUMNAS_PMV2, Base
+from adapters.out.persistencia.modelos import COLUMNAS_HU09, COLUMNAS_PMV2, Base
 from adapters.out.persistencia.repositorio_consultas_postgres import (
     RepositorioConsultasPostgres,
     instalar_procedimientos,
@@ -48,6 +48,7 @@ from application.use_cases.predecir_consulta import PredecirConsultaUseCase
 from application.use_cases.reindexar_corpus import ReindexarCorpusUseCase
 from application.use_cases.verificar_consistencia_datos import VerificarConsistenciaDatos
 from domain.services.evaluador_confianza import EvaluadorConfianza
+from domain.value_objects.origen_consulta import OrigenConsulta
 from infrastructure.config import configuracion
 from infrastructure.datos import preparar_carpeta_datos
 
@@ -55,8 +56,13 @@ log = logging.getLogger(__name__)
 
 
 class Contenedor:
-    def __init__(self, generador: str = "ollama"):
-        """`generador`: "ollama" (API), "literal" (sin modelo) o "auto" (Ollama si responde)."""
+    def __init__(self, generador: str = "ollama", origen: OrigenConsulta | None = None):
+        """`generador`: "ollama" (API), "literal" (sin modelo) o "auto" (Ollama si responde).
+
+        `origen`: de quien son las consultas que registra este proceso (HU-09). Por defecto
+        el de la configuracion del servidor (`usuario`); los scripts de carga y de humo lo
+        fijan al construir. El cliente de la API nunca lo elige."""
+        self.origen = origen or OrigenConsulta(configuracion.origen_consultas)
         preparar_carpeta_datos(
             configuracion.carpeta_datos,
             configuracion.ruta_corpus_base,
@@ -117,6 +123,7 @@ class Contenedor:
             predictor_pasajes=self.predictor_pasajes,
             probabilidad_minima_cobertura=configuracion.probabilidad_minima_cobertura,
             probabilidad_minima_pasajes=configuracion.probabilidad_minima_pasajes,
+            origen=self.origen,
         )
         self.predecir_consulta = PredecirConsultaUseCase(
             caracteristicas=self.consultar_corpus.caracteristicas,
@@ -139,6 +146,22 @@ class Contenedor:
                 "estado": "avisos" if self.avisos_consistencia else "ok",
                 "avisos": self.avisos_consistencia,
             },
+            **self._rotulo_de_demostracion(),
+        }
+
+    def _rotulo_de_demostracion(self) -> dict:
+        """HU-09: si la base tiene mayoritariamente consultas de prueba, la interfaz lo dice."""
+        por_origen: dict[str, int] = {}
+        if self.repositorio_consultas is not None:
+            try:
+                por_origen = self.repositorio_consultas.conteo_por_origen()
+            except Exception as exc:  # noqa: BLE001
+                log.warning("[REPOSITORIO] no se pudo contar por origen: %s", exc)
+        total = sum(por_origen.values())
+        sinteticas = total - por_origen.get("usuario", 0)
+        return {
+            "consultas_por_origen": por_origen,
+            "base_demostracion": total > 0 and sinteticas * 2 > total,
         }
 
     def _verificar_consistencia(self) -> list[str]:
@@ -154,13 +177,15 @@ class Contenedor:
     @staticmethod
     def _migrar_columnas_pmv2(motor) -> None:
         existentes = {c["name"] for c in inspect(motor).get_columns("consultas")}
-        faltantes = {n: t for n, t in COLUMNAS_PMV2.items() if n not in existentes}
+        faltantes = {
+            n: t for n, t in {**COLUMNAS_PMV2, **COLUMNAS_HU09}.items() if n not in existentes
+        }
         if not faltantes:
             return
         with motor.begin() as conexion:
             for nombre, tipo in faltantes.items():
                 conexion.execute(text(f"ALTER TABLE consultas ADD COLUMN {nombre} {tipo}"))
-        log.info("[REPOSITORIO] columnas del PMV2 añadidas: %s", ", ".join(faltantes))
+        log.info("[REPOSITORIO] columnas añadidas: %s", ", ".join(faltantes))
 
     def _conectar_base_datos(self) -> bool:
         try:

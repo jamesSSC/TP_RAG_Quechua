@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from uuid import uuid4
 
 from domain.value_objects.idioma import Idioma
+from domain.value_objects.origen_consulta import OrigenConsulta
 
 
 @dataclass
@@ -13,6 +14,7 @@ class Consulta:
     momento: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     texto_traducido: str | None = None
     variantes: list[str] = field(default_factory=list)
+    origen: OrigenConsulta = OrigenConsulta.USUARIO
 
     def __post_init__(self):
         self.texto = self.texto.strip()

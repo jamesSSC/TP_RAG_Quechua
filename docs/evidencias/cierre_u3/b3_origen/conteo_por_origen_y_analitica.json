@@ -1,0 +1,56 @@
+{
+  "base_real_antes": {
+    "archivo": "backend/quechua_wanka.db (solo lectura)",
+    "consultas": 65,
+    "tiene_columna_origen": false
+  },
+  "analitica_copia_base_real": {
+    "consultas_por_origen": {
+      "usuario": 65
+    },
+    "base_demostracion": false,
+    "por_defecto": {
+      "suficiente": false,
+      "modo": "real",
+      "aviso": null,
+      "mensaje": "Historial insuficiente: hay 65 consultas registradas y se necesitan al menos 100. No se emite priorización.",
+      "consultas_contadas": 65,
+      "abstenidas": 12,
+      "terminos_priorizados": 0
+    },
+    "incluir_sinteticas": {
+      "suficiente": false,
+      "modo": "real",
+      "aviso": null,
+      "mensaje": "Historial insuficiente: hay 65 consultas registradas y se necesitan al menos 100. No se emite priorización.",
+      "consultas_contadas": 65,
+      "abstenidas": 12,
+      "terminos_priorizados": 0
+    }
+  },
+  "analitica_carga_db": {
+    "consultas_por_origen": {
+      "carga": 800
+    },
+    "base_demostracion": true,
+    "por_defecto": {
+      "suficiente": false,
+      "modo": "real",
+      "aviso": null,
+      "mensaje": "Historial insuficiente: hay 0 consultas registradas y se necesitan al menos 100. No se emite priorización. Otras 800 consultas de prueba no cuentan como demanda real.",
+      "consultas_contadas": 0,
+      "abstenidas": 0,
+      "terminos_priorizados": 0
+    },
+    "incluir_sinteticas": {
+      "suficiente": true,
+      "modo": "demostracion",
+      "aviso": "Demostración con 800 consultas generadas por la prueba de carga; no es demanda real",
+      "mensaje": null,
+      "consultas_contadas": 800,
+      "abstenidas": 186,
+      "terminos_priorizados": 15
+    }
+  },
+  "nota": "carga.db generada con scripts/generar_transacciones.py 800 (consultas sinteticas, semilla 2026, generador literal). La base real se leyo en modo solo lectura; la analitica corrio sobre una copia migrada."
+}
