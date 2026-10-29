@@ -1,0 +1,17 @@
+{
+  "consultas": 120,
+  "respuestas_redactadas": 120,
+  "con_aviso_de_generacion": 0,
+  "contradiccion_potencial": 8,
+  "contradiccion_potencial_pct": 6.7,
+  "cortadas_done_reason_length": 0,
+  "cortadas_pct": 0.0,
+  "tokens_maximos": 32,
+  "latencia_ms": {
+    "media": 2651,
+    "p50": 2642,
+    "p95": 2805,
+    "max": 2874
+  },
+  "mitigacion_adr_028": false
+}
