@@ -127,3 +127,44 @@ def test_la_plantilla_en_ingles(monkeypatch):
     g, _ = _extractivo(monkeypatch, _json("Atuq", "zorro"))
     texto = g.redactar("how do you say fox?", [_zorro()], Idioma.INGLES)
     assert "Atuq" in texto and "Wanka Quechua" in texto
+
+
+# --- Fallos de la auditoria del PR #13: nada de esto debe llegar a la plantilla ---
+
+
+def _dos_entradas():
+    texto = "MIEDOSO: Manchakug. MIEL: Añalla, mishki. PERRO: Allqu (perro doméstico)."
+    return [
+        FragmentoRecuperado(
+            fragmento=Fragmento("m", texto, Procedencia(DOC, 20), TipoFragmento.LEXICOGRAFICO),
+            puntuacion=PuntuacionSimilitud(0.6),
+        )
+    ]
+
+
+@pytest.mark.salvaguarda
+@pytest.mark.parametrize(
+    "forma,glosa,caso",
+    [
+        ("Manchak", "miedoso", "forma truncada"),
+        ("perro", "perro", "el lema castellano como forma"),
+        ("Añalla", "miedoso", "forma de otra entrada"),
+        ("Manchakug", "miel", "par cruzado: forma de una entrada y glosa de otra"),
+    ],
+)
+def test_el_generador_extractivo_muestra_el_fragmento_literal_ante_cada_fallo(
+    monkeypatch, forma, glosa, caso
+):
+    g, _ = _extractivo(monkeypatch, _json(forma, glosa))
+    texto = g.redactar("consulta", _dos_entradas(), Idioma.ESPANOL)
+    assert texto.startswith("MIEDOSO: Manchakug."), caso  # fragmento literal, no la plantilla
+    assert "se dice" not in texto
+    assert (g.aceptadas, g.descartadas) == (0, 1)
+
+
+@pytest.mark.salvaguarda
+def test_la_plantilla_usa_la_forma_tal_como_esta_en_el_fragmento(monkeypatch):
+    g, _ = _extractivo(monkeypatch, _json("añalla, MISHKI", "Miel"))
+    texto = g.redactar("consulta", _dos_entradas(), Idioma.ESPANOL)
+    assert "Añalla, mishki" in texto and "«miel»" in texto
+    assert g.aceptadas == 1

@@ -79,7 +79,7 @@ def separar_glosa_y_formas(fragmentos: list[str]) -> tuple[set[str], set[str]]:
     return glosa, formas
 
 
-def evaluar_fidelidad(redaccion: str, consulta: str, fragmentos: list[str]) -> dict:
+def evaluar_fidelidad_v1(redaccion: str, consulta: str, fragmentos: list[str]) -> dict:
     """Devuelve banderas y conteos; nunca texto."""
     glosa, formas = separar_glosa_y_formas(fragmentos)
     permitidas = glosa | set(_tokens(consulta)) | FUNCIONALES
@@ -93,6 +93,36 @@ def evaluar_fidelidad(redaccion: str, consulta: str, fragmentos: list[str]) -> d
         "palabras_extranas": len(extranas),
         "contradiccion_potencial": bool(extranas),
         "forma_quechua_presente": any(t in formas for t in _tokens(redaccion)),
+    }
+
+
+NEGACIONES = {"no", "nunca", "jamas", "sin", "ni", "tampoco"}
+# Funcionales de 3 letras que la v2 (umbral de 3 letras) debe tolerar.
+FUNCIONALES_CORTAS = set(
+    "una uno dos son fue ser sea han has hay mas muy por con del las los les sus nos que sin "
+    "ver dar van".split()
+)
+
+
+def evaluar_fidelidad(redaccion: str, consulta: str, fragmentos: list[str]) -> dict:
+    """Regla v2 (la vigente, regla_declarada.md): v1 mas palabras de contenido desde 3 letras y
+    negaciones ajenas. Devuelve banderas y conteos; nunca texto."""
+    glosa, formas = separar_glosa_y_formas(fragmentos)
+    en_consulta = set(_tokens(consulta))
+    permitidas = glosa | en_consulta | FUNCIONALES | FUNCIONALES_CORTAS
+    raices = {_raiz(t) for t in permitidas}
+    tokens = _tokens(redaccion)
+    extranas = [
+        t
+        for t in tokens
+        if len(t) >= 3 and t not in formas and t not in permitidas and _raiz(t) not in raices
+    ]
+    negaciones = [t for t in tokens if t in NEGACIONES and t not in glosa and t not in en_consulta]
+    return {
+        "palabras_extranas": len(extranas),
+        "negaciones_ajenas": len(negaciones),
+        "contradiccion_potencial": bool(extranas or negaciones),
+        "forma_quechua_presente": any(t in formas for t in tokens),
     }
 
 
@@ -159,9 +189,13 @@ def main(salida: Path, n: int, mitigada: bool) -> None:
             "tokens": razones[antes]["eval_count"] if len(razones) > antes else None,
         }
         if not r.abstenida and r.generador_invocado:
-            fila.update(evaluar_fidelidad(r.texto, e["consulta"], [f.texto for f in r.respaldo]))
+            literal = r.texto.startswith(r.respaldo[0].texto)
+            fila["fragmento_literal"] = literal
             fila["longitud_redaccion"] = len(r.texto)
-            fila["es_fragmento_literal"] = r.texto.startswith(r.respaldo[0].texto)
+            if not literal:
+                fila.update(
+                    evaluar_fidelidad(r.texto, e["consulta"], [f.texto for f in r.respaldo])
+                )
         filas.append(fila)
 
     salida.mkdir(parents=True, exist_ok=True)
@@ -170,7 +204,9 @@ def main(salida: Path, n: int, mitigada: bool) -> None:
     p95 = lat[int(0.95 * (len(lat) - 1))] if lat else None
     resumen = {
         "consultas": len(filas),
-        "respuestas_redactadas": len(con_modelo),
+        "regla": "v2",
+        "respuestas_evaluadas": len(con_modelo),
+        "fragmentos_literales": sum(1 for f in filas if f.get("fragmento_literal")),
         "con_aviso_de_generacion": sum(f["aviso_generacion"] for f in filas),
         "contradiccion_potencial": sum(f["contradiccion_potencial"] for f in con_modelo),
         "contradiccion_potencial_pct": round(

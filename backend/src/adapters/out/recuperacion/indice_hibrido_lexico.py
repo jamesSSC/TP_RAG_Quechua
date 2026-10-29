@@ -8,13 +8,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from application.ports.out.indice_recuperacion_port import IndiceRecuperacionPort
 from domain.entities.fragmento import Fragmento, FragmentoRecuperado, TipoFragmento
 from domain.services.depurador_consulta import DepuradorConsulta
+from domain.services.entradas_lexicas import PATRON_LEMA
 from domain.value_objects.puntuacion_similitud import PuntuacionSimilitud
 
 SIN_INDICE = "El indice no ha sido construido; invoque indexar() primero"
-
-# Lema de una entrada lexicografica: la parte en mayusculas que precede a los dos puntos,
-# como en "PERRO: Allqu, ashuti." Un mismo fragmento puede contener mas de una entrada.
-PATRON_LEMA = re.compile(r"([A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑ\s\-]*?)\s*:")
 
 
 class _Estado(NamedTuple):
