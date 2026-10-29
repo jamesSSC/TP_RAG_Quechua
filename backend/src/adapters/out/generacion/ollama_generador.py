@@ -136,7 +136,7 @@ class OllamaGenerador(GeneradorTextoPort):
             'Devuelve SOLO un JSON con dos campos: {"forma": ..., "glosa": ...}.\n'
             "- forma: la(s) forma(s) en quechua wanka COPIADA(S) letra por letra del fragmento.\n"
             "- glosa: la palabra castellana del fragmento a la que corresponde.\n"
-            "No traduzcas, no corrijas, no completes y no agregues nada que no este en el fragmento.\n\n"
+            "No traduzcas, no corrijas, no completes ni agregues nada ajeno al fragmento.\n\n"
             f"Fragmentos:\n{contexto}\n\nConsulta: {consulta}\n\nJSON:"
         )
         texto, razon = self._generar(prompt, LIMITE_TOKENS, formato="json")
