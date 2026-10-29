@@ -47,3 +47,22 @@ Medición con la regla v2 sobre las mismas 120 consultas de A, Qwen real en GPU,
 
 El verificador endurecido descarta 11 de 120 extracciones (9,2 %, frente a 2 con el original): el coste de la fidelidad es mostrar el fragmento literal en ese 9 %. Con la v1 las cifras
 (`antes_regla_v1/`, `despues_regla_v1_verificador_original/`) fueron 6,7 % y 1,7 %; la v2 marca más (10,8 % en libre) porque es más conservadora, no porque el modelo haya empeorado.
+
+---
+
+# Segunda corrección del verificador (re-auditoría del PR #13)
+
+Fallos que quedaban: dos formas separadas por coma se aceptaban fusionadas («Allqu ashuti», que no es una subcadena literal) y el castellano entre paréntesis podía contar como forma.
+**Corrección:** el cuerpo de cada entrada se parte en formas candidatas por comas, puntos, punto y coma y paréntesis, y se excluyen los segmentos entre paréntesis; la forma propuesta debe ser
+un token completo o una secuencia contigua **dentro de un solo segmento**. Si el cuerpo trae paréntesis sin cerrar o frases de ejemplo (signos de interrogación o exclamación), no se distingue
+la estructura y se descarta (fragmento literal). Pruebas `@salvaguarda` por cada caso, en el verificador y a través del generador.
+
+Medición con la regla v2 (sin cambios), 120 consultas de A, Qwen real, solo la variante extractiva (la libre sigue siendo 13/120 = 10,8 %):
+
+| Verificador | Evaluadas | Aceptadas / descartadas | Fragmento literal | Contradicción (v2) | P95 |
+|---|---|---|---|---|---|
+| Original (subcadena) — `despues_regla_v1_verificador_original/` (v1) | 118 | 118 / 2 | 2 | 1,7 % (v1) | 2 672 ms |
+| Por entrada y límites de palabra — `despues_v2_verificador_por_entrada/` | 109 | 109 / 11 | 11 | 0/109 | 2 681 ms |
+| **Con segmentos y paréntesis (vigente) — `despues_v2/`** | **103** | **103 / 17** | **17** | **0/103** | **2 681 ms** |
+
+El verificador vigente descarta 17 de 120 extracciones (14,2 %) y muestra el fragmento literal en ellas; ninguna frase del modelo con palabras ajenas o negaciones ajenas.
