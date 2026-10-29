@@ -21,3 +21,29 @@ mal copiado; el resto eran redacciones con palabras ajenas al fragmento. Mitigac
 `VerificadorFormaLiteral` (dominio) exige la forma exacta y la glosa literal en el fragmento y la frase la compone una plantilla; si no se verifica,
 se muestra el fragmento literal. Las 2 marcadas después son esos fragmentos literales (la regla las cuenta porque contienen texto del propio diccionario): 0 frases del modelo con palabras ajenas.
 Modo configurable con `MODO_REDACCION=extractiva|libre` (por defecto extractiva).
+
+---
+
+# Corrección tras la auditoría del PR #13 (verificador endurecido y regla v2)
+
+**Fallo (mayor, salvaguarda):** `VerificadorFormaLiteral` comparaba por subcadena y aceptaba una forma truncada, el lema castellano como forma, formas de entradas
+distintas y el par cruzado forma de una entrada + glosa de otra. **Corrección:** `domain/services/entradas_lexicas.py` (única definición de `PATRON_LEMA`, compartida
+con el índice) segmenta el fragmento en entradas; el verificador exige que la glosa sea el lema de una entrada y que cada forma sea un token completo o una secuencia
+completa de tokens del cuerpo de **esa** entrada, distinta del lema; solo se normalizan mayúsculas y espacios (las letras quechuas se comparan literales) y la plantilla se
+compone con la forma tal como está en el fragmento. Si algo falla, se muestra el fragmento literal. 4 pruebas `@salvaguarda` de dominio (una por caso, más variantes) y 5 del generador.
+
+**Regla v2** (`regla_declarada.md`, declarada antes de medir; la v1 se conserva): palabras de contenido desde 3 letras, negaciones ajenas, y las respuestas que son el fragmento literal se cuentan aparte.
+
+Medición con la regla v2 sobre las mismas 120 consultas de A, Qwen real en GPU, base temporal (`antes_v2/`, `despues_v2/`):
+
+| Medida | Redacción libre (antes) | Extractiva con verificador endurecido (después) |
+|---|---|---|
+| Respuestas evaluadas (redacción del modelo o plantilla) | 120 | 109 |
+| Fragmento literal mostrado (verificador descartó) | 0 | 11 |
+| Contradicción potencial (v2) | 13/120 = 10,8 % | 0/109 = 0,0 % |
+| Extracciones aceptadas / descartadas | — | 109 / 11 |
+| Cortadas (`done_reason == length`) | 0 | 0 |
+| Latencia P95 | 2 793 ms | 2 681 ms |
+
+El verificador endurecido descarta 11 de 120 extracciones (9,2 %, frente a 2 con el original): el coste de la fidelidad es mostrar el fragmento literal en ese 9 %. Con la v1 las cifras
+(`antes_regla_v1/`, `despues_regla_v1_verificador_original/`) fueron 6,7 % y 1,7 %; la v2 marca más (10,8 % en libre) porque es más conservadora, no porque el modelo haya empeorado.
