@@ -33,19 +33,24 @@ def test_consultar_mientras_se_reindexa_nunca_falla_ni_cita_sin_documento():
     indice = IndiceHibridoLexico()
     indice.indexar(_corpus("a"))
     errores: list[Exception] = []
+    sin_cita: list = []
     parar = threading.Event()
 
     def consultar():
         while not parar.is_set():
             try:
-                for r in indice.recuperar("zorro", k=3):
-                    assert r.fragmento.procedencia.documento and r.fragmento.procedencia.pagina
+                recuperados = indice.recuperar("zorro", k=3)
                 indice.recuperar_prosa("zorro")
                 indice.es_lema("zorro")
                 indice.proporcion_fuera_de_vocabulario("zorro")
             except Exception as exc:  # noqa: BLE001
                 errores.append(exc)
                 return
+            sin_cita.extend(
+                r
+                for r in recuperados
+                if not (r.fragmento.procedencia.documento and r.fragmento.procedencia.pagina)
+            )
 
     hilos = [threading.Thread(target=consultar) for _ in range(4)]
     for h in hilos:
@@ -56,6 +61,7 @@ def test_consultar_mientras_se_reindexa_nunca_falla_ni_cita_sin_documento():
     for h in hilos:
         h.join()
     assert errores == [], f"fallo durante la reconstruccion: {errores[:1]}"
+    assert sin_cita == []
 
 
 def test_el_estado_se_publica_de_una_vez():

@@ -169,9 +169,9 @@ function Demanda({ demanda, sinteticas, onSinteticas }) {
     <section className="demanda" data-testid="demanda">
       <h2 className="panel__titulo">Analítica de demanda (HU-09)</h2>
       {demanda.modo === "demostracion" && (
-        <p className="aviso-demostracion" role="status" data-testid="aviso-demostracion">
+        <output className="aviso-demostracion" data-testid="aviso-demostracion">
           {demanda.aviso}
-        </p>
+        </output>
       )}
       <ul className="origenes" aria-label="Consultas por origen" data-testid="por-origen">
         {Object.entries(demanda.por_origen ?? {}).map(([origen, n]) => (
@@ -217,7 +217,7 @@ function Demanda({ demanda, sinteticas, onSinteticas }) {
         </ul>
       </div>
       {!demanda.suficiente ? (
-        <p className="modelo__aviso" role="status">{demanda.mensaje}</p>
+        <output className="modelo__aviso">{demanda.mensaje}</output>
       ) : (
         <>
           <p className="modelo__subtitulo">Documento que respalda las respuestas</p>

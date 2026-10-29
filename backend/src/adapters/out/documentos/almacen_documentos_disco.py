@@ -72,12 +72,12 @@ class AlmacenDocumentosDisco(AlmacenDocumentosPort):
         try:
             return self._guardar(contenido, limpio, sha)
         except PermissionError as exc:
-            log.error("[ALMACEN] sin permisos sobre %s: %s", self._carpeta, exc)
+            log.exception("[ALMACEN] sin permisos sobre %s", self._carpeta)
             raise ErrorAlmacenDocumentos(
                 "Sin permisos para guardar el documento en la carpeta de datos"
             ) from exc
         except OSError as exc:
-            log.error("[ALMACEN] no se pudo guardar %s: %s", limpio, exc)
+            log.exception("[ALMACEN] no se pudo guardar %s", limpio)
             raise ErrorAlmacenDocumentos(
                 "No se pudo guardar el documento en la carpeta de datos"
             ) from exc
