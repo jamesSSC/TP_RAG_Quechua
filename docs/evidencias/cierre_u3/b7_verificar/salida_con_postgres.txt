@@ -1,0 +1,3 @@
+ ✔ PostgreSQL: PostgreSQL 16.15 en localhost:5432; base quechua_wanka_demo presente
+ 14 comprobaciones en N s · 0 fallo(s) critico(s) · 0 aviso(s)
+ LISTO PARA GRABAR
