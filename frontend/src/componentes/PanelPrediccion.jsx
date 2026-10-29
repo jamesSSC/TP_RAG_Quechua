@@ -158,6 +158,8 @@ const NOMBRES_ORIGEN = {
   humo: "humo (sintética)",
 };
 
+const NOMBRES_IDIOMA = { es: "español", en: "inglés" };
+
 function Demanda({ demanda, sinteticas, onSinteticas }) {
   if (!demanda) return null;
   const e = demanda.estadisticas ?? {};
@@ -195,6 +197,24 @@ function Demanda({ demanda, sinteticas, onSinteticas }) {
         <div className="cifra">
           <span>Latencia p95</span><strong>{num(e.latencia_p95_ms, 1)} ms</strong>
         </div>
+      </div>
+      <div className="distribuciones">
+        <ul className="origenes" aria-label="Consultas por idioma" data-testid="por-idioma">
+          <li>Por idioma:</li>
+          {Object.entries(e.por_idioma ?? {}).map(([idioma, n]) => (
+            <li key={idioma}>
+              {NOMBRES_IDIOMA[idioma] ?? idioma}: <strong>{n}</strong>
+            </li>
+          ))}
+        </ul>
+        <ul className="origenes" aria-label="Consultas por vía de respaldo" data-testid="por-via">
+          <li>Por vía:</li>
+          {Object.entries(e.por_via ?? {}).map(([via, n]) => (
+            <li key={via}>
+              {via}: <strong>{n}</strong>
+            </li>
+          ))}
+        </ul>
       </div>
       {!demanda.suficiente ? (
         <p className="modelo__aviso" role="status">{demanda.mensaje}</p>

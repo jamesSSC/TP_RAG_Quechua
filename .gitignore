@@ -76,3 +76,7 @@ docs/specs/
 # Datos modificables del usuario (BUG-01)
 backend/data/documentos/
 backend/datos/
+
+# Demostracion (B5): base de carga y pids de los scripts
+backend/carga.db
+scripts/demo/.pids

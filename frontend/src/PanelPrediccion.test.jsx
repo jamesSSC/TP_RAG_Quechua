@@ -40,7 +40,15 @@ function instalar() {
         aviso:
           "Demostración con 800 consultas generadas por la prueba de carga; no es demanda real",
         por_origen: { usuario: 99, carga: 800 },
-        estadisticas: { total: 899, abstenidas: 186, respaldo_por_documento: {} },
+        estadisticas: {
+          total: 899,
+          abstenidas: 186,
+          probabilidad_cobertura_media: 0.8161,
+          latencia_p95_ms: 13.9,
+          por_idioma: { es: 653, en: 147 },
+          por_via: { similitud: 538, lema: 76, abstencion: 186 },
+          respaldo_por_documento: {},
+        },
         terminos_distintos_no_cubiertos: 0,
         prioridades: [],
       });
@@ -141,5 +149,19 @@ describe("PMV2 · panel de predicción", () => {
     expect(
       globalThis.fetch.mock.calls.some(([u]) => u.includes("incluir_sinteticas=true")),
     ).toBe(true);
+  });
+
+  it("la demostración muestra total, idioma, vía, probabilidad media y P95", async () => {
+    instalar();
+    render(<PanelPrediccion />);
+    fireEvent.click(await screen.findByLabelText(/Ver demostración/));
+    await screen.findByTestId("aviso-demostracion");
+    const demanda = screen.getByTestId("demanda");
+    expect(demanda.textContent).toContain("899");
+    expect(demanda.textContent).toMatch(/81[.,]6 %/);
+    expect(demanda.textContent).toContain("13.9 ms");
+    expect(screen.getByTestId("por-idioma").textContent).toMatch(/español: 653/);
+    expect(screen.getByTestId("por-idioma").textContent).toMatch(/inglés: 147/);
+    expect(screen.getByTestId("por-via").textContent).toMatch(/similitud: 538/);
   });
 });

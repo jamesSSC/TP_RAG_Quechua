@@ -1,0 +1,801 @@
+n,origen,consulta,etiqueta,decision,via,similitud_maxima,p_cobertura,p_pasajes,abstencion_por_predictor,documento,pagina,latencia_ms
+1,lema_es,[huella:80d5fa9013],,responde,similitud,0.4991,0.9974,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,7.0
+2,lema_es,[huella:3deb6e7931],,responde,lema,0.4754,0.9959,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,6.1
+3,lema_es,[huella:e01b9a770f],,responde,similitud,0.7656,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,5.9
+4,lema_es,[huella:a85151f83f],,responde,similitud,0.7245,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,6.1
+5,lema_es,[huella:25c3fbf3c8],,responde,lema,0.3978,0.9928,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,5.5
+6,lema_en,[huella:393a070443],,responde,similitud,0.6444,0.9955,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,9.5
+7,lema_es,[huella:f482bc3b10],,responde,similitud,0.5127,0.9894,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,5.7
+8,A,¿cómo se dice febrero en quechua wanka?,1,responde,lema,0.4562,0.9981,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,5.9
+9,F,¿Se utilizan mayúsculas en el idioma árabe?,0,abstiene,,0.1746,0.0046,,0,,,10.2
+10,E,[huella:9f166bda30],1,responde,similitud,0.5087,0.9947,,0,vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf,237,9.2
+11,lema_es,[huella:25770ded62],,responde,similitud,0.6396,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.7
+12,E,[huella:9a19df4afc],1,abstiene_con_pasajes,,0.2118,0.5619,0.8563,0,,,9.8
+13,lema_es,[huella:332d1afaa6],,responde,similitud,0.5777,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,9.8
+14,lema_es,[huella:7dbca5b1da],,responde,similitud,0.6214,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,29,5.3
+15,F,¿Qué indica put off como verbo frasal?,0,abstiene,,0.3375,0.1131,0.3893,0,,,11.3
+16,lema_es,[huella:4b7c877010],,responde,similitud,0.7301,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,6.5
+17,A,¿cómo se dice tenedor en quechua wanka?,1,responde,similitud,0.65,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,9.3
+18,B,what is the Wanka Quechua word for continuar?,1,responde,similitud,0.6176,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.3
+19,F,¿Cómo se expresa la posesión o pertenencia entre dos entidades?,0,abstiene_con_pasajes,,0.239,0.4093,0.7255,0,,,11.9
+20,A,¿cómo se dice lisonjero en quechua wanka?,1,responde,similitud,0.6878,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,5.7
+21,lema_en,[huella:13e774d9d6],,responde,similitud,0.5277,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,7.9
+22,D,how do you say to swallow in Wanka Quechua?,1,responde,similitud,0.6917,0.9068,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,16.0
+23,lema_es,[huella:d0df6eea87],,responde,similitud,0.6839,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,5.9
+24,D,how do you say boiled corn in Wanka Quechua?,1,responde,similitud,0.658,0.9987,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,16.3
+25,lema_es,[huella:44bab31023],,responde,similitud,0.6958,0.9987,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.9
+26,lema_es,[huella:b701b575f9],,responde,similitud,0.6002,0.9986,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.9
+27,C,¿cómo se dice auditoría contable en quechua wanka?,0,abstiene,,0.0632,0.0,,0,,,6.6
+28,E,[huella:7ab33f025a],1,abstiene_con_pasajes,,0.3151,0.3365,0.5543,0,,,12.2
+29,B,how do you say liviano in Wanka Quechua?,1,responde,similitud,0.7862,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,5.7
+30,lema_es,[huella:5c1983f2ef],,responde,similitud,0.7083,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.8
+31,E,[huella:15cef2be8e],1,abstiene_con_pasajes,,0.3438,0.9561,0.9918,0,,,13.1
+32,A,¿cómo se dice pito en quechua wanka?,1,responde,similitud,0.5022,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,5.5
+33,B,estoy buscando la palabra que designa bulla en la variedad wanka,1,responde,similitud,0.6017,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.7
+34,lema_es,[huella:f6ad8572e8],,responde,similitud,0.7356,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,5.9
+35,F,¿Cómo se construye el condicional en ruso?,0,abstiene,,0.3199,0.1516,,0,,,11.1
+36,A,¿cómo se dice desnudar en quechua wanka?,1,responde,similitud,0.6886,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,5.7
+37,F,¿Qué medidas de seguridad y salud ocupacional son obligatorias según la legislación minera peruana?,0,abstiene,,0.1885,0.0008,,0,,,12.8
+38,lema_es,[huella:6e0fda972c],,responde,similitud,0.5719,0.9975,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,8.8
+39,A,¿cómo se dice comportarse en quechua wanka?,1,responde,similitud,0.6705,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,6.1
+40,C,¿cómo se dice turbina eólica en quechua wanka?,0,abstiene,,0.1687,0.0001,,0,,,6.0
+41,A,¿cómo se dice sanar en quechua wanka?,1,responde,similitud,0.5903,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,5.4
+42,E,[huella:193c1c54b3],1,abstiene_con_pasajes,,0.383,0.1932,0.5756,0,,,13.6
+43,lema_es,[huella:4b0021152c],,responde,similitud,0.5965,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,5.7
+44,C,¿cómo se dice vacuna de ARN mensajero en quechua wanka?,0,abstiene,,0.2471,0.0003,,0,,,6.4
+45,C,¿cómo se dice ecografía en quechua wanka?,0,abstiene,,0.0987,0.0001,,0,,,5.4
+46,lema_es,[huella:683150ead3],,responde,similitud,0.6887,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.4
+47,A,¿cómo se dice enfriado en quechua wanka?,1,responde,similitud,0.5248,0.9885,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,5.7
+48,lema_es,[huella:5aa7b2d666],,responde,lema,0.4701,0.9897,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,8.1
+49,lema_es,[huella:4bed83412a],,responde,similitud,0.6629,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,9.1
+50,lema_es,[huella:598b990ca0],,responde,similitud,0.6766,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,7.3
+51,lema_es,[huella:54abe3724f],,responde,lema,0.468,0.9928,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,6.5
+52,A,¿cómo se dice confesar en quechua wanka?,1,responde,similitud,0.6394,0.9983,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,7.5
+53,F,¿Cómo afecta la temperatura nocturna a la floración de la planta de quinua?,0,abstiene,,0.2295,0.0004,,0,,,15.0
+54,lema_en,[huella:01bdd03136],,responde,similitud,0.6963,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,9.5
+55,lema_es,[huella:c25899b84f],,responde,similitud,0.6019,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.3
+56,A,¿cómo se dice ombligo en quechua wanka?,1,responde,similitud,0.6582,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,5.4
+57,lema_en,[huella:c5391480a0],,responde,lema,0.3889,0.9983,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,9.5
+58,lema_es,[huella:68589988c1],,responde,similitud,0.6334,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,10.9
+59,F,¿Qué función cumple el caso acusativo en la oración latina?,0,abstiene,,0.2584,0.0686,0.088,0,,,15.5
+60,F,¿Cómo afecta el contexto a la interpretación de los tres primeros tonos?,0,abstiene,,0.2152,0.0061,,0,,,13.9
+61,F,Quel est le titre de l'article ?,0,abstiene,,0.144,0.0001,,0,,,9.9
+62,E,[huella:0300fcc43d],1,responde,similitud,0.6078,0.9627,,0,vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf,174,8.2
+63,lema_es,[huella:91b29c8893],,responde,similitud,0.6017,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.6
+64,lema_es,[huella:846c3a968d],,responde,lema,0.3751,0.9274,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,5.8
+65,A,¿cómo se dice aplanar en quechua wanka?,1,responde,similitud,0.5178,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.9
+66,lema_es,[huella:a84c620e51],,responde,similitud,0.5674,0.9984,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,5.8
+67,D,how do you say church in Wanka Quechua?,1,responde,similitud,0.5156,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,7.4
+68,F,¿Cómo se escriben los números arábigos en español?,0,abstiene,,0.1836,0.0506,0.1061,0,,,11.1
+69,B,what is the Wanka Quechua word for consolar?,1,responde,similitud,0.6209,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,5.9
+70,lema_es,[huella:a3297b3bc9],,responde,similitud,0.7163,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.4
+71,lema_es,[huella:f94b1a3861],,responde,similitud,0.6856,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,30,5.5
+72,B,estoy buscando la palabra que designa pintar en la variedad wanka,1,responde,similitud,0.6437,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,5.9
+73,D,how do you say hole in Wanka Quechua?,1,responde,similitud,0.7451,0.9647,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,20.3
+74,E,[huella:0d024dbf05],1,abstiene_con_pasajes,,0.4466,0.9376,0.9912,0,,,14.4
+75,lema_es,[huella:d8d6bc8c08],,responde,similitud,0.663,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,5.8
+76,D,how do you say to discard in Wanka Quechua?,1,responde,similitud,0.6779,0.9964,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,11.1
+77,D,how do you say concave in Wanka Quechua?,1,responde,similitud,0.6209,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,9.6
+78,F,¿Qué función cumplen los marcadores de afirmación y negación al final de la frase?,0,abstiene,,0.2746,0.0259,0.0309,0,,,12.8
+79,lema_en,[huella:13b42f590d],,responde,similitud,0.6417,0.9972,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,8.3
+80,A,¿cómo se dice oscuro en quechua wanka?,1,responde,similitud,0.5278,0.9988,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,5.4
+81,B,estoy buscando la palabra que designa voluntariamente en la variedad wanka,1,responde,similitud,0.7333,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,37,6.1
+82,E,[huella:af0850994d],1,abstiene_con_pasajes,,0.3151,0.7382,0.9573,0,,,13.3
+83,lema_en,[huella:477fab4190],,responde,similitud,0.6465,0.9987,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,7.8
+84,lema_es,[huella:62bc26aff5],,responde,similitud,0.5253,0.985,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,5.7
+85,lema_es,[huella:5be660a42d],,responde,similitud,0.7204,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,6.1
+86,F,Comment accéder aux ressources complémentaires ?,0,abstiene,,0.369,0.0005,,0,,,10.6
+87,A,¿cómo se dice buscar en quechua wanka?,1,responde,similitud,0.7163,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.5
+88,F,¿De qué manera se indican las instrucciones o órdenes dirigidas a alguien?,0,abstiene,,0.2181,0.0035,,0,,,12.8
+89,F,¿Cuáles son los casos gramaticales del latín?,0,abstiene,,0.216,0.0477,,0,,,10.9
+90,lema_es,[huella:03b5e733fa],,responde,similitud,0.6628,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,5.7
+91,lema_es,[huella:e7912bb756],,responde,similitud,0.537,0.9989,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.6
+92,E,[huella:b93f6d4134],1,abstiene_con_pasajes,,0.4448,0.8425,0.9681,0,,,11.5
+93,F,¿Cuál es la diferencia entre el caso nominativo y el caso acusativo en alemán?,0,abstiene,,0.2549,0.0097,,0,,,14.4
+94,A,¿cómo se dice regresar en quechua wanka?,1,responde,similitud,0.7661,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,30,6.8
+95,lema_es,[huella:3435d9e5ab],,responde,similitud,0.6091,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,7.5
+96,lema_es,[huella:a0550e6fc6],,responde,lema,0.4133,0.9972,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,8.0
+97,lema_es,[huella:7234dbcc1c],,responde,similitud,0.531,0.9752,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,7.3
+98,F,¿Qué significa turn down una invitación?,0,abstiene,,0.2342,0.0001,,0,,,11.1
+99,E,[huella:cc09251249],1,abstiene_con_pasajes,,0.4601,0.9993,1.0,0,,,16.0
+100,D,how do you say to paint in Wanka Quechua?,1,responde,similitud,0.6437,0.9974,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,8.4
+101,A,¿cómo se dice encorralar en quechua wanka?,1,responde,similitud,0.7272,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,6.7
+102,A,¿cómo se dice deslizarse en quechua wanka?,1,responde,similitud,0.5911,0.9983,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,6.0
+103,lema_en,[huella:c610c244f6],,responde,similitud,0.7245,0.9985,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,9.8
+104,lema_en,[huella:8fd0eccb9b],,responde,similitud,0.7622,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,11.5
+105,B,necesito el término wanka para referirme a comparación,1,responde,similitud,0.5989,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,6.2
+106,A,¿cómo se dice cóncavo en quechua wanka?,1,responde,similitud,0.6209,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,5.8
+107,A,¿cómo se dice cascada en quechua wanka?,1,responde,similitud,0.6765,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,6.0
+108,E,[huella:a7937aab79],1,abstiene_con_pasajes,,0.3308,0.9228,0.9923,0,,,10.4
+109,A,¿cómo se dice tincar en quechua wanka?,1,responde,similitud,0.6246,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,6.0
+110,A,¿cómo se dice joroba en quechua wanka?,1,responde,similitud,0.6456,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.4
+111,B,what is the Wanka Quechua word for mote?,1,responde,similitud,0.5558,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,5.5
+112,lema_es,[huella:ecbea22134],,responde,similitud,0.6982,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,6.0
+113,C,¿cómo se dice algoritmo genético en quechua wanka?,0,abstiene,,0.0661,0.0,,0,,,6.0
+114,lema_es,[huella:c434f62ba1],,responde,similitud,0.5595,0.9971,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.6
+115,lema_es,[huella:4f86090d7e],,responde,similitud,0.699,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.4
+116,D,how do you say to console in Wanka Quechua?,1,responde,similitud,0.6209,0.9985,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,7.8
+117,lema_es,[huella:5779dd15e8],,responde,similitud,0.7345,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,5.8
+118,A,¿cómo se dice abrigarse en quechua wanka?,1,responde,similitud,0.5003,0.9848,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,7.1
+119,F,¿Qué cambio ocurre al final de los verbos cuando se usa el honorífico?,0,abstiene,,0.2689,0.1034,0.2045,0,,,11.8
+120,A,¿cómo se dice siguiente en quechua wanka?,1,responde,similitud,0.6157,0.9989,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,5.7
+121,lema_es,[huella:1601d5651b],,responde,similitud,0.5525,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,6.0
+122,lema_en,[huella:5bc3e86b37],,responde,lema,0.4562,0.9423,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,10.1
+123,F,¿Cómo se conjugan los verbos en la forma condicional futura?,0,abstiene,,0.212,0.038,0.0626,0,,,11.7
+124,lema_es,[huella:5ee636eb32],,responde,lema,0.2064,0.5701,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,5.7
+125,lema_es,[huella:db6f8954a8],,responde,similitud,0.5921,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,5.7
+126,lema_es,[huella:bf046bc635],,responde,lema,0.4152,0.9771,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,5.7
+127,B,what is the Wanka Quechua word for camarada?,1,responde,similitud,0.7256,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.6
+128,F,Quels sont les principaux thèmes abordés ?,0,abstiene,,0.1005,0.0,,0,,,9.1
+129,lema_es,[huella:449a708780],,responde,lema,0.3845,0.9714,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.7
+130,lema_es,[huella:5ad7dfda00],,responde,similitud,0.6114,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.7
+131,F,Qui est l'auteur du texte ?,0,abstiene,,0.098,0.0001,,0,,,8.3
+132,A,¿cómo se dice cueva en quechua wanka?,1,responde,similitud,0.6023,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,8.2
+133,F,¿Por qué es fundamental la transición defensiva ante un ataque adversario?,0,abstiene,,0.1627,0.0033,,0,,,16.4
+134,lema_es,[huella:fd04e98aa5],,responde,lema,0.3612,0.9817,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,8.8
+135,lema_es,[huella:f329159281],,responde,similitud,0.6084,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,8.0
+136,E,[huella:1d0be96b13],1,abstiene_con_pasajes,,0.3389,0.5755,0.7173,0,,,14.7
+137,lema_es,[huella:d0afdecc61],,responde,similitud,0.6237,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,6.5
+138,lema_es,[huella:a23c0fc8e1],,responde,similitud,0.5426,0.9947,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,6.0
+139,lema_es,[huella:3a951e9da1],,responde,similitud,0.5022,0.9816,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,6.2
+140,D,how do you say to return in Wanka Quechua?,1,responde,similitud,0.7728,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,37,14.1
+141,lema_es,[huella:e4340ece70],,responde,lema,0.3941,0.9798,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,5.6
+142,lema_es,[huella:9330a96b6e],,responde,lema,0.2988,0.936,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,6.1
+143,B,what is the Wanka Quechua word for venir?,1,responde,lema,0.3072,0.9572,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,5.2
+144,F,¿Qué implica el verbo短语 look after?,0,abstiene,,0.2408,0.0029,,0,,,9.5
+145,B,necesito el término wanka para referirme a deudor,1,responde,similitud,0.6381,0.9989,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,5.6
+146,F,¿Cómo se dice en español la frase make your bed?,0,abstiene,,0.2646,0.0046,,0,,,6.6
+147,lema_es,[huella:7ddfc1cde0],,responde,similitud,0.6188,0.9974,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,5.7
+148,lema_es,[huella:ce621edf26],,responde,lema,0.3769,0.917,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,5.8
+149,E,[huella:39c4522c22],1,responde,similitud,0.4818,0.9827,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,8.2
+150,lema_es,[huella:ffae9e3311],,responde,similitud,0.7073,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,6.0
+151,E,[huella:25ba42f1b3],1,responde,similitud,0.5428,0.4813,,0,vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf,86,8.7
+152,lema_es,[huella:0a8961432b],,responde,similitud,0.6224,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,5.7
+153,lema_es,[huella:4300c56cc0],,responde,lema,0.4572,0.9894,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,5.8
+154,D,how do you say twin in Wanka Quechua?,1,responde,similitud,0.6931,0.9909,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,11.6
+155,C,¿cómo se dice cajero automático en quechua wanka?,0,abstiene,,0.1576,0.0048,,0,,,5.9
+156,B,how do you say regresar in Wanka Quechua?,1,responde,similitud,0.7661,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,30,5.8
+157,B,what is the Wanka Quechua word for amado?,1,responde,similitud,0.5748,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,6.0
+158,F,¿Qué función cumple el caso acusativo en una oración alemana?,0,abstiene,,0.2385,0.0323,0.0391,0,,,12.3
+159,lema_es,[huella:c32a2c5dac],,responde,similitud,0.549,0.9988,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,7.4
+160,lema_es,[huella:6deebf25aa],,responde,similitud,0.7133,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,6.1
+161,F,¿Qué significa get over un problema emocional?,0,abstiene,,0.1698,0.0048,,0,,,9.5
+162,C,¿cómo se dice resonancia magnética en quechua wanka?,0,abstiene,,0.1185,0.0001,,0,,,6.4
+163,lema_es,[huella:285f42cd65],,responde,similitud,0.6019,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,5.4
+164,lema_es,[huella:fe40a4bfaf],,responde,lema,0.4325,0.9981,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,7.1
+165,D,how do you say shy in Wanka Quechua?,1,responde,similitud,0.5441,0.9912,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,9.4
+166,lema_en,[huella:4a9c47feb5],,responde,similitud,0.6878,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,13.7
+167,F,¿Cómo se realiza la desinfección del agua para eliminar patógenos?,0,abstiene,,0.2691,0.0167,,0,,,12.0
+168,lema_es,[huella:db27b0ab49],,responde,similitud,0.6098,0.9979,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,6.0
+169,A,¿cómo se dice poseedor en quechua wanka?,1,responde,similitud,0.6788,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,5.9
+170,lema_es,[huella:366eb092df],,responde,similitud,0.7143,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,5.8
+171,lema_es,[huella:5aa930a4cb],,responde,similitud,0.7514,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,5.7
+172,E,[huella:ff95afd9fc],1,responde,similitud,0.6017,0.9952,,0,vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf,37,11.0
+173,B,estoy buscando la palabra que designa lagartija en la variedad wanka,1,responde,similitud,0.5057,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,6.0
+174,lema_en,[huella:576fc0e852],,responde,similitud,0.5682,0.9944,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,7.4
+175,B,how do you say doblar in Wanka Quechua?,1,responde,similitud,0.6591,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.8
+176,A,¿cómo se dice salir en quechua wanka?,1,responde,lema,0.3742,0.9973,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,5.4
+177,lema_en,[huella:b1666c11bf],,responde,similitud,0.6375,0.9887,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,11.8
+178,lema_es,[huella:7bbadf2c40],,responde,similitud,0.5299,0.9977,,0,293274822-diccionario-quechua-Wanka-docx.pdf,37,5.7
+179,B,how do you say desnudar in Wanka Quechua?,1,responde,similitud,0.6886,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,6.1
+180,A,¿cómo se dice espinilla en quechua wanka?,1,responde,similitud,0.7016,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,5.8
+181,A,¿cómo se dice incinerar en quechua wanka?,1,responde,similitud,0.6458,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,5.7
+182,lema_es,[huella:50ee94809d],,responde,similitud,0.611,0.9986,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,5.8
+183,D,how do you say toy in Wanka Quechua?,1,responde,similitud,0.7096,0.9972,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,9.3
+184,E,[huella:3acc2ea2db],1,abstiene_con_pasajes,,0.3085,0.8681,0.9613,0,,,12.9
+185,E,[huella:a19adffbfc],1,abstiene_con_pasajes,,0.3396,0.4684,0.7225,0,,,13.3
+186,E,[huella:fb2339b074],1,abstiene_con_pasajes,,0.3984,0.9894,0.9996,0,,,13.1
+187,lema_es,[huella:7d33d97989],,responde,similitud,0.6183,0.9984,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,5.7
+188,lema_en,[huella:d7337106a9],,responde,similitud,0.6571,0.9788,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,14.3
+189,A,¿cómo se dice almacenar en quechua wanka?,1,responde,similitud,0.7834,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,6.0
+190,D,how do you say hoof in Wanka Quechua?,1,responde,similitud,0.579,0.9652,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,9.9
+191,A,¿cómo se dice eructar en quechua wanka?,1,responde,similitud,0.6963,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,6.5
+192,lema_es,[huella:7b5b71bb0f],,responde,similitud,0.656,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,6.4
+193,lema_es,[huella:e67efeadce],,responde,similitud,0.5642,0.9809,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,5.8
+194,A,¿cómo se dice mellizo en quechua wanka?,1,responde,similitud,0.6779,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,5.8
+195,B,how do you say ladera in Wanka Quechua?,1,responde,similitud,0.575,0.9972,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.8
+196,lema_es,[huella:0173978973],,responde,lema,0.4479,0.9973,,0,293274822-diccionario-quechua-Wanka-docx.pdf,26,5.7
+197,lema_es,[huella:6b7248390e],,responde,lema,0.3814,0.9966,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,5.8
+198,F,¿Cómo se escriben los nombres propios en árabe?,0,abstiene,,0.2247,0.0875,0.2097,0,,,11.2
+199,lema_es,[huella:bc46f052af],,responde,lema,0.3592,0.834,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,11.0
+200,lema_es,[huella:6c99fce7f5],,responde,similitud,0.6023,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,6.6
+201,A,¿cómo se dice cuanto en quechua wanka?,1,responde,lema,0.3517,0.9972,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,7.9
+202,lema_es,[huella:820fee545c],,responde,similitud,0.5298,0.9971,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.7
+203,lema_es,[huella:c710240b7c],,responde,similitud,0.622,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,5.5
+204,F,¿Cómo se conjugan los verbos en la forma negativa del presente?,0,abstiene,,0.2343,0.0277,0.0349,0,,,12.6
+205,A,¿cómo se dice barbechado en quechua wanka?,1,responde,similitud,0.6851,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,5.8
+206,lema_en,[huella:94c4710163],,responde,similitud,0.6221,0.9989,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,7.6
+207,A,¿cómo se dice anudar en quechua wanka?,1,responde,similitud,0.5351,0.9958,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.7
+208,E,[huella:03a937c6bb],1,abstiene_con_pasajes,,0.3836,0.9813,0.9982,0,,,14.5
+209,lema_es,[huella:40cfbfbf0f],,responde,similitud,0.5847,0.9988,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.5
+210,F,¿Qué sufijo se añade al infinitivo para formar el futuro simple?,0,abstiene,,0.2089,0.0228,0.033,0,,,13.7
+211,F,¿Cómo opera la unidad de ejecución para realizar cálculos matemáticos?,0,abstiene,,0.1656,0.003,,0,,,13.2
+212,lema_es,[huella:f443f23250],,responde,similitud,0.5236,0.969,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,6.7
+213,lema_en,[huella:d7337106a9],,responde,similitud,0.6571,0.9788,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,14.3
+214,lema_es,[huella:cb432ec80e],,responde,similitud,0.6485,0.9989,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.7
+215,lema_es,[huella:6d1f4717a2],,responde,similitud,0.5383,0.9973,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,6.6
+216,A,¿cómo se dice orina en quechua wanka?,1,responde,lema,0.3748,0.9948,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,6.2
+217,F,¿Cómo se forma una oración básica con sujeto verbo objeto?,0,abstiene_con_pasajes,,0.3173,0.4938,0.5602,0,,,12.2
+218,lema_es,[huella:bf02a2a60a],,responde,similitud,0.6462,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,6.0
+219,lema_en,[huella:c4c80fabe9],,responde,similitud,0.6581,0.995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,10.3
+220,lema_es,[huella:aa385863bb],,responde,similitud,0.5671,0.998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,5.4
+221,E,[huella:82402d34ec],1,abstiene_con_pasajes,,0.3115,0.9507,0.9949,0,,,12.3
+222,lema_es,[huella:9a3a0a2e7f],,responde,lema,0.4523,0.8723,,0,293274822-diccionario-quechua-Wanka-docx.pdf,26,5.9
+223,C,¿cómo se dice antibiótico en quechua wanka?,0,abstiene,,0.1274,0.0002,,0,,,5.6
+224,lema_es,[huella:6d304230a1],,responde,similitud,0.5377,0.9937,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,5.7
+225,lema_es,[huella:15f696ea8a],,responde,similitud,0.6373,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,5.6
+226,lema_es,[huella:32f9969d64],,responde,similitud,0.6656,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,5.9
+227,lema_es,[huella:987f6e5f9d],,responde,similitud,0.6512,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.3
+228,lema_es,[huella:229c12feee],,responde,lema,0.42,0.9946,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,5.7
+229,D,how do you say new in Wanka Quechua?,1,responde,similitud,0.6162,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,7.7
+230,lema_es,[huella:e7e0c1ea4e],,responde,similitud,0.6946,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,6.3
+231,B,how do you say asado in Wanka Quechua?,1,responde,similitud,0.6086,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,6.2
+232,F,Quelle est la date de publication ?,0,abstiene,,0.2962,0.0001,,0,,,10.4
+233,lema_es,[huella:b8bfb45c2c],,responde,lema,0.4183,0.9437,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,5.6
+234,lema_es,[huella:a9f569c094],,responde,similitud,0.5136,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,6.2
+235,lema_es,[huella:0f1bb473a8],,responde,similitud,0.5566,0.983,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,5.8
+236,lema_en,[huella:dd628061d2],,responde,similitud,0.8032,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,10.4
+237,E,[huella:7566dfd77b],1,abstiene_con_pasajes,,0.3711,0.7404,0.9535,0,,,11.4
+238,B,necesito el término wanka para referirme a tímido,1,responde,similitud,0.5441,0.9962,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,5.5
+239,E,[huella:23d5f71971],1,abstiene,,0.1657,0.3138,,0,,,10.1
+240,B,what is the Wanka Quechua word for enfriado?,1,responde,similitud,0.5248,0.9885,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,6.0
+241,lema_en,[huella:b774da7e0a],,responde,similitud,0.5429,0.9966,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,8.0
+242,lema_es,[huella:1562a0a306],,responde,similitud,0.651,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,6.0
+243,lema_es,[huella:3ea080608d],,responde,similitud,0.6917,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,7.0
+244,lema_es,[huella:02248169c6],,responde,similitud,0.636,0.9982,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,7.7
+245,lema_es,[huella:213b9eeebe],,responde,similitud,0.6719,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,7.1
+246,lema_es,[huella:8e7473b40e],,responde,similitud,0.5328,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.6
+247,F,¿Cuál es la importancia del movimiento sin balón en la ruptura defensiva?,0,abstiene,,0.1868,0.0039,,0,,,12.5
+248,A,¿cómo se dice cobarde en quechua wanka?,1,responde,similitud,0.669,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,5.8
+249,F,¿Por qué es importante filtrar el agua después de la desinfección?,0,abstiene,,0.3594,0.0672,,0,,,12.3
+250,D,how do you say bench in Wanka Quechua?,1,responde,similitud,0.7251,0.996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,11.9
+251,A,¿cómo se dice horrible en quechua wanka?,1,responde,similitud,0.6933,0.9961,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,9.6
+252,F,Dans quel contexte historique s'inscrit cet article ?,0,abstiene,,0.2012,0.0,,0,,,11.4
+253,lema_en,[huella:8ad26e2dc8],,responde,similitud,0.5903,0.9908,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,10.1
+254,lema_es,[huella:52fb7a4882],,responde,similitud,0.6723,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,5.5
+255,lema_en,[huella:2138f8aafd],,responde,similitud,0.6696,0.9989,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,22.4
+256,lema_es,[huella:12f0b7f7b9],,responde,similitud,0.6961,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,6.3
+257,lema_es,[huella:7220d94ba7],,responde,lema,0.188,0.4321,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,6.9
+258,F,¿Qué sucede con la vocal final cuando termina una palabra en 'a' para formar su plural?,0,abstiene,,0.2583,0.1466,0.2617,0,,,13.1
+259,lema_es,[huella:0bfa9e679e],,responde,similitud,0.6001,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,6.1
+260,lema_es,[huella:2f89d01136],,responde,similitud,0.5248,0.9885,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,5.6
+261,A,¿cómo se dice amado en quechua wanka?,1,responde,similitud,0.5748,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,5.8
+262,lema_es,[huella:881347868b],,responde,similitud,0.6938,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,5.9
+263,F,¿Qué nivel de humedad del suelo es ideal durante las etapas vegetativas?,0,abstiene,,0.2196,0.0025,,0,,,12.3
+264,lema_es,[huella:d2c37d4cca],,responde,similitud,0.5982,0.9964,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,5.7
+265,A,¿cómo se dice pecado en quechua wanka?,1,responde,similitud,0.4999,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,26,5.9
+266,B,estoy buscando la palabra que designa pájaro en la variedad wanka,1,responde,similitud,0.6246,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,6.0
+267,F,¿Cuál es la diferencia entre tonos altos y bajos en mandarín?,0,abstiene,,0.2031,0.0111,0.0168,0,,,11.9
+268,lema_es,[huella:f7c530b25f],,responde,lema,0.3537,0.997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,5.5
+269,A,¿cómo se dice embarrar en quechua wanka?,1,responde,similitud,0.5235,0.9938,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,6.8
+270,lema_es,[huella:3dc7a232b4],,responde,similitud,0.6751,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,6.2
+271,lema_es,[huella:407df695c6],,responde,similitud,0.5129,0.9868,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,6.1
+272,lema_es,[huella:84ca33a311],,responde,lema,0.4228,0.9919,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.0
+273,lema_es,[huella:ccc50c3648],,responde,similitud,0.5482,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.5
+274,A,¿cómo se dice feliz en quechua wanka?,1,responde,similitud,0.6409,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,5.3
+275,lema_es,[huella:fbef7e0d67],,responde,lema,0.4232,0.9981,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,5.7
+276,lema_es,[huella:f392931e9e],,responde,similitud,0.667,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,5.7
+277,lema_es,[huella:f8eb5134d7],,responde,similitud,0.6627,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.8
+278,lema_en,[huella:c734f59e12],,responde,similitud,0.6041,0.9748,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,13.8
+279,F,¿Cuál es la estructura gramatical para expresar capacidad o posibilidad?,0,abstiene,,0.175,0.0165,,0,,,12.5
+280,F,¿Qué ocurre cuando dos palabras de diferentes tones se combinan en una frase?,0,abstiene,,0.3077,0.0279,0.0345,0,,,14.2
+281,lema_es,[huella:0740cf8d46],,responde,similitud,0.5444,0.9984,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,5.6
+282,D,how do you say horrible in Wanka Quechua?,1,responde,similitud,0.6933,0.9961,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,9.5
+283,A,¿cómo se dice algo en quechua wanka?,1,responde,lema,0.3973,0.7409,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,5.6
+284,lema_es,[huella:9cc20b8feb],,responde,lema,0.4239,0.9957,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,5.8
+285,lema_en,[huella:68711482fc],,responde,similitud,0.8796,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,7.5
+286,F,¿Qué estrategias utilizan los equipos para controlar el ritmo del partido?,0,abstiene,,0.2111,0.0027,,0,,,11.5
+287,lema_es,[huella:cf56af5c3a],,responde,similitud,0.5003,0.9953,,0,293274822-diccionario-quechua-Wanka-docx.pdf,26,6.1
+288,F,¿Cómo se transforma el plural de las palabras que terminan en consonante seguida de vocal?,0,abstiene,,0.283,0.0132,0.0123,0,,,13.7
+289,lema_en,[huella:1532b76808],,responde,similitud,0.6813,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,7.8
+290,lema_es,[huella:c22e5d89dd],,responde,similitud,0.5893,0.9985,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,6.5
+291,lema_es,[huella:ea0dfa4f5a],,responde,similitud,0.6551,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,6.3
+292,A,¿cómo se dice camarada en quechua wanka?,1,responde,similitud,0.7256,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,6.2
+293,F,¿Cuál es la diferencia entre la escritura árabe y la española?,0,abstiene,,0.2751,0.0518,0.0761,0,,,11.2
+294,B,estoy buscando la palabra que designa corregirse en la variedad wanka,1,responde,similitud,0.7502,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.3
+295,lema_es,[huella:e9e47085b5],,responde,lema,0.4317,0.9956,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,7.4
+296,B,how do you say iglesia in Wanka Quechua?,1,responde,similitud,0.5156,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,6.7
+297,F,¿Qué significa la expresión verbal get up?,0,abstiene,,0.2569,0.0298,0.0509,0,,,10.3
+298,lema_en,[huella:b337d4031c],,responde,similitud,0.5176,0.9936,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,7.5
+299,E,[huella:174d02fda6],1,responde,similitud,0.498,0.9967,,0,vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf,31,9.0
+300,lema_es,[huella:50d8e11278],,responde,lema,0.4482,0.9974,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,5.9
+301,A,¿cómo se dice necesitado en quechua wanka?,1,responde,similitud,0.7193,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,6.0
+302,D,how do you say cave in Wanka Quechua?,1,responde,similitud,0.7013,0.9978,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,10.3
+303,lema_es,[huella:e48fdc74f1],,responde,similitud,0.7049,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,5.7
+304,F,¿Cómo se pronuncia la palabra ma con un tono medio alto?,0,abstiene,,0.2691,0.2101,0.4293,0,,,12.0
+305,A,¿cómo se dice ensangrentar en quechua wanka?,1,responde,similitud,0.7127,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,5.9
+306,lema_en,[huella:3f7e8f6328],,responde,lema,0.337,0.9935,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,10.4
+307,E,[huella:42dd2afb8a],1,abstiene_con_pasajes,,0.3256,0.9802,0.9984,0,,,12.4
+308,E,[huella:5244f92562],1,responde,similitud,0.5469,0.9992,,0,vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf,254,9.9
+309,B,necesito el término wanka para referirme a cueva,1,responde,similitud,0.6023,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,5.3
+310,lema_en,[huella:e04979402a],,responde,similitud,0.6696,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,17.3
+311,D,how do you say to accuse in Wanka Quechua?,1,responde,similitud,0.6835,0.9927,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,12.1
+312,A,¿cómo se dice mote en quechua wanka?,1,responde,similitud,0.5558,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,5.7
+313,lema_en,[huella:4548b53928],,responde,similitud,0.635,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,7.7
+314,F,¿Cuándo se debe realizar la siembra para optimizar el rendimiento en zonas altas?,0,abstiene,,0.1774,0.0146,0.0296,0,,,13.0
+315,F,¿Cómo se declinan las palabras masculinas en primera y segunda declinación?,0,abstiene,,0.2319,0.0066,0.0085,0,,,12.5
+316,A,¿cómo se dice trabajador en quechua wanka?,1,responde,similitud,0.5994,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,6.0
+317,F,¿Qué papel juega el contraataque rápido en las tácticas actuales?,0,abstiene,,0.2504,0.0127,,0,,,11.2
+318,F,¿Cómo se determina la terminación del adjetivo en el caso genitivo?,0,abstiene,,0.2632,0.0219,,0,,,12.0
+319,F,¿Cómo se conjugan los verbos terminados en -ir en el pasado?,0,abstiene,,0.3533,0.0129,,0,,,12.1
+320,F,¿Qué función cumple la unidad de control dentro del procesador?,0,abstiene,,0.1807,0.0187,0.0237,0,,,12.0
+321,A,¿cómo se dice consolar en quechua wanka?,1,responde,similitud,0.6209,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.1
+322,A,¿cómo se dice diablo en quechua wanka?,1,responde,lema,0.4799,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.7
+323,lema_es,[huella:439c80d8ba],,responde,similitud,0.7273,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,6.1
+324,F,Où peut-on trouver cet article en ligne ?,0,abstiene,,0.1352,0.0,,0,,,10.7
+325,E,[huella:88c61c0020],1,abstiene,,0.2229,0.0735,0.1972,0,,,11.5
+326,D,how do you say to sew in Wanka Quechua?,1,responde,similitud,0.7405,0.9894,,0,293274822-diccionario-quechua-Wanka-docx.pdf,37,11.8
+327,E,[huella:180917351d],1,abstiene_con_pasajes,,0.2988,0.7225,0.9059,0,,,13.6
+328,lema_es,[huella:f8488495b5],,responde,similitud,0.6327,0.9952,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,13.5
+329,lema_es,[huella:0e0a77d742],,responde,similitud,0.5512,0.9938,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,6.0
+330,lema_en,[huella:a219d89b55],,responde,similitud,0.6813,0.9961,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,10.5
+331,lema_en,[huella:eac5261723],,responde,similitud,0.536,0.9966,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,7.3
+332,D,how do you say to burp in Wanka Quechua?,1,responde,similitud,0.7016,0.9959,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,11.8
+333,F,¿Quiénes pueden ser declarados responsables por actividades mineras ilegales bajo la normativa vigente?,0,abstiene,,0.1336,0.0005,,0,,,13.4
+334,E,[huella:3ef1aed356],1,abstiene_con_pasajes,,0.4205,0.9417,0.9877,0,,,15.3
+335,lema_es,[huella:8509e19cd3],,responde,similitud,0.7144,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,6.5
+336,lema_es,[huella:def83b6fb2],,responde,similitud,0.588,0.9898,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,7.8
+337,F,¿Cuál es la posición del verbo en relación con los otros elementos de la frase?,0,abstiene_con_pasajes,,0.3494,0.4362,0.6485,0,,,13.2
+338,C,¿cómo se dice criptomoneda en quechua wanka?,0,abstiene,,0.0502,0.0,,0,,,5.3
+339,A,¿cómo se dice iglesia en quechua wanka?,1,responde,similitud,0.5156,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,6.3
+340,A,¿cómo se dice acusar en quechua wanka?,1,responde,similitud,0.6835,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,7.1
+341,lema_en,[huella:ef2341e613],,responde,similitud,0.5464,0.9566,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,18.9
+342,C,¿cómo se dice submarino en quechua wanka?,0,abstiene,,0.14,0.0,,0,,,5.3
+343,lema_es,[huella:ecd76c8ff6],,responde,similitud,0.5463,0.9952,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,5.6
+344,E,[huella:db1b6cd118],1,responde,similitud,0.4985,0.998,,0,vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf,265,8.9
+345,lema_es,[huella:1434f77041],,responde,similitud,0.7014,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,5.6
+346,B,necesito el término wanka para referirme a feliz,1,responde,similitud,0.6409,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,5.0
+347,A,¿cómo se dice número en quechua wanka?,1,responde,similitud,0.5906,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,5.5
+348,B,what is the Wanka Quechua word for caminar?,1,responde,similitud,0.6738,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,6.5
+349,lema_en,[huella:7f6b462bd7],,responde,similitud,0.7738,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,8.1
+350,A,¿cómo se dice olvido en quechua wanka?,1,responde,similitud,0.6674,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,5.7
+351,A,¿cómo se dice comparación en quechua wanka?,1,responde,similitud,0.5989,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,6.6
+352,E,[huella:3a47c8dbc8],1,abstiene_con_pasajes,,0.4422,0.9304,0.9861,0,,,13.2
+353,B,necesito el término wanka para referirme a sueldo,1,responde,similitud,0.6228,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,5.6
+354,lema_es,[huella:33ec45889d],,responde,similitud,0.6447,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,6.5
+355,A,¿cómo se dice descomponerse en quechua wanka?,1,responde,similitud,0.5512,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,7.6
+356,A,¿cómo se dice desparramar en quechua wanka?,1,responde,similitud,0.6025,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,7.0
+357,lema_es,[huella:f69d57b911],,responde,similitud,0.6209,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.1
+358,lema_es,[huella:783c7a8a61],,responde,similitud,0.5983,0.9988,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,5.7
+359,lema_en,[huella:4d89ad2296],,responde,similitud,0.7035,0.941,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,15.9
+360,C,¿cómo se dice código de barras en quechua wanka?,0,abstiene,,0.2495,0.0007,,0,,,6.1
+361,F,¿Cuál es el propósito principal del conjunto de instrucciones o ISA?,0,abstiene,,0.2195,0.0236,0.0491,0,,,11.5
+362,lema_es,[huella:e71b19463e],,responde,similitud,0.5404,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,5.3
+363,lema_es,[huella:ba6c1deae1],,responde,similitud,0.665,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,7.4
+364,A,¿cómo se dice padecer en quechua wanka?,1,responde,similitud,0.5781,0.9968,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,6.0
+365,lema_en,[huella:637d5b6c93],,responde,similitud,0.6373,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,7.3
+366,C,¿cómo se dice microprocesador en quechua wanka?,0,abstiene,,0.0629,0.0,,0,,,5.8
+367,A,¿cómo se dice juguete en quechua wanka?,1,responde,similitud,0.6716,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.7
+368,A,¿cómo se dice atajar en quechua wanka?,1,responde,similitud,0.6759,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,5.5
+369,D,how do you say lizard in Wanka Quechua?,1,responde,similitud,0.5057,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,7.4
+370,A,¿cómo se dice pezuña en quechua wanka?,1,responde,similitud,0.579,0.9987,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,5.8
+371,E,[huella:faf222b55f],1,abstiene,,0.2597,0.2986,0.4698,0,,,11.7
+372,A,¿cómo se dice deuda en quechua wanka?,1,responde,similitud,0.6356,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,5.5
+373,lema_es,[huella:08a1d7493a],,responde,similitud,0.7013,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,5.4
+374,lema_en,[huella:8de3ab0fb4],,responde,similitud,0.5355,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,7.8
+375,B,what is the Wanka Quechua word for carnoso?,1,responde,similitud,0.6458,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,6.1
+376,lema_es,[huella:c78472a3a7],,responde,similitud,0.64,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,5.8
+377,lema_en,[huella:e6773ceef6],,responde,similitud,0.4919,0.9877,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,7.9
+378,lema_es,[huella:ce00ea57d8],,responde,similitud,0.5024,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,5.8
+379,E,[huella:f4c4750d77],1,abstiene_con_pasajes,,0.4409,0.993,0.9995,0,,,13.1
+380,A,¿cómo se dice pintar en quechua wanka?,1,responde,similitud,0.6437,0.9978,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,9.1
+381,B,estoy buscando la palabra que designa mellizo en la variedad wanka,1,responde,similitud,0.6779,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,5.6
+382,A,¿cómo se dice coca en quechua wanka?,1,responde,similitud,0.5176,0.9936,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,5.4
+383,lema_es,[huella:16baab0d3a],,responde,similitud,0.6327,0.9987,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,5.9
+384,lema_es,[huella:02d92f9088],,responde,similitud,0.5506,0.9964,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,5.6
+385,A,¿cómo se dice liviano en quechua wanka?,1,responde,similitud,0.7862,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,5.6
+386,B,estoy buscando la palabra que designa lisonjero en la variedad wanka,1,responde,similitud,0.6878,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,5.8
+387,F,¿Qué papel juega el cloro en el tratamiento del agua potable?,0,abstiene,,0.2517,0.0104,,0,,,11.5
+388,A,¿cómo se dice último en quechua wanka?,1,responde,similitud,0.6464,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,5.5
+389,lema_es,[huella:fcde24c850],,responde,lema,0.4575,0.9927,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,6.4
+390,A,¿cómo se dice araña en quechua wanka?,1,responde,lema,0.3824,0.9291,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,6.1
+391,B,necesito el término wanka para referirme a pezuña,1,responde,similitud,0.579,0.9987,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,5.8
+392,lema_es,[huella:0f1aba0e84],,responde,similitud,0.62,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,5.4
+393,F,¿Cuál es el proceso de coagulación y floculación en las plantas depuradoras?,0,abstiene,,0.2427,0.0025,,0,,,12.9
+394,lema_es,[huella:34014f0598],,responde,similitud,0.6975,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,5.4
+395,lema_es,[huella:8f47633eca],,responde,similitud,0.5057,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.7
+396,F,¿Cómo se controla la dureza del agua en los sistemas de distribución?,0,abstiene,,0.2855,0.008,,0,,,12.4
+397,lema_es,[huella:93f146ae96],,responde,similitud,0.6641,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,6.0
+398,A,¿cómo se dice abajo en quechua wanka?,1,responde,lema,0.4519,0.9976,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,5.4
+399,F,¿Existe un sistema de puntuación similar al español en árabe?,0,abstiene,,0.2166,0.0205,0.0451,0,,,12.6
+400,E,[huella:135072ed62],1,abstiene_con_pasajes,,0.4066,0.9912,0.9997,0,,,14.6
+401,lema_es,[huella:807eff19fa],,responde,lema,0.4126,0.9974,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.5
+402,lema_es,[huella:4cac9b6dd7],,responde,similitud,0.588,0.9979,,0,293274822-diccionario-quechua-Wanka-docx.pdf,30,5.6
+403,B,necesito el término wanka para referirme a visitar,1,responde,similitud,0.5066,0.9983,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,6.0
+404,lema_es,[huella:c161dd483f],,responde,similitud,0.5518,0.9973,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.6
+405,lema_es,[huella:a6d9e58ef8],,responde,similitud,0.6433,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,6.4
+406,lema_es,[huella:4556fd3b98],,responde,lema,0.3803,0.9571,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,5.8
+407,E,[huella:7b38e07268],1,abstiene_con_pasajes,,0.3583,0.9237,0.9867,0,,,13.9
+408,lema_es,[huella:92419c2e2d],,responde,similitud,0.5526,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,5.5
+409,lema_es,[huella:a6f4e49436],,responde,lema,0.3156,0.9058,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,6.5
+410,A,¿cómo se dice sueldo en quechua wanka?,1,responde,similitud,0.6228,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,5.7
+411,lema_en,[huella:a34e712419],,responde,lema,0.3725,0.9629,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,7.9
+412,F,¿Qué es la arquitectura de computadores?,0,abstiene,,0.2597,0.0008,,0,,,11.2
+413,lema_es,[huella:97ef0e0d9f],,responde,similitud,0.5956,0.9986,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,5.6
+414,lema_es,[huella:6ce2ae2b18],,responde,lema,0.3521,0.9788,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,5.7
+415,lema_en,[huella:070067e124],,responde,similitud,0.6594,0.9947,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,15.0
+416,lema_es,[huella:6b259ce334],,responde,similitud,0.662,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,6.3
+417,E,[huella:b61a5d5d28],1,abstiene_con_pasajes,,0.3802,0.9732,0.9981,0,,,13.2
+418,B,estoy buscando la palabra que designa retoñar en la variedad wanka,1,responde,similitud,0.6331,0.9962,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,5.8
+419,A,¿cómo se dice ensartar en quechua wanka?,1,responde,similitud,0.7826,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,7.6
+420,lema_es,[huella:50c3f61ee7],,responde,similitud,0.5586,0.995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,6.0
+421,lema_en,[huella:1be0b621f0],,responde,similitud,0.527,0.9969,,0,293274822-diccionario-quechua-Wanka-docx.pdf,29,7.3
+422,A,¿cómo se dice tiesto en quechua wanka?,1,responde,similitud,0.6535,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,5.5
+423,F,¿Qué indica gramaticalmente el caso acusativo femenino?,0,abstiene,,0.1914,0.1535,0.3019,0,,,11.6
+424,lema_es,[huella:6d72b8b803],,responde,similitud,0.533,0.9783,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,5.7
+425,C,¿cómo se dice grúa portuaria en quechua wanka?,0,abstiene,,0.0598,0.0001,,0,,,5.9
+426,A,¿cómo se dice continuar en quechua wanka?,1,responde,similitud,0.6176,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,5.7
+427,E,[huella:c0c76d2135],1,abstiene_con_pasajes,,0.382,0.9841,0.9993,0,,,12.9
+428,lema_es,[huella:a356a763f4],,responde,similitud,0.492,0.997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,8.9
+429,lema_es,[huella:102aba0e2d],,responde,similitud,0.6668,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,6.7
+430,E,[huella:0a794757b7],1,abstiene_con_pasajes,,0.3397,0.9909,0.999,0,,,13.4
+431,lema_es,[huella:899a1bcde2],,responde,similitud,0.6802,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.9
+432,lema_es,[huella:51d3e9f69d],,responde,similitud,0.6754,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,5.8
+433,E,[huella:07fa45ab71],1,abstiene_con_pasajes,,0.4238,0.9031,0.9665,0,,,11.4
+434,F,¿Cómo se organiza el juego de área pequeña para desmarcar al portero?,0,abstiene,,0.2999,0.0014,,0,,,11.3
+435,lema_es,[huella:da3827c575],,responde,similitud,0.6004,0.9986,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,5.6
+436,A,¿cómo se dice mango en quechua wanka?,1,responde,similitud,0.5123,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,7.6
+437,lema_es,[huella:58cfa9ef44],,responde,similitud,0.7017,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.7
+438,lema_es,[huella:10cba6416f],,responde,similitud,0.657,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,5.6
+439,B,how do you say cóncavo in Wanka Quechua?,1,responde,similitud,0.6209,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,5.6
+440,F,¿Cuál es la regla general para agregar el sufijo al plural de los sustantivos italianos?,0,abstiene,,0.3093,0.0333,0.0516,0,,,12.8
+441,lema_es,[huella:3001571d92],,responde,similitud,0.7568,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.9
+442,lema_es,[huella:2a25cbfa72],,responde,similitud,0.5399,0.9977,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.3
+443,D,how do you say to confess in Wanka Quechua?,1,responde,similitud,0.6641,0.9956,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,11.0
+444,D,how do you say devil in Wanka Quechua?,1,responde,lema,0.4799,0.9858,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,9.6
+445,lema_es,[huella:c7626d9455],,responde,similitud,0.6955,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,5.8
+446,E,[huella:4de2225aa0],1,abstiene_con_pasajes,,0.3409,0.7007,0.9627,0,,,11.3
+447,A,¿cómo se dice doblar en quechua wanka?,1,responde,similitud,0.6591,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.4
+448,D,how do you say to visit in Wanka Quechua?,1,responde,similitud,0.5066,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,7.6
+449,lema_es,[huella:2e922e699c],,responde,lema,0.2002,0.6806,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,5.6
+450,lema_es,[huella:4efa9b8766],,responde,similitud,0.6996,0.9986,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,5.6
+451,lema_es,[huella:a94d19ed55],,responde,similitud,0.642,0.9986,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,5.7
+452,E,[huella:4e2c4ef2da],1,abstiene_con_pasajes,,0.4115,0.8649,0.9752,0,,,14.0
+453,F,¿Cómo se forma la primera persona del plural del presente en ruso?,0,abstiene_con_pasajes,,0.3847,0.6521,0.8707,0,,,13.8
+454,A,¿cómo se dice tragar en quechua wanka?,1,responde,similitud,0.6305,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,6.1
+455,B,what is the Wanka Quechua word for fluir?,1,responde,similitud,0.504,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.7
+456,lema_es,[huella:a5af47b22e],,responde,similitud,0.7622,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,5.8
+457,lema_es,[huella:3ad82a9a9b],,responde,similitud,0.8032,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.1
+458,lema_es,[huella:4efd1b44e8],,responde,similitud,0.6495,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,5.8
+459,lema_es,[huella:1b8ca819dc],,responde,similitud,0.5786,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,5.7
+460,B,necesito el término wanka para referirme a castañetear,1,responde,similitud,0.6752,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,5.8
+461,lema_es,[huella:67c47d98e8],,responde,similitud,0.5058,0.9972,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,6.1
+462,lema_es,[huella:b6869714db],,responde,lema,0.2225,0.4542,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,5.7
+463,lema_es,[huella:52875d4c5c],,responde,similitud,0.6662,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,5.9
+464,lema_es,[huella:7a35b237cf],,responde,lema,0.412,0.9677,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.0
+465,E,[huella:dc91ecf64d],1,abstiene_con_pasajes,,0.3622,0.3708,0.7322,0,,,12.6
+466,A,¿cómo se dice pájaro en quechua wanka?,1,responde,similitud,0.6246,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,6.8
+467,A,¿cómo se dice torrentada en quechua wanka?,1,responde,similitud,0.5779,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,6.0
+468,lema_es,[huella:e0221c6d56],,responde,similitud,0.5261,0.988,,0,293274822-diccionario-quechua-Wanka-docx.pdf,37,5.7
+469,A,¿cómo se dice próximo en quechua wanka?,1,responde,similitud,0.6699,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,6.6
+470,lema_en,[huella:cc8e76c276],,responde,similitud,0.6668,0.9894,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,10.3
+471,B,how do you say horrible in Wanka Quechua?,1,responde,similitud,0.6933,0.9961,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,9.6
+472,lema_es,[huella:cd10cc9a18],,responde,lema,0.3792,0.9746,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,5.4
+473,lema_en,[huella:a6b2bf7bb2],,responde,similitud,0.5949,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,8.5
+474,lema_es,[huella:99a2e5b787],,responde,similitud,0.6072,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,5.8
+475,lema_es,[huella:e7eeb5127a],,responde,similitud,0.5783,0.996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,5.4
+476,lema_es,[huella:3a8946fe85],,responde,lema,0.4475,0.9989,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,6.2
+477,lema_es,[huella:72ebd2a23b],,responde,similitud,0.5166,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,7.3
+478,E,[huella:04274bc85f],1,responde,similitud,0.5093,0.983,,0,vbook.pub_cerron-palomino-rodolfo-gramatica-quechua-junin-huanca-1976-ocrpdf.pdf,13,10.4
+479,A,¿cómo se dice corazón en quechua wanka?,1,responde,similitud,0.7758,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,5.9
+480,lema_es,[huella:9f4ecf4cb7],,responde,similitud,0.6592,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,6.1
+481,A,¿cómo se dice carnoso en quechua wanka?,1,responde,similitud,0.6458,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,5.7
+482,lema_es,[huella:c86d8d775a],,responde,similitud,0.6444,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,5.8
+483,B,how do you say tragar in Wanka Quechua?,1,responde,similitud,0.6305,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,6.0
+484,F,¿Cuál es el sufijo utilizado para negar los verbos en la forma teinal?,0,abstiene,,0.2399,0.0328,0.0656,0,,,13.0
+485,lema_es,[huella:419942329b],,responde,similitud,0.795,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.7
+486,lema_es,[huella:a4f0060c25],,responde,similitud,0.6654,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,5.9
+487,A,¿cómo se dice miedoso en quechua wanka?,1,responde,lema,0.4454,0.9973,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,5.9
+488,E,[huella:667d8ac691],1,abstiene_con_pasajes,,0.4643,0.9262,0.9899,0,,,11.5
+489,F,¿Qué tecnologías modernas se utilizan para monitorizar la calidad del agua?,0,abstiene,,0.1948,0.0108,,0,,,11.9
+490,E,[huella:d535a3b980],1,abstiene_con_pasajes,,0.3469,0.9435,0.9947,0,,,10.2
+491,A,¿cómo se dice voluntariamente en quechua wanka?,1,responde,similitud,0.7333,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,37,6.0
+492,lema_es,[huella:490b8be406],,responde,similitud,0.5007,0.998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,6.3
+493,lema_es,[huella:b77f68a2bc],,responde,similitud,0.6256,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.4
+494,F,¿Cómo se construye una pregunta sobre la existencia de algo?,0,abstiene,,0.2522,0.1342,0.2508,0,,,12.1
+495,lema_es,[huella:89ef145d49],,responde,lema,0.4082,0.9927,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,6.1
+496,lema_es,[huella:45df316353],,responde,similitud,0.6487,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.7
+497,B,estoy buscando la palabra que designa descomponerse en la variedad wanka,1,responde,similitud,0.5512,0.9982,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,6.6
+498,lema_es,[huella:f43fd7fd77],,responde,similitud,0.5043,0.9969,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,5.6
+499,F,¿Cómo se debe manejar la poda para mejorar la calidad de los granos?,0,abstiene,,0.2961,0.1169,0.2733,0,,,12.7
+500,lema_es,[huella:99076f9d0d],,responde,similitud,0.6655,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,5.7
+501,A,¿cómo se dice fluir en quechua wanka?,1,responde,similitud,0.504,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.7
+502,D,how do you say comrade in Wanka Quechua?,1,responde,similitud,0.7256,0.9989,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,10.7
+503,B,necesito el término wanka para referirme a cuanto,1,responde,lema,0.3517,0.9701,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,5.8
+504,A,¿cómo se dice bulla en quechua wanka?,1,responde,similitud,0.6017,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.7
+505,A,¿cómo se dice castañetear en quechua wanka?,1,responde,similitud,0.6752,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,6.0
+506,F,¿Cómo se forman los plurales de los sustantivos neutros?,0,abstiene,,0.2988,0.0856,0.1653,0,,,11.9
+507,lema_es,[huella:ecb87227cd],,responde,similitud,0.6795,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,8.8
+508,F,¿Qué ocurre con la palabra que indica el tiempo pasado?,0,abstiene_con_pasajes,,0.36,0.4652,0.6064,0,,,12.9
+509,C,¿cómo se dice firewall en quechua wanka?,0,abstiene,,0.0483,0.0001,,0,,,7.5
+510,B,estoy buscando la palabra que designa barbechado en la variedad wanka,1,responde,similitud,0.6851,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,6.3
+511,A,¿cómo se dice esquilar en quechua wanka?,1,responde,similitud,0.7318,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,6.5
+512,B,how do you say entablillar in Wanka Quechua?,1,responde,similitud,0.682,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,6.5
+513,F,¿Cómo se regula el pago de impuestos y regalías a las autoridades locales en proyectos mineros?,0,abstiene,,0.2249,0.0005,,0,,,13.8
+514,lema_en,[huella:b967f17471],,responde,similitud,0.6843,0.9098,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,27.3
+515,lema_es,[huella:041044ba0d],,responde,lema,0.398,0.9924,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,6.3
+516,lema_es,[huella:1591751c74],,responde,similitud,0.5915,0.9988,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,6.0
+517,D,how do you say lightweight in Wanka Quechua?,1,responde,similitud,0.8465,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,25.1
+518,A,¿cómo se dice lagartija en quechua wanka?,1,responde,similitud,0.5057,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.9
+519,E,[huella:d2e0d5d808],1,abstiene_con_pasajes,,0.3112,0.4399,0.8078,0,,,12.2
+520,A,¿cómo se dice chato en quechua wanka?,1,responde,similitud,0.662,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,5.6
+521,E,[huella:2671a7cf25],1,abstiene_con_pasajes,,0.2873,0.7961,0.9511,0,,,12.5
+522,lema_es,[huella:bbb26626b4],,responde,similitud,0.5744,0.998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,5.9
+523,A,¿cómo se dice náusea en quechua wanka?,1,responde,similitud,0.6075,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,9.6
+524,C,¿cómo se dice refinería de petróleo en quechua wanka?,0,abstiene,,0.2555,0.0007,,0,,,6.8
+525,lema_es,[huella:4fef4267ef],,responde,similitud,0.6837,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,5.6
+526,F,¿Cuál es el procedimiento administrativo para solicitar un permiso ambiental en una zona minera?,0,abstiene,,0.2915,0.0153,,0,,,13.2
+527,A,¿cómo se dice difunto en quechua wanka?,1,responde,similitud,0.6701,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.6
+528,lema_en,[huella:4e529c122a],,responde,similitud,0.5547,0.9826,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,9.6
+529,lema_es,[huella:24ec85d5b2],,responde,similitud,0.6154,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,7.3
+530,F,¿Quién diseñó la primera computadora digital electrónica programable?,0,abstiene,,0.1411,0.0413,0.1291,0,,,12.5
+531,lema_es,[huella:1388707494],,responde,similitud,0.7333,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,37,6.2
+532,lema_en,[huella:d548e8bc86],,responde,similitud,0.6353,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,7.7
+533,lema_es,[huella:16b800e7dc],,responde,similitud,0.7197,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,5.9
+534,D,how do you say beloved in Wanka Quechua?,1,responde,similitud,0.5748,0.9918,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,9.9
+535,lema_en,[huella:f2a23aacaa],,responde,similitud,0.5509,0.997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,7.6
+536,lema_es,[huella:e666496879],,responde,similitud,0.5003,0.9955,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,5.7
+537,C,¿cómo se dice motor diésel en quechua wanka?,0,abstiene,,0.0581,0.0,,0,,,5.5
+538,lema_es,[huella:833c24caeb],,responde,similitud,0.6354,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.7
+539,lema_es,[huella:2fecb85bce],,responde,similitud,0.603,0.9983,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,5.7
+540,B,estoy buscando la palabra que designa tenedor en la variedad wanka,1,responde,similitud,0.65,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,5.8
+541,A,¿cómo se dice banco en quechua wanka?,1,responde,lema,0.4294,0.9855,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,5.8
+542,B,what is the Wanka Quechua word for mango?,1,responde,similitud,0.5123,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,8.5
+543,A,¿cómo se dice humita en quechua wanka?,1,responde,similitud,0.6252,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,5.7
+544,lema_en,[huella:fd31808a89],,responde,similitud,0.5898,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,10.7
+545,A,¿cómo se dice agradar en quechua wanka?,1,responde,similitud,0.6691,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,5.6
+546,lema_es,[huella:4207c74dbf],,responde,similitud,0.5733,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,6.2
+547,B,estoy buscando la palabra que designa descartar en la variedad wanka,1,responde,similitud,0.5007,0.9975,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,5.9
+548,lema_es,[huella:534ba9b5c9],,responde,similitud,0.5772,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,5.6
+549,lema_es,[huella:b57077550d],,responde,similitud,0.691,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,5.8
+550,lema_es,[huella:ebcd4f7deb],,responde,similitud,0.7178,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,5.6
+551,lema_es,[huella:ec2046c048],,responde,lema,0.434,0.9783,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,5.5
+552,lema_es,[huella:fd28170781],,responde,similitud,0.6899,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.0
+553,lema_en,[huella:733ce9b2f3],,responde,similitud,0.659,0.9957,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,10.5
+554,F,¿Cuál es la traducción de run out of algo?,0,abstiene,,0.1495,0.1029,0.2981,0,,,11.4
+555,F,¿Qué indica el sufijo -av- en la forma del pasado?,0,abstiene,,0.3642,0.2137,0.3289,0,,,11.9
+556,F,¿Cuáles son los requisitos legales necesarios para obtener una concesión minera en Perú?,0,abstiene,,0.1716,0.0009,,0,,,12.4
+557,lema_es,[huella:7d20f06650],,responde,similitud,0.6542,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,6.0
+558,lema_es,[huella:6dbc2f8d02],,responde,similitud,0.517,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,6.1
+559,C,¿cómo se dice panel solar en quechua wanka?,0,abstiene,,0.0961,0.0,,0,,,6.3
+560,lema_es,[huella:2a9eb9f164],,responde,similitud,0.7462,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,6.5
+561,F,¿Cuál es la regla de formación del perfecto compuesto con el verbo auxiliar?,0,abstiene,,0.2957,0.1715,0.4575,0,,,13.1
+562,lema_es,[huella:46d06c42bb],,responde,similitud,0.6142,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,6.1
+563,lema_en,[huella:b1de9f2d87],,responde,similitud,0.5787,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,12.3
+564,D,how do you say to walk in Wanka Quechua?,1,responde,similitud,0.6738,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,18.0
+565,lema_es,[huella:36971712ae],,responde,similitud,0.6289,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,6.1
+566,A,¿cómo se dice huincha en quechua wanka?,1,responde,similitud,0.6686,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,9.6
+567,C,¿cómo se dice tomografía en quechua wanka?,0,abstiene,,0.1021,0.0001,,0,,,5.7
+568,E,[huella:b926bba56f],1,abstiene_con_pasajes,,0.329,0.5412,0.8996,0,,,12.1
+569,E,[huella:d7da0f5349],1,abstiene_con_pasajes,,0.244,0.3494,0.6432,0,,,12.0
+570,lema_es,[huella:ea0735682a],,responde,similitud,0.6788,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,6.5
+571,lema_es,[huella:258c02a2c2],,responde,similitud,0.7136,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,5.9
+572,lema_es,[huella:c3414d9637],,responde,lema,0.4369,0.9854,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,5.7
+573,lema_en,[huella:3c41cbbb8d],,responde,similitud,0.5928,0.9908,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,7.8
+574,lema_es,[huella:57a9b8492c],,responde,similitud,0.6491,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,5.5
+575,lema_en,[huella:b06afd24fb],,responde,similitud,0.8796,0.9947,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,27.2
+576,A,¿cómo se dice espigar en quechua wanka?,1,responde,similitud,0.642,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,5.7
+577,lema_es,[huella:16b973dbbe],,responde,similitud,0.5809,0.9988,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.5
+578,lema_es,[huella:f85050e867],,responde,similitud,0.6693,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,5.5
+579,F,¿Qué establece la Ley General de Minas sobre la competencia del Estado para la gestión del subsuelo?,0,abstiene,,0.2399,0.0059,0.01,0,,,13.9
+580,A,¿cómo se dice deposito en quechua wanka?,1,responde,similitud,0.5417,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,6.7
+581,F,¿Qué terminaciones indican la declinación de los sustantivos femeninos?,0,abstiene,,0.2677,0.0259,0.048,0,,,13.6
+582,lema_es,[huella:00282e571a],,responde,lema,0.4454,0.9956,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,5.9
+583,F,¿Cuál es el género de los adjetivos que coinciden con el sustantivo al que modifican?,0,abstiene,,0.2953,0.0893,0.139,0,,,12.4
+584,F,¿Cuál es la definición de give up en este contexto?,0,abstiene,,0.2088,0.0113,,0,,,11.5
+585,lema_es,[huella:8367d2a2c8],,responde,lema,0.3,0.7075,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,5.2
+586,C,¿cómo se dice semiconductor en quechua wanka?,0,abstiene,,0.2262,0.0007,,0,,,5.7
+587,lema_es,[huella:635ce49087],,responde,similitud,0.6551,0.9986,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,5.8
+588,lema_es,[huella:c94d32b0d4],,responde,similitud,0.6567,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,5.5
+589,A,¿cómo se dice piojoso en quechua wanka?,1,responde,similitud,0.5486,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,5.4
+590,lema_es,[huella:1f2e8eeeca],,responde,similitud,0.6738,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.8
+591,D,how do you say bird in Wanka Quechua?,1,responde,similitud,0.6566,0.9886,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,12.1
+592,lema_es,[huella:bd0c9f0b86],,responde,similitud,0.6393,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,5.6
+593,B,estoy buscando la palabra que designa espinilla en la variedad wanka,1,responde,similitud,0.7016,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,6.0
+594,A,¿cómo se dice afecto en quechua wanka?,1,responde,similitud,0.5939,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,6.4
+595,lema_es,[huella:0c014047aa],,responde,similitud,0.545,0.9964,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,7.5
+596,lema_en,[huella:1746f53ad4],,responde,similitud,0.7126,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,7.5
+597,F,¿Qué componente se encarga de ejecutar las instrucciones y controlar el flujo de datos?,0,abstiene,,0.1811,0.0011,,0,,,12.7
+598,E,[huella:92a0461471],1,abstiene_con_pasajes,,0.2788,0.7408,0.8991,0,,,12.1
+599,F,¿En qué situaciones se utiliza el auxiliar masu para indicar obligación?,0,abstiene,,0.3687,0.0612,,0,,,13.2
+600,A,¿cómo se dice nuevo en quechua wanka?,1,responde,similitud,0.6162,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,5.4
+601,lema_es,[huella:d6fe5af68c],,responde,similitud,0.7127,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,6.0
+602,lema_es,[huella:85665c3969],,responde,similitud,0.7023,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,5.6
+603,lema_es,[huella:688d89f693],,responde,similitud,0.7419,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,6.1
+604,D,how do you say roasted in Wanka Quechua?,1,responde,similitud,0.6086,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,7.7
+605,E,[huella:23715f7157],1,abstiene_con_pasajes,,0.4155,0.9581,0.994,0,,,12.5
+606,lema_es,[huella:d29cca9866],,responde,similitud,0.5122,0.9967,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,6.0
+607,lema_es,[huella:ddf41d4e9f],,responde,similitud,0.5935,0.9988,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.4
+608,D,how do you say happy in Wanka Quechua?,1,responde,similitud,0.6784,0.9518,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,15.7
+609,C,¿cómo se dice radiografía dental en quechua wanka?,0,abstiene,,0.0963,0.0001,,0,,,6.1
+610,lema_es,[huella:ba1f1f4e25],,responde,similitud,0.4937,0.9927,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,5.3
+611,lema_es,[huella:c67debbb33],,responde,similitud,0.594,0.9979,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,5.5
+612,E,[huella:1ba92c999c],1,abstiene_con_pasajes,,0.328,0.9712,0.9973,0,,,12.2
+613,F,¿Cuál es la regla principal para formar el caso dativo de los sustantivos neutros?,0,abstiene,,0.3104,0.0363,0.1004,0,,,17.0
+614,A,¿cómo se dice fósforo en quechua wanka?,1,responde,similitud,0.6492,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.6
+615,lema_es,[huella:b422ba57c4],,responde,similitud,0.6717,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,5.3
+616,lema_es,[huella:5234722a2a],,responde,similitud,0.6123,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,5.5
+617,lema_es,[huella:c77bfe4162],,responde,similitud,0.6349,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,5.3
+618,F,¿Qué reglas de acentuación existen en el alfabeto árabe?,0,abstiene,,0.2329,0.009,,0,,,11.2
+619,lema_es,[huella:ea6d3b8289],,responde,similitud,0.6351,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,6.0
+620,E,[huella:5f771d9ce7],1,abstiene_con_pasajes,,0.3109,0.9758,0.9984,0,,,12.4
+621,lema_es,[huella:f99487f48b],,responde,similitud,0.5617,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,5.6
+622,lema_en,[huella:a973f73eae],,responde,similitud,0.5339,0.9953,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,8.3
+623,C,¿cómo se dice hipoteca bancaria en quechua wanka?,0,abstiene,,0.0892,0.0003,,0,,,6.0
+624,A,¿cómo se dice entablillar en quechua wanka?,1,responde,similitud,0.682,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,6.1
+625,lema_es,[huella:f1d8f8a0a1],,responde,similitud,0.6969,0.9978,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,9.6
+626,lema_es,[huella:9eaaa4d52e],,responde,similitud,0.7232,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,8.0
+627,lema_en,[huella:5dbf972da7],,responde,similitud,0.7104,0.9967,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,10.2
+628,F,¿En qué casos se utiliza el caso genitivo?,0,abstiene,,0.2437,0.1203,0.2102,0,,,10.4
+629,lema_es,[huella:1c202fd3cd],,responde,similitud,0.5179,0.9954,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,5.4
+630,lema_es,[huella:469bdf9691],,responde,similitud,0.5373,0.9975,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,5.3
+631,B,how do you say libertar in Wanka Quechua?,1,responde,similitud,0.5145,0.9952,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,5.9
+632,lema_es,[huella:6872a5264b],,responde,similitud,0.6951,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,6.2
+633,C,¿cómo se dice contrato de arrendamiento en quechua wanka?,0,abstiene,,0.2546,0.0007,,0,,,7.0
+634,A,¿cómo se dice coser en quechua wanka?,1,responde,similitud,0.576,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,5.6
+635,lema_es,[huella:d282a20fd6],,responde,similitud,0.6629,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.6
+636,lema_es,[huella:ba1ef19a70],,responde,similitud,0.7164,0.9974,,0,293274822-diccionario-quechua-Wanka-docx.pdf,8,11.7
+637,lema_en,[huella:ed1611db67],,responde,similitud,0.673,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,8.3
+638,B,necesito el término wanka para referirme a confesar,1,responde,similitud,0.6394,0.9983,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,5.9
+639,lema_es,[huella:2e63671772],,responde,similitud,0.5651,0.994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,6.0
+640,lema_es,[huella:d1e2c22687],,responde,similitud,0.5383,0.9986,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.8
+641,lema_es,[huella:d96460c7b7],,responde,similitud,0.6124,0.9971,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,6.0
+642,lema_es,[huella:fdc2572287],,responde,similitud,0.5622,0.9966,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,7.5
+643,D,how do you say urine in Wanka Quechua?,1,responde,lema,0.3748,0.9487,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,7.8
+644,lema_en,[huella:697ee6d369],,responde,lema,0.4563,0.9157,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,9.9
+645,lema_es,[huella:849f3c1472],,responde,similitud,0.5009,0.9936,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,6.4
+646,lema_es,[huella:29d33a6566],,responde,similitud,0.6077,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,6.1
+647,lema_es,[huella:fbaf63bf77],,responde,similitud,0.7133,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,5.8
+648,E,[huella:c1d74f9114],1,abstiene_con_pasajes,,0.3369,0.3644,0.5769,0,,,13.2
+649,F,¿Cómo se transforma un verbo en su forma pasiva?,0,abstiene,,0.2247,0.0046,,0,,,11.2
+650,F,¿Qué es la altura crítica en el ciclo productivo de la quinua?,0,abstiene,,0.3156,0.0249,,0,,,11.0
+651,lema_es,[huella:31f1d2b73c],,responde,similitud,0.6146,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,5.6
+652,F,¿Cómo influye la posesión del balón en la construcción de ataques modernos?,0,abstiene,,0.2436,0.003,,0,,,12.4
+653,lema_es,[huella:6b8e4eb818],,responde,similitud,0.6206,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,29,5.8
+654,F,¿Cómo funciona el modelo de von Neumann en la gestión de memoria?,0,abstiene,,0.2339,0.001,,0,,,12.3
+655,lema_en,[huella:753ede6d8e],,responde,similitud,0.6844,0.9768,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,12.2
+656,A,¿cómo se dice asado en quechua wanka?,1,responde,similitud,0.6086,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,5.5
+657,F,¿Cuál es la frecuencia recomendada para aplicar abonos verdes en el cultivo?,0,abstiene,,0.153,0.0014,,0,,,12.6
+658,lema_es,[huella:02bec759e4],,responde,similitud,0.5781,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,5.8
+659,lema_en,[huella:bf56fef150],,responde,similitud,0.6567,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,28,7.6
+660,F,¿Por qué los tonos medios son difíciles de distinguir para los no nativos?,0,abstiene,,0.1975,0.0047,,0,,,11.9
+661,lema_es,[huella:e3d57a2b66],,responde,similitud,0.5066,0.9983,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,5.4
+662,lema_es,[huella:f6b1c75d8c],,responde,similitud,0.5996,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,5.8
+663,D,how do you say hillside in Wanka Quechua?,1,responde,similitud,0.7293,0.9786,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,18.2
+664,A,¿cómo se dice cerro en quechua wanka?,1,responde,similitud,0.505,0.9982,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,5.4
+665,lema_en,[huella:259d4f043d],,responde,similitud,0.7021,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,8.1
+666,A,¿cómo se dice venir en quechua wanka?,1,responde,lema,0.3072,0.9572,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,5.5
+667,lema_es,[huella:acc20a00f1],,responde,similitud,0.5879,0.998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,6.1
+668,lema_es,[huella:c732acc9f3],,responde,similitud,0.6616,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,5.6
+669,A,¿cómo se dice deudor en quechua wanka?,1,responde,similitud,0.6381,0.9989,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,6.5
+670,lema_es,[huella:dc695075ce],,responde,similitud,0.5119,0.995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,5.7
+671,lema_es,[huella:080d18caf9],,responde,similitud,0.537,0.997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,5.5
+672,B,necesito el término wanka para referirme a agradar,1,responde,similitud,0.6691,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,5.6
+673,D,how do you say forgetfulness in Wanka Quechua?,1,responde,similitud,0.6674,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,7.5
+674,lema_es,[huella:5581175c49],,responde,similitud,0.6151,0.9986,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,5.5
+675,C,¿cómo se dice peaje electrónico en quechua wanka?,0,abstiene,,0.0741,0.0,,0,,,5.5
+676,lema_en,[huella:8eca55c6da],,responde,similitud,0.6553,0.9844,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,11.7
+677,lema_es,[huella:4940af177c],,responde,similitud,0.6606,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,5.7
+678,F,¿Cuál es la diferencia entre las formas verbales -u y -em en el presente?,0,abstiene_con_pasajes,,0.3379,0.715,0.9137,0,,,12.1
+679,lema_es,[huella:bb80d697d8],,responde,similitud,0.4887,0.9931,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,6.7
+680,lema_es,[huella:296b1b2197],,responde,similitud,0.645,0.9954,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.9
+681,A,¿cómo se dice caluroso en quechua wanka?,1,responde,similitud,0.6917,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.5
+682,lema_es,[huella:59d1abab98],,responde,similitud,0.6032,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,5.5
+683,F,¿Qué ocurre específicamente con las palabras que terminan en 'o' para crear su forma plural?,0,abstiene,,0.2633,0.0181,0.0253,0,,,13.4
+684,A,¿cómo se dice tímido en quechua wanka?,1,responde,similitud,0.5441,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,5.5
+685,lema_es,[huella:5487afd3b3],,responde,similitud,0.6629,0.9988,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,5.4
+686,B,necesito el término wanka para referirme a diablo,1,responde,lema,0.4799,0.9988,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,5.5
+687,lema_en,[huella:b15de0f506],,responde,similitud,0.7686,0.9642,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,16.1
+688,F,Quelles sont les références bibliographiques citées ?,0,abstiene,,0.127,0.0,,0,,,12.5
+689,lema_es,[huella:0ded5b8d59],,responde,similitud,0.6612,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,5.9
+690,F,¿Cuáles son los principales contaminantes que afectan al agua potable?,0,abstiene,,0.2311,0.009,,0,,,11.9
+691,lema_es,[huella:247ba63dcb],,responde,similitud,0.7452,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,5.9
+692,F,¿Se utiliza el orden inverso de las palabras en árabe?,0,abstiene,,0.3084,0.0391,0.0906,0,,,11.3
+693,lema_en,[huella:33eaaf2301],,responde,similitud,0.6158,0.9934,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,10.4
+694,F,¿Qué diferencia existe entre la arquitectura Harvard y la de von Neumann?,0,abstiene,,0.2542,0.0147,0.0216,0,,,11.8
+695,A,¿cómo se dice terminar en quechua wanka?,1,responde,lema,0.377,0.9806,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,5.9
+696,B,necesito el término wanka para referirme a deslizarse,1,responde,similitud,0.5911,0.9983,,0,293274822-diccionario-quechua-Wanka-docx.pdf,12,6.0
+697,F,¿Cómo se expresa call it off oficialmente?,0,abstiene,,0.1692,0.004,,0,,,10.4
+698,lema_es,[huella:b5f1702f1a],,responde,similitud,0.7227,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,6.9
+699,F,¿Cómo se representan las vocales en la escritura árabe?,0,abstiene_con_pasajes,,0.326,0.3248,0.5349,0,,,12.4
+700,B,how do you say anudar in Wanka Quechua?,1,responde,similitud,0.5351,0.9958,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.7
+701,B,estoy buscando la palabra que designa acusar en la variedad wanka,1,responde,similitud,0.6835,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,5.7
+702,lema_es,[huella:dabcec167d],,responde,similitud,0.6887,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,1,6.1
+703,E,[huella:62ebe6fc81],1,abstiene_con_pasajes,,0.2026,0.428,0.6556,0,,,10.9
+704,A,¿cómo se dice sorber en quechua wanka?,1,responde,similitud,0.6379,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,5.7
+705,lema_es,[huella:2102ffe416],,responde,similitud,0.5701,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,6.1
+706,lema_en,[huella:45267b7949],,responde,similitud,0.736,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,10.2
+707,lema_en,[huella:3c06bea72d],,responde,similitud,0.7066,0.98,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,18.1
+708,A,¿cómo se dice seleccionar en quechua wanka?,1,responde,similitud,0.7331,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,5.8
+709,E,[huella:1a39b1620e],1,abstiene_con_pasajes,,0.4525,0.8884,0.9547,0,,,13.1
+710,lema_es,[huella:10e507ebf3],,responde,similitud,0.5813,0.9975,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,6.1
+711,B,what is the Wanka Quechua word for buscar?,1,responde,similitud,0.7163,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,6.6
+712,D,how do you say to search in Wanka Quechua?,1,responde,similitud,0.7163,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,7.6
+713,E,[huella:4186ad957e],1,abstiene_con_pasajes,,0.3426,0.8849,0.9873,0,,,12.3
+714,lema_es,[huella:a9e7a0176b],,responde,similitud,0.6872,0.9986,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,6.2
+715,lema_es,[huella:21c3cc0bdc],,responde,similitud,0.7506,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,6.2
+716,lema_es,[huella:70edd372fd],,responde,similitud,0.6187,0.9983,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,5.7
+717,lema_es,[huella:0554a8bab0],,responde,similitud,0.5787,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,5.7
+718,lema_es,[huella:b896544e72],,responde,lema,0.4466,0.9623,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,6.6
+719,E,[huella:c02342866c],1,abstiene_con_pasajes,,0.4315,0.9051,0.9752,0,,,13.3
+720,lema_en,[huella:7ed8bf9759],,responde,similitud,0.7947,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,14,16.7
+721,B,what is the Wanka Quechua word for juguete?,1,responde,similitud,0.6716,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,5.9
+722,lema_en,[huella:ba573a6a21],,responde,similitud,0.7567,0.9888,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,16.6
+723,E,[huella:f4a6e52994],1,abstiene_con_pasajes,,0.2781,0.5119,0.8005,0,,,12.1
+724,E,[huella:b574502718],1,abstiene_con_pasajes,,0.3252,0.4568,0.7479,0,,,11.1
+725,lema_es,[huella:e6be1c5748],,responde,similitud,0.4896,0.9955,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,5.8
+726,B,what is the Wanka Quechua word for nuevo?,1,responde,similitud,0.6162,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,5.5
+727,D,how do you say to come in Wanka Quechua?,1,responde,lema,0.3072,0.9953,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,7.8
+728,lema_en,[huella:9a6d793d11],,responde,similitud,0.7294,0.9936,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,10.5
+729,lema_en,[huella:c469c95f4b],,responde,similitud,0.7331,0.9979,,0,293274822-diccionario-quechua-Wanka-docx.pdf,32,10.6
+730,B,how do you say eructar in Wanka Quechua?,1,responde,similitud,0.6963,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,15,5.3
+731,F,¿Por qué es clave la presión alta o el pressing en las últimas líneas defensivas?,0,abstiene,,0.1624,0.0009,,0,,,12.0
+732,lema_es,[huella:9cc4606d7b],,responde,lema,0.4545,0.993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,5.9
+733,A,¿cómo se dice hueco en quechua wanka?,1,responde,similitud,0.5904,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,5.4
+734,lema_es,[huella:d8568f9bdd],,responde,similitud,0.5241,0.9953,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,5.3
+735,A,¿cómo se dice libertar en quechua wanka?,1,responde,similitud,0.5145,0.9952,,0,293274822-diccionario-quechua-Wanka-docx.pdf,21,5.8
+736,lema_es,[huella:c9ffbf36b3],,responde,similitud,0.6022,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.6
+737,A,¿cómo se dice retoñar en quechua wanka?,1,responde,similitud,0.6331,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,5.9
+738,C,¿cómo se dice videoconferencia en quechua wanka?,0,abstiene,,0.0727,0.0001,,0,,,10.0
+739,lema_es,[huella:ad4803370a],,responde,lema,0.4152,0.9968,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,6.6
+740,A,¿cómo se dice ladera en quechua wanka?,1,responde,similitud,0.575,0.9972,,0,293274822-diccionario-quechua-Wanka-docx.pdf,20,6.1
+741,lema_es,[huella:68aeebebaf],,responde,lema,0.4475,0.9875,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,5.8
+742,D,how do you say to continue in Wanka Quechua?,1,responde,similitud,0.6176,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,11.7
+743,lema_en,[huella:8cf1d4f335],,responde,similitud,0.7667,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,30,7.8
+744,F,¿Cómo se marca el caso dativo en los sustantivos masculinos?,0,abstiene,,0.3132,0.0168,,0,,,11.3
+745,lema_es,[huella:f23398b2ce],,responde,lema,0.3858,0.9949,,0,293274822-diccionario-quechua-Wanka-docx.pdf,2,5.8
+746,F,¿Cuál es el ejemplo clásico de pronunciación del cuarto tono?,0,abstiene,,0.2554,0.0318,0.0667,0,,,12.1
+747,C,¿cómo se dice fibra óptica en quechua wanka?,0,abstiene,,0.087,0.0001,,0,,,6.0
+748,lema_es,[huella:e01fe5f6a6],,responde,similitud,0.6246,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,8.7
+749,lema_en,[huella:6f522a35d7],,responde,similitud,0.651,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,11.4
+750,lema_es,[huella:ecd4243447],,responde,lema,0.3163,0.9957,,0,293274822-diccionario-quechua-Wanka-docx.pdf,5,7.6
+751,D,how do you say fork in Wanka Quechua?,1,responde,similitud,0.65,0.9938,,0,293274822-diccionario-quechua-Wanka-docx.pdf,34,12.0
+752,F,¿Qué significa el carácter shang cuando se lee con un tono bajo?,0,abstiene,,0.1594,0.0038,,0,,,11.5
+753,B,how do you say olvido in Wanka Quechua?,1,responde,similitud,0.6674,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,5.9
+754,lema_es,[huella:eebe973124],,responde,similitud,0.6612,0.9992,,0,293274822-diccionario-quechua-Wanka-docx.pdf,7,5.8
+755,lema_en,[huella:86557ce296],,responde,similitud,0.5089,0.9908,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,7.4
+756,lema_en,[huella:b0f7200472],,responde,similitud,0.6374,0.9881,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,12.2
+757,lema_en,[huella:6350312d96],,responde,lema,0.4531,0.9884,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,8.9
+758,D,how do you say to fold in Wanka Quechua?,1,responde,similitud,0.6591,0.9942,,0,293274822-diccionario-quechua-Wanka-docx.pdf,13,14.1
+759,lema_en,[huella:024accd383],,responde,similitud,0.556,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,35,12.5
+760,lema_es,[huella:8930e87111],,responde,lema,0.3705,0.9794,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,5.9
+761,lema_es,[huella:e615f6aaa9],,responde,similitud,0.631,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,5.6
+762,A,¿cómo se dice fundador en quechua wanka?,1,responde,similitud,0.6211,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,17,6.0
+763,lema_es,[huella:5c5daebe23],,responde,similitud,0.5905,0.9919,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,5.8
+764,F,¿En qué casos se utiliza el artículo determinado con un tilde diacrítica?,0,abstiene,,0.2049,0.004,,0,,,12.4
+765,A,¿cómo se dice visitar en quechua wanka?,1,responde,similitud,0.5066,0.9989,,0,293274822-diccionario-quechua-Wanka-docx.pdf,36,6.5
+766,lema_es,[huella:422106284d],,responde,lema,0.3517,0.9972,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,6.4
+767,lema_es,[huella:26cfe576b9],,responde,similitud,0.4994,0.9912,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,6.1
+768,lema_es,[huella:80f29a0afc],,responde,similitud,0.6212,0.9999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,24,6.1
+769,F,¿Cuál es la traducción correcta de catch a cold en inglés?,0,abstiene,,0.1681,0.0035,,0,,,12.6
+770,A,¿cómo se dice corregirse en quechua wanka?,1,responde,similitud,0.7502,0.9997,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,6.3
+771,lema_en,[huella:c0838f8944],,responde,similitud,0.654,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,16,8.7
+772,lema_es,[huella:17922bfcfc],,responde,similitud,0.6406,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,6.3
+773,B,what is the Wanka Quechua word for incinerar?,1,responde,similitud,0.6458,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,7.1
+774,F,¿Existe alguna excepción a la regla básica de añadir 'i' o 'e' para formar plurales en italiano?,0,abstiene,,0.244,0.0121,0.0188,0,,,15.2
+775,lema_es,[huella:14bcefe7ef],,responde,similitud,0.6333,0.9958,,0,293274822-diccionario-quechua-Wanka-docx.pdf,23,6.5
+776,E,[huella:ea7ea38e46],1,abstiene_con_pasajes,,0.3458,0.982,0.997,0,,,14.9
+777,lema_es,[huella:df9f3a2885],,responde,similitud,0.6895,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,6.2
+778,A,¿cómo se dice descartar en quechua wanka?,1,responde,similitud,0.5007,0.9987,,0,293274822-diccionario-quechua-Wanka-docx.pdf,11,6.6
+779,D,how do you say salary in Wanka Quechua?,1,responde,similitud,0.6228,0.9981,,0,293274822-diccionario-quechua-Wanka-docx.pdf,33,8.5
+780,lema_es,[huella:7938821756],,responde,similitud,0.6029,0.9993,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,6.0
+781,lema_es,[huella:d7c1fe0005],,responde,similitud,0.5201,0.999,,0,293274822-diccionario-quechua-Wanka-docx.pdf,30,6.4
+782,lema_en,[huella:e0b0635775],,responde,similitud,0.6943,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,10.9
+783,C,¿cómo se dice placa base en quechua wanka?,0,abstiene,,0.4698,0.2805,,0,,,6.3
+784,lema_en,[huella:8baf658472],,responde,similitud,0.6818,0.9968,,0,293274822-diccionario-quechua-Wanka-docx.pdf,22,11.5
+785,A,¿cómo se dice asistente en quechua wanka?,1,responde,similitud,0.6723,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,4,7.3
+786,lema_es,[huella:18a73cbc49],,responde,similitud,0.5099,0.9915,,0,293274822-diccionario-quechua-Wanka-docx.pdf,10,6.5
+787,lema_es,[huella:8f01ecb4ce],,responde,similitud,0.6495,0.9994,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,6.2
+788,C,¿cómo se dice endoscopia en quechua wanka?,0,abstiene,,0.0635,0.0,,0,,,6.6
+789,lema_es,[huella:38974fa440],,responde,similitud,0.6748,0.9995,,0,293274822-diccionario-quechua-Wanka-docx.pdf,18,6.8
+790,lema_en,[huella:fb4a357654],,responde,similitud,0.641,0.9849,,0,293274822-diccionario-quechua-Wanka-docx.pdf,9,12.4
+791,A,¿cómo se dice caminar en quechua wanka?,1,responde,similitud,0.6738,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,6,6.0
+792,lema_es,[huella:3f534b0342],,responde,similitud,0.6523,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,30,6.5
+793,A,¿cómo se dice amurallar en quechua wanka?,1,responde,similitud,0.7245,1.0,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,6.2
+794,lema_es,[huella:64c16eef2f],,responde,similitud,0.6011,0.9991,,0,293274822-diccionario-quechua-Wanka-docx.pdf,31,5.5
+795,lema_es,[huella:f9b2aa8616],,responde,similitud,0.5001,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.5
+796,B,necesito el término wanka para referirme a hueco,1,responde,similitud,0.5904,0.998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,19,5.7
+797,lema_es,[huella:5f917af2a1],,responde,similitud,0.5801,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,25,6.4
+798,lema_en,[huella:17f57cbdd6],,responde,similitud,0.7701,0.9996,,0,293274822-diccionario-quechua-Wanka-docx.pdf,27,17.0
+799,C,¿cómo se dice quimioterapia en quechua wanka?,0,abstiene,,0.0831,0.0008,,0,,,5.9
+800,lema_es,[huella:707db3a20f],,responde,similitud,0.7131,0.9998,,0,293274822-diccionario-quechua-Wanka-docx.pdf,3,5.9

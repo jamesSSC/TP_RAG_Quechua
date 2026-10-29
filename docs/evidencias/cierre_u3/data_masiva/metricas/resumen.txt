@@ -1,0 +1,13 @@
+﻿==============================================================================
+  RESUMEN DE METRICAS  -  2026-10-29 05:06
+==============================================================================
+  pytest                 OK     212 passed, 4 skipped, 2 warnings in 6.88s
+  arnes (A, B, C, D)     OK     identico a la linea base 2980a81
+  entrenar_predictores   OK     modelos versionados intactos
+  evaluar_pmv2           OK     RN-06 = True; falsos positivos en C = 0
+  vitest                 OK     Tests  21 passed (21)
+  Newman                 OK     solicitudes 15 (fallidas 0) - afirmaciones 39 (fallidas 0)
+  pip-audit              OK     No known vulnerabilities found
+==============================================================================
+  TODO EN VERDE
+==============================================================================

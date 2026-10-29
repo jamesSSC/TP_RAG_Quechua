@@ -21,6 +21,7 @@ historial de uso.
 """
 
 import csv
+import hashlib
 import json
 import random
 import statistics
@@ -74,6 +75,18 @@ def carga(n: int, contenedor: Contenedor) -> list[dict]:
     return filas[:n]
 
 
+# Particiones cuyo texto esta en conjuntos versionados (evaluacion_v2.json y negativas_prosa.json).
+# Las demas (E: evaluacion_prosa.json, fuera de Git; lema_es/lema_en: derivadas del corpus) no se
+# publican: en la evidencia versionada solo aparece una huella.
+PUBLICABLES = {"A", "B", "C", "D", "F"}
+
+
+def publicable(origen: str, consulta: str) -> str:
+    if origen in PUBLICABLES:
+        return consulta
+    return "[huella:" + hashlib.md5(consulta.encode("utf-8")).hexdigest()[:10] + "]"
+
+
 def percentil(valores: list[float], q: float) -> float:
     ordenados = sorted(valores)
     return ordenados[min(len(ordenados) - 1, int(q * (len(ordenados) - 1)))]
@@ -94,7 +107,7 @@ def main(n: int, salida: Path) -> None:
             {
                 "n": i,
                 "origen": fila["origen"],
-                "consulta": fila["consulta"],
+                "consulta": publicable(fila["origen"], fila["consulta"]),
                 "etiqueta": fila.get("etiqueta", ""),
                 "decision": "responde"
                 if not r.abstenida
@@ -143,7 +156,13 @@ def main(n: int, salida: Path) -> None:
         "falsos_positivos_en_negativas_etiquetadas": fp,
         "respondidas_lema_es": f"{sum(r['decision'] == 'responde' for r in lema_es)}/{len(lema_es)}",
         "abstenciones_por_predictor": sum(r["abstencion_por_predictor"] for r in registros),
-        "estadisticas_base_datos": contenedor.repositorio_consultas.estadisticas()
+        # La analitica por defecto solo cuenta `usuario` (HU-09): aqui se piden las sinteticas.
+        "estadisticas_base_datos": contenedor.repositorio_consultas.estadisticas(
+            incluir_sinteticas=True
+        )
+        if contenedor.repositorio_consultas
+        else None,
+        "filas_por_origen_en_la_base": contenedor.repositorio_consultas.conteo_por_origen()
         if contenedor.repositorio_consultas
         else None,
         "generador": "literal (sin Ollama): mide recuperacion, prediccion y persistencia",
