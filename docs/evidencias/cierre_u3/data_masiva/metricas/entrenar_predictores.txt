@@ -1,27 +1,27 @@
 ﻿
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
-C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+<repo>\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
   opt_res = optimize.minimize(
 [DATOS] 415 consultas etiquetadas; extrayendo caracteristicas...
 [cobertura] regresion_logistica      {'n': 415, 'auc_roc': 0.9961, 'exactitud': 0.9518, 'precision': 0.9851, 'sensibilidad': 0.9429, 'especificidad': 0.9704, 'f1': 0.9635, 'matriz_confusion': {'vp': 264, 'fp': 4, 'vn': 131, 'fn': 16}, 'corte': 0.5}
@@ -33,4 +33,4 @@ C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logi
 [COBERTURA] corte de operacion 0.25 (0 respuestas retiradas en CV)
 [PASAJES]   linea base regla: {'n': 167, 'auc_roc': 0.6877, 'exactitud': 0.6467, 'precision': 0.5051, 'sensibilidad': 0.8333, 'especificidad': 0.5421, 'f1': 0.6289, 'matriz_confusion': {'vp': 50, 'fp': 49, 'vn': 58, 'fn': 10}, 'corte': 0.5}
 [PASAJES]   regla + modelo:   {'corte': 0.5, 'cobertura_E': 0.8, 'falsos_positivos_F': 0.0935, 'f1': 0.8136}
-[SALIDA]    C:\Users\user 01\AppData\Local\Temp\qw_metricas_30463bb7\modelos y C:\Users\user 01\AppData\Local\Temp\qw_metricas_30463bb7\entrenamiento
+[SALIDA]    <tmp>\qw_metricas_30463bb7\modelos y <tmp>\qw_metricas_30463bb7\entrenamiento
