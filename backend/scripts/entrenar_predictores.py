@@ -20,6 +20,7 @@ Genera:  modelos/cobertura.joblib, modelos/relevancia_pasajes.joblib, modelos/me
 
 import csv
 import json
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -60,7 +61,8 @@ from domain.services.evaluador_confianza import EvaluadorConfianza  # noqa: E402
 from infrastructure.config import configuracion  # noqa: E402
 
 DATOS = RAIZ / "data"
-MODELOS = RAIZ / "modelos"
+# QW_MODELOS_SALIDA permite entrenar sin tocar los modelos versionados (scripts/demo/04).
+MODELOS = Path(os.environ.get("QW_MODELOS_SALIDA") or RAIZ / "modelos")
 SEMILLA = 2026
 CON_RESPALDO = {"A", "B", "D", "E"}
 REJILLA = [round(float(x), 2) for x in np.arange(0.05, 0.96, 0.05)]

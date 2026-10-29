@@ -1,0 +1,36 @@
+﻿
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+C:\dev\TP_RAG_Quechua\backend\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:451: OptimizeWarning: Unknown solver options: iprint
+  opt_res = optimize.minimize(
+[DATOS] 415 consultas etiquetadas; extrayendo caracteristicas...
+[cobertura] regresion_logistica      {'n': 415, 'auc_roc': 0.9961, 'exactitud': 0.9518, 'precision': 0.9851, 'sensibilidad': 0.9429, 'especificidad': 0.9704, 'f1': 0.9635, 'matriz_confusion': {'vp': 264, 'fp': 4, 'vn': 131, 'fn': 16}, 'corte': 0.5}
+[cobertura] bosque_aleatorio         {'n': 415, 'auc_roc': 0.9922, 'exactitud': 0.9566, 'precision': 0.9816, 'sensibilidad': 0.9536, 'especificidad': 0.963, 'f1': 0.9674, 'matriz_confusion': {'vp': 267, 'fp': 5, 'vn': 130, 'fn': 13}, 'corte': 0.5}
+[cobertura] linea_base_mayoritaria   {'n': 415, 'auc_roc': 0.5, 'exactitud': 0.6747, 'precision': 0.6747, 'sensibilidad': 1.0, 'especificidad': 0.0, 'f1': 0.8058, 'matriz_confusion': {'vp': 280, 'fp': 135, 'vn': 0, 'fn': 0}, 'corte': 0.5}
+[pasajes] regresion_logistica      {'n': 167, 'auc_roc': 0.9804, 'exactitud': 0.9222, 'precision': 0.8507, 'sensibilidad': 0.95, 'especificidad': 0.9065, 'f1': 0.8976, 'matriz_confusion': {'vp': 57, 'fp': 10, 'vn': 97, 'fn': 3}, 'corte': 0.5}
+[pasajes] bosque_aleatorio         {'n': 167, 'auc_roc': 0.9732, 'exactitud': 0.9162, 'precision': 0.8594, 'sensibilidad': 0.9167, 'especificidad': 0.9159, 'f1': 0.8871, 'matriz_confusion': {'vp': 55, 'fp': 9, 'vn': 98, 'fn': 5}, 'corte': 0.5}
+[pasajes] linea_base_mayoritaria   {'n': 167, 'auc_roc': 0.5, 'exactitud': 0.6407, 'precision': 0.0, 'sensibilidad': 0.0, 'especificidad': 1.0, 'f1': 0.0, 'matriz_confusion': {'vp': 0, 'fp': 0, 'vn': 107, 'fn': 60}, 'corte': 0.5}
+[COBERTURA] corte de operacion 0.25 (0 respuestas retiradas en CV)
+[PASAJES]   linea base regla: {'n': 167, 'auc_roc': 0.6877, 'exactitud': 0.6467, 'precision': 0.5051, 'sensibilidad': 0.8333, 'especificidad': 0.5421, 'f1': 0.6289, 'matriz_confusion': {'vp': 50, 'fp': 49, 'vn': 58, 'fn': 10}, 'corte': 0.5}
+[PASAJES]   regla + modelo:   {'corte': 0.5, 'cobertura_E': 0.8, 'falsos_positivos_F': 0.0935, 'f1': 0.8136}
+[SALIDA]    C:\Users\user 01\AppData\Local\Temp\qw_metricas_30463bb7\modelos y C:\Users\user 01\AppData\Local\Temp\qw_metricas_30463bb7\entrenamiento
