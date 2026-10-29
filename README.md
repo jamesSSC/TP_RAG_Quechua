@@ -111,6 +111,31 @@ Tres desviaciones respecto de la prueba de concepto, todas documentadas en el c�
    modificar el umbral**, de modo que la recalibración prevista en la condición C-4 no
    resulta necesaria.
 
+## PMV2 · Predicción con aprendizaje automático
+
+Dos casos de uso de predicción, integrados en la arquitectura hexagonal mediante el puerto
+`PredictorPort` (adaptador `PredictorSklearn`) y expuestos en la pestaña **Predicción ML** y
+en cada respuesta:
+
+| Predicción | Historia | Qué estima | Validación cruzada (5 particiones, semilla 2026) |
+|---|---|---|---|
+| 1 · Cobertura documental | HU-08.1 / RF-14 | Probabilidad de que el corpus respalde la consulta | 415 consultas: AUC 0,996 · F1 0,964 · especificidad 97 % |
+| 2 · Relevancia de pasajes | HU-04 / RF-15 | Probabilidad de que los pasajes de prosa traten la pregunta | 167 consultas: AUC 0,980 · pasajes ante preguntas no cubiertas 45,8 % → 9,3 % |
+
+Los modelos solo pueden **añadir** abstenciones o retirar pasajes (RN-06); `scripts/evaluar_pmv2.py`
+lo verifica. HU-09 (`GET /api/analitica/demanda`) ordena la demanda insatisfecha ponderada por
+el modelo de cobertura. Con `BASE_DATOS=postgres` el historial se escribe y se agrega con
+procedimientos almacenados (`backend/db/postgres/procedimientos.sql`).
+
+```bash
+python scripts/entrenar_predictores.py      # entrena, valida y guarda modelos/*.joblib
+python scripts/evaluar_pmv2.py              # no regresión RN-06
+RUTA_SQLITE=carga.db python scripts/generar_transacciones.py 800   # prueba de data masiva
+```
+
+Endpoints nuevos: `POST /api/predicciones`, `GET /api/modelos`, `GET /api/analitica/demanda`.
+Evidencias en `docs/evidencias/pmv2/`.
+
 ## Puesta en marcha y verificación
 
 - Instalación completa del entorno: [docs/INSTALACION.md](docs/INSTALACION.md)
@@ -141,6 +166,5 @@ proceden literalmente de los documentos indexados y se citan con su fuente.
   deriva del propio corpus indexado, de modo que sobrestima el desempeño en uso real. Un
   conjunto verdaderamente independiente exigiría consultas formuladas por docentes de
   Educación Intercultural Bilingüe o por hablantes de la variedad.
-- **La analítica predictiva y el despliegue móvil no forman parte de este incremento.**
-  Corresponden al PMV2 y al PMV3, y dependen de artefactos que este incremento produce: el
-  registro de consultas no cubiertas y el corpus segmentado.
+- **El despliegue móvil (PMV3) no forma parte de este incremento.** La analítica predictiva
+  (PMV2) sí: ver la sección anterior.

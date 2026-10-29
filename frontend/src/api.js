@@ -97,3 +97,11 @@ export async function ingestarDocumento(datos) {
   }
   return respuesta.json();
 }
+
+// PMV2 · casos de uso de prediccion (HU-08.1, HU-04) y analitica de demanda (HU-09).
+export const predecir = (texto) =>
+  pedir("/api/predicciones", { method: "POST", body: JSON.stringify({ texto }) });
+
+export const obtenerModelos = () => pedir("/api/modelos");
+
+export const obtenerDemanda = (top = 15) => pedir(`/api/analitica/demanda?top=${top}`);

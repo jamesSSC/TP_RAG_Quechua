@@ -1,3 +1,5 @@
+import Probabilidad from "./Probabilidad";
+
 function Indicadores({ resultado }) {
   const { similitud_maxima, umbral, latencia_ms, via_respaldo, abstenida } = resultado;
   const tau = typeof umbral === "number" ? umbral : null;
@@ -81,6 +83,34 @@ function Traduccion({ lecturas, usada }) {
           Lectura usada: <strong>{usada}</strong>
         </p>
       )}
+    </div>
+  );
+}
+
+// PMV2: lo que estimaron los modelos predictivos para esta consulta (HU-08.1 y HU-04).
+function PrediccionMl({ resultado }) {
+  const {
+    probabilidad_cobertura: pCob,
+    probabilidad_pasajes: pPas,
+    abstencion_por_predictor: porPredictor,
+  } = resultado;
+  if (typeof pCob !== "number" && typeof pPas !== "number") return null;
+  return (
+    <div className="prediccion-ml" data-testid="prediccion-ml">
+      <p className="prediccion-ml__titulo">Predicción del modelo (aprendizaje automático)</p>
+      <Probabilidad etiqueta="Probabilidad de respaldo documental" valor={pCob} />
+      {porPredictor && (
+        <p className="prediccion-ml__nota">
+          La similitud permitía responder, pero el modelo estimó una probabilidad de respaldo
+          por debajo del corte y el sistema se abstuvo (RN-06: el modelo solo añade
+          abstenciones).
+        </p>
+      )}
+      <Probabilidad
+        etiqueta="Probabilidad de que los pasajes traten la pregunta"
+        valor={pPas}
+        corte={0.5}
+      />
     </div>
   );
 }
@@ -169,6 +199,8 @@ export default function Respuesta({ resultado }) {
       )}
 
       <Indicadores resultado={resultado} />
+
+      <PrediccionMl resultado={resultado} />
 
       <footer className="respuesta__pie">
         <p className="respuesta__aviso">{aviso}</p>
