@@ -1,0 +1,10 @@
+Exportado a C:\dev\TP_RAG_Quechua\backend\artefactos_movil
+  idf_palabras.bin              0.08 MB
+  matriz_palabras.bin           0.66 MB
+  vocab_palabras.json           0.25 MB
+  idf_caracteres.bin            0.39 MB
+  matriz_caracteres.bin         8.33 MB
+  vocab_caracteres.json         0.86 MB
+  fragmentos.json               1.06 MB
+  lemario.json                  0.04 MB
+  TOTAL                        11.67 MB
