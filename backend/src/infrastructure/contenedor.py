@@ -17,6 +17,7 @@ import logging
 from sqlalchemy import create_engine, inspect, text
 from sqlalchemy.orm import sessionmaker
 
+from adapters.out.documentos.almacen_documentos_disco import AlmacenDocumentosDisco
 from adapters.out.documentos.corpus_jsonl import CorpusJsonl
 from adapters.out.documentos.extractor_pdf import ExtractorPdf
 from adapters.out.generacion.generador_literal import GeneradorLiteral
@@ -45,8 +46,10 @@ from application.use_cases.gestionar_fuentes import GestionarFuentesUseCase
 from application.use_cases.ingestar_documento import IngestarDocumentoUseCase
 from application.use_cases.predecir_consulta import PredecirConsultaUseCase
 from application.use_cases.reindexar_corpus import ReindexarCorpusUseCase
+from application.use_cases.verificar_consistencia_datos import VerificarConsistenciaDatos
 from domain.services.evaluador_confianza import EvaluadorConfianza
 from infrastructure.config import configuracion
+from infrastructure.datos import preparar_carpeta_datos
 
 log = logging.getLogger(__name__)
 
@@ -54,7 +57,13 @@ log = logging.getLogger(__name__)
 class Contenedor:
     def __init__(self, generador: str = "ollama"):
         """`generador`: "ollama" (API), "literal" (sin modelo) o "auto" (Ollama si responde)."""
+        preparar_carpeta_datos(
+            configuracion.carpeta_datos,
+            configuracion.ruta_corpus_base,
+            configuracion.ruta_corpus,
+        )
         self.corpus = CorpusJsonl(configuracion.ruta_corpus)
+        self.almacen_documentos = AlmacenDocumentosDisco(configuracion.ruta_documentos)
         self.indice = IndiceHibridoLexico()
         total = self.indice.indexar(self.corpus.cargar())
         log.info("[INDICE] construido con %s fragmentos", total)
@@ -92,7 +101,9 @@ class Contenedor:
             corpus=self.corpus,
             indice=self.indice,
             repositorio_fuentes=self.repositorio_fuentes,
+            almacen_documentos=self.almacen_documentos,
         )
+        self.avisos_consistencia = self._verificar_consistencia()
 
         self.consultar_corpus = ConsultarCorpusUseCase(
             indice=self.indice,
@@ -124,7 +135,21 @@ class Contenedor:
             "modelo": configuracion.ollama_modelo,
             "predictores_disponibles": self.predictor_cobertura.disponible()
             and self.predictor_pasajes.disponible(),
+            "consistencia": {
+                "estado": "avisos" if self.avisos_consistencia else "ok",
+                "avisos": self.avisos_consistencia,
+            },
         }
+
+    def _verificar_consistencia(self) -> list[str]:
+        try:
+            # Solo informa; nunca borra ni corrige nada.
+            return VerificarConsistenciaDatos(
+                self.corpus, self.repositorio_fuentes, self.almacen_documentos
+            ).ejecutar()
+        except Exception as exc:  # noqa: BLE001
+            log.warning("[CONSISTENCIA] no se pudo verificar: %s", exc)
+            return []
 
     @staticmethod
     def _migrar_columnas_pmv2(motor) -> None:

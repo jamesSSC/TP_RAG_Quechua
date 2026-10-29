@@ -2,6 +2,7 @@ import logging
 from datetime import date
 
 from application.ports import IngestarDocumentoPort, ResultadoIngesta
+from application.ports.out.almacen_documentos_port import AlmacenDocumentosPort
 from application.ports.out.extraccion_documental_port import ExtraccionDocumentalPort
 from application.ports.out.indice_recuperacion_port import IndiceRecuperacionPort
 from application.ports.out.repositorio_corpus_port import RepositorioCorpusPort
@@ -27,12 +28,14 @@ class IngestarDocumentoUseCase(IngestarDocumentoPort):
         indice: IndiceRecuperacionPort,
         repositorio_fuentes: RepositorioFuentesPort | None = None,
         segmentador: Segmentador | None = None,
+        almacen_documentos: AlmacenDocumentosPort | None = None,
     ):
         self._extractor = extractor
         self._corpus = corpus
         self._indice = indice
         self._repositorio_fuentes = repositorio_fuentes
         self._segmentador = segmentador or Segmentador()
+        self._almacen = almacen_documentos
 
     def ejecutar(
         self,
@@ -57,6 +60,14 @@ class IngestarDocumentoUseCase(IngestarDocumentoPort):
             paginas_con_texto=documento.paginas_con_texto,
             derivado_ocr=derivado_ocr,
         )
+
+        if self._almacen is not None:
+            guardado = self._almacen.guardar(contenido, nombre_archivo)
+            log.info(
+                "[DATOS] PDF guardado sha256=%s duplicado=%s",
+                guardado.sha256[:12],
+                guardado.duplicado,
+            )
 
         fragmentos = self._segmentador.segmentar(documento, tipo, derivado_ocr)
         nuevos = self._corpus.agregar(fragmentos)

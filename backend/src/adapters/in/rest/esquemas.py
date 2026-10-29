@@ -98,6 +98,11 @@ class DocumentosCorpus(BaseModel):
     total_fragmentos: int
 
 
+class ConsistenciaDatos(BaseModel):
+    estado: str
+    avisos: list[str] = []
+
+
 class EstadoSistema(BaseModel):
     fragmentos_indexados: int
     umbral_abstencion: float
@@ -105,3 +110,4 @@ class EstadoSistema(BaseModel):
     base_datos_disponible: bool
     modelo: str
     predictores_disponibles: bool = False
+    consistencia: ConsistenciaDatos | None = None

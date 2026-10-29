@@ -72,3 +72,7 @@ docs/specs/
 # --- Documentos en la raíz (solo se conserva README.md) ---
 /*.md
 !/README.md
+
+# Datos modificables del usuario (BUG-01)
+backend/data/documentos/
+backend/datos/
