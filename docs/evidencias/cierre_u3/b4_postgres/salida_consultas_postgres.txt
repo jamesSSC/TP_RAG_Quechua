@@ -1,0 +1,97 @@
+Despliegue de nulos es �(nulo)�.
+El estilo de borde es 2.
+
+== 1. Consultas por origen antes de la transaccion (fn_conteo_por_origen) ==
++---------+-----------+
+| origen  | consultas |
++---------+-----------+
+| carga   |       800 |
+| usuario |         5 |
++---------+-----------+
+(2 filas)
+
+
+== 2. sp_registrar_consulta dentro de BEGIN ... ROLLBACK (no deja nada guardado) ==
+BEGIN
+CALL
+Dentro de la transaccion ya se ve la consulta nueva:
++---------+-----------+
+| origen  | consultas |
++---------+-----------+
+| carga   |       800 |
+| usuario |         6 |
++---------+-----------+
+(2 filas)
+
+RNF-08: una respuesta afirmativa sin respaldo documental la rechaza el procedimiento.
+SAVEPOINT
+psql:docs/video/consultas_postgres.sql:50: ERROR:  Respuesta demo-sin-respaldo sin respaldo documental
+CONTEXTO:  función PL/pgSQL sp_registrar_consulta(character varying,text,character varying,text,timestamp with time zone,text,boolean,double precision,character varying,double precision,double precision,boolean,integer,double precision,jsonb,character varying) en la línea 5 en RAISE
+ROLLBACK
+ROLLBACK
+
+== 3. Despues del ROLLBACK el conteo vuelve al de antes ==
++---------+-----------+
+| origen  | consultas |
++---------+-----------+
+| carga   |       800 |
+| usuario |         5 |
++---------+-----------+
+(2 filas)
+
+
+== 4. fn_resumen_demanda(): solo demanda real (origen = usuario, valor por defecto) ==
++-------+------------+----------------------------+------------------------------+-------------------+-----------------+
+| total | abstenidas | abstenciones_por_predictor | probabilidad_cobertura_media | latencia_media_ms | latencia_p95_ms |
++-------+------------+----------------------------+------------------------------+-------------------+-----------------+
+|     5 |          3 |                          0 |          0.39989134322491493 | 5.760000000000001 |             7.1 |
++-------+------------+----------------------------+------------------------------+-------------------+-----------------+
+(1 fila)
+
+
+== 5. fn_resumen_demanda(FALSE): incluye las consultas sinteticas (demostracion) ==
++-------+------------+----------------------------+------------------------------+-------------------+-----------------+
+| total | abstenidas | abstenciones_por_predictor | probabilidad_cobertura_media | latencia_media_ms | latencia_p95_ms |
++-------+------------+----------------------------+------------------------------+-------------------+-----------------+
+|   805 |        189 |                          0 |           0.8135144781712424 | 7.754161490683227 |            13.5 |
++-------+------------+----------------------------+------------------------------+-------------------+-----------------+
+(1 fila)
+
+
+== 6. fn_respaldo_por_documento(): consultas respaldadas por cada documento (real) ==
++----------------------------------------------+-----------+
+|                  documento                   | consultas |
++----------------------------------------------+-----------+
+| 293274822-diccionario-quechua-Wanka-docx.pdf |         2 |
++----------------------------------------------+-----------+
+(1 fila)
+
+
+== 7. fn_demanda_insatisfecha(10): terminos abstenidos, solo demanda real ==
++----------------------------------------------+------------------------+
+|                    texto                     | probabilidad_cobertura |
++----------------------------------------------+------------------------+
+| ¿cómo se dice dron en quechua wanka?         | 1.9310256913517014e-05 |
+| ¿cómo se dice dron en quechua wanka?         | 1.9310256913517014e-05 |
+| ¿cómo se dice criptomoneda en quechua wanka? | 1.0725609585259604e-05 |
++----------------------------------------------+------------------------+
+(3 filas)
+
+
+== 8. fn_demanda_insatisfecha(10, FALSE): con sinteticas (demostracion) ==
++--------------------------------------------------------------------------------------------------+------------------------+
+|                                              texto                                               | probabilidad_cobertura |
++--------------------------------------------------------------------------------------------------+------------------------+
+| ¿cómo se dice dron en quechua wanka?                                                             | 1.9310256913517014e-05 |
+| ¿cómo se dice dron en quechua wanka?                                                             | 1.9310256913517014e-05 |
+| ¿cómo se dice criptomoneda en quechua wanka?                                                     | 1.0725609585259604e-05 |
+| ¿cómo se dice quimioterapia en quechua wanka?                                                    |  0.0008464817618321776 |
+| ¿cómo se dice endoscopia en quechua wanka?                                                       | 1.4223734629604627e-05 |
+| ¿cómo se dice placa base en quechua wanka?                                                       |     0.2804754886680907 |
+| ¿Qué grafías empleó el autor para representar consonantes como la palatal retrofleja?            |     0.9820338796659109 |
+| ¿Existe alguna excepción a la regla básica de añadir 'i' o 'e' para formar plurales en italiano? |   0.012102466096237196 |
+| ¿Cuál es la traducción correcta de catch a cold en inglés?                                       |   0.003464185844167987 |
+| ¿En qué casos se utiliza el artículo determinado con un tilde diacrítica?                        |   0.003989932506039274 |
++--------------------------------------------------------------------------------------------------+------------------------+
+(10 filas)
+

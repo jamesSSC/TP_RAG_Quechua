@@ -4,8 +4,8 @@ from domain.entities.fuente import Fuente
 
 
 class RepositorioFuentesPort(ABC):
-    """Persistencia de la gobernanza documental (RNF-11). Es el puerto que el adaptador de
-    PostgreSQL implementa en escritorio y que en el incremento movil implementaria SQLite."""
+    """Persistencia de la gobernanza documental (RNF-11). Es el puerto que implementa el
+    adaptador de base de datos de escritorio y que en el incremento movil implementaria SQLite."""
 
     @abstractmethod
     def crear(self, fuente: Fuente) -> Fuente: ...
