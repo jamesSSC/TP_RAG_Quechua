@@ -9,6 +9,7 @@ from . import (
     corpus_controller,
     fuentes_controller,
     historial_controller,
+    prediccion_controller,
     sistema_controller,
 )
 
@@ -18,4 +19,5 @@ routers = [
     historial_controller.router,
     corpus_controller.router,
     fuentes_controller.router,
+    prediccion_controller.router,
 ]

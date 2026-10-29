@@ -120,5 +120,12 @@ class IndiceHibridoLexico(IndiceRecuperacionPort):
             for i in posiciones[:k]
         ]
 
+    def proporcion_fuera_de_vocabulario(self, consulta: str) -> float:
+        terminos = re.findall(r"\w+", self._depurador.depurar(consulta))
+        if not terminos or self._matriz_palabras is None:
+            return 0.0
+        vocabulario = self._vec_palabras.vocabulary_
+        return sum(t not in vocabulario for t in terminos) / len(terminos)
+
     def es_lema(self, termino: str) -> bool:
         return self._depurador.depurar(termino) in self._lemario

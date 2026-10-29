@@ -23,3 +23,12 @@ class RepositorioConsultasPort(ABC):
 
     @abstractmethod
     def total_registradas(self) -> int: ...
+
+    def estadisticas(self) -> dict:
+        """Agregados del historial (HU-09). No es abstracto: un repositorio que no los
+        calcule deja la analitica sin datos sin romper la consulta."""
+        raise NotImplementedError
+
+    def abstenciones_con_prediccion(self, limite: int = 5000) -> list[tuple[str, float | None]]:
+        """Texto de cada consulta abstenida y la probabilidad de cobertura que se estimo."""
+        raise NotImplementedError

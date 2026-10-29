@@ -1,0 +1,67 @@
+{
+  "pmv1_sin_predictores": {
+    "A": {
+      "n": 120,
+      "responde": 120
+    },
+    "B": {
+      "n": 60,
+      "responde": 60
+    },
+    "C": {
+      "n": 28,
+      "abstiene": 28
+    },
+    "D": {
+      "n": 40,
+      "responde": 40
+    },
+    "E": {
+      "n": 60,
+      "abstiene_con_pasajes": 50,
+      "responde": 9,
+      "abstiene": 1
+    },
+    "F": {
+      "n": 107,
+      "abstiene_con_pasajes": 49,
+      "abstiene": 58
+    }
+  },
+  "pmv2_con_predictores": {
+    "A": {
+      "n": 120,
+      "responde": 120
+    },
+    "B": {
+      "n": 60,
+      "responde": 60
+    },
+    "C": {
+      "n": 28,
+      "abstiene": 28
+    },
+    "D": {
+      "n": 40,
+      "responde": 40
+    },
+    "E": {
+      "n": 60,
+      "abstiene_con_pasajes": 48,
+      "responde": 9,
+      "abstiene": 3
+    },
+    "F": {
+      "n": 107,
+      "abstiene": 100,
+      "abstiene_con_pasajes": 7
+    }
+  },
+  "rn06_respuestas_pmv2_subconjunto_de_pmv1": true,
+  "respuestas_retiradas_por_predictor": [],
+  "fp_C_pmv2": 0,
+  "pasajes_mostrados_F_pmv1": 49,
+  "pasajes_mostrados_F_pmv2": 7,
+  "pasajes_mostrados_E_pmv1": 50,
+  "pasajes_mostrados_E_pmv2": 48
+}

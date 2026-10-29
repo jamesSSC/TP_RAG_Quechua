@@ -26,6 +26,7 @@ def historial(
             similitud_maxima=round(respuesta.similitud_maxima, 4),
             via_respaldo=respuesta.via_respaldo,
             momento=respuesta.momento,
+            probabilidad_cobertura=respuesta.probabilidad_cobertura,
         )
         for consulta, respuesta in puerto.ejecutar(limite)
     ]

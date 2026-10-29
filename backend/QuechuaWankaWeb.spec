@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 from PyInstaller.utils.hooks import collect_all
 
-datas = [('data/fragmentos_v3.jsonl', 'data'), ('data/traduccion_en_es.json', 'data'), ('interfaz', 'interfaz')]
+datas = [('data/fragmentos_v3.jsonl', 'data'), ('data/traduccion_en_es.json', 'data'), ('interfaz', 'interfaz'), ('modelos', 'modelos'), ('db', 'db')]
 binaries = []
 # `in` es palabra reservada: estos paquetes se cargan con importlib y PyInstaller no los ve.
 hiddenimports = [

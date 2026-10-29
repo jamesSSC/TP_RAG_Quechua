@@ -82,3 +82,23 @@ def test_el_modelo_no_guarda_datos_personales():
     nombres = {c.name for t in ("consultas", "respaldos") for c in Base.metadata.tables[t].columns}
     prohibidos = {"ip", "usuario", "user_agent", "useragent", "email", "nombre", "sesion"}
     assert not (nombres & prohibidos)
+
+
+def test_pmv2_registra_la_prediccion_y_calcula_los_agregados(repo):
+    c1 = Consulta(texto="zorro")
+    r1 = _respondida(c1)
+    r1.probabilidad_cobertura = 0.95
+    r1.latencia_ms = 12.0
+    repo.registrar(c1, r1)
+    c2 = Consulta(texto="¿cómo se dice dron?")
+    r2 = Respuesta(consulta_id=c2.id, texto="sin respaldo", abstenida=True)
+    r2.probabilidad_cobertura = 0.05
+    r2.latencia_ms = 3.0
+    repo.registrar(c2, r2)
+
+    e = repo.estadisticas()
+    assert e["total"] == 2 and e["abstenidas"] == 1
+    assert e["respaldo_por_documento"] == {DOCUMENTO: 1}
+    assert round(e["probabilidad_cobertura_media"], 2) == 0.5
+    assert repo.abstenciones_con_prediccion() == [("¿cómo se dice dron?", 0.05)]
+    assert repo.historial()[1][1].probabilidad_cobertura == 0.95

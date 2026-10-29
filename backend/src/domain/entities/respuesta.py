@@ -42,6 +42,12 @@ class Respuesta:
     generador_invocado: bool = False
     # Si la redaccion fallo (D-6) se muestra el fragmento literal y se avisa aqui.
     aviso_generacion: str | None = None
+    # PMV2. Probabilidad de respaldo documental estimada por el modelo de cobertura (RF-14) y
+    # probabilidad de que los pasajes de prosa traten la consulta (RF-15). None si el modelo
+    # no esta disponible. Son estimaciones: la decision sigue siendo la del umbral (RN-06).
+    probabilidad_cobertura: float | None = None
+    probabilidad_pasajes: float | None = None
+    abstencion_por_predictor: bool = False
 
     def __post_init__(self):
         # RNF-08: ninguna respuesta afirmativa puede emitirse sin fuente verificable.

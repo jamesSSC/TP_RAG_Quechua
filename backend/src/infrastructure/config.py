@@ -46,6 +46,15 @@ class Configuracion(BaseSettings):
     fragmentos_recuperados: int = 5
     ruta_corpus: Path = RAIZ / "data" / "fragmentos_v3.jsonl"
 
+    # PMV2 · modelos predictivos (scripts/entrenar_predictores.py). Los cortes salen de la
+    # validacion cruzada documentada en modelos/metricas.json; si el artefacto no existe el
+    # sistema opera exactamente como en el PMV1 (RN-06).
+    ruta_modelo_cobertura: Path = RAIZ / "modelos" / "cobertura.joblib"
+    ruta_modelo_pasajes: Path = RAIZ / "modelos" / "relevancia_pasajes.joblib"
+    ruta_metricas_modelos: Path = RAIZ / "modelos" / "metricas.json"
+    probabilidad_minima_cobertura: float = 0.25
+    probabilidad_minima_pasajes: float = 0.50
+
     # Interfaz ya compilada. Cuando existe, el servicio la sirve y no hace falta ningun
     # proceso aparte para el front-end.
     ruta_interfaz: Path = RAIZ / "interfaz"

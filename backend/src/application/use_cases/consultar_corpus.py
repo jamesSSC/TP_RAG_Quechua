@@ -5,11 +5,16 @@ from application.ports import ConsultarCorpusPort
 from application.ports.out.detector_idioma_port import DetectorIdiomaPort
 from application.ports.out.generador_texto_port import GeneradorNoDisponible, GeneradorTextoPort
 from application.ports.out.indice_recuperacion_port import IndiceRecuperacionPort
+from application.ports.out.predictor_port import PredictorPort
 from application.ports.out.repositorio_consultas_port import RepositorioConsultasPort
 from application.ports.out.traductor_port import TraductorPort
 from domain.entities.consulta import Consulta
 from domain.entities.fragmento import FragmentoRecuperado
 from domain.entities.respuesta import Respuesta
+from domain.services.caracteristicas_consulta import (
+    CaracteristicasConsulta,
+    extraer_caracteristicas,
+)
 from domain.services.clasificador_consulta import ClasificadorConsulta
 from domain.services.depurador_consulta import DepuradorConsulta
 from domain.services.evaluador_confianza import EvaluadorConfianza
@@ -40,6 +45,17 @@ MENSAJE_SIN_RESPALDO = {
 
 AVISO_GENERACION = "El servicio de redacción no está disponible; se muestra el fragmento literal."
 
+MENSAJE_PREDICTOR = {
+    Idioma.ESPANOL: (
+        "El modelo predictivo estima que esta consulta no tiene respaldo suficiente en el "
+        "corpus. Me abstengo para no proponer una forma no documentada."
+    ),
+    Idioma.INGLES: (
+        "The predictive model estimates that this query lacks enough support in the corpus. "
+        "I abstain so as not to propose an undocumented form."
+    ),
+}
+
 MENSAJE_IDIOMA = (
     "Solo se admiten consultas en español o en inglés. "
     "Only queries in Spanish or English are supported."
@@ -64,6 +80,10 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
         depurador: DepuradorConsulta | None = None,
         clasificador: ClasificadorConsulta | None = None,
         k: int = 5,
+        predictor_cobertura: PredictorPort | None = None,
+        predictor_pasajes: PredictorPort | None = None,
+        probabilidad_minima_cobertura: float = 0.0,
+        probabilidad_minima_pasajes: float = 0.0,
     ):
         self._indice = indice
         self._generador = generador
@@ -74,6 +94,12 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
         self._depurador = depurador or DepuradorConsulta()
         self._clasificador = clasificador or ClasificadorConsulta(self._depurador)
         self._k = k
+        # PMV2 (RF-14 y RF-15). Ambos predictores solo pueden AÑADIR abstenciones o retirar
+        # pasajes (RN-06): nunca convierten en respuesta lo que la regla del umbral rechaza.
+        self._predictor_cobertura = predictor_cobertura
+        self._predictor_pasajes = predictor_pasajes
+        self._p_min_cobertura = probabilidad_minima_cobertura
+        self._p_min_pasajes = probabilidad_minima_pasajes
 
     def ejecutar(self, texto_consulta: str) -> Respuesta:
         return self._resolver(texto_consulta, time.perf_counter())
@@ -145,6 +171,35 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
             veredicto.umbral,
         )
 
+        prediccion = self._predecir(consulta, recuperados)
+        p_cobertura = prediccion["cobertura"]
+        abstencion_por_predictor = (
+            veredicto.responder
+            and p_cobertura is not None
+            and p_cobertura < self._p_min_cobertura
+        )
+        if abstencion_por_predictor:
+            # RN-06: el predictor puede añadir una abstencion, nunca quitarla.
+            log.info(
+                "[PREDICTOR] cobertura=%.3f < %.2f -> abstencion",
+                p_cobertura,
+                self._p_min_cobertura,
+            )
+            return self._registrar(
+                t0,
+                consulta,
+                Respuesta(
+                    consulta_id=consulta.id,
+                    texto=MENSAJE_PREDICTOR[idioma],
+                    abstenida=True,
+                    idioma=idioma,
+                    similitud_maxima=veredicto.similitud_maxima,
+                    consulta_traducida=consulta.texto_traducido,
+                    probabilidad_cobertura=p_cobertura,
+                    abstencion_por_predictor=True,
+                ),
+            )
+
         if not veredicto.responder:
             # Antes de abstenerse del todo se busca en la prosa, que se consulta aparte
             # porque las entradas de diccionario, mucho mas cortas, copan siempre las
@@ -165,6 +220,18 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
                     consulta=self._depurador.depurar(consulta.texto_para_recuperar),
                 )
             )
+            p_pasajes = None
+            if pasajes and self._predictor_pasajes is not None and prediccion["vector"]:
+                # RF-15: el segundo modelo estima si los pasajes tratan de verdad la pregunta.
+                # Solo puede retirarlos; los que muestra siguen rotulados "no es una respuesta".
+                p_pasajes = self._predictor_pasajes.probabilidad(prediccion["vector"])
+                if p_pasajes is not None and p_pasajes < self._p_min_pasajes:
+                    log.info(
+                        "[PREDICTOR] pasajes=%.3f < %.2f -> se retiran",
+                        p_pasajes,
+                        self._p_min_pasajes,
+                    )
+                    pasajes = []
             log.info("[GENERADOR] NO invocado (sin respaldo)")
             log.info("[CASO-USO] pasajes de prosa ofrecidos=%d (no es una respuesta)", len(pasajes))
             return self._registrar(
@@ -178,6 +245,8 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
                     similitud_maxima=veredicto.similitud_maxima,
                     consulta_traducida=consulta.texto_traducido,
                     pasajes=pasajes,
+                    probabilidad_cobertura=p_cobertura,
+                    probabilidad_pasajes=p_pasajes,
                 ),
             )
 
@@ -217,8 +286,65 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
                 via_respaldo=veredicto.via_respaldo,
                 generador_invocado=True,
                 aviso_generacion=aviso_generacion,
+                probabilidad_cobertura=p_cobertura,
             ),
         )
+
+    def caracteristicas(self, texto_consulta: str) -> CaracteristicasConsulta:
+        """Vector de caracteristicas de una consulta, calculado por el mismo camino que la
+        consulta real (deteccion, traduccion, recuperacion). Lo usa el script de
+        entrenamiento para que entrenar y predecir hagan exactamente las mismas cuentas."""
+        idioma = self._detector.detectar(texto_consulta)
+        consulta = Consulta(texto=texto_consulta, idioma=idioma)
+        if self._traductor is not None:
+            termino = self._depurador.depurar(consulta.texto)
+            candidatas = self._traductor.candidatas(termino, aproximar=idioma is Idioma.INGLES)
+            if (
+                candidatas
+                and idioma is Idioma.ESPANOL
+                and termino not in candidatas
+                and not self._indice.es_lema(termino)
+            ):
+                idioma = Idioma.INGLES
+                consulta.idioma = idioma
+                candidatas = self._traductor.candidatas(termino, aproximar=True)
+            consulta.variantes = candidatas
+        recuperados, origen = self._recuperar_con_variantes(consulta)
+        if recuperados and consulta.variantes:
+            ganadora = origen.get(recuperados[0].id)
+            if ganadora and ganadora != consulta.texto:
+                consulta.texto_traducido = ganadora
+        return self._vector(consulta, recuperados)
+
+    def _vector(
+        self, consulta: Consulta, recuperados: list[FragmentoRecuperado]
+    ) -> CaracteristicasConsulta:
+        texto = consulta.texto_para_recuperar
+        return extraer_caracteristicas(
+            consulta=texto,
+            terminos_depurados=self._depurador.depurar(texto).split(),
+            recuperados=recuperados,
+            pasajes=self._indice.recuperar_prosa(texto, k=3),
+            proporcion_fuera_vocabulario=self._indice.proporcion_fuera_de_vocabulario(texto),
+        )
+
+    def _predecir(self, consulta: Consulta, recuperados: list[FragmentoRecuperado]) -> dict:
+        activos = [
+            p
+            for p in (self._predictor_cobertura, self._predictor_pasajes)
+            if p is not None and p.disponible()
+        ]
+        if not activos:
+            return {"vector": None, "cobertura": None}
+        vector = self._vector(consulta, recuperados)
+        cobertura = (
+            self._predictor_cobertura.probabilidad(vector)
+            if self._predictor_cobertura is not None
+            else None
+        )
+        if cobertura is not None:
+            log.info("[PREDICTOR] probabilidad de cobertura=%.3f", cobertura)
+        return {"vector": vector, "cobertura": cobertura}
 
     def _recuperar_con_variantes(
         self, consulta: Consulta

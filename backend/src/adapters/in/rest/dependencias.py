@@ -7,10 +7,12 @@ lee, de modo que los controladores no importan la infraestructura.
 from fastapi import HTTPException, Request
 
 from application.ports import (
+    AnalizarDemandaPort,
     ConsultarCorpusPort,
     ConsultarHistorialPort,
     GestionarFuentesPort,
     IngestarDocumentoPort,
+    PredecirConsultaPort,
     ReindexarCorpusPort,
 )
 
@@ -42,6 +44,17 @@ def gestionar_fuentes(request: Request) -> GestionarFuentesPort:
     puerto = _contenedor(request).gestionar_fuentes
     if puerto is None:
         raise HTTPException(503, "La gestion de fuentes requiere la base de datos")
+    return puerto
+
+
+def predecir_consulta(request: Request) -> PredecirConsultaPort:
+    return _contenedor(request).predecir_consulta
+
+
+def analizar_demanda(request: Request) -> AnalizarDemandaPort:
+    puerto = _contenedor(request).analizar_demanda
+    if puerto is None:
+        raise HTTPException(503, "La analitica de demanda requiere la base de datos")
     return puerto
 
 
