@@ -5,15 +5,15 @@
  ✔ Conjunto de evaluacion v2: evaluacion_v2.json (0.1 MB)
  ✔ Tabla de traduccion EN->ES: traduccion_en_es.json (0.2 MB)
  ✔ Evaluacion de prosa (fuera de Git): evaluacion_prosa.json (0.0 MB)
- ✔ Modelo de cobertura: cobertura.joblib (0.0 MB)
- ✔ Modelo de relevancia de pasajes: relevancia_pasajes.joblib (0.0 MB)
+ ✔ Modelo de cobertura: cobertura.joblib (4 KB) se carga bien
+ ✔ Modelo de relevancia de pasajes: relevancia_pasajes.joblib (4 KB) se carga bien
  ✔ Ollama con qwen3.5:4b: responde en http://localhost:11434
- ✔ Modelo precalentado: cargado en memoria en 2.4 s
+ ✔ Modelo precalentado: cargado en memoria en 2.5 s
  ✔ Puerto 8000 libre (API): libre
  ✔ Puerto 5173 libre (interfaz): libre
  ✔ Base de demostracion carga.db: carga.db (0.4 MB)
  ✔ Interfaz compilada o arrancable: compilada en backend/interfaz
 ----------------------------------------------------------------------
- 14 comprobaciones en 7.0 s · 0 fallo(s) critico(s) · 0 aviso(s)
+ 14 comprobaciones en 8.3 s · 0 fallo(s) critico(s) · 0 aviso(s)
  LISTO PARA GRABAR
 [ ok ] Entorno listo.
