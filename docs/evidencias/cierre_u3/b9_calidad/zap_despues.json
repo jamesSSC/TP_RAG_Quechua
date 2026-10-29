@@ -1,0 +1,16 @@
+{
+ "herramienta": "OWASP ZAP 2.17.0, automation framework (openapi + spider + spiderAjax + passive scan); escaneo base, sin escaneo activo",
+ "objetivo": "http://127.0.0.1:8000 (API + SPA compilada), origin/test/paridad-movil 7389441 en worktree aislado, base SQLite temporal",
+ "fecha": "2026-10-29",
+ "alertas": [
+  {
+   "riesgo": "Informational (Medium)",
+   "nombre": "Modern Web Application",
+   "plugin": "10109",
+   "instancias": 3
+  }
+ ],
+ "por_riesgo": {
+  "Informational": 1
+ }
+}
