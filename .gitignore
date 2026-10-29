@@ -80,3 +80,8 @@ backend/datos/
 # Demostracion (B5): base de carga y pids de los scripts
 backend/carga.db
 scripts/demo/.pids
+
+# E2E (B6): bases temporales y resultados de Playwright
+frontend/e2e/.tmp/
+frontend/test-results/
+frontend/playwright-report/
