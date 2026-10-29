@@ -44,4 +44,36 @@ def test_tolera_flexiones_por_raiz():
 
 def test_el_resultado_nunca_incluye_texto():
     r = m.evaluar_fidelidad("Atuq significa lobo.", "zorro", ZORRO)
-    assert set(r) == {"palabras_extranas", "contradiccion_potencial", "forma_quechua_presente"}
+    assert set(r) == {
+        "palabras_extranas",
+        "negaciones_ajenas",
+        "contradiccion_potencial",
+        "forma_quechua_presente",
+    }
+
+
+# --- Regla v2: mas conservadora ---
+
+
+def test_v2_marca_una_negacion_que_el_diccionario_no_dice():
+    assert m.evaluar_fidelidad("Atuq no es zorro.", "zorro", ZORRO)["contradiccion_potencial"]
+    assert m.evaluar_fidelidad("Nunca se dice Atuq.", "zorro", ZORRO)["negaciones_ajenas"] == 1
+    assert not m.evaluar_fidelidad_v1("Atuq no es zorro.", "zorro", ZORRO)[
+        "contradiccion_potencial"
+    ]
+
+
+def test_v2_tolera_la_negacion_que_viene_de_la_consulta():
+    r = m.evaluar_fidelidad("No hay otra forma que Atuq.", "no hay zorro", ZORRO)
+    assert r["negaciones_ajenas"] == 0
+
+
+def test_v2_marca_palabras_cortas_de_contenido():
+    r = m.evaluar_fidelidad("Atuq es un oso.", "zorro", ZORRO)
+    assert r["contradiccion_potencial"] and r["palabras_extranas"] == 1
+    assert not m.evaluar_fidelidad_v1("Atuq es un oso.", "zorro", ZORRO)["contradiccion_potencial"]
+
+
+def test_v2_no_marca_las_palabras_funcionales_cortas():
+    r = m.evaluar_fidelidad("Se dice Atuq por zorro.", "zorro", ZORRO)
+    assert not r["contradiccion_potencial"]
