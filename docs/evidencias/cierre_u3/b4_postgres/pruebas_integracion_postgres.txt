@@ -1,0 +1,5 @@
+tests/unit/adapters/out/test_repositorio_consultas_postgres.py::test_los_procedimientos_existen PASSED
+tests/unit/adapters/out/test_repositorio_consultas_postgres.py::test_registrar_por_procedimiento_y_agregar_por_funcion PASSED
+tests/unit/adapters/out/test_repositorio_consultas_postgres.py::test_el_procedimiento_rechaza_una_respuesta_sin_respaldo PASSED
+tests/unit/adapters/out/test_repositorio_consultas_postgres.py::test_origen_por_procedimiento_filtra_resumen_y_demanda PASSED
+============================== 4 passed in 0.83s ==============================
