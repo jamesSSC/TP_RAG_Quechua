@@ -1,0 +1,17 @@
+ ✔ Python 3.12 o superior: Python 3.12
+ ✔ Dependencias de Python: 13 paquetes importables
+ ✔ Corpus segmentado (fuera de Git): fragmentos_v3.jsonl (1.2 MB)
+ ✔ Conjunto de evaluacion v2: evaluacion_v2.json (0.1 MB)
+ ✔ Tabla de traduccion EN->ES: traduccion_en_es.json (0.2 MB)
+ ✔ Evaluacion de prosa (fuera de Git): evaluacion_prosa.json (0.0 MB)
+ ✔ Modelo de cobertura: cobertura.joblib (0.0 MB)
+ ✔ Modelo de relevancia de pasajes: relevancia_pasajes.joblib (0.0 MB)
+ ✔ Ollama con qwen3.5:4b: responde en http://localhost:11434
+ ✖ API en marcha (GET /api/estado): no responde 200 (codigo 0)
+ ⚠ Interfaz en el puerto 5173: nadie escucha: arranque la interfaz
+ ✔ Base de demostracion carga.db: carga.db (0.4 MB)
+ ✔ Interfaz compilada o arrancable: compilada en backend/interfaz
+----------------------------------------------------------------------
+ 13 comprobaciones en 6.6 s · 1 fallo(s) critico(s) · 1 aviso(s)
+ NO ESTA LISTO: corrija los ✖ antes de grabar
+rc=1 (esperado 1: la app no esta levantada)
