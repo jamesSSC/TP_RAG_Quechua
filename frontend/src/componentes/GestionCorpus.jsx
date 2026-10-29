@@ -68,9 +68,17 @@ export default function GestionCorpus() {
         en la calidad de la recuperación.
       </p>
 
-      {error && <p className="error">{error}</p>}
+      {error && (
+        <p id="error-corpus" role="alert" className="error">
+          {error}
+        </p>
+      )}
 
-      <form className="formulario" onSubmit={subir}>
+      <form
+        className="formulario"
+        onSubmit={subir}
+        aria-describedby={error ? "error-corpus" : undefined}
+      >
         <h3 className="formulario__titulo">Incorporar documento</h3>
 
         <div className="formulario__rejilla">

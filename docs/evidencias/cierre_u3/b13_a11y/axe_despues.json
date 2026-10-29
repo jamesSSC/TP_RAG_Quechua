@@ -1,0 +1,38 @@
+{
+  "consultar": {
+    "infracciones": 0,
+    "nodos": 0,
+    "reglas": [],
+    "objetivos_menores_44px": {
+      "cantidad": 0,
+      "ejemplos": []
+    }
+  },
+  "fuentes": {
+    "infracciones": 0,
+    "nodos": 0,
+    "reglas": [],
+    "objetivos_menores_44px": {
+      "cantidad": 0,
+      "ejemplos": []
+    }
+  },
+  "incorporar": {
+    "infracciones": 0,
+    "nodos": 0,
+    "reglas": [],
+    "objetivos_menores_44px": {
+      "cantidad": 0,
+      "ejemplos": []
+    }
+  },
+  "prediccion": {
+    "infracciones": 0,
+    "nodos": 0,
+    "reglas": [],
+    "objetivos_menores_44px": {
+      "cantidad": 0,
+      "ejemplos": []
+    }
+  }
+}

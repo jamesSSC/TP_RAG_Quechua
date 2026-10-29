@@ -6,29 +6,29 @@ export default function TamanoTexto({ indice, onCambiar }) {
       <button
         type="button"
         className="tamano__boton"
-        aria-label="Reducir tamaño del texto"
+        aria-label="A−, reducir tamaño del texto"
         onClick={() => onCambiar(indice - 1)}
         disabled={indice <= 0}
       >
-        A<span aria-hidden="true">−</span>
+        A−
       </button>
       <button
         type="button"
         className="tamano__boton"
-        aria-label="Restablecer tamaño del texto"
+        aria-label="A, restablecer tamaño del texto"
         onClick={() => onCambiar(INDICE_NORMAL)}
         disabled={indice === INDICE_NORMAL}
       >
-        <span aria-hidden="true">A</span>
+        A
       </button>
       <button
         type="button"
         className="tamano__boton"
-        aria-label="Aumentar tamaño del texto"
+        aria-label="A+, aumentar tamaño del texto"
         onClick={() => onCambiar(indice + 1)}
         disabled={indice >= TAMANOS.length - 1}
       >
-        A<span aria-hidden="true">+</span>
+        A+
       </button>
     </div>
   );

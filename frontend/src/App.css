@@ -712,3 +712,10 @@ img, video { max-width: 100%; }
 .origenes__control { display: block; margin: 0.25rem 0 0.75rem; }
 
 output { display: block; }
+
+/* Accesibilidad (B13): objetivos tactiles de al menos 44 px */
+button, select, input:not([type="checkbox"]) { min-height: 44px; }
+button { min-width: 44px; }
+.campo--casilla { min-height: 44px; display: flex; align-items: center; gap: 0.5rem; }
+input[type="checkbox"] { width: 1.5rem; height: 1.5rem; }
+.origenes__control { min-height: 44px; display: flex; align-items: center; gap: 0.5rem; }
