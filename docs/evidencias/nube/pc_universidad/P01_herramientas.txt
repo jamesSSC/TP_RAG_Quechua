@@ -1,0 +1,8 @@
+$ git --version; node --version; python --version; uv --version
+git version 2.52.0.windows.1
+v24.16.0
+Python 3.14.6
+uv 0.13.6 (329bf9448 2026-10-26 x86_64-pc-windows-msvc)
+$ gh --version
+/usr/bin/bash: line 6: gh: command not found
+gh: no instalado (opcional)

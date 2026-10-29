@@ -55,6 +55,8 @@ def consultar(
         traduccion_usada=respuesta.consulta_traducida,
         generador_invocado=respuesta.generador_invocado,
         aviso_generacion=respuesta.aviso_generacion,
+        redactado_por=respuesta.redactado_por,
+        motivo_redaccion=respuesta.motivo_redaccion,
         probabilidad_cobertura=_redondear(respuesta.probabilidad_cobertura),
         probabilidad_pasajes=_redondear(respuesta.probabilidad_pasajes),
         abstencion_por_predictor=respuesta.abstencion_por_predictor,

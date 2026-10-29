@@ -52,6 +52,8 @@ INSTRUCCION = {
 
 
 class OllamaGenerador(GeneradorTextoPort):
+    nombre = "ollama"
+
     """Adaptador del puerto de generacion contra el servicio HTTP local de Ollama.
 
     Cumple la integracion con un servicio externo exigida por la consigna sin contradecir

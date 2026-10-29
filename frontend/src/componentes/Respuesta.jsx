@@ -133,6 +133,8 @@ export default function Respuesta({ resultado }) {
     traduccion_usada: usada,
     consulta_traducida: traducida,
     aviso_generacion: avisoGeneracion,
+    redactado_por: redactadoPor,
+    motivo_redaccion: motivoRedaccion,
   } = resultado;
 
   const hayPasajes = pasajes.length > 0;
@@ -152,6 +154,13 @@ export default function Respuesta({ resultado }) {
         <output className="respuesta__aviso-generacion">
           {avisoGeneracion}
         </output>
+      )}
+
+      {redactadoPor && (
+        <p className="respuesta__redactor" data-testid="redactado-por">
+          Redactado por: {redactadoPor === "gemini" ? "Gemini" : redactadoPor}
+          {motivoRedaccion ? ` (motivo: ${motivoRedaccion})` : ""}
+        </p>
       )}
 
       {/* En una abstencion solo hay un mensaje de ausencia: ninguna forma destacada. */}

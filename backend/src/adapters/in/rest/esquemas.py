@@ -48,6 +48,9 @@ class RespuestaSalida(BaseModel):
     traduccion_usada: str | None = None
     generador_invocado: bool = False
     aviso_generacion: str | None = None
+    # ADR-032: «Redactado por: gemini | ollama | extractivo» y el motivo si hubo degradacion.
+    redactado_por: str | None = None
+    motivo_redaccion: str | None = None
     # PMV2: probabilidades estimadas por los modelos predictivos (None si no hay modelo).
     probabilidad_cobertura: float | None = None
     probabilidad_pasajes: float | None = None
@@ -114,3 +117,10 @@ class EstadoSistema(BaseModel):
     # HU-09: consultas registradas por origen y rotulo de base de demostracion.
     consultas_por_origen: dict[str, int] = {}
     base_demostracion: bool = False
+    # Nube (ADR-030 a 032). Solo nombres y conteos: ningun secreto ni cadena de conexion.
+    entorno: str = "local"
+    motor_base_datos: str = "sqlite"
+    origen_corpus: str = "jsonl"
+    generador: str = "ollama"
+    modelos_ml: dict[str, bool] = {}
+    documentos_corpus: int = 0

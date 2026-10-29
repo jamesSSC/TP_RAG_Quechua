@@ -1,0 +1,73 @@
+# Despliegue en Render (Guía de laboratorio 11; ADR-030 a ADR-032).
+#
+# Render crea los dos servicios desde este Blueprint (New → Blueprint) y vuelve a desplegar en
+# cada push a `main` cuando la CI de GitHub Actions termina en verde (autoDeployTrigger).
+# Los secretos (DATABASE_URL de Neon y GEMINI_API_KEY) tienen `sync: false`: el usuario los
+# pega en el panel de Render y nunca entran en Git.
+#
+# Si Render asigna otros subdominios (el nombre ya estaba tomado), actualizar CORS_ORIGENES y
+# VITE_API_URL con las URL reales (paso U5 de docs/despliegue/PASOS_USUARIO.md).
+
+services:
+  - type: web
+    name: quechua-api
+    runtime: python
+    plan: free
+    region: virginia # cerca de Neon (AWS us-east-1)
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    # ADR-030: solo en la nube se escucha en 0.0.0.0:$PORT; en local sigue 127.0.0.1.
+    startCommand: cd src && uvicorn infrastructure.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/estado
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: ENTORNO
+        value: staging
+      - key: BASE_DATOS
+        value: postgres
+      - key: CORPUS_ORIGEN
+        value: postgres
+      - key: DATABASE_URL
+        sync: false
+      - key: GENERADOR
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODELO
+        value: gemini-2.5-flash
+      - key: TRADUCTOR
+        value: tabla
+      - key: UMBRAL_ABSTENCION
+        value: "0.48"
+      - key: CORS_ORIGENES
+        value: https://quechua-web.onrender.com
+      # Autoriza a humo_nube.py y a la carga a registrar como `humo`/`carga` (HU-09).
+      - key: TOKEN_PRUEBAS
+        generateValue: true
+
+  - type: web
+    name: quechua-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: VITE_API_URL
+        value: https://quechua-api.onrender.com
+    # SPA: cualquier ruta del cliente devuelve la interfaz.
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: DENY

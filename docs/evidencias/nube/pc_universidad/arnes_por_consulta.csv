@@ -1,0 +1,249 @@
+id,particion,consulta,traduccion,top1_id,similitud_max,decision,via_respaldo,pasajes,pasajes_ids,respaldo_ids,respaldo_lema,respaldo_correcto,generador_invocado,respaldo_sin_documento_o_pagina
+A001,A,¿cómo se dice cóncavo en quechua wanka?,,b1bb5a64ec8a,0.620917,responde,similitud,0,,b1bb5a64ec8a,1,1,1,0
+A002,A,¿cómo se dice confesar en quechua wanka?,,77284ef6f049,0.639356,responde,similitud,0,,77284ef6f049,1,1,1,0
+A003,A,¿cómo se dice buscar en quechua wanka?,,612eed6f970b,0.716344,responde,similitud,0,,612eed6f970b,1,1,1,0
+A004,A,¿cómo se dice espinilla en quechua wanka?,,cf322db879c6,0.701555,responde,similitud,0,,cf322db879c6,1,1,1,0
+A005,A,¿cómo se dice regresar en quechua wanka?,,467d1c629713,0.766074,responde,similitud,0,,467d1c629713,1,1,1,0
+A006,A,¿cómo se dice castañetear en quechua wanka?,,8dad70c5cc65,0.675235,responde,similitud,0,,8dad70c5cc65,1,1,1,0
+A007,A,¿cómo se dice consolar en quechua wanka?,,6cab7dfeefc9,0.620932,responde,similitud,0,,6cab7dfeefc9,1,1,1,0
+A008,A,¿cómo se dice corregirse en quechua wanka?,,3cfb2a4950b7,0.750216,responde,similitud,0,,3cfb2a4950b7,1,1,1,0
+A009,A,¿cómo se dice libertar en quechua wanka?,,8d778999c4ba,0.514517,responde,similitud,0,,8d778999c4ba,1,1,1,0
+A010,A,¿cómo se dice cuanto en quechua wanka?,,3fe1eb814759,0.351678,responde,lema,0,,3fe1eb814759,1,1,1,0
+A011,A,¿cómo se dice amado en quechua wanka?,,f06b576c6906,0.574813,responde,similitud,0,,f06b576c6906,1,1,1,0
+A012,A,¿cómo se dice descartar en quechua wanka?,,ed0db3c1ee68,0.500694,responde,similitud,0,,ed0db3c1ee68,1,1,1,0
+A013,A,¿cómo se dice liviano en quechua wanka?,,6392d858772c,0.786171,responde,similitud,0,,6392d858772c,1,1,1,0
+A014,A,¿cómo se dice sueldo en quechua wanka?,,9e1de3ce5a14,0.622850,responde,similitud,0,,9e1de3ce5a14,1,1,1,0
+A015,A,¿cómo se dice nuevo en quechua wanka?,,6bcfa4ef64f3,0.616181,responde,similitud,0,,6bcfa4ef64f3,1,1,1,0
+A016,A,¿cómo se dice voluntariamente en quechua wanka?,,8ee2db59f053,0.733277,responde,similitud,0,,8ee2db59f053,1,1,1,0
+A017,A,¿cómo se dice iglesia en quechua wanka?,,657c412a587f,0.515556,responde,similitud,0,,657c412a587f,1,1,1,0
+A018,A,¿cómo se dice cueva en quechua wanka?,,bbdf59fe4641,0.602314,responde,similitud,0,,bbdf59fe4641,1,1,1,0
+A019,A,¿cómo se dice carnoso en quechua wanka?,,9fc0111f1918,0.645791,responde,similitud,0,,9fc0111f1918,1,1,1,0
+A020,A,¿cómo se dice acusar en quechua wanka?,,94e06f941df3,0.683483,responde,similitud,0,,94e06f941df3,1,1,1,0
+A021,A,¿cómo se dice desnudar en quechua wanka?,,853341ab0618,0.688586,responde,similitud,0,,853341ab0618,1,1,1,0
+A022,A,¿cómo se dice tímido en quechua wanka?,,508dfe8e7d9f,0.544104,responde,similitud,0,,508dfe8e7d9f,1,1,1,0
+A023,A,¿cómo se dice mango en quechua wanka?,,8c3c3bb46ae2,0.512262,responde,similitud,0,,8c3c3bb46ae2,1,1,1,0
+A024,A,¿cómo se dice bulla en quechua wanka?,,4b5238a2b1a4,0.601691,responde,similitud,0,,4b5238a2b1a4,1,1,1,0
+A025,A,¿cómo se dice doblar en quechua wanka?,,d655fca5084e,0.659073,responde,similitud,0,,d655fca5084e,1,1,1,0
+A026,A,¿cómo se dice feliz en quechua wanka?,,d5dd00535911,0.640919,responde,similitud,0,,d5dd00535911,1,1,1,0
+A027,A,¿cómo se dice incinerar en quechua wanka?,,7c88cd7b378d,0.645815,responde,similitud,0,,7c88cd7b378d,1,1,1,0
+A028,A,¿cómo se dice retoñar en quechua wanka?,,7f2d97b50436,0.633097,responde,similitud,0,,7f2d97b50436,1,1,1,0
+A029,A,¿cómo se dice olvido en quechua wanka?,,b1499c591348,0.667359,responde,similitud,0,,b1499c591348,1,1,1,0
+A030,A,¿cómo se dice deudor en quechua wanka?,,1ef685485dc4,0.638123,responde,similitud,0,,1ef685485dc4,1,1,1,0
+A031,A,¿cómo se dice mote en quechua wanka?,,64d38dbff56b,0.555780,responde,similitud,0,,64d38dbff56b,1,1,1,0
+A032,A,¿cómo se dice lagartija en quechua wanka?,,3f83965664c7,0.505744,responde,similitud,0,,3f83965664c7,1,1,1,0
+A033,A,¿cómo se dice horrible en quechua wanka?,temible,01f0e4e46ea2,0.693326,responde,similitud,0,,01f0e4e46ea2|b71d062b86ba|1ae2e3190c26,1,1,1,0
+A034,A,¿cómo se dice deslizarse en quechua wanka?,,695cecbcd0ce,0.591126,responde,similitud,0,,695cecbcd0ce,1,1,1,0
+A035,A,¿cómo se dice camarada en quechua wanka?,,06f465cf0906,0.725594,responde,similitud,0,,06f465cf0906,1,1,1,0
+A036,A,¿cómo se dice barbechado en quechua wanka?,,b0ac74464d8d,0.685050,responde,similitud,0,,b0ac74464d8d,1,1,1,0
+A037,A,¿cómo se dice ladera en quechua wanka?,,96c42ea1b1e2,0.574951,responde,similitud,0,,96c42ea1b1e2,1,1,1,0
+A038,A,¿cómo se dice diablo en quechua wanka?,,f544a774ddc9,0.479902,responde,lema,0,,f544a774ddc9,1,1,1,0
+A039,A,¿cómo se dice venir en quechua wanka?,,0f727dc11b6b,0.307185,responde,lema,0,,0f727dc11b6b,1,1,1,0
+A040,A,¿cómo se dice descomponerse en quechua wanka?,,ead910cda6c8,0.551183,responde,similitud,0,,ead910cda6c8,1,1,1,0
+A041,A,¿cómo se dice eructar en quechua wanka?,,2457b8fa91f4,0.696286,responde,similitud,0,,2457b8fa91f4,1,1,1,0
+A042,A,¿cómo se dice agradar en quechua wanka?,,b9421390628f,0.669144,responde,similitud,0,,b9421390628f,1,1,1,0
+A043,A,¿cómo se dice juguete en quechua wanka?,,32e53548a074,0.671637,responde,similitud,0,,32e53548a074,1,1,1,0
+A044,A,¿cómo se dice pintar en quechua wanka?,,a4dbd96ac93d,0.643737,responde,similitud,0,,a4dbd96ac93d,1,1,1,0
+A045,A,¿cómo se dice entablillar en quechua wanka?,,7e64f9908f57,0.682018,responde,similitud,0,,7e64f9908f57,1,1,1,0
+A046,A,¿cómo se dice pezuña en quechua wanka?,,7556440d804a,0.578966,responde,similitud,0,,7556440d804a,1,1,1,0
+A047,A,¿cómo se dice caminar en quechua wanka?,,044d0b51f54a,0.673767,responde,similitud,0,,044d0b51f54a,1,1,1,0
+A048,A,¿cómo se dice mellizo en quechua wanka?,,a2c07845a28c,0.677851,responde,similitud,0,,a2c07845a28c,1,1,1,0
+A049,A,¿cómo se dice asado en quechua wanka?,,e270177c8f63,0.608595,responde,similitud,0,,e270177c8f63,1,1,1,0
+A050,A,¿cómo se dice hueco en quechua wanka?,,976de8d691e3,0.590385,responde,similitud,0,,976de8d691e3,1,1,1,0
+A051,A,¿cómo se dice enfriado en quechua wanka?,,40026c519fd3,0.524763,responde,similitud,0,,40026c519fd3,1,1,1,0
+A052,A,¿cómo se dice pájaro en quechua wanka?,,89901c82d2a6,0.624599,responde,similitud,0,,89901c82d2a6,1,1,1,0
+A053,A,¿cómo se dice anudar en quechua wanka?,,a3a6ccca8efd,0.535126,responde,similitud,0,,a3a6ccca8efd,1,1,1,0
+A054,A,¿cómo se dice visitar en quechua wanka?,,3fdd6492f5ac,0.506613,responde,similitud,0,,3fdd6492f5ac,1,1,1,0
+A055,A,¿cómo se dice continuar en quechua wanka?,,be266e2eb251,0.617551,responde,similitud,0,,be266e2eb251,1,1,1,0
+A056,A,¿cómo se dice lisonjero en quechua wanka?,,117940f678ea,0.687797,responde,similitud,0,,117940f678ea,1,1,1,0
+A057,A,¿cómo se dice tragar en quechua wanka?,,4174030630c4,0.630537,responde,similitud,0,,4174030630c4,1,1,1,0
+A058,A,¿cómo se dice comparación en quechua wanka?,,3ac5e5f44038,0.598864,responde,similitud,0,,3ac5e5f44038,1,1,1,0
+A059,A,¿cómo se dice fluir en quechua wanka?,,db9e28849f9b,0.503979,responde,similitud,0,,db9e28849f9b,1,1,1,0
+A060,A,¿cómo se dice tenedor en quechua wanka?,,088a59147308,0.649969,responde,similitud,0,,088a59147308,1,1,1,0
+A061,A,¿cómo se dice banco en quechua wanka?,,dd4a542c736a,0.429395,responde,lema,0,,dd4a542c736a,1,1,1,0
+A062,A,¿cómo se dice encorralar en quechua wanka?,,c9cb851c5a4a,0.727152,responde,similitud,0,,c9cb851c5a4a,1,1,1,0
+A063,A,¿cómo se dice orina en quechua wanka?,,1a554ccd8bec,0.374811,responde,lema,0,,1a554ccd8bec,1,1,1,0
+A064,A,¿cómo se dice coser en quechua wanka?,,ac0a1ae37237,0.576040,responde,similitud,0,,ac0a1ae37237,1,1,1,0
+A065,A,¿cómo se dice ensangrentar en quechua wanka?,,67f027cf6c83,0.712744,responde,similitud,0,,67f027cf6c83,1,1,1,0
+A066,A,¿cómo se dice araña en quechua wanka?,,869b33606b5f,0.382423,responde,lema,0,,869b33606b5f,1,1,1,0
+A067,A,¿cómo se dice pito en quechua wanka?,,7c3ce11da62a,0.502178,responde,similitud,0,,7c3ce11da62a,1,1,1,0
+A068,A,¿cómo se dice abajo en quechua wanka?,,6b502475ea98,0.451909,responde,lema,0,,6b502475ea98,1,1,1,0
+A069,A,¿cómo se dice tiesto en quechua wanka?,,103c7205de03,0.653493,responde,similitud,0,,103c7205de03,1,1,1,0
+A070,A,¿cómo se dice esquilar en quechua wanka?,,03d31a0305be,0.731750,responde,similitud,0,,03d31a0305be,1,1,1,0
+A071,A,¿cómo se dice comportarse en quechua wanka?,,cdcda80fe38a,0.670504,responde,similitud,0,,cdcda80fe38a,1,1,1,0
+A072,A,¿cómo se dice almacenar en quechua wanka?,,2d57cf64d436,0.783441,responde,similitud,0,,2d57cf64d436,1,1,1,0
+A073,A,¿cómo se dice náusea en quechua wanka?,,22785c21b73a,0.607549,responde,similitud,0,,22785c21b73a|3f025b1a5c6a,1,1,1,0
+A074,A,¿cómo se dice febrero en quechua wanka?,,e709a994ac20,0.456162,responde,lema,0,,e709a994ac20,1,1,1,0
+A075,A,¿cómo se dice difunto en quechua wanka?,,9854fa3d3f14,0.670101,responde,similitud,0,,9854fa3d3f14,1,1,1,0
+A076,A,¿cómo se dice embarrar en quechua wanka?,,54ee53a870a1,0.523523,responde,similitud,0,,54ee53a870a1,1,1,1,0
+A077,A,¿cómo se dice próximo en quechua wanka?,,3a4531a896a0,0.669902,responde,similitud,0,,3a4531a896a0,1,1,1,0
+A078,A,¿cómo se dice terminar en quechua wanka?,,bfb80d98bbf8,0.376982,responde,lema,0,,bfb80d98bbf8,1,1,1,0
+A079,A,¿cómo se dice sanar en quechua wanka?,,6f037e59512f,0.590283,responde,similitud,0,,6f037e59512f,1,1,1,0
+A080,A,¿cómo se dice atajar en quechua wanka?,,eec5fbeed9eb,0.675880,responde,similitud,0,,eec5fbeed9eb,1,1,1,0
+A081,A,¿cómo se dice tincar en quechua wanka?,,ea19cddfbf63,0.624602,responde,similitud,0,,ea19cddfbf63,1,1,1,0
+A082,A,¿cómo se dice necesitado en quechua wanka?,,de975cae615c,0.719257,responde,similitud,0,,de975cae615c,1,1,1,0
+A083,A,¿cómo se dice miedoso en quechua wanka?,,0fca894c797a,0.445431,responde,lema,0,,0fca894c797a,1,1,1,0
+A084,A,¿cómo se dice poseedor en quechua wanka?,,73faca192732,0.678808,responde,similitud,0,,73faca192732,1,1,1,0
+A085,A,¿cómo se dice último en quechua wanka?,,3867f00f0f80,0.646371,responde,similitud,0,,3867f00f0f80,1,1,1,0
+A086,A,¿cómo se dice torrentada en quechua wanka?,,6057ca1608a7,0.577922,responde,similitud,0,,6057ca1608a7,1,1,1,0
+A087,A,¿cómo se dice huincha en quechua wanka?,,85b8da4e4f6e,0.668552,responde,similitud,0,,85b8da4e4f6e,1,1,1,0
+A088,A,¿cómo se dice humita en quechua wanka?,,e85d51de5c8d,0.625219,responde,similitud,0,,e85d51de5c8d,1,1,1,0
+A089,A,¿cómo se dice amurallar en quechua wanka?,,71efebf30ae7,0.724493,responde,similitud,0,,71efebf30ae7,1,1,1,0
+A090,A,¿cómo se dice caluroso en quechua wanka?,,79a80ed2d51f,0.691667,responde,similitud,0,,79a80ed2d51f,1,1,1,0
+A091,A,¿cómo se dice desparramar en quechua wanka?,,9ea012b3d1b6,0.602515,responde,similitud,0,,9ea012b3d1b6,1,1,1,0
+A092,A,¿cómo se dice sorber en quechua wanka?,,8fd95ccc6b3e,0.637860,responde,similitud,0,,8fd95ccc6b3e,1,1,1,0
+A093,A,¿cómo se dice ensartar en quechua wanka?,,23722d9af9bd,0.782581,responde,similitud,0,,23722d9af9bd,1,1,1,0
+A094,A,¿cómo se dice asistente en quechua wanka?,,d179147a4b99,0.672291,responde,similitud,0,,d179147a4b99,1,1,1,0
+A095,A,¿cómo se dice afecto en quechua wanka?,,5503989bde5f,0.593934,responde,similitud,0,,5503989bde5f,1,1,1,0
+A096,A,¿cómo se dice número en quechua wanka?,,4e683bb3c9b1,0.590619,responde,similitud,0,,4e683bb3c9b1,1,1,1,0
+A097,A,¿cómo se dice algo en quechua wanka?,,60712bf1954a,0.397278,responde,lema,0,,60712bf1954a,1,1,1,0
+A098,A,¿cómo se dice cerro en quechua wanka?,,963ce26c4c3c,0.505008,responde,similitud,0,,963ce26c4c3c,1,1,1,0
+A099,A,¿cómo se dice padecer en quechua wanka?,,0bee2d4094ed,0.578090,responde,similitud,0,,0bee2d4094ed,1,1,1,0
+A100,A,¿cómo se dice ombligo en quechua wanka?,,def833c4c063,0.658151,responde,similitud,0,,def833c4c063,1,1,1,0
+A101,A,¿cómo se dice piojoso en quechua wanka?,,a6c6ba3e1016,0.548615,responde,similitud,0,,a6c6ba3e1016,1,1,1,0
+A102,A,¿cómo se dice chato en quechua wanka?,,7e32efcf5068,0.661963,responde,similitud,0,,7e32efcf5068,1,1,1,0
+A103,A,¿cómo se dice trabajador en quechua wanka?,,072c1bad101a,0.599449,responde,similitud,0,,072c1bad101a,1,1,1,0
+A104,A,¿cómo se dice fósforo en quechua wanka?,,55e6bcf0b41e,0.649178,responde,similitud,0,,55e6bcf0b41e,1,1,1,0
+A105,A,¿cómo se dice seleccionar en quechua wanka?,,4c2321ea1711,0.733139,responde,similitud,0,,4c2321ea1711,1,1,1,0
+A106,A,¿cómo se dice espigar en quechua wanka?,,ba2bc95d3847,0.641991,responde,similitud,0,,ba2bc95d3847,1,1,1,0
+A107,A,¿cómo se dice deuda en quechua wanka?,,bb05dabb91af,0.635624,responde,similitud,0,,bb05dabb91af,1,1,1,0
+A108,A,¿cómo se dice oscuro en quechua wanka?,,3b465e9316f8,0.527808,responde,similitud,0,,3b465e9316f8,1,1,1,0
+A109,A,¿cómo se dice cobarde en quechua wanka?,,2de908051b25,0.669025,responde,similitud,0,,2de908051b25,1,1,1,0
+A110,A,¿cómo se dice joroba en quechua wanka?,,2a38ac3bf1b4,0.645649,responde,similitud,0,,2a38ac3bf1b4,1,1,1,0
+A111,A,¿cómo se dice corazón en quechua wanka?,,0cde389eb103,0.775792,responde,similitud,0,,0cde389eb103,1,1,1,0
+A112,A,¿cómo se dice abrigarse en quechua wanka?,,d80508eb062e,0.500267,responde,similitud,0,,d80508eb062e,1,1,1,0
+A113,A,¿cómo se dice aplanar en quechua wanka?,,56397490ac19,0.517773,responde,similitud,0,,56397490ac19,1,1,1,0
+A114,A,¿cómo se dice cascada en quechua wanka?,,57399387f98b,0.676461,responde,similitud,0,,57399387f98b,1,1,1,0
+A115,A,¿cómo se dice deposito en quechua wanka?,,2189b2c748ee,0.541749,responde,similitud,0,,2189b2c748ee,1,1,1,0
+A116,A,¿cómo se dice salir en quechua wanka?,,091522282d8b,0.374162,responde,lema,0,,091522282d8b,1,1,1,0
+A117,A,¿cómo se dice fundador en quechua wanka?,,1435fb36b551,0.621067,responde,similitud,0,,1435fb36b551,1,1,1,0
+A118,A,¿cómo se dice siguiente en quechua wanka?,,334d88a65b5c,0.615668,responde,similitud,0,,334d88a65b5c,1,1,1,0
+A119,A,¿cómo se dice coca en quechua wanka?,,5037c6df35cf,0.517611,responde,similitud,0,,5037c6df35cf,1,1,1,0
+A120,A,¿cómo se dice pecado en quechua wanka?,,fe4c337d7b95,0.499865,responde,similitud,0,,fe4c337d7b95,1,1,1,0
+B001,B,how do you say cóncavo in Wanka Quechua?,,b1bb5a64ec8a,0.620917,responde,similitud,0,,b1bb5a64ec8a,1,1,1,0
+B002,B,necesito el término wanka para referirme a confesar,,77284ef6f049,0.639356,responde,similitud,0,,77284ef6f049,1,1,1,0
+B003,B,what is the Wanka Quechua word for buscar?,,612eed6f970b,0.716344,responde,similitud,0,,612eed6f970b,1,1,1,0
+B004,B,estoy buscando la palabra que designa espinilla en la variedad wanka,,cf322db879c6,0.701555,responde,similitud,0,,cf322db879c6,1,1,1,0
+B005,B,how do you say regresar in Wanka Quechua?,,467d1c629713,0.766074,responde,similitud,0,,467d1c629713,1,1,1,0
+B006,B,necesito el término wanka para referirme a castañetear,,8dad70c5cc65,0.675235,responde,similitud,0,,8dad70c5cc65,1,1,1,0
+B007,B,what is the Wanka Quechua word for consolar?,,6cab7dfeefc9,0.620932,responde,similitud,0,,6cab7dfeefc9,1,1,1,0
+B008,B,estoy buscando la palabra que designa corregirse en la variedad wanka,,3cfb2a4950b7,0.750216,responde,similitud,0,,3cfb2a4950b7,1,1,1,0
+B009,B,how do you say libertar in Wanka Quechua?,,8d778999c4ba,0.514517,responde,similitud,0,,8d778999c4ba,1,1,1,0
+B010,B,necesito el término wanka para referirme a cuanto,,3fe1eb814759,0.351678,responde,lema,0,,3fe1eb814759,1,1,1,0
+B011,B,what is the Wanka Quechua word for amado?,,f06b576c6906,0.574813,responde,similitud,0,,f06b576c6906,1,1,1,0
+B012,B,estoy buscando la palabra que designa descartar en la variedad wanka,,ed0db3c1ee68,0.500694,responde,similitud,0,,ed0db3c1ee68,1,1,1,0
+B013,B,how do you say liviano in Wanka Quechua?,,6392d858772c,0.786171,responde,similitud,0,,6392d858772c,1,1,1,0
+B014,B,necesito el término wanka para referirme a sueldo,,9e1de3ce5a14,0.622850,responde,similitud,0,,9e1de3ce5a14,1,1,1,0
+B015,B,what is the Wanka Quechua word for nuevo?,,6bcfa4ef64f3,0.616181,responde,similitud,0,,6bcfa4ef64f3,1,1,1,0
+B016,B,estoy buscando la palabra que designa voluntariamente en la variedad wanka,,8ee2db59f053,0.733277,responde,similitud,0,,8ee2db59f053,1,1,1,0
+B017,B,how do you say iglesia in Wanka Quechua?,,657c412a587f,0.515556,responde,similitud,0,,657c412a587f,1,1,1,0
+B018,B,necesito el término wanka para referirme a cueva,,bbdf59fe4641,0.602314,responde,similitud,0,,bbdf59fe4641,1,1,1,0
+B019,B,what is the Wanka Quechua word for carnoso?,,9fc0111f1918,0.645791,responde,similitud,0,,9fc0111f1918,1,1,1,0
+B020,B,estoy buscando la palabra que designa acusar en la variedad wanka,,94e06f941df3,0.683483,responde,similitud,0,,94e06f941df3,1,1,1,0
+B021,B,how do you say desnudar in Wanka Quechua?,,853341ab0618,0.688586,responde,similitud,0,,853341ab0618,1,1,1,0
+B022,B,necesito el término wanka para referirme a tímido,,508dfe8e7d9f,0.544104,responde,similitud,0,,508dfe8e7d9f,1,1,1,0
+B023,B,what is the Wanka Quechua word for mango?,,8c3c3bb46ae2,0.512262,responde,similitud,0,,8c3c3bb46ae2,1,1,1,0
+B024,B,estoy buscando la palabra que designa bulla en la variedad wanka,,4b5238a2b1a4,0.601691,responde,similitud,0,,4b5238a2b1a4,1,1,1,0
+B025,B,how do you say doblar in Wanka Quechua?,,d655fca5084e,0.659073,responde,similitud,0,,d655fca5084e,1,1,1,0
+B026,B,necesito el término wanka para referirme a feliz,,d5dd00535911,0.640919,responde,similitud,0,,d5dd00535911,1,1,1,0
+B027,B,what is the Wanka Quechua word for incinerar?,,7c88cd7b378d,0.645815,responde,similitud,0,,7c88cd7b378d,1,1,1,0
+B028,B,estoy buscando la palabra que designa retoñar en la variedad wanka,,7f2d97b50436,0.633097,responde,similitud,0,,7f2d97b50436,1,1,1,0
+B029,B,how do you say olvido in Wanka Quechua?,,b1499c591348,0.667359,responde,similitud,0,,b1499c591348,1,1,1,0
+B030,B,necesito el término wanka para referirme a deudor,,1ef685485dc4,0.638123,responde,similitud,0,,1ef685485dc4,1,1,1,0
+B031,B,what is the Wanka Quechua word for mote?,,64d38dbff56b,0.555780,responde,similitud,0,,64d38dbff56b,1,1,1,0
+B032,B,estoy buscando la palabra que designa lagartija en la variedad wanka,,3f83965664c7,0.505744,responde,similitud,0,,3f83965664c7,1,1,1,0
+B033,B,how do you say horrible in Wanka Quechua?,temible,01f0e4e46ea2,0.693326,responde,similitud,0,,01f0e4e46ea2|b71d062b86ba|1ae2e3190c26,1,1,1,0
+B034,B,necesito el término wanka para referirme a deslizarse,,695cecbcd0ce,0.591126,responde,similitud,0,,695cecbcd0ce,1,1,1,0
+B035,B,what is the Wanka Quechua word for camarada?,,06f465cf0906,0.725594,responde,similitud,0,,06f465cf0906,1,1,1,0
+B036,B,estoy buscando la palabra que designa barbechado en la variedad wanka,,b0ac74464d8d,0.685050,responde,similitud,0,,b0ac74464d8d,1,1,1,0
+B037,B,how do you say ladera in Wanka Quechua?,,96c42ea1b1e2,0.574951,responde,similitud,0,,96c42ea1b1e2,1,1,1,0
+B038,B,necesito el término wanka para referirme a diablo,,f544a774ddc9,0.479902,responde,lema,0,,f544a774ddc9,1,1,1,0
+B039,B,what is the Wanka Quechua word for venir?,,0f727dc11b6b,0.307185,responde,lema,0,,0f727dc11b6b,1,1,1,0
+B040,B,estoy buscando la palabra que designa descomponerse en la variedad wanka,,ead910cda6c8,0.551183,responde,similitud,0,,ead910cda6c8,1,1,1,0
+B041,B,how do you say eructar in Wanka Quechua?,,2457b8fa91f4,0.696286,responde,similitud,0,,2457b8fa91f4,1,1,1,0
+B042,B,necesito el término wanka para referirme a agradar,,b9421390628f,0.669144,responde,similitud,0,,b9421390628f,1,1,1,0
+B043,B,what is the Wanka Quechua word for juguete?,,32e53548a074,0.671637,responde,similitud,0,,32e53548a074,1,1,1,0
+B044,B,estoy buscando la palabra que designa pintar en la variedad wanka,,a4dbd96ac93d,0.643737,responde,similitud,0,,a4dbd96ac93d,1,1,1,0
+B045,B,how do you say entablillar in Wanka Quechua?,,7e64f9908f57,0.682018,responde,similitud,0,,7e64f9908f57,1,1,1,0
+B046,B,necesito el término wanka para referirme a pezuña,,7556440d804a,0.578966,responde,similitud,0,,7556440d804a,1,1,1,0
+B047,B,what is the Wanka Quechua word for caminar?,,044d0b51f54a,0.673767,responde,similitud,0,,044d0b51f54a,1,1,1,0
+B048,B,estoy buscando la palabra que designa mellizo en la variedad wanka,,a2c07845a28c,0.677851,responde,similitud,0,,a2c07845a28c,1,1,1,0
+B049,B,how do you say asado in Wanka Quechua?,,e270177c8f63,0.608595,responde,similitud,0,,e270177c8f63,1,1,1,0
+B050,B,necesito el término wanka para referirme a hueco,,976de8d691e3,0.590385,responde,similitud,0,,976de8d691e3,1,1,1,0
+B051,B,what is the Wanka Quechua word for enfriado?,,40026c519fd3,0.524763,responde,similitud,0,,40026c519fd3,1,1,1,0
+B052,B,estoy buscando la palabra que designa pájaro en la variedad wanka,,89901c82d2a6,0.624599,responde,similitud,0,,89901c82d2a6,1,1,1,0
+B053,B,how do you say anudar in Wanka Quechua?,,a3a6ccca8efd,0.535126,responde,similitud,0,,a3a6ccca8efd,1,1,1,0
+B054,B,necesito el término wanka para referirme a visitar,,3fdd6492f5ac,0.506613,responde,similitud,0,,3fdd6492f5ac,1,1,1,0
+B055,B,what is the Wanka Quechua word for continuar?,,be266e2eb251,0.617551,responde,similitud,0,,be266e2eb251,1,1,1,0
+B056,B,estoy buscando la palabra que designa lisonjero en la variedad wanka,,117940f678ea,0.687797,responde,similitud,0,,117940f678ea,1,1,1,0
+B057,B,how do you say tragar in Wanka Quechua?,,4174030630c4,0.630537,responde,similitud,0,,4174030630c4,1,1,1,0
+B058,B,necesito el término wanka para referirme a comparación,,3ac5e5f44038,0.598864,responde,similitud,0,,3ac5e5f44038,1,1,1,0
+B059,B,what is the Wanka Quechua word for fluir?,,db9e28849f9b,0.503979,responde,similitud,0,,db9e28849f9b,1,1,1,0
+B060,B,estoy buscando la palabra que designa tenedor en la variedad wanka,,088a59147308,0.649969,responde,similitud,0,,088a59147308,1,1,1,0
+C001,C,¿cómo se dice criptomoneda en quechua wanka?,,,0.050169,abstiene,,0,,,0,0,0,0
+C002,C,¿cómo se dice algoritmo genético en quechua wanka?,,,0.066062,abstiene,,0,,,0,0,0,0
+C003,C,¿cómo se dice vacuna de ARN mensajero en quechua wanka?,,,0.247118,abstiene,,0,,,0,0,0,0
+C004,C,¿cómo se dice firewall en quechua wanka?,,,0.048287,abstiene,,0,,,0,0,0,0
+C005,C,¿cómo se dice hipoteca bancaria en quechua wanka?,,,0.089166,abstiene,,0,,,0,0,0,0
+C006,C,¿cómo se dice turbina eólica en quechua wanka?,,,0.168710,abstiene,,0,,,0,0,0,0
+C007,C,¿cómo se dice resonancia magnética en quechua wanka?,,,0.118529,abstiene,,0,,,0,0,0,0
+C008,C,¿cómo se dice submarino en quechua wanka?,,,0.139984,abstiene,,0,,,0,0,0,0
+C009,C,¿cómo se dice semiconductor en quechua wanka?,,,0.226186,abstiene,,0,,,0,0,0,0
+C010,C,¿cómo se dice fibra óptica en quechua wanka?,,,0.086979,abstiene,,0,,,0,0,0,0
+C011,C,¿cómo se dice motor diésel en quechua wanka?,,,0.058148,abstiene,,0,,,0,0,0,0
+C012,C,¿cómo se dice panel solar en quechua wanka?,,,0.096073,abstiene,,0,,,0,0,0,0
+C013,C,¿cómo se dice radiografía dental en quechua wanka?,,,0.096257,abstiene,,0,,,0,0,0,0
+C014,C,¿cómo se dice contrato de arrendamiento en quechua wanka?,,,0.254575,abstiene,,0,,,0,0,0,0
+C015,C,¿cómo se dice quimioterapia en quechua wanka?,,,0.083112,abstiene,,0,,,0,0,0,0
+C016,C,¿cómo se dice placa base en quechua wanka?,,,0.469792,abstiene,,0,,,0,0,0,0
+C017,C,¿cómo se dice videoconferencia en quechua wanka?,,,0.072651,abstiene,,0,,,0,0,0,0
+C018,C,¿cómo se dice código de barras en quechua wanka?,,,0.249509,abstiene,,0,,,0,0,0,0
+C019,C,¿cómo se dice endoscopia en quechua wanka?,,,0.063493,abstiene,,0,,,0,0,0,0
+C020,C,¿cómo se dice peaje electrónico en quechua wanka?,,,0.074069,abstiene,,0,,,0,0,0,0
+C021,C,¿cómo se dice ecografía en quechua wanka?,,,0.098667,abstiene,,0,,,0,0,0,0
+C022,C,¿cómo se dice refinería de petróleo en quechua wanka?,,,0.255539,abstiene,,0,,,0,0,0,0
+C023,C,¿cómo se dice antibiótico en quechua wanka?,,,0.127359,abstiene,,0,,,0,0,0,0
+C024,C,¿cómo se dice grúa portuaria en quechua wanka?,,,0.059797,abstiene,,0,,,0,0,0,0
+C025,C,¿cómo se dice cajero automático en quechua wanka?,,,0.157572,abstiene,,0,,,0,0,0,0
+C026,C,¿cómo se dice tomografía en quechua wanka?,,,0.102067,abstiene,,0,,,0,0,0,0
+C027,C,¿cómo se dice auditoría contable en quechua wanka?,,,0.063195,abstiene,,0,,,0,0,0,0
+C028,C,¿cómo se dice microprocesador en quechua wanka?,,,0.062939,abstiene,,0,,,0,0,0,0
+D001,D,how do you say concave in Wanka Quechua?,cóncavo,b1bb5a64ec8a,0.620917,responde,similitud,0,,b1bb5a64ec8a,1,1,1,0
+D002,D,how do you say to confess in Wanka Quechua?,confesarse,c00eb9f16b46,0.664061,responde,similitud,0,,c00eb9f16b46|77284ef6f049,1,1,1,0
+D003,D,how do you say to search in Wanka Quechua?,buscar,612eed6f970b,0.716344,responde,similitud,0,,612eed6f970b,1,1,1,0
+D004,D,how do you say to return in Wanka Quechua?,volver,655e8d56426c,0.772756,responde,similitud,0,,655e8d56426c|467d1c629713|ca7b9ea49bce|285ef936ef92,1,1,1,0
+D005,D,how do you say to console in Wanka Quechua?,consolar,6cab7dfeefc9,0.620932,responde,similitud,0,,6cab7dfeefc9,1,1,1,0
+D006,D,how do you say beloved in Wanka Quechua?,amado,f06b576c6906,0.574813,responde,similitud,0,,f06b576c6906|a6434a291557,1,1,1,0
+D007,D,how do you say to discard in Wanka Quechua?,aventar,991731c553c8,0.677903,responde,similitud,0,,991731c553c8|ed0db3c1ee68,1,1,1,0
+D008,D,how do you say lightweight in Wanka Quechua?,lampa,803d30518c05,0.846536,responde,similitud,0,,803d30518c05|6392d858772c|e7059c9c12d5|361889dfb5f3|63a465a3bca9,1,1,1,0
+D009,D,how do you say salary in Wanka Quechua?,sueldo,9e1de3ce5a14,0.622850,responde,similitud,0,,9e1de3ce5a14,1,1,1,0
+D010,D,how do you say new in Wanka Quechua?,nuevo,6bcfa4ef64f3,0.616181,responde,similitud,0,,6bcfa4ef64f3,1,1,1,0
+D011,D,how do you say church in Wanka Quechua?,iglesia,657c412a587f,0.515556,responde,similitud,0,,657c412a587f,1,1,1,0
+D012,D,how do you say cave in Wanka Quechua?,caverna,49919b71f588,0.701329,responde,similitud,0,,49919b71f588|bbdf59fe4641,1,1,1,0
+D013,D,how do you say to accuse in Wanka Quechua?,acusar,94e06f941df3,0.683483,responde,similitud,0,,94e06f941df3|f309ca48593c|cc436945c0bc,1,1,1,0
+D014,D,how do you say shy in Wanka Quechua?,tímido,508dfe8e7d9f,0.544104,responde,similitud,0,,508dfe8e7d9f|a8fea95fa536,1,1,1,0
+D015,D,how do you say to fold in Wanka Quechua?,doblar,d655fca5084e,0.659073,responde,similitud,0,,d655fca5084e|cf18d66042b1|a6d02eab8c0a,1,1,1,0
+D016,D,how do you say happy in Wanka Quechua?,satisfecho,ff0c29f70fd2,0.678370,responde,similitud,0,,ff0c29f70fd2|d5dd00535911|d57d0dea077b|c6adb0eadfad|53fd6773a0ad,1,1,1,0
+D017,D,how do you say forgetfulness in Wanka Quechua?,olvido,b1499c591348,0.667359,responde,similitud,0,,b1499c591348,1,1,1,0
+D018,D,how do you say boiled corn in Wanka Quechua?,choclo,5771a495aac6,0.658013,responde,similitud,0,,5771a495aac6|c35ae85c213b|64d38dbff56b|1f05dcf92aaf|0dc84fdcbef3,1,1,1,0
+D019,D,how do you say lizard in Wanka Quechua?,lagartija,3f83965664c7,0.505744,responde,similitud,0,,3f83965664c7,1,1,1,0
+D020,D,how do you say horrible in Wanka Quechua?,temible,01f0e4e46ea2,0.693326,responde,similitud,0,,01f0e4e46ea2|b71d062b86ba|1ae2e3190c26,1,1,1,0
+D021,D,how do you say comrade in Wanka Quechua?,camarada,06f465cf0906,0.725594,responde,similitud,0,,06f465cf0906|62d14a57d639,1,1,1,0
+D022,D,how do you say hillside in Wanka Quechua?,costado,38641d87badd,0.729313,responde,similitud,0,,38641d87badd|11fae3d258b9|96c42ea1b1e2|963ce26c4c3c|a27a70d78701,1,1,1,0
+D023,D,how do you say devil in Wanka Quechua?,diablo,f544a774ddc9,0.479902,responde,lema,0,,f544a774ddc9|ac8f2ece0185,1,1,1,0
+D024,D,how do you say to come in Wanka Quechua?,venir,0f727dc11b6b,0.307185,responde,lema,0,,0f727dc11b6b,1,1,1,0
+D025,D,how do you say to burp in Wanka Quechua?,bostezar,77dce29255da,0.701598,responde,similitud,0,,77dce29255da|2457b8fa91f4|24f508a39ec5,1,1,1,0
+D026,D,how do you say toy in Wanka Quechua?,muñeca,0c938e46d7cf,0.709618,responde,similitud,0,,0c938e46d7cf|32e53548a074,1,1,1,0
+D027,D,how do you say to paint in Wanka Quechua?,pintar,a4dbd96ac93d,0.643737,responde,similitud,0,,a4dbd96ac93d,1,1,1,0
+D028,D,how do you say hoof in Wanka Quechua?,pezuña,7556440d804a,0.578966,responde,similitud,0,,7556440d804a|bc3c136bfed1,1,1,1,0
+D029,D,how do you say to walk in Wanka Quechua?,caminar,044d0b51f54a,0.673767,responde,similitud,0,,044d0b51f54a|10743a7409db|65ef3f01c176|285fb815cdd6|93c17cf5b708,1,1,1,0
+D030,D,how do you say twin in Wanka Quechua?,gemelo,ab80c9717fb4,0.693122,responde,similitud,0,,ab80c9717fb4|a2c07845a28c|e95222c47ff5,1,1,1,0
+D031,D,how do you say roasted in Wanka Quechua?,asado,e270177c8f63,0.608595,responde,similitud,0,,e270177c8f63,1,1,1,0
+D032,D,how do you say hole in Wanka Quechua?,agujero,b65a4b108c0f,0.745135,responde,similitud,0,,b65a4b108c0f|94c2729f5d8b|bbdf59fe4641|b4dfeb545d38|976de8d691e3,1,1,1,0
+D033,D,how do you say bird in Wanka Quechua?,gallinazo,82ab90c388d2,0.656575,responde,similitud,0,,82ab90c388d2|89901c82d2a6|f32e364c8019,1,1,1,0
+D034,D,how do you say to visit in Wanka Quechua?,visitar,3fdd6492f5ac,0.506613,responde,similitud,0,,3fdd6492f5ac,1,1,1,0
+D035,D,how do you say to continue in Wanka Quechua?,continuar,be266e2eb251,0.617551,responde,similitud,0,,be266e2eb251|07792ed36532|4f4a5cc031f9,1,1,1,0
+D036,D,how do you say to swallow in Wanka Quechua?,bocado,1d732d9a680a,0.691720,responde,similitud,0,,1d732d9a680a|b19d7251d9d9|8fd95ccc6b3e|4174030630c4|d4ffcd4dbbe0,1,1,1,0
+D037,D,how do you say fork in Wanka Quechua?,tenedor,088a59147308,0.649969,responde,similitud,0,,088a59147308|7335e77b5a81,1,1,1,0
+D038,D,how do you say bench in Wanka Quechua?,asiento,5325a411123d,0.725095,responde,similitud,0,,5325a411123d|c8bda81f2479|dd4a542c736a,1,1,1,0
+D039,D,how do you say urine in Wanka Quechua?,orina,1a554ccd8bec,0.374811,responde,lema,0,,1a554ccd8bec,1,1,1,0
+D040,D,how do you say to sew in Wanka Quechua?,zurcir,d5d53023f6f3,0.740501,responde,similitud,0,,d5d53023f6f3|0462380a6a1d|ac0a1ae37237,1,1,1,0

@@ -1,0 +1,64 @@
+name: CI
+
+# Pruebas en cada push y PR. Render despliega `main` solo cuando esta CI termina en verde
+# (autoDeployTrigger: checksPass en render.yaml).
+on:
+  push:
+    branches: [main, "feat/**", "fix/**", "test/**"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    services:
+      # PostgreSQL efimero para las pruebas de integracion (procedimientos y corpus en la base).
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: quechua_wanka
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s
+          --health-retries 10
+    env:
+      POSTGRES_PRUEBAS_URL: postgresql+psycopg://postgres:ci@localhost:5432/quechua_wanka
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements*.txt
+      - run: pip install -r requirements-dev.txt
+      # El corpus y la evaluacion de prosa no estan en Git (ADR-015): las pruebas que los
+      # necesitan se omiten por marcador (tests/conftest.py).
+      - name: pytest
+        run: python -m pytest -q -p no:cacheprovider
+      - name: pip-audit
+        run: pip-audit -r requirements.txt --progress-spinner off
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - name: vitest
+        run: npx vitest run
+      - name: build
+        run: npm run build

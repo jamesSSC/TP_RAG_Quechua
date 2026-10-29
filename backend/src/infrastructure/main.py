@@ -10,7 +10,11 @@ from fastapi.staticfiles import StaticFiles
 
 from infrastructure.config import configuracion
 from infrastructure.contenedor import Contenedor
-from infrastructure.seguridad import CabecerasDeSeguridad
+from infrastructure.seguridad import (
+    CabecerasDeSeguridad,
+    ClaveGeminiDeLaPeticion,
+    OrigenDePruebasAutorizado,
+)
 
 # `in` es palabra reservada de Python: el paquete adapters/in solo se importa por cadena.
 routers = import_module("adapters.in.rest").routers
@@ -39,6 +43,8 @@ app = FastAPI(
     lifespan=ciclo_vida,
 )
 
+app.add_middleware(ClaveGeminiDeLaPeticion)
+app.add_middleware(OrigenDePruebasAutorizado, token=configuracion.token_pruebas)
 app.add_middleware(CabecerasDeSeguridad)
 app.add_middleware(
     CORSMiddleware,

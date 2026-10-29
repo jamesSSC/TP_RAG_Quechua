@@ -1,5 +1,6 @@
 import json
 import logging
+import threading
 
 from adapters.out.generacion.ollama_generador import OllamaGenerador
 from application.ports.out.generador_texto_port import GeneradorTextoPort
@@ -24,6 +25,7 @@ class GeneradorExtractivo(GeneradorTextoPort):
     def __init__(self, ollama: OllamaGenerador, verificador: VerificadorFormaLiteral | None = None):
         self._ollama = ollama
         self._verificador = verificador or VerificadorFormaLiteral()
+        self._ultima = threading.local()
         self.aceptadas = 0
         self.descartadas = 0
 
@@ -36,6 +38,7 @@ class GeneradorExtractivo(GeneradorTextoPort):
             datos = self._ollama.extraer(consulta, fragmentos, idioma)
         except (json.JSONDecodeError, ValueError):
             datos = {}
+        self._ultima.valor = (self.nombre, None)
         verificada = self._verificador.comprobar(
             datos.get("forma"), datos.get("glosa"), [f.texto for f in fragmentos]
         )
@@ -46,9 +49,17 @@ class GeneradorExtractivo(GeneradorTextoPort):
             # escribio el modelo.
             return plantilla.format(glosa=verificada.glosa, forma=verificada.forma)
         self.descartadas += 1
+        self._ultima.valor = ("extractivo", "verificador: forma o glosa ausentes del fragmento")
         log.info("[GENERADOR] extraccion descartada: no figura literalmente en el fragmento")
         primero = fragmentos[0]
         return f"{primero.texto} ({primero.procedencia.citar()})"
+
+    @property
+    def nombre(self) -> str:
+        return getattr(self._ollama, "nombre", "ollama")
+
+    def procedencia_redaccion(self) -> tuple[str, str | None]:
+        return getattr(self._ultima, "valor", (self.nombre, None))
 
     def precalentar(self) -> bool:
         return self._ollama.precalentar()

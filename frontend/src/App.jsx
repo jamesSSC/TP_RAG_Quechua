@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { borrarHistorial, consultar, obtenerEstado, obtenerHistorial } from "./api";
+import { borrarHistorial, consultar, obtenerEstado, obtenerHistorial, URL_API } from "./api";
+import ConfiguracionNube from "./componentes/ConfiguracionNube";
 import CajaConsulta from "./componentes/CajaConsulta";
 import EstadoInicial from "./componentes/EstadoInicial";
 import GestionCorpus from "./componentes/GestionCorpus";
@@ -82,6 +83,13 @@ export default function App() {
         <TamanoTexto indice={tamano} onCambiar={cambiarTamano} />
       </header>
 
+      {estado?.generador === "gemini" && (
+        <output className="aviso-privacidad" data-testid="aviso-privacidad">
+          En la versión en la nube, el texto de la consulta y los fragmentos se envían a la API de
+          Google para redactar; no se envían datos personales.
+        </output>
+      )}
+
       {estado?.base_demostracion && (
         <output className="aviso-demostracion" data-testid="base-demostracion">
           Base de demostración: la mayoría de las consultas guardadas son generadas por pruebas, no
@@ -120,6 +128,7 @@ export default function App() {
         {vista === "consulta" ? (
           <>
             <EstadoInicial estado={estado} />
+            {estado?.generador === "gemini" && <ConfiguracionNube />}
             <CajaConsulta onConsultar={lanzarConsulta} cargando={cargando} />
 
             {error && (
@@ -154,7 +163,16 @@ export default function App() {
       </main>
 
       <footer className="pie">
-        {estado ? (
+        {estado && estado.entorno && estado.entorno !== "local" ? (
+          <span data-testid="pie-entorno">
+            Entorno: {estado.entorno} · API: {URL_API} · base {estado.motor_base_datos} · corpus{" "}
+            {estado.origen_corpus} ({estado.fragmentos_indexados.toLocaleString("es-PE")}{" "}
+            fragmentos, {estado.documentos_corpus} documentos) · redacción {estado.generador}
+            {estado.generador === "gemini" ? ` (${estado.modelo})` : ""} · modelos ML{" "}
+            {estado.predictores_disponibles ? "cargados" : "no cargados"} · umbral{" "}
+            {estado.umbral_abstencion}
+          </span>
+        ) : estado ? (
           <span>
             {estado.fragmentos_indexados.toLocaleString("es-PE")} fragmentos indexados ·
             umbral de abstención {estado.umbral_abstencion} · modelo {estado.modelo} ·

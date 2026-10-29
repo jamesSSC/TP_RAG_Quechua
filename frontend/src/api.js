@@ -1,6 +1,16 @@
 // URL de la API: solo desde VITE_API_URL. Vacia (o sin definir) = rutas relativas al mismo
 // origen, que es como el ejecutable sirve la interfaz; en desarrollo Vite redirige /api.
 const BASE = import.meta.env.VITE_API_URL ?? "";
+export const URL_API = BASE || "mismo origen";
+
+// BYOK (ADR-032): clave de Gemini del propio usuario. Solo en memoria de esta pestaña: sin
+// localStorage ni cookies; se pierde al recargar. Viaja en la cabecera X-Gemini-Key por HTTPS.
+let claveGemini = "";
+export const fijarClaveGemini = (clave) => {
+  claveGemini = (clave ?? "").trim();
+};
+export const hayClaveGemini = () => claveGemini !== "";
+const cabecerasClave = () => (claveGemini ? { "X-Gemini-Key": claveGemini } : {});
 
 // La primera consulta con el modelo en CPU puede tardar decenas de segundos.
 export const TIEMPO_MAXIMO_MS = 180000;
@@ -19,7 +29,7 @@ async function pedir(ruta, opciones = {}) {
   let respuesta;
   try {
     respuesta = await fetch(`${BASE}${ruta}`, {
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...cabecerasClave() },
       signal: control.signal,
       ...opciones,
     });

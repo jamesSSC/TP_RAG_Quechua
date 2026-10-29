@@ -20,6 +20,7 @@ from sqlalchemy.orm import sessionmaker
 from adapters.out.documentos.almacen_documentos_disco import AlmacenDocumentosDisco
 from adapters.out.documentos.corpus_jsonl import CorpusJsonl
 from adapters.out.documentos.extractor_pdf import ExtractorPdf
+from adapters.out.generacion.gemini_generador import GeminiGenerador
 from adapters.out.generacion.generador_extractivo import GeneradorExtractivo
 from adapters.out.generacion.generador_literal import GeneradorLiteral
 from adapters.out.generacion.ollama_generador import OllamaGenerador
@@ -33,6 +34,10 @@ from adapters.out.persistencia.repositorio_consultas_postgres import (
 )
 from adapters.out.persistencia.repositorio_consultas_sqlalchemy import (
     RepositorioConsultasSqlAlchemy,
+)
+from adapters.out.persistencia.repositorio_corpus_postgres import (
+    RepositorioCorpusPostgres,
+    instalar_esquema,
 )
 from adapters.out.persistencia.repositorio_fuentes_postgres import (
     RepositorioFuentesPostgres,
@@ -58,37 +63,49 @@ log = logging.getLogger(__name__)
 
 class Contenedor:
     def __init__(self, generador: str = "ollama", origen: OrigenConsulta | None = None):
-        """`generador`: "ollama" (API), "literal" (sin modelo) o "auto" (Ollama si responde).
+        """`generador`: "ollama" (API), "literal" (sin modelo), "auto" (Ollama si responde),
+        "extractivo" (nube sin modelo: fragmento literal citado) o "gemini" (nube, ADR-032).
 
         `origen`: de quien son las consultas que registra este proceso (HU-09). Por defecto
         el de la configuracion del servidor (`usuario`); los scripts de carga y de humo lo
         fijan al construir. El cliente de la API nunca lo elige."""
         self.origen = origen or OrigenConsulta(configuracion.origen_consultas)
-        preparar_carpeta_datos(
-            configuracion.carpeta_datos,
-            configuracion.ruta_corpus_base,
-            configuracion.ruta_corpus,
-        )
-        self.corpus = CorpusJsonl(configuracion.ruta_corpus)
-        self.almacen_documentos = AlmacenDocumentosDisco(configuracion.ruta_documentos)
+
+        self.repositorio_consultas = None
+        self.consultar_historial = None
+        self.gestionar_fuentes = None
+        self.repositorio_fuentes = None
+        self.analizar_demanda = None
+        self._motor = None
+        # La base va primero: con CORPUS_ORIGEN=postgres el corpus sale de ella (ADR-031).
+        self.base_datos_disponible = self._conectar_base_datos()
+
+        self.origen_corpus = configuracion.corpus_origen
+        if self.origen_corpus == "postgres":
+            if self._motor is None:
+                raise RuntimeError(
+                    "CORPUS_ORIGEN=postgres exige BASE_DATOS=postgres y una base accesible"
+                )
+            self.corpus = RepositorioCorpusPostgres(self._motor)
+            # En la nube el disco es efimero: los PDF persisten como fragmentos en la base,
+            # no como archivos (limitacion declarada en el reporte de despliegue).
+            self.almacen_documentos = None
+        else:
+            preparar_carpeta_datos(
+                configuracion.carpeta_datos,
+                configuracion.ruta_corpus_base,
+                configuracion.ruta_corpus,
+            )
+            self.corpus = CorpusJsonl(configuracion.ruta_corpus)
+            self.almacen_documentos = AlmacenDocumentosDisco(configuracion.ruta_documentos)
         self.indice = IndiceHibridoLexico()
         total = self.indice.indexar(self.corpus.cargar())
-        log.info("[INDICE] construido con %s fragmentos", total)
+        log.info("[INDICE] construido con %s fragmentos (%s)", total, self.origen_corpus)
 
         self.extractor = ExtractorPdf()
 
-        self.generador = OllamaGenerador(
-            url_base=configuracion.ollama_url, modelo=configuracion.ollama_modelo
-        )
-        if configuracion.modo_redaccion == "extractiva":
-            # ADR-028: el modelo solo extrae {forma, glosa}; se verifican contra el fragmento.
-            self.generador = GeneradorExtractivo(self.generador)
-        if generador == "literal" or (generador == "auto" and not self.generador.disponible()):
-            # Sin modelo (CLI, pruebas, equipo sin Ollama) la respuesta se compone con el
-            # texto literal del fragmento; la salvaguarda no cambia: el generador solo
-            # se invoca si hay respaldo.
-            log.warning("[GENERADOR] sin Ollama: se compone el texto literal del fragmento")
-            self.generador = GeneradorLiteral()
+        self.gemini = None
+        self.generador = self._crear_generador(generador)
         # La traduccion de la consulta se resuelve por tabla precalculada y no por
         # modelo: sobre el subconjunto D alcanza 100 % de recall frente al 95 % del
         # mismo modelo en el momento, sin coste de inferencia y de forma revisable.
@@ -97,13 +114,6 @@ class Contenedor:
         self.detector = DetectorIdiomaHeuristico()
         self.predictor_cobertura = PredictorSklearn(configuracion.ruta_modelo_cobertura)
         self.predictor_pasajes = PredictorSklearn(configuracion.ruta_modelo_pasajes)
-
-        self.repositorio_consultas = None
-        self.consultar_historial = None
-        self.gestionar_fuentes = None
-        self.repositorio_fuentes = None
-        self.analizar_demanda = None
-        self.base_datos_disponible = self._conectar_base_datos()
 
         self.reindexar_corpus = ReindexarCorpusUseCase(corpus=self.corpus, indice=self.indice)
         self.ingestar_documento = IngestarDocumentoUseCase(
@@ -115,7 +125,22 @@ class Contenedor:
         )
         self.avisos_consistencia = self._verificar_consistencia()
 
-        self.consultar_corpus = ConsultarCorpusUseCase(
+        self.consultar_corpus = self._caso_consulta(self.origen)
+        # Pruebas contra la nube (carga, humo): solo con TOKEN_PRUEBAS (ver seguridad.py). Mismo
+        # indice y mismos adaptadores; cambia unicamente el origen con que se registran.
+        self._consulta_por_origen = {
+            o: self._caso_consulta(OrigenConsulta(o)) for o in ("carga", "humo")
+        }
+        self.predecir_consulta = PredecirConsultaUseCase(
+            caracteristicas=self.consultar_corpus.caracteristicas,
+            predictor_cobertura=self.predictor_cobertura,
+            predictor_pasajes=self.predictor_pasajes,
+            corte_cobertura=configuracion.probabilidad_minima_cobertura,
+            corte_pasajes=configuracion.probabilidad_minima_pasajes,
+        )
+
+    def _caso_consulta(self, origen: OrigenConsulta) -> ConsultarCorpusUseCase:
+        return ConsultarCorpusUseCase(
             indice=self.indice,
             generador=self.generador,
             evaluador=self.evaluador,
@@ -127,15 +152,40 @@ class Contenedor:
             predictor_pasajes=self.predictor_pasajes,
             probabilidad_minima_cobertura=configuracion.probabilidad_minima_cobertura,
             probabilidad_minima_pasajes=configuracion.probabilidad_minima_pasajes,
-            origen=self.origen,
+            origen=origen,
         )
-        self.predecir_consulta = PredecirConsultaUseCase(
-            caracteristicas=self.consultar_corpus.caracteristicas,
-            predictor_cobertura=self.predictor_cobertura,
-            predictor_pasajes=self.predictor_pasajes,
-            corte_cobertura=configuracion.probabilidad_minima_cobertura,
-            corte_pasajes=configuracion.probabilidad_minima_pasajes,
+
+    def consultar_corpus_para(self, origen_pruebas: str | None) -> ConsultarCorpusUseCase:
+        """El caso de uso de consulta para el origen autorizado de la peticion (o el normal)."""
+        return self._consulta_por_origen.get(origen_pruebas or "", self.consultar_corpus)
+
+    def _crear_generador(self, generador: str):
+        if generador == "gemini":
+            # ADR-032: Gemini solo extrae {forma, glosa}; el verificador de ADR-028 decide. Sin
+            # clave, con 429 o pasado el tiempo, el caso de uso responde con el fragmento
+            # literal citado y lo rotula como "extractivo" con el motivo.
+            self.gemini = GeminiGenerador(
+                clave=configuracion.gemini_api_key,
+                modelo=configuracion.gemini_modelo,
+                timeout=configuracion.gemini_timeout,
+            )
+            return GeneradorExtractivo(self.gemini)
+        if generador == "extractivo":
+            log.info("[GENERADOR] extractivo sin modelo: fragmento literal citado")
+            return GeneradorLiteral()
+        modelo = OllamaGenerador(
+            url_base=configuracion.ollama_url, modelo=configuracion.ollama_modelo
         )
+        if configuracion.modo_redaccion == "extractiva":
+            # ADR-028: el modelo solo extrae {forma, glosa}; se verifican contra el fragmento.
+            modelo = GeneradorExtractivo(modelo)
+        if generador == "literal" or (generador == "auto" and not modelo.disponible()):
+            # Sin modelo (CLI, pruebas, equipo sin Ollama) la respuesta se compone con el
+            # texto literal del fragmento; la salvaguarda no cambia: el generador solo
+            # se invoca si hay respaldo.
+            log.warning("[GENERADOR] sin Ollama: se compone el texto literal del fragmento")
+            return GeneradorLiteral()
+        return modelo
 
     def estado(self) -> dict:
         return {
@@ -143,7 +193,17 @@ class Contenedor:
             "umbral_abstencion": self.evaluador.umbral,
             "generador_disponible": self.generador.disponible(),
             "base_datos_disponible": self.base_datos_disponible,
-            "modelo": configuracion.ollama_modelo,
+            "modelo": self.gemini.modelo if self.gemini else configuracion.ollama_modelo,
+            # Nube (ADR-030 a 032): solo nombres y conteos, ningun secreto.
+            "entorno": configuracion.entorno,
+            "motor_base_datos": configuracion.base_datos,
+            "origen_corpus": self.origen_corpus,
+            "generador": self.generador.nombre,
+            "modelos_ml": {
+                "cobertura_hu08_1": self.predictor_cobertura.disponible(),
+                "pasajes_rf15": self.predictor_pasajes.disponible(),
+            },
+            "documentos_corpus": len(self._documentos()),
             "predictores_disponibles": self.predictor_cobertura.disponible()
             and self.predictor_pasajes.disponible(),
             "consistencia": {
@@ -152,6 +212,13 @@ class Contenedor:
             },
             **self._rotulo_de_demostracion(),
         }
+
+    def _documentos(self) -> list[str]:
+        try:
+            return self.corpus.documentos()
+        except Exception as exc:  # noqa: BLE001
+            log.warning("[CORPUS] no se pudieron listar los documentos: %s", type(exc).__name__)
+            return []
 
     def _rotulo_de_demostracion(self) -> dict:
         """HU-09: si la base tiene mayoritariamente consultas de prueba, la interfaz lo dice."""
@@ -200,7 +267,17 @@ class Contenedor:
                 # `timeout`: espera de hasta 30 s a que se libere un bloqueo de escritura.
                 {"connect_args": {"check_same_thread": False, "timeout": 30}}
                 if configuracion.base_datos == "sqlite"
-                else {"pool_pre_ping": True}
+                else {
+                    "pool_pre_ping": True,
+                    # Plan gratuito de Neon y Render: pocas conexiones, recicladas antes de
+                    # que el pooler de Neon las cierre por inactividad.
+                    "pool_size": 3,
+                    "max_overflow": 2,
+                    "pool_recycle": 300,
+                    # El pooler de Neon (PgBouncer, modo transaccion) no conserva sentencias
+                    # preparadas entre transacciones.
+                    "connect_args": {"prepare_threshold": None},
+                }
             )
             # hide_parameters: los mensajes de error no incluyen los valores (texto de la consulta).
             motor = create_engine(configuracion.url_base_datos, hide_parameters=True, **opciones)
@@ -219,8 +296,11 @@ class Contenedor:
             sesion = sessionmaker(motor, expire_on_commit=False)
             if configuracion.base_datos == "postgres":
                 # Con PostgreSQL la escritura y los agregados van por procedimientos
-                # almacenados; SQLite no los admite y usa el adaptador SQLAlchemy.
+                # almacenados; SQLite no los admite y usa el adaptador SQLAlchemy. El esquema
+                # (tabla `fragmentos`, ADR-031) se instala antes que los procedimientos.
+                instalar_esquema(motor)
                 instalar_procedimientos(motor)
+                self._motor = motor
                 self.repositorio_consultas = RepositorioConsultasPostgres(sesion)
             else:
                 self.repositorio_consultas = RepositorioConsultasSqlAlchemy(sesion)
