@@ -36,7 +36,7 @@ CASOS = [
     },
     {
         "id": "C-05",
-        "consulta": "¿Qué referencia temporal implica la acción expresada por el verbo nominalizado?",
+        "consulta": "¿Cuál es el procedimiento para renovar un pasaporte?",
         "esperado": {"abstenida": True},
     },
     {
