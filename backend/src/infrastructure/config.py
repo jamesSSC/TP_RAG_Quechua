@@ -23,6 +23,18 @@ def resolver_carpeta_datos(empaquetado: bool, carpeta_ejecutable: Path, raiz: Pa
     return carpeta_ejecutable / "datos" if empaquetado else raiz / "data"
 
 
+def normalizar_database_url(url: str) -> str:
+    """Adapta la cadena que entrega Neon (`postgres://` o `postgresql://`) al controlador
+    psycopg de SQLAlchemy y exige TLS si la cadena no lo fija."""
+    for prefijo in ("postgres://", "postgresql://"):
+        if url.startswith(prefijo):
+            url = "postgresql+psycopg://" + url[len(prefijo) :]
+            break
+    if "sslmode=" not in url and not any(h in url for h in ("@localhost", "@127.0.0.1")):
+        url += ("&" if "?" in url else "?") + "sslmode=require"
+    return url
+
+
 class Configuracion(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=CARPETA_EJECUTABLE / ".env", env_file_encoding="utf-8", extra="ignore"
@@ -47,6 +59,15 @@ class Configuracion(BaseSettings):
 
     ruta_sqlite: Path = CARPETA_EJECUTABLE / "quechua_wanka.db"
 
+    # Nube (ADR-031): cadena de conexion completa de la base gestionada (Neon). Tiene prioridad
+    # sobre POSTGRES_*. Es un secreto: se pega en el panel de Render o en el .env local y nunca
+    # se imprime ni se devuelve por la API.
+    database_url: str = ""
+    # Origen del corpus: "jsonl" (archivo local, E1) o "postgres" (tabla `fragmentos`, nube).
+    corpus_origen: Literal["jsonl", "postgres"] = "jsonl"
+    # Rotulo del entorno que se muestra en /api/estado y en el pie de la interfaz.
+    entorno: str = "local"
+
     ruta_tabla_traduccion: Path = RAIZ / "data" / "traduccion_en_es.json"
     ollama_url: str = "http://localhost:11434"
     ollama_modelo: str = "qwen3.5:4b"
@@ -54,7 +75,16 @@ class Configuracion(BaseSettings):
     umbral_abstencion: float = 0.48
     # Generador: "ollama" (modelo), "literal" (fragmento literal sin modelo, para pruebas de carga
     # que miden la API y no la GPU) o "auto" (Ollama si responde).
-    generador: Literal["ollama", "literal", "auto"] = "ollama"
+    # "extractivo": sin modelo, compone el fragmento literal citado (nube sin clave de Gemini).
+    # "gemini": la API de Google extrae {forma, glosa} y se verifica como en ADR-028 (ADR-032).
+    generador: Literal["ollama", "literal", "auto", "extractivo", "gemini"] = "ollama"
+    # ADR-032. La clave es un secreto del servicio (panel de Render); nunca se registra.
+    gemini_api_key: str = ""
+    gemini_modelo: str = "gemini-2.5-flash"
+    gemini_timeout: float = 15.0
+    # Secreto que autoriza a las pruebas contra la nube a registrar sus consultas como `carga` o
+    # `humo` (cabeceras X-Token-Pruebas y X-Origen-Consultas). Vacio: desactivado.
+    token_pruebas: str = ""
     # Redaccion con modelo: "extractiva" (ADR-028: el modelo extrae {forma, glosa}, se verifica
     # contra el fragmento y se compone en una plantilla) o "libre" (el modelo escribe la frase).
     modo_redaccion: Literal["extractiva", "libre"] = "extractiva"
@@ -97,6 +127,8 @@ class Configuracion(BaseSettings):
     def url_base_datos(self) -> str:
         if self.base_datos == "sqlite":
             return f"sqlite:///{self.ruta_sqlite}"
+        if self.database_url:
+            return normalizar_database_url(self.database_url)
         return (
             f"postgresql+psycopg://{self.postgres_user}:{self.postgres_password}"
             f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"

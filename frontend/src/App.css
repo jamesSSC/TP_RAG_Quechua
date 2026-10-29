@@ -730,3 +730,37 @@ input[type="checkbox"] { width: 1.5rem; height: 1.5rem; }
 .estado__nombre { font-weight: 600; }
 .estado__detalle { color: var(--tinta-suave); }
 .estado__aviso { margin-top: 0.6rem; padding: 0.5rem 0.75rem; border: 1px solid var(--abstencion); border-radius: 6px; color: var(--abstencion); font-weight: 600; }
+
+/* Nube (ADR-032): aviso de privacidad, configuracion BYOK y rotulo del redactor. */
+.aviso-privacidad {
+  display: block;
+  margin: 0 0 1rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  font-size: 0.85em;
+}
+
+.configuracion-nube {
+  margin: 0 0 1rem;
+  font-size: 0.9em;
+}
+
+.configuracion-nube__formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.configuracion-nube__formulario input {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.configuracion-nube__nota,
+.respuesta__redactor {
+  font-size: 0.85em;
+  color: var(--tinta-suave);
+}

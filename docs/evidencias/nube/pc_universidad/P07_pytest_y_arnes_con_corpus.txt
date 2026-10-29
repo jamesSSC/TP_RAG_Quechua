@@ -1,0 +1,31 @@
+$ pytest -q (con corpus reconstruido)
+    opt_res = optimize.minimize(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+333 passed, 4 skipped, 2 warnings in 14.00s
+$ python scripts/arnes_linea_base.py
+      "tau": "0.48",
+      "regla_lema": "si",
+      "vp": 180,
+      "fp": 0,
+      "vn": 28,
+      "fn": 0,
+      "precision": "1.0000",
+      "recall": "1.0000",
+      "f1": "1.0000",
+      "especificidad": "1.0000"
+    },
+    {
+      "tau": "0.48",
+      "regla_lema": "no",
+      "vp": 165,
+      "fp": 0,
+      "vn": 28,
+      "fn": 15,
+      "precision": "1.0000",
+      "recall": "0.9167",
+      "f1": "0.9565",
+      "especificidad": "1.0000"
+    }
+  ]
+}

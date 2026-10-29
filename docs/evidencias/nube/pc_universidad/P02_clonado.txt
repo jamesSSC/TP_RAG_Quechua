@@ -1,0 +1,8 @@
+$ git clone https://github.com/omarpiero/TP_RAG_Quechua.git
+$ git log --oneline -3
+9ca0361 Merge pull request #16 from omarpiero/feat/arranque-exe
+905cc17 Merge pull request #15 from omarpiero/feat/a11y-formularios
+1470199 Merge pull request #14 from omarpiero/test/paridad-movil
+$ git status -sb
+## main...origin/main
+?? docs/evidencias/nube/

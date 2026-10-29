@@ -22,7 +22,13 @@ def _contenedor(request: Request):
 
 
 def consultar_corpus(request: Request) -> ConsultarCorpusPort:
-    return _contenedor(request).consultar_corpus
+    # `origen_pruebas` solo existe si la peticion trajo el token de pruebas del servidor
+    # (infrastructure/seguridad.py); el cliente normal nunca elige el origen (HU-09).
+    origen = request.scope.get("state", {}).get("origen_pruebas")
+    contenedor = _contenedor(request)
+    if origen and hasattr(contenedor, "consultar_corpus_para"):
+        return contenedor.consultar_corpus_para(origen)
+    return contenedor.consultar_corpus
 
 
 def ingestar_documento(request: Request) -> IngestarDocumentoPort:

@@ -1,0 +1,7 @@
+Medicion de memoria local (Windows, Python 3.12.16), corpus reconstruido 3605 fragmentos / 8 documentos,
+GENERADOR=extractivo, SQLite, modelos ML cargados. Carga: 40 POST /api/consultas (C-01, C-02, C-03, C-05 x10),
+10 POST /api/predicciones, 1 GET /api/analitica/demanda.
+
+proceso python (uvicorn) : pico working set = 217.2 MB   (umbral del prompt: 450 MB; plan free de Render: 512 MB)
+nota: "privado" 1406 MB es espacio virtual reservado (numpy/BLAS), no memoria residente.
+Decision: no hace falta la alternativa de Hugging Face Spaces. Confirmar en Render > Metrics (captura U10).

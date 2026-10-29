@@ -341,6 +341,62 @@ del PR 8.** Fuente: encargo del orquestador del 2026-10-01.
 
 ---
 
+## ADR-030 · Escucha en 0.0.0.0 solo en la nube — Propuesta (Guía 11)
+
+**Contexto.** Render enruta el tráfico HTTPS hacia el puerto que indica `$PORT`; un servicio que
+escucha en `127.0.0.1` no recibe nada. En local, en cambio, escuchar en todas las interfaces
+expone la API a la red del aula.
+
+**Decisión.** `127.0.0.1` sigue siendo el valor por defecto en local (uvicorn, ejecutable, Vite).
+Solo el `startCommand` de `render.yaml` usa `--host 0.0.0.0 --port $PORT`. No hay variable que lo
+cambie en local: el cambio vive en la orden de arranque de la plataforma.
+
+**Consecuencias.** Ningún cambio de comportamiento en E1. En la nube la exposición la limita
+Render (solo HTTPS en el puerto asignado).
+
+## ADR-031 · Corpus en PostgreSQL y Neon como base de staging — Propuesta (Guía 11)
+
+**Contexto.** El disco de Render es efímero: el archivo `fragmentos_v3.jsonl` y lo que se
+incorpora por HU-02 se perderían en cada redespliegue. La Guía 11 exige una base gestionada y
+con los datos cargados.
+
+**Decisión.** Nuevo adaptador `RepositorioCorpusPostgres` del puerto `RepositorioCorpusPort`
+(tabla `fragmentos`, `db/postgres/esquema.sql`, idempotente), elegido con `CORPUS_ORIGEN=postgres`
+(por defecto `jsonl`). Conexión por `DATABASE_URL` (TLS obligatorio, *pooling* de Neon, sin
+sentencias preparadas persistentes). Neon (plan gratuito, AWS us-east-1) como base de staging:
+editor SQL y vista de tablas en el navegador, sin expiración a los 30 días. La siembra la hace
+`scripts/sembrar_nube.py`. El dominio no cambia (lo verifica la prueba de arquitectura).
+
+**Consecuencias.** Los PDF incorporados en la nube persisten como fragmentos, no como archivos.
+Con `CORPUS_ORIGEN=postgres` y sin base, el servicio no arranca (fallo visible, no un índice
+vacío en silencio).
+
+## ADR-032 · Redacción con Gemini en la nube, extractivo como respaldo — Propuesta (Guía 11)
+
+**Contexto.** Ollama/Qwen necesita GPU y los planes gratuitos de CPU lo harían inutilizable. La
+nube necesita un módulo de IA que responda.
+
+**Decisión.** Adaptador `GeminiGenerador` (API REST con `httpx`, sin SDK) que **solo extrae**
+`{forma, glosa}`; lo envuelve `GeneradorExtractivo`, de modo que pasa por el mismo
+`VerificadorFormaLiteral` de ADR-028. Gemini no traduce (sigue la tabla, `TRADUCTOR=tabla`), no
+produce formas quechuas y no se llama en una abstención. RN-06 y τ = 0,48 no cambian. Sin clave,
+con error, con 429 o pasados 15 s se responde con el fragmento literal citado; la respuesta
+indica «Redactado por: gemini | extractivo» y el motivo. Clave principal `GEMINI_API_KEY` como
+secreto de Render; opcional BYOK por la cabecera `X-Gemini-Key`, solo en memoria de la pestaña, nunca
+registrada.
+
+**Excepción a RNF-06 (solo staging).** En la nube el texto de la consulta y los fragmentos
+recuperados se envían a la API de Google para la extracción; no se envían datos personales (la
+consulta no lleva identificadores, ADR-027). La interfaz muestra el aviso. Base legal de referencia:
+Ley 29733 (Protección de Datos Personales, Perú), que no aplica a datos no personales, y los
+términos del plan gratuito de la API de Gemini (Google puede usar el contenido para mejorar sus
+productos). E1 (local) sigue sin enviar nada fuera del equipo.
+
+**Consecuencias.** Depende de la cuota gratuita, que es baja y variable; la medición frente a Qwen
+declara el tamaño de muestra alcanzado.
+
+---
+
 ## Registro de cambios
 
 | Fecha | Cambio |
@@ -349,3 +405,4 @@ del PR 8.** Fuente: encargo del orquestador del 2026-10-01.
 | 2026-09-24 | Aceptadas ADR-009, 010, 011 y 015 por decisión del usuario; nuevas ADR-017 (aceptada) y ADR-018 (propuesta) |
 | 2026-09-24 | Línea base v2: ADR-019, 020, 022–026 aceptadas; ADR-021 y 027 propuestas; ADR-004, 008 y 012 actualizadas |
 | 2026-10-01 | **ADR-021 aceptada** con las cinco condiciones de `13_BRECHAS_RUBRICA.md` §3 (decisión del usuario). ADR-020: nota con la medición sobre `fragmentos_v3` y confirmación de τ 0,48 (no se reescribe el texto aceptado). ADR-013 y ADR-027: nota «sin preferencia del usuario; pendiente de confirmación antes del PR 8»; siguen abiertas y en propuesta |
+| 2026-10-29 | Guía 11 (despliegue en la nube): ADR-030, 031 y 032 propuestas en la rama `feat/despliegue-nube` |

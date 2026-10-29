@@ -8,6 +8,9 @@ log = logging.getLogger("rag.generador")
 
 
 class GeneradorLiteral(GeneradorTextoPort):
+    # Rotulo de la nube sin modelo (GENERADOR=extractivo): el texto es el fragmento citado.
+    nombre = "extractivo"
+
     """Compone la respuesta con el texto literal de los fragmentos, sin modelo de lenguaje.
 
     Sirve a la CLI y a los equipos sin Ollama. No aporta ni reformula nada: cada linea es el

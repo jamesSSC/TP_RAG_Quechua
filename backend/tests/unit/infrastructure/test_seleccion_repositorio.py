@@ -55,6 +55,8 @@ def test_con_base_datos_postgres_cablea_el_repositorio_de_procedimientos(entorno
 
     monkeypatch.setattr(modulo, "create_engine", motor_falso)
     monkeypatch.setattr(modulo, "instalar_procedimientos", lambda motor: instalados.append(motor))
+    esquemas = []
+    monkeypatch.setattr(modulo, "instalar_esquema", lambda motor: esquemas.append(motor))
     monkeypatch.setattr(
         modulo,
         "configuracion",
@@ -63,6 +65,7 @@ def test_con_base_datos_postgres_cablea_el_repositorio_de_procedimientos(entorno
     contenedor = modulo.Contenedor(generador="literal")
     assert type(contenedor.repositorio_consultas) is RepositorioConsultasPostgres
     assert len(instalados) == 1  # los procedimientos se instalan al arrancar
+    assert len(esquemas) == 1  # y antes, el esquema del corpus (ADR-031)
     assert pedidas[0][0].startswith("postgresql+psycopg://")
     assert pedidas[0][1]["pool_pre_ping"] is True
 

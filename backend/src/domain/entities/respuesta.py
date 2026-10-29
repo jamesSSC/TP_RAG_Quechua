@@ -42,6 +42,10 @@ class Respuesta:
     generador_invocado: bool = False
     # Si la redaccion fallo (D-6) se muestra el fragmento literal y se avisa aqui.
     aviso_generacion: str | None = None
+    # ADR-032: quien redacto ("gemini", "ollama" o "extractivo" = fragmento literal citado) y,
+    # si no fue el modelo previsto, por que (sin clave, 429, tiempo agotado, verificador).
+    redactado_por: str | None = None
+    motivo_redaccion: str | None = None
     # PMV2. Probabilidad de respaldo documental estimada por el modelo de cobertura (RF-14) y
     # probabilidad de que los pasajes de prosa traten la consulta (RF-15). None si el modelo
     # no esta disponible. Son estimaciones: la decision sigue siendo la del umbral (RN-06).

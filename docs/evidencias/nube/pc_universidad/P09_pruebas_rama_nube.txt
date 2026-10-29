@@ -1,0 +1,50 @@
+$ git switch -c feat/despliegue-nube; git status --short
+ M backend/src/adapters/in/rest/consultas_controller.py
+ M backend/src/adapters/in/rest/dependencias.py
+ M backend/src/adapters/in/rest/esquemas.py
+ M backend/src/adapters/out/generacion/generador_extractivo.py
+ M backend/src/adapters/out/generacion/generador_literal.py
+ M backend/src/adapters/out/generacion/ollama_generador.py
+ M backend/src/application/ports/out/generador_texto_port.py
+ M backend/src/application/use_cases/consultar_corpus.py
+ M backend/src/domain/entities/respuesta.py
+ M backend/src/infrastructure/config.py
+ M backend/src/infrastructure/contenedor.py
+ M backend/src/infrastructure/main.py
+ M backend/src/infrastructure/seguridad.py
+ M backend/tests/conftest.py
+ M backend/tests/unit/infrastructure/test_seleccion_repositorio.py
+ M docs/07_DECISIONES.md
+ M frontend/src/App.css
+ M frontend/src/App.jsx
+ M frontend/src/api.js
+ M frontend/src/componentes/Respuesta.jsx
+?? .github/workflows/
+?? backend/db/postgres/esquema.sql
+?? backend/scripts/humo_nube.py
+?? backend/scripts/sembrar_nube.py
+?? backend/src/adapters/out/generacion/gemini_generador.py
+?? backend/src/adapters/out/persistencia/repositorio_corpus_postgres.py
+?? backend/tests/unit/adapters/out/test_gemini_generador.py
+?? backend/tests/unit/adapters/out/test_repositorio_corpus_postgres.py
+?? backend/tests/unit/infrastructure/test_nube.py
+?? docs/Asistente_Quechua_Wanka.nube.postman_environment.json
+?? docs/despliegue/
+?? docs/evidencias/nube/
+?? frontend/e2e/capturas.nube.spec.js
+?? frontend/playwright.nube.config.js
+?? frontend/src/Nube.test.jsx
+?? frontend/src/componentes/ConfiguracionNube.jsx
+?? render.yaml
+$ pytest -q (con corpus reconstruido, rama feat/despliegue-nube)
+364 passed, 6 skipped, 2 warnings in 14.19s
+$ pytest -q tests nuevos de nube
+31 passed, 2 skipped, 1 warning in 2.70s
+$ pytest -q (SIN corpus, como en la CI)
+354 passed, 16 skipped, 2 warnings in 13.38s
+$ npx vitest run; npm run build
+ Test Files  6 passed (6)
+      Tests  33 passed (33)
+[32m✓ built in 165ms[39m
+$ pip-audit -r requirements.txt
+No known vulnerabilities found

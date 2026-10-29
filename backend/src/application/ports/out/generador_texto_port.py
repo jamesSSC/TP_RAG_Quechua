@@ -12,6 +12,9 @@ class GeneradorNoDisponible(Exception):
 
 
 class GeneradorTextoPort(ABC):
+    # Quien redacta, para el rotulo «Redactado por» de la respuesta (ADR-032).
+    nombre: str = "modelo"
+
     @abstractmethod
     def redactar(
         self,
@@ -27,3 +30,9 @@ class GeneradorTextoPort(ABC):
 
     @abstractmethod
     def disponible(self) -> bool: ...
+
+    def procedencia_redaccion(self) -> tuple[str, str | None]:
+        """(quien redacto, motivo) de la ultima redaccion de ESTE hilo. Por defecto, el propio
+        generador y sin motivo; GeneradorExtractivo lo sobrescribe cuando el verificador
+        sustituye la extraccion por el fragmento literal."""
+        return self.nombre, None

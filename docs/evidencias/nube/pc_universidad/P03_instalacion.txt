@@ -1,0 +1,17 @@
+$ uv venv --python 3.12  (falló el enlace de versión menor: política de la PC; se usó el Python 3.12 descargado por uv)
+$ python -m venv .venv
+Python 3.12.16
+$ uv pip install -r requirements-dev.txt
+fastapi                   0.162.0
+numpy                     2.2.1
+pip-audit                 2.10.1
+psycopg                   3.2.3
+psycopg-binary            3.2.3
+pytest                    9.2.0
+pytest-bdd                8.1.0
+pytest-cov                7.1.0
+scikit-learn              1.6.0
+sqlalchemy                2.0.36
+uvicorn                   0.34.0
+$ npm ci (frontend)
+88

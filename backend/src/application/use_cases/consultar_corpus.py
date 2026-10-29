@@ -299,16 +299,27 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
     def _redactar(self, consulta: Consulta, respaldo: list, idioma: Idioma):
         """Devuelve (texto, aviso). D-6: sin redactor se muestra el fragmento literal con su
         cita; nunca un error del servicio ni una forma que no este en el corpus."""
+        texto, aviso, _, _ = self._redactar_rotulado(consulta, respaldo, idioma)
+        return texto, aviso
+
+    def _redactar_rotulado(self, consulta: Consulta, respaldo: list, idioma: Idioma):
+        """Como `_redactar`, mas quien redacto y el motivo de la degradacion (ADR-032)."""
         log.info("[GENERADOR] invocado (%d fragmentos de respaldo)", len(respaldo))
         try:
-            return self._generador.redactar(consulta.texto, respaldo, idioma), None
+            texto = self._generador.redactar(consulta.texto, respaldo, idioma)
         except GeneradorNoDisponible as exc:
             log.warning("[GENERADOR] fallo: %s -> plantilla literal", type(exc).__name__)
             primero = respaldo[0]
-            return f"{primero.texto} ({primero.procedencia.citar()})", AVISO_GENERACION
+            texto = f"{primero.texto} ({primero.procedencia.citar()})"
+            return texto, AVISO_GENERACION, "extractivo", str(exc) or type(exc).__name__
+        procedencia = getattr(self._generador, "procedencia_redaccion", None)
+        redactado_por, motivo = procedencia() if procedencia else (None, None)
+        return texto, None, redactado_por, motivo
 
     def _respuesta_con_respaldo(self, consulta, idioma, veredicto, respaldo, p_cobertura):
-        texto, aviso_generacion = self._redactar(consulta, respaldo, idioma)
+        texto, aviso_generacion, redactado_por, motivo = self._redactar_rotulado(
+            consulta, respaldo, idioma
+        )
         return Respuesta(
             consulta_id=consulta.id,
             texto=texto,
@@ -320,6 +331,8 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
             via_respaldo=veredicto.via_respaldo,
             generador_invocado=True,
             aviso_generacion=aviso_generacion,
+            redactado_por=redactado_por,
+            motivo_redaccion=motivo,
             probabilidad_cobertura=p_cobertura,
         )
 

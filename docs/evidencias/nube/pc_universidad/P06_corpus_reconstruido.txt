@@ -1,0 +1,17 @@
+$ copy D:\Quechua\corpus\fragmentos_v2.jsonl backend\data\
+$ python scripts/reparar_ocr.py   (v2 -> v3, pipeline del propio repo)
+vocabulario construido: 3625 palabras
+fragmentos reparados: 784/3605 = 21.7%
+escrito en D:\Quechua\TP_RAG_Quechua\backend\data\fragmentos_v3.jsonl
+$ python scripts/generar_evaluacion_prosa.py
+prosa total 1135, legible 723
+
+0 preguntas escritas en D:\Quechua\TP_RAG_Quechua\backend\data\evaluacion_prosa.json
+$ verificacion
+data/fragmentos_v2.jsonl 1237351 bytes sha256 b29252dec8e8f7b81109555e0720ce3fe99fbacaf50093f47207cc9fb3c0fccc
+data/fragmentos_v3.jsonl 1228444 bytes sha256 d6200ed9e992e7dc3bfc740ec69195606ffb8f022d044d202d43ce562e47470a
+data/evaluacion_prosa.json 2 bytes sha256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945
+fragmentos v3: 3605 documentos: 8
+evaluacion_prosa consultas: 0
+ROTULO: corpus reconstruido en esta PC (reparar_ocr.py sobre fragmentos_v2.jsonl local), no el v3 original
+evaluacion_prosa.json: NO regenerable sin Ollama/Qwen (generar_evaluacion_prosa.py usa el LLM); archivo vacio borrado.
