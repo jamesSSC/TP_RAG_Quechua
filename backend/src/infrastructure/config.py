@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Al empaquetar con PyInstaller el codigo vive dentro de un directorio temporal que el
@@ -12,6 +13,13 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 EMPAQUETADO = getattr(sys, "frozen", False)
 RAIZ = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[2]))
 CARPETA_EJECUTABLE = Path(sys.executable).parent if EMPAQUETADO else RAIZ
+
+
+def resolver_carpeta_datos(empaquetado: bool, carpeta_ejecutable: Path, raiz: Path) -> Path:
+    """Carpeta de datos modificables (corpus ampliado y PDF incorporados). Empaquetado:
+    `datos/` junto al ejecutable, porque `_MEIPASS` se borra al cerrar. Desarrollo:
+    `backend/data/`."""
+    return carpeta_ejecutable / "datos" if empaquetado else raiz / "data"
 
 
 class Configuracion(BaseSettings):
@@ -44,7 +52,11 @@ class Configuracion(BaseSettings):
 
     umbral_abstencion: float = 0.48
     fragmentos_recuperados: int = 5
-    ruta_corpus: Path = RAIZ / "data" / "fragmentos_v3.jsonl"
+    # Corpus base (solo lectura, viaja en el paquete) y copia modificable (BUG-01). La copia
+    # se hace en el primer arranque; en desarrollo ambos coinciden en backend/data/.
+    ruta_corpus_base: Path = RAIZ / "data" / "fragmentos_v3.jsonl"
+    carpeta_datos: Path = resolver_carpeta_datos(EMPAQUETADO, CARPETA_EJECUTABLE, RAIZ)
+    ruta_corpus: Path | None = None
 
     # PMV2 · modelos predictivos (scripts/entrenar_predictores.py). Los cortes salen de la
     # validacion cruzada documentada en modelos/metricas.json; si el artefacto no existe el
@@ -60,6 +72,16 @@ class Configuracion(BaseSettings):
     ruta_interfaz: Path = RAIZ / "interfaz"
 
     cors_origenes: str = "http://localhost:5173"
+
+    @model_validator(mode="after")
+    def _derivar_rutas_de_datos(self):
+        if self.ruta_corpus is None:
+            self.ruta_corpus = self.carpeta_datos / "fragmentos_v3.jsonl"
+        return self
+
+    @property
+    def ruta_documentos(self) -> Path:
+        return self.carpeta_datos / "documentos"
 
     @property
     def url_base_datos(self) -> str:

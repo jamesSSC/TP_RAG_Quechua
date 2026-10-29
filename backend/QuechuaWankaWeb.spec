@@ -9,9 +9,11 @@ hiddenimports = [
     'adapters.in.rest.esquemas', 'adapters.in.rest.consultas_controller',
     'adapters.in.rest.corpus_controller', 'adapters.in.rest.fuentes_controller',
     'adapters.in.rest.historial_controller', 'adapters.in.rest.sistema_controller',
+    'adapters.in.rest.prediccion_controller',
     'application.ports.in', 'application.ports.in.consultar_corpus_port',
     'application.ports.in.ingestar_documento_port', 'application.ports.in.gestionar_fuentes_port',
     'application.ports.in.consultar_historial_port', 'application.ports.in.reindexar_corpus_port',
+    'application.ports.in.predecir_consulta_port', 'application.ports.in.analizar_demanda_port',
     'uvicorn.logging', 'uvicorn.protocols.http.auto', 'uvicorn.protocols.websockets.auto',
     'uvicorn.lifespan.on', 'sqlalchemy.dialects.sqlite',
 ]
