@@ -119,7 +119,13 @@ def _cliente(con_base_datos=True) -> TestClient:
 
 def test_las_rutas_son_las_mismas_de_antes_del_refactor():
     cliente = _cliente()
-    rutas = {(m, r.path) for r in cliente.app.routes for m in getattr(r, "methods", set())}
+    # Las rutas se leen del esquema OpenAPI: FastAPI >= 0.16x anida los routers incluidos
+    # y `app.routes` ya no los lista planos.
+    rutas = {
+        (metodo.upper(), ruta)
+        for ruta, operaciones in cliente.app.openapi()["paths"].items()
+        for metodo in operaciones
+    }
     esperadas = {
         ("GET", "/api/estado"),
         ("POST", "/api/consultas"),
