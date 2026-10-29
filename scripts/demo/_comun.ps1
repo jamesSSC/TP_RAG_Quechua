@@ -73,6 +73,16 @@ function Detener-Servidores {
     }
 }
 
+# Quita de lo que se guarda las rutas propias del equipo (usuario, repositorio, carpeta temporal).
+function Sanear-Linea([string]$Linea) {
+    $tmp = [System.IO.Path]::GetTempPath().TrimEnd([char]92)
+    foreach ($par in @(@($tmp, "<tmp>"), @($Raiz, "<repo>"), @($env:USERPROFILE, "<usuario>"))) {
+        if ($par[0]) { $Linea = $Linea.Replace($par[0], $par[1]) }
+    }
+    # Variantes con nombre corto 8.3 (USER01~1) o con otro usuario
+    return ($Linea -replace '(?i)[A-Z]:\\Users\\[^\\"]+\\AppData\\Local\\Temp', "<tmp>")
+}
+
 # Ejecuta un comando, muestra su salida y la guarda en $Archivo (UTF-8). Devuelve solo el codigo de salida.
 function Ejecutar-Y-Guardar([string]$Archivo, [scriptblock]$Comando) {
     $dir = Split-Path -Parent $Archivo
@@ -83,7 +93,7 @@ function Ejecutar-Y-Guardar([string]$Archivo, [scriptblock]$Comando) {
     $ErrorActionPreference = "Continue"
     try {
         & $Comando 2>&1 | ForEach-Object {
-            $linea = "$_"
+            $linea = Sanear-Linea "$_"
             Write-Host $linea
             Add-Content -LiteralPath $Archivo -Value $linea -Encoding UTF8
         }
