@@ -1,0 +1,99 @@
+{
+  "proyecto": "omarpiero_rag-quechua-wanka",
+  "puerta_de_calidad": {
+    "estado": "ERROR",
+    "condiciones": [
+      {
+        "metrica": "new_coverage",
+        "estado": "OK",
+        "valor": "84.9"
+      },
+      {
+        "metrica": "new_duplicated_lines_density",
+        "estado": "OK",
+        "valor": "0.0"
+      },
+      {
+        "metrica": "new_violations",
+        "estado": "ERROR",
+        "valor": "44"
+      }
+    ]
+  },
+  "medidas": {
+    "coverage": "77.6",
+    "bugs": "0",
+    "reliability_rating": "1.0",
+    "code_smells": "83",
+    "duplicated_lines_density": "0.7",
+    "security_rating": "1.0",
+    "ncloc": "5116",
+    "vulnerabilities": "0",
+    "security_hotspots": "0",
+    "sqale_rating": "1.0"
+  },
+  "bugs": [],
+  "vulnerabilidades": [],
+  "hotspots": [],
+  "code_smells": {
+    "total": 83,
+    "por_severidad_y_regla": {
+      "severities": [
+        [
+          "MAJOR",
+          71
+        ],
+        [
+          "MINOR",
+          9
+        ],
+        [
+          "CRITICAL",
+          3
+        ],
+        [
+          "INFO",
+          0
+        ],
+        [
+          "BLOCKER",
+          0
+        ]
+      ],
+      "rules": [
+        [
+          "python:S9073",
+          34
+        ],
+        [
+          "python:S8415",
+          9
+        ],
+        [
+          "javascript:S6819",
+          8
+        ],
+        [
+          "javascript:S3358",
+          7
+        ],
+        [
+          "python:S8410",
+          4
+        ],
+        [
+          "python:S5778",
+          4
+        ],
+        [
+          "javascript:S9020",
+          3
+        ],
+        [
+          "css:S4666",
+          3
+        ]
+      ]
+    }
+  }
+}
