@@ -74,5 +74,8 @@ SELECT * FROM fn_respaldo_por_documento();
 SELECT * FROM fn_demanda_insatisfecha(10);
 
 \echo
-\echo '== 8. fn_demanda_insatisfecha(10, FALSE): con sinteticas (demostracion) =='
-SELECT * FROM fn_demanda_insatisfecha(10, FALSE);
+\echo '== 8. fn_demanda_insatisfecha(10, FALSE): con sinteticas (demostracion), solo huella =='
+-- No se muestra el texto: las sinteticas se derivan de conjuntos de evaluacion y se identifican
+-- por una huella (md5 abreviado). Solo se ven la huella y la probabilidad de cobertura.
+SELECT left(md5(texto), 8) AS huella, probabilidad_cobertura
+  FROM fn_demanda_insatisfecha(10, FALSE);
