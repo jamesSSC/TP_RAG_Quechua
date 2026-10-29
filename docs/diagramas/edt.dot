@@ -1,0 +1,11 @@
+digraph E { rankdir=LR; node[shape=box,style="filled",fillcolor="#FFFFFF",fontname="DejaVu Sans",fontsize=9.5]; edge[arrowhead=none];
+ label="Estructura de desglose del trabajo (EDT)"; labelloc=t; fontname="DejaVu Sans"; fontsize=13; splines=ortho;
+ r [label="1. Asistente SLM + RAG\nquechua wanka",fillcolor="#1F3864",fontcolor=white];
+ g [label="1.1 Gestión del proyecto",fillcolor="#EAF3FB"]; a [label="1.2 PMV1 · Escritorio",fillcolor="#E8F5E9"]; b [label="1.3 PMV2 · Predicción ML",fillcolor="#FFF6E5"]; m [label="1.4 PMV3 · Móvil sin red",fillcolor="#F2F2F2"]; d [label="1.5 Documentación\ny cierre",fillcolor="#FDECEA"];
+ r->{g a b m d};
+ g1[label="1.1.1 Acta y plan\n(PMBOK 7 + Scrum)"]; g2[label="1.1.2 Backlog y\ntablero Trello"]; g3[label="1.1.3 Riesgos, calidad\ny comunicaciones"]; g->{g1 g2 g3};
+ a1[label="1.2.1 Corpus (8 PDF)\ny procedencia"]; a2[label="1.2.2 Índice léxico\nhíbrido + arnés"]; a3[label="1.2.3 Consulta, τ,\ntraducción, generación"]; a4[label="1.2.4 Interfaz React\n+ API + BD"]; a->{a1 a2 a3 a4};
+ b1[label="1.3.1 Dataset 415\nconsultas etiquetadas"]; b2[label="1.3.2 Modelo de\ncobertura (RF-14)"]; b3[label="1.3.3 Modelo de\npasajes (RF-15)"]; b4[label="1.3.4 Analítica HU-09\n+ procedimientos BD"]; b->{b1 b2 b3 b4};
+ m1[label="1.4.1 Exportación\ndel índice"]; m2[label="1.4.2 App Flutter\nsin red"]; m3[label="1.4.3 Validación\nen dispositivo"]; m->{m1 m2 m3};
+ d1[label="1.5.1 Documentos 0–6"]; d2[label="1.5.2 Informe final\ny video"]; d3[label="1.5.3 Sustentación"]; d->{d1 d2 d3};
+}
