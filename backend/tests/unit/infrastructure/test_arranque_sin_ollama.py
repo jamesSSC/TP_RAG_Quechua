@@ -1,4 +1,4 @@
-"""B14: sin Ollama el sistema arranca, lo avisa en /api/estado y responde con el fragmento literal."""
+"""B14: sin Ollama el sistema arranca, lo avisa en /api/estado y responde con el literal."""
 
 from importlib import import_module
 
