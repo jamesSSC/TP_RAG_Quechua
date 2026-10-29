@@ -36,11 +36,15 @@ class GeneradorExtractivo(GeneradorTextoPort):
             datos = self._ollama.extraer(consulta, fragmentos, idioma)
         except (json.JSONDecodeError, ValueError):
             datos = {}
-        forma, glosa = datos.get("forma"), datos.get("glosa")
-        if self._verificador.verificar(forma, glosa, [f.texto for f in fragmentos]):
+        verificada = self._verificador.comprobar(
+            datos.get("forma"), datos.get("glosa"), [f.texto for f in fragmentos]
+        )
+        if verificada is not None:
             self.aceptadas += 1
             plantilla = PLANTILLA.get(idioma, PLANTILLA[Idioma.ESPANOL])
-            return plantilla.format(glosa=glosa.strip(), forma=forma.strip())
+            # Se compone con la forma y el lema TAL COMO ESTAN en el fragmento, no con lo que
+            # escribio el modelo.
+            return plantilla.format(glosa=verificada.glosa, forma=verificada.forma)
         self.descartadas += 1
         log.info("[GENERADOR] extraccion descartada: no figura literalmente en el fragmento")
         primero = fragmentos[0]
