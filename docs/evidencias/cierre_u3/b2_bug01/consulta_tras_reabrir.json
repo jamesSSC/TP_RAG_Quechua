@@ -1,0 +1,10 @@
+{
+  "http": 200,
+  "abstenida": false,
+  "via_respaldo": "similitud",
+  "documentos_en_respaldo": [
+    "293274822-diccionario-quechua-Wanka-docx.pdf",
+    "copia-prueba-bug01.pdf"
+  ],
+  "recupera_el_documento_incorporado": true
+}
