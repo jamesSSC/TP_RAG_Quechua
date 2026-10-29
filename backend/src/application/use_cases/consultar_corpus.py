@@ -429,8 +429,12 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
             except Exception as exc:  # noqa: BLE001
                 # El historial no es critico: si no se puede escribir (base bloqueada, disco
                 # lleno) la consulta se responde igual, con su documento y pagina.
+                # Sin el texto de la consulta (dato del usuario): id, causa y traza bastan.
                 log.warning(
-                    "[REPOSITORIO] no se pudo registrar la consulta: %s", type(exc).__name__
+                    "[REPOSITORIO] no se pudo registrar consulta_id=%s: %s",
+                    consulta.id,
+                    type(exc).__name__,
+                    exc_info=True,
                 )
                 return respuesta
             log.info(

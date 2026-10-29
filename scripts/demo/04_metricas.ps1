@@ -97,19 +97,20 @@ try {
 # 6) Newman contra la API (la arranca si hace falta)
 Escribir-Paso "Newman ..."
 $arrancada = $null
+$puedeCorrerNewman = $false
 $envAntes = @{ B = $env:BASE_DATOS; R = $env:RUTA_SQLITE }
-if ((Estado-Api) -ne 200) {
-    if (Puerto-Ocupado $PuertoApi) {
-        Registrar "Newman" $false "el puerto $PuertoApi esta ocupado por otro programa"
-    } else {
-        $env:BASE_DATOS = "sqlite"
-        $env:RUTA_SQLITE = Join-Path $tmp "newman.db"
-        $arrancada = Start-Process -FilePath $Python -WindowStyle Hidden -PassThru -WorkingDirectory $Backend `
-            -ArgumentList @("-m", "uvicorn", "infrastructure.main:app", "--app-dir", "src", "--host", "127.0.0.1", "--port", "$PuertoApi")
-        if ($null -eq (Esperar-Estado)) { Registrar "Newman" $false "la API no arranco" ; $arrancada = $arrancada }
-    }
+# Newman solo corre contra una API que este mismo script arranca con una base aparte: nunca contra
+# una API ajena (podria ser la de uso real).
+if ((Estado-Api) -eq 200 -or (Puerto-Ocupado $PuertoApi)) {
+    Registrar "Newman" $false "el puerto $PuertoApi esta ocupado por otra API: no se usa; detengala y repita"
+} else {
+    $env:BASE_DATOS = "sqlite"
+    $env:RUTA_SQLITE = Join-Path $tmp "newman.db"
+    $arrancada = Start-Process -FilePath $Python -WindowStyle Hidden -PassThru -WorkingDirectory $Backend `
+        -ArgumentList @("-m", "uvicorn", "infrastructure.main:app", "--app-dir", "src", "--host", "127.0.0.1", "--port", "$PuertoApi")
+    if ($null -eq (Esperar-Estado)) { Registrar "Newman" $false "la API temporal no arranco" } else { $puedeCorrerNewman = $true }
 }
-if ((Estado-Api) -eq 200) {
+if ($puedeCorrerNewman) {
     $coleccion = Join-Path $Raiz "docs\Asistente_Quechua_Wanka.postman_collection.json"
     # El informe JSON de Newman contiene las respuestas completas (texto del corpus): va a la carpeta temporal.
     $informe = Join-Path $tmp "newman.json"
