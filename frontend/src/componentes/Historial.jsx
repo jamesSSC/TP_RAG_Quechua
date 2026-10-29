@@ -1,3 +1,9 @@
+function etiquetaDeEstado(entrada) {
+  if (entrada.abstenida) return "sin respaldo";
+  if (entrada.via_respaldo === "lema") return "respondida · entrada exacta";
+  return "respondida";
+}
+
 export default function Historial({ entradas, disponible = true, onBorrar, borrando = false }) {
   const confirmarBorrado = () => {
     if (window.confirm("¿Borrar todo el historial de consultas de este equipo?")) onBorrar();
@@ -24,11 +30,13 @@ export default function Historial({ entradas, disponible = true, onBorrar, borra
         borrarlas.
       </p>
 
-      {!disponible ? (
+      {!disponible && (
         <p className="historial__vacio">El historial no está disponible en este momento.</p>
-      ) : entradas.length === 0 ? (
+      )}
+      {disponible && entradas.length === 0 && (
         <p className="historial__vacio">Todavía no hay consultas guardadas.</p>
-      ) : (
+      )}
+      {disponible && entradas.length > 0 && (
         <ul className="historial__lista">
           {entradas.map((entrada, indice) => (
             <li key={`${entrada.momento ?? ""}-${indice}`} className="historial__item">
@@ -40,11 +48,7 @@ export default function Historial({ entradas, disponible = true, onBorrar, borra
               />
               <span className="historial__consulta">{entrada.consulta}</span>
               <span className="historial__estado">
-                {entrada.abstenida
-                  ? "sin respaldo"
-                  : entrada.via_respaldo === "lema"
-                    ? "respondida · entrada exacta"
-                    : "respondida"}
+                {etiquetaDeEstado(entrada)}
               </span>
             </li>
           ))}

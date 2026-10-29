@@ -63,6 +63,12 @@ export default function App() {
     }
   };
 
+  const otrasVistas = {
+    prediccion: <PanelPrediccion />,
+    fuentes: <GestionFuentes />,
+    corpus: <GestionCorpus />,
+  };
+
   return (
     <div className={`aplicacion aplicacion--${TAMANOS[tamano]}`}>
       <header className="cabecera">
@@ -76,10 +82,10 @@ export default function App() {
       </header>
 
       {estado?.base_demostracion && (
-        <p className="aviso-demostracion" role="status" data-testid="base-demostracion">
+        <output className="aviso-demostracion" data-testid="base-demostracion">
           Base de demostración: la mayoría de las consultas guardadas son generadas por pruebas, no
           demanda real.
-        </p>
+        </output>
       )}
 
       <nav className="pestanas">
@@ -128,9 +134,9 @@ export default function App() {
               </div>
             )}
             {cargando && (
-              <p className="cargando" role="status">
+              <output className="cargando">
                 <span className="giro" aria-hidden="true" /> Buscando en el corpus…
-              </p>
+              </output>
             )}
 
             <Respuesta resultado={resultado} />
@@ -140,12 +146,8 @@ export default function App() {
               onBorrar={borrar}
             />
           </>
-        ) : vista === "prediccion" ? (
-          <PanelPrediccion />
-        ) : vista === "fuentes" ? (
-          <GestionFuentes />
         ) : (
-          <GestionCorpus />
+          otrasVistas[vista]
         )}
       </main>
 
