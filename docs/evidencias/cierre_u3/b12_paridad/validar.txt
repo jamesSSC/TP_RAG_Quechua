@@ -1,0 +1,5 @@
+Consultas comparadas      : 248
+Diferencia maxima absoluta: 2.533e-08   (¿cómo se dice joroba en quechua wanka?)
+Desajustes en el top-5    : 0
+
+RESULTADO: EQUIVALENTE
