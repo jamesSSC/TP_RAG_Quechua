@@ -1,0 +1,25 @@
+name: Keep-alive (REF-01)
+
+# REF-01 (revisión por experto, 04/11/2026): Render apaga el servicio gratuito tras ~15 min
+# sin tráfico y la primera consulta tarda hasta 60 s. Este flujo llama cada 10 min a
+# /api/estado, que no gasta cuota de Gemini ni registra consultas, para mantenerlo despierto.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping a /api/estado
+        run: |
+          for i in 1 2 3; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 https://quechua-api.onrender.com/api/estado || true)
+            if [ "$code" = "200" ]; then echo "Servicio despierto (HTTP $code)"; exit 0; fi
+            echo "Intento $i: HTTP $code"; sleep 10
+          done
+          exit 1
