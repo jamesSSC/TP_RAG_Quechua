@@ -10,8 +10,15 @@ consulta anade, no la del equipo entero. Se informa por respuesta y por abstenci
 
 Uso:
     python scripts/medir_latencia_energia.py http://127.0.0.1:8000 SALIDA [--energia] [--etiqueta X]
-Solo contra la API local: contra la nube las consultas contarian como demanda real (HU-09).
+
+Contra la nube (HU-09): las consultas se marcan con `--origen humo` (cabeceras X-Token-Pruebas y
+X-Origen-Consultas; el token se lee de la variable TOKEN_PRUEBAS o de backend/.env y no se imprime)
+y se espacian con `--por-minuto 20`, para no registrar demanda falsa ni forzar el limite:
+    python scripts/medir_latencia_energia.py https://quechua-api.onrender.com SALIDA         --origen humo --por-minuto 20 --etiqueta nube_gemini
+Ademas del tiempo, informa el arnes: recall@5 (oro en el respaldo) en A, B y D y FP en C.
 """
+
+import os
 
 import csv
 import json
@@ -75,10 +82,32 @@ def percentil(valores, p):
     return v[min(len(v) - 1, round((len(v) - 1) * p))]
 
 
-def main(base, salida: Path, energia: bool, etiqueta: str):
+def token_pruebas() -> str:
+    if os.environ.get("TOKEN_PRUEBAS"):
+        return os.environ["TOKEN_PRUEBAS"]
+    env = RAIZ / ".env"
+    if env.exists():
+        for linea in env.read_text(encoding="utf-8").splitlines():
+            if linea.startswith("TOKEN_PRUEBAS="):
+                return linea.split("=", 1)[1].strip()
+    return ""
+
+
+def main(base, salida: Path, energia: bool, etiqueta: str, origen=None, por_minuto=0):
     salida.mkdir(parents=True, exist_ok=True)
     consultas = json.loads((RAIZ / "data" / "evaluacion_v2.json").read_text(encoding="utf-8"))
-    cliente = httpx.Client(timeout=180.0)
+    cabeceras = {}
+    if origen:
+        # La API solo acepta estos origenes (seguridad.py, ORIGENES_DE_PRUEBA); cualquier otro
+        # se registra como `usuario`, es decir, como demanda real. Ocurrio el 20/11 con "arnes".
+        if origen not in {"humo", "carga"}:
+            sys.exit(f"Origen '{origen}' no admitido por la API: usar humo o carga.")
+        token = token_pruebas()
+        if not token:
+            sys.exit("Falta TOKEN_PRUEBAS: sin el, las consultas contarian como demanda real.")
+        cabeceras = {"X-Token-Pruebas": token, "X-Origen-Consultas": origen}
+    cliente = httpx.Client(timeout=180.0, headers=cabeceras)
+    pausa = 60.0 / por_minuto if por_minuto else 0.0
     estado = cliente.get(f"{base}/api/estado").json()
 
     gpu = MedidorGpu() if energia else None
@@ -95,6 +124,8 @@ def main(base, salida: Path, energia: bool, etiqueta: str):
 
     filas = []
     for e in consultas:
+        if pausa:
+            time.sleep(pausa)
         t0 = time.perf_counter()
         r = cliente.post(f"{base}/api/consultas", json={"texto": e["consulta"]})
         t1 = time.perf_counter()
@@ -108,6 +139,11 @@ def main(base, salida: Path, energia: bool, etiqueta: str):
             "redactado_por": d.get("redactado_por"),
             "total_ms": round((t1 - t0) * 1000, 2),
             "servidor_ms": d.get("latencia_ms"),
+            "oro_en_top5": bool(
+                set(e["oro"]) & {f["fragmento_id"] for f in (d.get("respaldo") or [])[:5]}
+            )
+            if e["oro"]
+            else None,
         }
         if gpu:
             ej, pmedia = gpu.energia_j(t0, t1, reposo)
@@ -155,6 +191,19 @@ def main(base, salida: Path, energia: bool, etiqueta: str):
         "respuestas": resumen(respondidas) if respondidas else None,
         "abstenciones": resumen(abstenidas) if abstenidas else None,
         "errores_http": sum(f["http"] != 200 for f in filas),
+        "origen": origen or "usuario (API local)",
+        "arnes": {
+            sub: {
+                "n": len(g := [f for f in filas if f["subconjunto"] == sub]),
+                "respondidas": sum(f["abstenida"] is False for f in g),
+                **(
+                    {"falsos_positivos": sum(f["abstenida"] is False for f in g)}
+                    if sub == "C"
+                    else {"recall@5": round(sum(bool(f["oro_en_top5"]) for f in g) / len(g), 4)}
+                ),
+            }
+            for sub in "ABCD"
+        },
         "potencia_reposo_w": round(reposo, 2) if reposo is not None else None,
         "fecha_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
@@ -167,4 +216,6 @@ def main(base, salida: Path, energia: bool, etiqueta: str):
 if __name__ == "__main__":
     args = sys.argv[1:]
     etiqueta = args[args.index("--etiqueta") + 1] if "--etiqueta" in args else "local"
-    main(args[0], Path(args[1]), "--energia" in args, etiqueta)
+    origen = args[args.index("--origen") + 1] if "--origen" in args else None
+    por_minuto = int(args[args.index("--por-minuto") + 1]) if "--por-minuto" in args else 0
+    main(args[0], Path(args[1]), "--energia" in args, etiqueta, origen, por_minuto)
