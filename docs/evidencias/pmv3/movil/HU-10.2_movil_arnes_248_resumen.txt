@@ -1,0 +1,14 @@
+Arnés de 248 consultas (evaluacion_v2.json) en el emulador Pixel 9 Pro, modo sin conexión, sin red.
+Compilación de depuración (la que usa la prueba de integración); no se repitió en profile ni en release.
+
+partición                   n  atendidas  recall@5  falsos positivos
+A_lexico_es               120        120     1.000                 0
+B_independiente            60         60     1.000                 0
+C_fuera_de_cobertura       28          0         —                 0
+D_ingles                   40         40     1.000                 0
+
+consultas: 248   arranque (carga del índice): 258 ms
+latencia por consulta: P50 0.80 ms · P95 2.71 ms · máx 12.73 ms · media 1.05 ms
+fallos: 0
+
+00:00 +1: All tests passed!

@@ -1,0 +1,54 @@
+commit ccb4e29 · Flutter 3.44.9 • channel stable • https://github.com/flutter/flutter.git
+00:00 +0: test/asistente_conmutado_test.dart
+00:00 +0: test/asistente_conmutado_test.dart: automático: con red responde la nube
+00:00 +1: test/asistente_conmutado_test.dart: automático: sin red pasa al corpus local y lo dice
+00:00 +2: test/asistente_conmutado_test.dart: automático: si la nube tarda más de la espera, contesta el teléfono
+00:00 +3: test/asistente_conmutado_test.dart: automático: si la nube tarda más de la espera, contesta el teléfono
+00:00 +4: test/asistente_conmutado_test.dart: automático: si la nube tarda más de la espera, contesta el teléfono
+00:00 +5: test/asistente_conmutado_test.dart: automático: si la nube tarda más de la espera, contesta el teléfono
+00:00 +6: test/asistente_conmutado_test.dart: automático: si la nube tarda más de la espera, contesta el teléfono
+00:00 +7: test/asistente_conmutado_test.dart: automático: si la nube tarda más de la espera, contesta el teléfono
+00:00 +8: test/asistente_conmutado_test.dart: automático: si la nube tarda más de la espera, contesta el teléfono
+00:00 +9: test/paridad_test.dart: (setUpAll)
+00:00 +9: test/asistente_conmutado_test.dart: automático: un 5xx también pasa al corpus local
+00:00 +10: test/paridad_test.dart: (setUpAll)
+00:00 +10: test/asistente_conmutado_test.dart: automático: vuelve a la nube en cuanto hay red
+00:00 +11: test/paridad_test.dart: (setUpAll)
+00:00 +12: test/paridad_test.dart: (setUpAll)
+00:00 +13: test/paridad_test.dart: (setUpAll)
+00:00 +13: test/asistente_conmutado_test.dart: solo sin conexión: nunca se llama a la nube
+00:00 +14: test/paridad_test.dart: (setUpAll)
+00:00 +15: test/paridad_test.dart: (setUpAll)
+00:00 +16: test/paridad_test.dart: (setUpAll)
+00:00 +16: test/paridad_test.dart: el indice carga los 3605 fragmentos y su umbral
+00:00 +17: test/paridad_test.dart: la depuracion de la consulta coincide con la del escritorio
+00:00 +18: test/respuesta_local_test.dart: (setUpAll)
+00:00 +19: test/respuesta_local_test.dart: (setUpAll)
+00:00 +20: test/respuesta_local_test.dart: (setUpAll)
+00:00 +21: test/respuesta_local_test.dart: (setUpAll)
+00:00 +22: test/respuesta_local_test.dart: (setUpAll)
+00:00 +23: test/respuesta_local_test.dart: (setUpAll)
+00:00 +23: test/respuesta_local_test.dart: una consulta en espanol compone la correspondencia con sus matices
+00:00 +24: test/respuesta_local_test.dart: una palabra inglesa suelta se resuelve pasando por el espanol
+00:00 +25: test/respuesta_local_test.dart: un termino con varios sentidos los entrega todos
+00:00 +26: test/respuesta_local_test.dart: una consulta fuera de cobertura se abstiene y no ofrece nada
+00:00 +27: test/respuesta_local_test.dart: una pregunta de gramatica entrega pasajes sin afirmar nada
+00:00 +28: test/respuesta_local_test.dart: el corpus reparado llega legible a la respuesta
+00:00 +29: test/respuesta_local_test.dart: (tearDownAll)
+00:00 +29: test/widget_test.dart: la cabecera muestra el logo, el corpus y el modo activo siempre
+00:01 +30: test/widget_test.dart: una respuesta en línea muestra la cita, de qué modo vino y la predicción ML
+00:01 +31: test/widget_test.dart: sin conexión la respuesta lo declara y explica que no hay ML en el teléfono
+00:01 +32: test/widget_test.dart: la abstención se muestra como resultado, sin ninguna forma quechua
+00:01 +33: test/widget_test.dart: una abstención con pasajes los muestra citados y rotulados
+00:01 +34: test/widget_test.dart: el respaldo completo llega plegado y se despliega con un toque
+00:01 +35: test/widget_test.dart: pasados 4 s sin respuesta aparece el aviso de arranque en frío de la web
+00:01 +36: test/widget_test.dart: sin conexión no se muestra el aviso de arranque en frío
+00:01 +37: test/widget_test.dart: ante un 429 se informa y no se reintenta solo
+00:02 +38: test/widget_test.dart: el selector manual cambia el modo y la preferencia se guarda
+00:02 +39: test/widget_test.dart: A+ agranda el texto y A lo restablece, y la preferencia se guarda
+00:02 +40: test/widget_test.dart: con la letra al máximo se leen la forma, la fuente y el aviso (HU-11)
+00:02 +41: test/widget_test.dart: los botones táctiles miden al menos 48 px
+00:02 +42: test/widget_test.dart: la pestaña de fuentes lista los documentos
+00:02 +43: test/widget_test.dart: la pestaña de predicción ML muestra las dos probabilidades y las variables
+00:02 +44: test/widget_test.dart: tocar una consulta del historial la repite
+00:02 +45: All tests passed!

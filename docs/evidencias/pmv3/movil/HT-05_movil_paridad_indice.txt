@@ -1,0 +1,18 @@
+# HT-05 · El indice que exporta hoy el backend del equipo es el mismo que lleva la app
+# backend: tp-rag-quechua 8088193 · app: quechua-wanka-movil ccb4e29
+# corpus: fragmentos_v3.jsonl sha256=d6200ed9e992e7dc (3605 lineas)
+$ python backend/scripts/exportar_indice_movil.py <tmp> ; sha256sum por archivo
+fragmentos.json          app=d60b3dc38d30af59 equipo=d60b3dc38d30af59 IGUAL
+idf_caracteres.bin       app=158075dd5aaee97f equipo=158075dd5aaee97f IGUAL
+idf_palabras.bin         app=1b63512b36451a4f equipo=1b63512b36451a4f IGUAL
+lemario.json             app=2cc18604b3cd6324 equipo=2cc18604b3cd6324 IGUAL
+manifiesto.json          app=d8a55f5ebd826054 equipo=d8a55f5ebd826054 IGUAL
+matriz_caracteres.bin    app=13c883c71d058c56 equipo=13c883c71d058c56 IGUAL
+matriz_palabras.bin      app=3b9b70c2c784b8c7 equipo=3b9b70c2c784b8c7 IGUAL
+traduccion_en_es.json    app=a9674051505428a6 equipo=a9674051505428a6 IGUAL
+vocab_caracteres.json    app=cc0896690bf8ca68 equipo=cc0896690bf8ca68 IGUAL
+vocab_palabras.json      app=ea4ec9468bb8357e equipo=ea4ec9468bb8357e IGUAL
+(traduccion_en_es.json se compara con backend/data/traduccion_en_es.json, la tabla que usa la API)
+$ python backend/scripts/generar_paridad_dart.py  -> 15 casos; comparado con test/paridad_esperada.json de la app: identico
+$ flutter test test/paridad_test.dart
+00:00 +5: All tests passed!

@@ -1,0 +1,18 @@
+$ curl -s https://quechua-api.onrender.com/api/estado   (2026-11-20T00:59:29Z)
+{
+ "fragmentos_indexados": 3605,
+ "documentos_corpus": 8,
+ "umbral_abstencion": 0.48,
+ "entorno": "staging",
+ "generador": "gemini",
+ "modelo": "gemini-3.5-flash-lite",
+ "predictores_disponibles": true,
+ "consultas_por_origen": {
+  "carga": 1005,
+  "humo": 270,
+  "usuario": 49
+ },
+ "escritura_protegida": true
+}
+HTTP 200 en 0.381062s
+

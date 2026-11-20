@@ -1,0 +1,19 @@
+# Mediciones en emulador Pixel 9 Pro (x86_64, API 37), APK profile x86_64
+fecha_utc 2026-11-20T00:53:49Z
+## Arranque en frio (am start -W, app detenida antes de cada corrida)
+TotalTime: 788 WaitTime: 789 MEDICION arranque_ms=140
+TotalTime: 682 WaitTime: 684 MEDICION arranque_ms=146
+TotalTime: 787 WaitTime: 787 MEDICION arranque_ms=154
+TotalTime: 691 WaitTime: 693 MEDICION arranque_ms=150
+TotalTime: 772 WaitTime: 775 MEDICION arranque_ms=175
+## Memoria (dumpsys meminfo, tras una consulta)
+  Native Heap    41006    40900       52       77    41892    57600    49659     3175
+  Dalvik Heap     1897     1852        4     2401     3304     5143     2604     2539
+        TOTAL   137807    91148    28300     2616   240548    62743    52263     5714
+         Native Heap:    40900                          41892
+           TOTAL PSS:   137807            TOTAL RSS:   240548       TOTAL SWAP PSS:     2616
+## Tamano de los APK release (flutter build apk --release --split-per-abi)
+build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk 20.2 MB
+build/app/outputs/flutter-apk/app-x86_64-release.apk 24.0 MB
+
+## Indice incorporado: assets/indice = 12M
