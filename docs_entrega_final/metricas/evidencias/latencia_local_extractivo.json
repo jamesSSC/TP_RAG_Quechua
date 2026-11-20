@@ -1,0 +1,32 @@
+{
+ "etiqueta": "local_extractivo",
+ "api": "http://127.0.0.1:8000",
+ "generador": "extractivo",
+ "modelo": "ninguno (extractivo)",
+ "fragmentos": 3605,
+ "calentamiento_ms": 10.6,
+ "todas": {
+  "n": 248,
+  "p50_ms": 6.8,
+  "p95_ms": 15.0,
+  "max_ms": 80.7,
+  "media_ms": 8.4
+ },
+ "respuestas": {
+  "n": 220,
+  "p50_ms": 6.8,
+  "p95_ms": 15.1,
+  "max_ms": 80.7,
+  "media_ms": 8.6
+ },
+ "abstenciones": {
+  "n": 28,
+  "p50_ms": 7.1,
+  "p95_ms": 8.3,
+  "max_ms": 8.4,
+  "media_ms": 7.2
+ },
+ "errores_http": 0,
+ "potencia_reposo_w": null,
+ "fecha_utc": "2026-11-20T01:55:47Z"
+}
