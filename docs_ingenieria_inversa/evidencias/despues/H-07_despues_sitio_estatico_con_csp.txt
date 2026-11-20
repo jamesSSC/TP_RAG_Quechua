@@ -1,0 +1,22 @@
+# rama fix/s14-arreglos-rapidos (sin commit aun; ver PR)
+# El sitio estatico de Render toma las cabeceras de render.yaml al desplegar main. Hasta el
+# despliegue se verifica sirviendo el build con esas mismas cabeceras y abriendolo con Playwright:
+$ VITE_API_URL=https://quechua-api.onrender.com vite build && servir dist con las cabeceras de render.yaml && playwright
+CSP: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://quechua-api.onrender.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
+estado visible: true
+violaciones CSP: 0
+(errores de CORS esperados: la API solo admite su origen real, no 127.0.0.1)
+
+$ grep -nE "Content-Security-Policy|Referrer-Policy|Permissions-Policy|ADMIN_TOKEN" -A2 render.yaml
+50:      - key: ADMIN_TOKEN
+51-        sync: false
+52-
+--
+79:        name: Content-Security-Policy
+80-        value: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://quechua-api.onrender.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+81-      - path: /*
+82:        name: Referrer-Policy
+83-        value: no-referrer
+84-      - path: /*
+85:        name: Permissions-Policy
+86-        value: camera=(), microphone=(), geolocation=()

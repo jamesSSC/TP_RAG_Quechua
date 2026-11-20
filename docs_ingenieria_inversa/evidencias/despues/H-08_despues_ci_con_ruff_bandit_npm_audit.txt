@@ -1,0 +1,17 @@
+# rama fix/s14-arreglos-rapidos (sin commit aun; ver PR)
+$ grep -nE "ruff|bandit|npm audit|pip-audit|oxlint" .github/workflows/ci.yml
+41:      # S14: estilo y errores comunes (ruff) y analisis estatico de seguridad (Bandit) en la CI,
+43:      - name: ruff
+44:        run: ruff check src tests
+45:      - name: bandit
+46:        run: bandit -q -r src -ll
+52:      - name: pip-audit
+53:        run: pip-audit -r requirements.txt --progress-spinner off
+69:      - name: npm audit
+70:        run: npm audit --audit-level=high
+72:      - name: oxlint
+73:        run: npx oxlint
+
+$ cd backend && ruff check src tests && bandit -q -r src -ll
+All checks passed!
+bandit: sin hallazgos de severidad media o alta (salida vacia)

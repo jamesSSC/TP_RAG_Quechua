@@ -39,11 +39,12 @@ from adapters.out.persistencia.repositorio_corpus_postgres import (
     RepositorioCorpusPostgres,
     instalar_esquema,
 )
-from adapters.out.persistencia.repositorio_fuentes_postgres import (
-    RepositorioFuentesPostgres,
+from adapters.out.persistencia.repositorio_fuentes_sqlalchemy import (
+    RepositorioFuentesSqlalchemy,
 )
 from adapters.out.prediccion.predictor_sklearn import PredictorSklearn
 from adapters.out.recuperacion.indice_hibrido_lexico import IndiceHibridoLexico
+from adapters.out.traduccion.ollama_traductor import OllamaTraductor
 from adapters.out.traduccion.traductor_tabla import TraductorTabla
 from application.use_cases.analizar_demanda import AnalizarDemandaUseCase
 from application.use_cases.consultar_corpus import ConsultarCorpusUseCase
@@ -105,11 +106,20 @@ class Contenedor:
         self.extractor = ExtractorPdf()
 
         self.gemini = None
+        self._generador_configurado = generador
         self.generador = self._crear_generador(generador)
         # La traduccion de la consulta se resuelve por tabla precalculada y no por
         # modelo: sobre el subconjunto D alcanza 100 % de recall frente al 95 % del
         # mismo modelo en el momento, sin coste de inferencia y de forma revisable.
-        self.traductor = TraductorTabla(configuracion.ruta_tabla_traduccion)
+        # TRADUCTOR (render.yaml) elige el adaptador; antes la variable se ignoraba y siempre se
+        # usaba la tabla. "tabla" sigue siendo el valor por defecto y el de la nube.
+        if configuracion.traductor == "ollama":
+            self.traductor = OllamaTraductor(
+                url_base=configuracion.ollama_url, modelo=configuracion.ollama_modelo
+            )
+        else:
+            self.traductor = TraductorTabla(configuracion.ruta_tabla_traduccion)
+        log.info("[TRADUCTOR] %s", configuracion.traductor)
         self.evaluador = EvaluadorConfianza(umbral=configuracion.umbral_abstencion)
         self.detector = DetectorIdiomaHeuristico()
         self.predictor_cobertura = PredictorSklearn(configuracion.ruta_modelo_cobertura)
@@ -187,13 +197,22 @@ class Contenedor:
             return GeneradorLiteral()
         return modelo
 
+    def _modelo_redactor(self) -> str:
+        """H-10: el modelo que de verdad redacta. Con el extractivo no hay modelo; antes se
+        informaba el de Ollama aunque no se usara."""
+        if self.gemini:
+            return self.gemini.modelo
+        if self._generador_configurado == "extractivo":
+            return "ninguno (extractivo)"
+        return configuracion.ollama_modelo
+
     def estado(self) -> dict:
         return {
             "fragmentos_indexados": self.indice.total_indexado(),
             "umbral_abstencion": self.evaluador.umbral,
             "generador_disponible": self.generador.disponible(),
             "base_datos_disponible": self.base_datos_disponible,
-            "modelo": self.gemini.modelo if self.gemini else configuracion.ollama_modelo,
+            "modelo": self._modelo_redactor(),
             # Nube (ADR-030 a 032): solo nombres y conteos, ningun secreto.
             "entorno": configuracion.entorno,
             "escritura_protegida": configuracion.modo_nube,
@@ -305,7 +324,7 @@ class Contenedor:
                 self.repositorio_consultas = RepositorioConsultasPostgres(sesion)
             else:
                 self.repositorio_consultas = RepositorioConsultasSqlAlchemy(sesion)
-            self.repositorio_fuentes = RepositorioFuentesPostgres(sesion)
+            self.repositorio_fuentes = RepositorioFuentesSqlalchemy(sesion)
             self.gestionar_fuentes = GestionarFuentesUseCase(self.repositorio_fuentes)
             self.consultar_historial = ConsultarHistorialUseCase(self.repositorio_consultas)
             self.analizar_demanda = AnalizarDemandaUseCase(self.repositorio_consultas)

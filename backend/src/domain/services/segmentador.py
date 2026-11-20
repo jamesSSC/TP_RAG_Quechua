@@ -57,7 +57,7 @@ class Segmentador:
 
         limites = cortes + [len(texto)]
         entradas = []
-        for inicio, fin in zip(limites, limites[1:]):
+        for inicio, fin in zip(limites, limites[1:], strict=False):
             entrada = texto[inicio:fin].strip()
             if entrada:
                 entradas.append(entrada)

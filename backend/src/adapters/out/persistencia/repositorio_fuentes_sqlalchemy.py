@@ -6,7 +6,11 @@ from application.ports.out.repositorio_fuentes_port import RepositorioFuentesPor
 from domain.entities.fuente import Fuente
 
 
-class RepositorioFuentesPostgres(RepositorioFuentesPort):
+class RepositorioFuentesSqlalchemy(RepositorioFuentesPort):
+    """Registro de fuentes (HU-01) sobre SQLAlchemy. Sirve igual con SQLite (local) que con
+    PostgreSQL/Neon (nube): el nombre anterior, `RepositorioFuentesPostgres`, sugeria que solo
+    funcionaba con PostgreSQL (H-09)."""
+
     def __init__(self, sesion: sessionmaker[Session]):
         self._sesion = sesion
 

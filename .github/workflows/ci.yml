@@ -38,6 +38,12 @@ jobs:
           cache: pip
           cache-dependency-path: backend/requirements*.txt
       - run: pip install -r requirements-dev.txt
+      # S14: estilo y errores comunes (ruff) y analisis estatico de seguridad (Bandit) en la CI,
+      # no solo en local. Bandit falla con hallazgos de severidad media o alta (-ll).
+      - name: ruff
+        run: ruff check src tests
+      - name: bandit
+        run: bandit -q -r src -ll
       # El corpus y la evaluacion de prosa no estan en Git (ADR-015): las pruebas que los
       # necesitan se omiten por marcador (tests/conftest.py).
       - name: pytest
@@ -59,6 +65,9 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
+      # S14: dependencias del frontend con vulnerabilidades altas o criticas rompen la CI.
+      - name: npm audit
+        run: npm audit --audit-level=high
       # S13 (M-08): lint del frontend. Hoy 0 errores y 3 avisos (no bloquean).
       - name: oxlint
         run: npx oxlint

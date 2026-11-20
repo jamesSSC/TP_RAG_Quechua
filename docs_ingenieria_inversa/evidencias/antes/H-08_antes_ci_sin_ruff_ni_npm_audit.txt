@@ -1,0 +1,6 @@
+# commit 8088193
+$ grep -nE "ruff|bandit|npm audit|pip-audit|oxlint" .github/workflows/ci.yml
+46:      - name: pip-audit
+47:        run: pip-audit -r requirements.txt --progress-spinner off
+63:      - name: oxlint
+64:        run: npx oxlint

@@ -46,6 +46,9 @@ services:
       # Autoriza a humo_nube.py y a la carga a registrar como `humo`/`carga` (HU-09).
       - key: TOKEN_PRUEBAS
         generateValue: true
+      # ADR-035: token de las escrituras. Solo se declara; el valor se pone en el panel.
+      - key: ADMIN_TOKEN
+        sync: false
 
   - type: web
     name: quechua-web
@@ -71,3 +74,13 @@ services:
       - path: /*
         name: X-Frame-Options
         value: DENY
+      # S14: el sitio estatico no enviaba CSP (la API si). Solo se permite conectar con la API.
+      - path: /*
+        name: Content-Security-Policy
+        value: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://quechua-api.onrender.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+      - path: /*
+        name: Referrer-Policy
+        value: no-referrer
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=()
