@@ -50,3 +50,29 @@ el 20/11/2026 (UTC); conviene rotularlas `humo` si el equipo decide relabelar (g
   como demanda real. Sin acceso a Render, **por medir**.
 - Aviso de arranque en frío capturado contra Render dormido: se intenta cuando el servicio vuelva a
   suspenderse (15 min sin tráfico).
+
+## Incidente · 2026-11-20, 02:23–02:26 UTC · 31 consultas de prueba registradas como `usuario`
+
+Al medir la latencia en la nube con `TOKEN_PRUEBAS` se usó el origen `arnes`, pero la API solo admite
+`humo` y `carga` (`backend/src/infrastructure/seguridad.py:58`, `ORIGENES_DE_PRUEBA`). El token se había
+comprobado con `humo` (humo 270 → 271), pero no con `arnes`. Resultado: **31 consultas** quedaron con
+`origen = 'usuario'`: la de calentamiento («zorro») más las 30 primeras de `evaluacion_v2.json`
+(A001 a A030). Se detuvo en cuanto `usuario` pasó de 50 a 79 (cerró en 81). El guion ya rechaza
+cualquier origen distinto de `humo` y `carga`.
+
+**Corrección (acción manual de James en la consola de Neon, en transacción, sin borrar nada):**
+
+```sql
+BEGIN;
+SELECT COUNT(*) FROM consultas
+WHERE origen = 'usuario'
+  AND momento BETWEEN '2026-11-20 02:23:00+00' AND '2026-11-20 02:26:30+00';
+-- Debe dar 31. Si da otro número, ROLLBACK y revisar.
+UPDATE consultas SET origen = 'humo'
+WHERE origen = 'usuario'
+  AND momento BETWEEN '2026-11-20 02:23:00+00' AND '2026-11-20 02:26:30+00';
+COMMIT;   -- o ROLLBACK si la verificación no dio 31
+```
+
+Las 6 consultas de la app del 20/11, 00:37–00:51 UTC (tabla de arriba), se pueden rotular igual si el
+equipo lo decide.
