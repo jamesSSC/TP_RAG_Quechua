@@ -1,0 +1,28 @@
+# CI del fork en ubuntu-latest sobre fix/s14-arreglos-rapidos (54385b0 + d23098a)
+$ gh run view 44656608139 -R jamesSSC/TP_RAG_Quechua --json jobs
+frontend (success)
+   Set up job: success
+   Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09: success
+   Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444: success
+   Run npm ci: success
+   npm audit: success
+   oxlint: success
+   vitest: success
+   build: success
+   Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444: success
+   Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09: success
+   Complete job: success
+backend (success)
+   Set up job: success
+   Initialize containers: success
+   Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09: success
+   Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1: success
+   Run pip install -r requirements-dev.txt: success
+   ruff: success
+   bandit: success
+   pytest: success
+   pip-audit: success
+   Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1: success
+   Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09: success
+   Stop containers: success
+   Complete job: success
