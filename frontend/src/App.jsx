@@ -21,6 +21,7 @@ import PanelPrediccion from "./componentes/PanelPrediccion";
 import Respuesta from "./componentes/Respuesta";
 import TamanoTexto from "./componentes/TamanoTexto";
 import { guardarTamano, leerTamano, TAMANOS } from "./tamanoTexto";
+import logo from "./assets/logo_contorno.svg";
 import "./App.css";
 
 const PESTANAS = [
@@ -206,11 +207,20 @@ export default function App() {
   return (
     <div className={`aplicacion aplicacion--${TAMANOS[tamano]}`}>
       <header className="cabecera">
-        <div>
-          <h1 className="cabecera__titulo">Asistente de consulta del quechua wanka</h1>
-          <p className="cabecera__subtitulo">
-            Consulta sobre el corpus documental publicado de la variedad wanka de Junín
-          </p>
+        <div className="cabecera__marca">
+          <img
+            className="cabecera__logo"
+            src={logo}
+            alt="Logo del asistente de consulta del quechua wanka"
+            width="56"
+            height="56"
+          />
+          <div>
+            <h1 className="cabecera__titulo">Asistente de consulta del quechua wanka</h1>
+            <p className="cabecera__subtitulo">
+              Consulta sobre el corpus documental publicado de la variedad wanka de Junín
+            </p>
+          </div>
         </div>
         <TamanoTexto indice={tamano} onCambiar={cambiarTamano} />
       </header>
