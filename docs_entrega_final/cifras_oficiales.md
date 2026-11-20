@@ -16,7 +16,7 @@ Fecha de medición: 19 y 20/11/2026. Repositorio base: `omarpiero/TP_RAG_Quechua
 | C-04 | Puertos | **17**: 7 de entrada y 10 de salida | `ls backend/src/application/ports/{in,out}/*.py` | `8088193` |
 | C-05 | Casos de uso / controladores REST / middleware | **8 / 6 / 7** | ver `docs_ingenieria_inversa/evidencias/fase_arquitectura/` | `8088193` |
 | C-06 | Rutinas en PostgreSQL | **7**: 2 procedimientos y 5 funciones | `grep -hoiE "create (or replace )?(function\|procedure) [a-z_]+" backend/db/postgres/*.sql` | `8088193` |
-| C-07 | WIP del Kanban | **1** en desarrollo; 2 en especificación, auditoría y revisión humana | `docs/05_KANBAN.md:15-24` | `8088193` |
+| C-07 | WIP del Kanban | **Trello: 3** («una tarjeta por integrante», tarjeta en IN PROGRESS). `docs/05_KANBAN.md:15-24` dice 1 en desarrollo y 2 en las demás columnas: **unificar** (el tablero real usa 3) | Export JSON del tablero (20/11); `docs/05_KANBAN.md` | 20/11 |
 | C-08 | Corpus | **3 605** fragmentos, **8** documentos (nube tras la limpieza H-14) | `curl -s https://quechua-api.onrender.com/api/estado` | 20/11 00:59 UTC |
 | C-09 | Umbral τ | **0,48** (en local, en la nube y en el teléfono) | `config.py:75`; `manifiesto.json` de la app | `8088193` |
 
