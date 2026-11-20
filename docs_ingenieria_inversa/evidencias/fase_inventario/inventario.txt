@@ -1,0 +1,16 @@
+# commit 8088193 (main = omarpiero/TP_RAG_Quechua@8088193)
+$ git log --oneline | wc -l ; gh pr list --state all
+commits en main: 137
+PR: MERGED=26 OPEN=1
+
+$ archivos y lineas por capa (backend/src, *.py)
+  domain            20 archivos    830 lineas
+  application       30 archivos   1287 lineas
+  adapters          39 archivos   2353 lineas
+  infrastructure     7 archivos    894 lineas
+  tests            56 archivos 5014 lineas
+  frontend/src     27 archivos 3774 lineas
+
+$ dependencias directas
+  backend/requirements.txt: 13 paquetes
+  frontend/package.json: 2 de ejecucion, 12 de desarrollo
