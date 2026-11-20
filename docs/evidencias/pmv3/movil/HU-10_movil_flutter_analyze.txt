@@ -1,0 +1,3 @@
+commit ccb4e29
+Analyzing quechua-wanka-movil...                                
+No issues found! (ran in 2.3s)

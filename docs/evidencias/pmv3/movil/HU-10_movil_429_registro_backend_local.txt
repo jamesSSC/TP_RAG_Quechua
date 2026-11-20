@@ -1,0 +1,62 @@
+INFO:     Started server process [38124]
+INFO:     Waiting for application startup.
+19:54:42 [REPOSITORIO] base de datos conectada
+19:54:42 [INDICE] construido con 3605 fragmentos (jsonl)
+19:54:42 [GENERADOR] extractivo sin modelo: fragmento literal citado
+19:54:43 [PREDICTOR] cargado cobertura.joblib
+19:54:43 [PREDICTOR] cargado relevancia_pasajes.joblib
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8765 (Press CTRL+C to quit)
+INFO:     127.0.0.1:58719 - "GET /api/vivo HTTP/1.1" 200 OK
+19:54:43 [REST] GET /api/estado
+INFO:     127.0.0.1:58720 - "GET /api/estado HTTP/1.1" 200 OK
+19:54:43 [REST] POST /api/consultas
+19:54:43 [PUERTO-IN] ConsultarCorpusPort.ejecutar
+19:54:43 [CASO-USO] ConsultarCorpus: idioma=es
+19:54:43 [TRADUCTOR] lecturas candidatas=0
+19:54:43 [INDICE] k=5 recuperados=5 sim_max=0.610 mejor=35d5d6d6b8a4 (293274822-diccionario-quechua-Wanka-docx.pdf, p. 37)
+19:54:43 [EVALUADOR] responder=True via=similitud tau=0.48
+19:54:43 [PREDICTOR] probabilidad de cobertura=1.000
+19:54:43 [GENERADOR] invocado (1 fragmentos de respaldo)
+19:54:43 [GENERADOR] texto literal de 1 fragmento(s), sin modelo
+19:54:43 [REPOSITORIO] registrada consulta_id=09f6b662-91b1-4e07-9cff-c88fdc5e3378 abstenida=False
+INFO:     127.0.0.1:58721 - "POST /api/consultas HTTP/1.1" 200 OK
+19:54:43 [REST] POST /api/consultas
+19:54:43 [PUERTO-IN] ConsultarCorpusPort.ejecutar
+19:54:43 [CASO-USO] ConsultarCorpus: idioma=es
+19:54:43 [TRADUCTOR] lecturas candidatas=0
+19:54:43 [INDICE] k=5 recuperados=5 sim_max=0.610 mejor=35d5d6d6b8a4 (293274822-diccionario-quechua-Wanka-docx.pdf, p. 37)
+19:54:43 [EVALUADOR] responder=True via=similitud tau=0.48
+19:54:43 [PREDICTOR] probabilidad de cobertura=1.000
+19:54:43 [GENERADOR] invocado (1 fragmentos de respaldo)
+19:54:43 [GENERADOR] texto literal de 1 fragmento(s), sin modelo
+19:54:43 [REPOSITORIO] registrada consulta_id=1abb305b-3fea-4f18-b5f8-83205f2df7cf abstenida=False
+INFO:     127.0.0.1:58722 - "POST /api/consultas HTTP/1.1" 200 OK
+19:54:43 [SEGURIDAD] 429 /api/consultas cliente=12ca17b49a
+INFO:     127.0.0.1:58723 - "POST /api/consultas HTTP/1.1" 429 Too Many Requests
+19:55:38 [REST] GET /api/estado
+INFO:     127.0.0.1:58932 - "GET /api/estado HTTP/1.1" 200 OK
+19:55:56 [REST] POST /api/consultas
+19:55:56 [PUERTO-IN] ConsultarCorpusPort.ejecutar
+19:55:56 [CASO-USO] ConsultarCorpus: idioma=es
+19:55:56 [TRADUCTOR] lecturas candidatas=0
+19:55:56 [INDICE] k=5 recuperados=5 sim_max=0.271 mejor=19eb27356311 (293274822-diccionario-quechua-Wanka-docx.pdf, p. 27)
+19:55:56 [EVALUADOR] responder=True via=lema tau=0.48
+19:55:56 [PREDICTOR] probabilidad de cobertura=0.989
+19:55:56 [GENERADOR] invocado (1 fragmentos de respaldo)
+19:55:56 [GENERADOR] texto literal de 1 fragmento(s), sin modelo
+19:55:56 [REPOSITORIO] registrada consulta_id=1811fddb-04d7-4d23-b7d7-d125071684c1 abstenida=False
+INFO:     127.0.0.1:60381 - "POST /api/consultas HTTP/1.1" 200 OK
+19:55:59 [REST] POST /api/consultas
+19:55:59 [PUERTO-IN] ConsultarCorpusPort.ejecutar
+19:55:59 [CASO-USO] ConsultarCorpus: idioma=es
+19:55:59 [TRADUCTOR] lecturas candidatas=0
+19:55:59 [INDICE] k=5 recuperados=5 sim_max=0.617 mejor=454acbb90e28 (293274822-diccionario-quechua-Wanka-docx.pdf, p. 2)
+19:55:59 [EVALUADOR] responder=True via=similitud tau=0.48
+19:55:59 [PREDICTOR] probabilidad de cobertura=0.989
+19:55:59 [GENERADOR] invocado (2 fragmentos de respaldo)
+19:55:59 [GENERADOR] texto literal de 2 fragmento(s), sin modelo
+19:55:59 [REPOSITORIO] registrada consulta_id=ce9093eb-9a0d-4377-83f0-f00e1585d06f abstenida=False
+INFO:     127.0.0.1:60381 - "POST /api/consultas HTTP/1.1" 200 OK
+19:56:03 [SEGURIDAD] 429 /api/consultas cliente=12ca17b49a
+INFO:     127.0.0.1:60381 - "POST /api/consultas HTTP/1.1" 429 Too Many Requests

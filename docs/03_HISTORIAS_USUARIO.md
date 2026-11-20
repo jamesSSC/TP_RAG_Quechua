@@ -720,6 +720,87 @@ Característica: Interfaz accesible
     Entonces se ven la forma quechua, la fuente y el aviso de alcance sin quedar recortados
 ```
 
+### 7.1 Criterios del PMV3 en dos modos (ADR-038, aclaración B0)
+
+La app tiene un modo **en línea** (principal: cliente de la API desplegada) y un modo **sin conexión**
+(respaldo: índice exportado y compositor determinista). Estos escenarios amplían los de HU-10.1 a HU-11
+sin sustituirlos; los de modo avión siguen vigentes tal cual.
+
+```gherkin
+# language: es
+@HU-10.1 @PMV3 @dos-modos
+Característica: Consulta desde el teléfono en los dos modos
+  Escenario: Consulta en línea contra la nube
+    Dado la aplicación en modo automático y el teléfono con red
+    Cuando consulto "zorro"
+    Entonces la respuesta muestra "Atuq" con el documento y la página 37
+    Y la respuesta indica "Respondido en línea · nube"
+    Y se muestra el bloque de predicción ML con la probabilidad de respaldo
+
+  Escenario: Cambio automático al corpus del teléfono
+    Dado la aplicación en modo automático
+    Y el dispositivo en modo avión
+    Cuando consulto "zorro"
+    Entonces la respuesta muestra "Atuq" con el documento y la página 37
+    Y la respuesta indica "Respondido sin conexión · corpus local"
+    Y explica que no hubo conexión con la nube
+    Y el indicador de la cabecera muestra "Sin conexión · corpus local"
+
+  Escenario: La nube no responde a tiempo
+    Dado la aplicación en modo automático
+    Y la API sin responder durante 20 segundos
+    Cuando consulto un término
+    Entonces responde el corpus del teléfono y la respuesta lo declara
+
+  Escenario: Selector manual
+    Cuando elijo "Solo sin conexión" en el selector de modo
+    Entonces ninguna consulta sale del teléfono
+    Y la preferencia se conserva al volver a abrir la aplicación
+
+@HU-10.1 @PMV3 @nube
+Característica: Comportamiento ante la nube
+  Escenario: Arranque en frío de Render
+    Dado la API en la nube suspendida
+    Cuando una consulta tarda más de 4 segundos
+    Entonces se muestra el mismo aviso de arranque en frío que en la web
+
+  Escenario: Límite de consultas
+    Dado que la API responde 429 con Retry-After
+    Cuando consulto
+    Entonces se muestra el mensaje del servidor y la espera
+    Y la aplicación no reintenta sola
+    Y el botón "Reintentar" se habilita al cumplirse la espera
+
+@HU-10.2 @PMV3 @salvaguarda @arnes
+Característica: Misma salvaguarda en los dos modos
+  Escenario: Cero falsos positivos sin conexión en el dispositivo
+    Cuando ejecuto en el dispositivo las 248 consultas de evaluacion_v2.json en modo sin conexión
+    Entonces los falsos positivos de la partición C son 0
+    Y el recall@5 de A, B y D es 1,000
+
+  Escenario: Abstención en los dos modos
+    Cuando consulto "criptomoneda" en línea y en modo avión
+    Entonces en ambos casos la aplicación declara que no dispone de respaldo documental
+    Y no muestra ninguna forma en quechua
+
+@HU-10.1 @PMV3 @seguridad
+Característica: La app no administra
+  Escenario: Sin token ni funciones de administración
+    Dado el código fuente de la aplicación
+    Entonces no contiene ADMIN_TOKEN, TOKEN_PRUEBAS ni la cabecera X-Admin-Token
+    Y solo envía POST a /api/consultas y /api/predicciones
+
+@HU-11 @PMV3
+Característica: Interfaz legible en el teléfono
+  Escenario: Tamaño de letra como en la web
+    Cuando pulso "A+" hasta el máximo
+    Entonces se leen la forma quechua, la fuente y el aviso de alcance sin recortes
+    Y "A" restablece el tamaño normal
+
+  Escenario: Botones táctiles grandes
+    Entonces los botones A−, A, A+ y Consultar miden al menos 48 px de alto
+```
+
 ---
 
 ## 8. Historias técnicas (habilitadores)
@@ -836,3 +917,4 @@ Característica: Servidor MCP de desarrollo
 |---|---|---|---|
 | 2026-09-24 | 1.0 | Creación; división de HU-08 y HU-10; historias técnicas HT-00…HT-07 | — |
 | 2026-09-24 | 1.1 | HT-00 en la semana 1 del sprint 1; escenario de identificadores en HU-02; nueva HT-08 | ADR-017, ADR-018 |
+| 2026-11-19 | 1.2 | §7.1: criterios Gherkin del PMV3 en dos modos (en línea y sin conexión) | ADR-038 |

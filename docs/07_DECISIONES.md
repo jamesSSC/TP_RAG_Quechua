@@ -492,6 +492,51 @@ bajo). Detrás de un NAT, varios usuarios comparten el límite: 20/min sigue sie
 
 ---
 
+## ADR-038 · App móvil: cliente de la nube con respaldo sin conexión — Propuesta (PMV3, B0)
+
+**Contexto.** El PMV3 se planificó como una app 100 % sin conexión (HU-10.x, ADR-019 y ADR-026): índice
+léxico exportado, compositor determinista y ningún modelo en el teléfono. Después del PMV2 el sistema
+desplegado (Render + Neon + Gemini) tiene funciones que el teléfono no puede reproducir: los dos
+predictores ML (HU-08.1, RF-14 y RF-15), la redacción con Gemini y el registro de fuentes con entidad y
+licencia. El usuario aclaró el alcance (B0): el modo principal es la nube y el sin conexión es el respaldo.
+
+**Decisión.** La app `quechua-wanka-movil` cumple su único puerto (`AsistentePort`) con tres adaptadores:
+`AsistenteNube` (cliente HTTP de los endpoints públicos de lectura: `POST /api/consultas`,
+`POST /api/predicciones`, `GET /api/modelos`, `GET /api/fuentes`, `GET /api/estado`), `AsistenteLocal`
+(el adaptador sin conexión ya existente, sin cambios en su lógica) y `AsistenteConmutado`, que compone
+los dos y es el que inyecta el contenedor.
+
+- **Automático** (por defecto): se pregunta a la nube; si no hay red, si no responde en 20 s o si
+  devuelve un 5xx, contesta el corpus del teléfono y la respuesta lo declara. La consulta siguiente
+  vuelve a intentar la nube.
+- **Solo en línea** y **Solo sin conexión**: selector manual, guardado en SQLite.
+- El modo activo se ve siempre en la cabecera («En línea · nube» / «Sin conexión · corpus local») y
+  cada respuesta dice de qué modo vino.
+- Un **429** no cambia de modo ni se reintenta: se muestra el mensaje del servidor y el botón
+  «Reintentar» se habilita al cumplirse `Retry-After` (ADR-037).
+- El aviso de arranque en frío usa el mismo texto y el mismo umbral (4 s) que la web (ADR-033).
+- La app **no lleva** `ADMIN_TOKEN`, `TOKEN_PRUEBAS` ni claves de API, y no tiene funciones de
+  administración (incorporar, editar o borrar fuentes, borrar el historial). Una prueba
+  (`test/seguridad_test.dart`) lo comprueba sobre el código fuente.
+- El historial es siempre el del teléfono (SQLite, con el modo de cada consulta): en la nube la
+  lectura del historial del servidor exige el token (ADR-036).
+- La URL de la API va en `--dart-define=API_URL` (por defecto, `https://quechua-api.onrender.com`).
+- Paleta y logo de la web (B11).
+
+**Consecuencias.**
+- En línea, la consulta **sí sale del teléfono** (a Render y, para redactar, a Gemini); sin conexión,
+  no. La interfaz lo hace visible y el artículo debe corregir la afirmación de privacidad (B8).
+- Las dos vías no son idénticas: en línea el predictor puede **añadir** abstenciones (RN-06) y la
+  redacción es de Gemini; sin conexión decide solo el umbral τ = 0,48 con la coincidencia de lema, y
+  redacta el compositor determinista. La salvaguarda se conserva en ambas (0 FP en C medido en las dos).
+- Las consultas que la app hace a la nube se registran con origen `usuario`, porque la app no puede
+  llevar el token de pruebas. Las pruebas automatizadas de la app usan un doble de la API; las
+  capturas contra la nube se limitaron a unas pocas consultas, anotadas en la bitácora.
+- La dependencia nueva es solo de desarrollo (`flutter_launcher_icons`, para el ícono). La conectividad
+  se infiere del propio fallo HTTP, sin paquetes de red adicionales.
+
+---
+
 ## Registro de cambios
 
 | Fecha | Cambio |
@@ -503,3 +548,4 @@ bajo). Detrás de un NAT, varios usuarios comparten el límite: 20/min sigue sie
 | 2026-10-29 | Guía 11 (despliegue en la nube): ADR-030, 031 y 032 propuestas en la rama `feat/despliegue-nube` |
 | 2026-11-12 | S13 fase 1 (FURPS+): ADR-033 (aviso de arranque en frío, REF-02) y ADR-034 (`/api/vivo` y presupuesto de horas del ping, REF-01) propuestas en `s13/furps-owasp` |
 | 2026-11-12 | S13 fase 2 (OWASP): ADR-035 (token de administración), ADR-036 (historial por sesión) y ADR-037 (límite de peticiones) propuestas en `s13/owasp` |
+| 2026-11-19 | PMV3 (B0): ADR-038 propuesta (app móvil: cliente de la nube con respaldo sin conexión) en `feat/pmv3-app-movil` |
