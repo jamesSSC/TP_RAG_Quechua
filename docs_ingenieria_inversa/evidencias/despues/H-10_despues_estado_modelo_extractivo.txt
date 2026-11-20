@@ -1,0 +1,9 @@
+# rama fix/s14-arreglos-rapidos (sin commit aun; ver PR)
+$ curl -s 127.0.0.1:8000/api/estado  (ENTORNO=local GENERADOR=extractivo)
+{"generador": "extractivo", "modelo": "ninguno (extractivo)", "generador_disponible": true}
+
+$ grep -E "TRADUCTOR|INFO|WARNING" backend_local.log | head
+20:48:22 INFO    infrastructure.contenedor [REPOSITORIO] base de datos conectada
+20:48:23 INFO    infrastructure.contenedor [INDICE] construido con 3605 fragmentos (jsonl)
+20:48:23 INFO    infrastructure.contenedor [GENERADOR] extractivo sin modelo: fragmento literal citado
+20:48:23 INFO    infrastructure.contenedor [TRADUCTOR] tabla

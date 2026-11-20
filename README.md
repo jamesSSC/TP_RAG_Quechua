@@ -6,11 +6,24 @@ recuperación sobre el corpus documental publicado del quechua wanka de Junín.
 Toda respuesta cita el documento y la página que la sustentan, y el sistema declara
 explícitamente la ausencia de información en lugar de proponer una forma no documentada.
 
-Este repositorio contiene la **versión de escritorio**: servicio, interfaz web, base de
-datos e ingesta documental. La aplicación móvil, que resuelve la consulta en el propio
-dispositivo y sin red, vive en
-[quechua-wanka-movil](https://github.com/DalgomXD-byte/quechua-wanka-movil) y empaqueta
-los artefactos que aquí se generan con `scripts/exportar_indice_movil.py`.
+Este repositorio contiene el **servicio, la interfaz web, la base de datos y la ingesta
+documental**, desplegados también en la nube:
+
+- Web: <https://quechua-web.onrender.com>
+- API: <https://quechua-api.onrender.com> (`/docs`, `/api/estado`, `/api/vivo`)
+- Base: Neon PostgreSQL (AWS us-east-1). Redacción en la nube: Gemini 3.5 Flash-Lite.
+
+La aplicación móvil (PMV3, ADR-038) vive en
+[quechua-wanka-movil](https://github.com/DalgomXD-byte/quechua-wanka-movil). Tiene dos modos:
+
+- **En línea:** cliente de esta API.
+- **Sin conexión:** resuelve en el teléfono con los artefactos que aquí se generan con
+  `backend/scripts/exportar_indice_movil.py`.
+
+**Requisitos: Python 3.12 (obligatorio, el mismo que fija `render.yaml` y la CI) y Node 22.**
+
+El corpus procesado (`backend/data/fragmentos_v3.jsonl`) no se versiona (ADR-015). Sin él, el
+backend arranca, pero las pruebas que lo necesitan se omiten (ver `docs/INSTALACION.md`).
 
 ## Arquitectura
 
@@ -18,33 +31,34 @@ Arquitectura hexagonal (puertos y adaptadores). La correspondencia con la estruc
 exigida por la consigna es directa; los nombres siguen la convención de Python:
 
 ```
-backend/
+backend/src/
 ├── domain/                     -> /domain
 │   ├── entities/               -> entities
 │   ├── value_objects/          -> valueObjects
-│   └── ports/                  -> ports (interfaces)
+│   └── services/               -> reglas de dominio (evaluador de confianza, verificador literal)
 ├── application/                -> /application
-│   ├── use_cases/              -> useCases
-│   └── services/               -> services
-└── infrastructure/             -> /infrastructure
-    └── adapters/               -> adapters
-        ├── input/              -> input (controllers)
-        └── output/             -> output (DB, APIs)
+│   ├── ports/in/  ports/out/   -> ports (7 de entrada, 10 de salida)
+│   └── use_cases/              -> useCases (8 casos de uso)
+├── adapters/
+│   ├── in/rest/  in/cli/       -> input (6 controladores REST y la CLI)
+│   └── out/                    -> output (BD, índice, generadores, predictores, traducción)
+└── infrastructure/             -> /infrastructure (configuración, contenedor, main, seguridad)
 ```
 
 El núcleo de dominio no conoce ninguna tecnología concreta: solo los puertos. Sustituir
 PostgreSQL por SQLite, u Ollama por un motor de inferencia embebido, afecta únicamente al
 adaptador correspondiente y se resuelve en `infrastructure/contenedor.py`.
 
-| Puerto | Adaptador actual | Adaptador previsto en el incremento móvil |
+| Puerto | Adaptadores (local / nube) | En la app móvil sin conexión |
 |---|---|---|
-| `IndiceRecuperacionPort` | Índice híbrido léxico en memoria | El mismo, con índice preconstruido |
-| `GeneradorTextoPort` | Ollama por HTTP (Qwen3.5-4B) | llama.cpp embebido (Qwen3.5-0.8B) |
-| `TraductorPort` | Ollama por HTTP | llama.cpp embebido |
+| `IndiceRecuperacionPort` | `IndiceHibridoLexico` en memoria | El mismo índice exportado (paridad byte a byte) |
+| `GeneradorTextoPort` | Ollama (local) · Gemini (nube) · extractivo y literal (sin modelo) | Compositor determinista (ADR-026) |
+| `TraductorPort` | `TraductorTabla` (defecto, `TRADUCTOR=tabla`) · `OllamaTraductor` (`TRADUCTOR=ollama`) | La misma tabla |
+| `PredictorPort` | `PredictorSklearn` ×2 (PMV2) | No (se declara en la interfaz) |
 | `ExtraccionDocumentalPort` | pypdf | No aplica: el corpus viaja preindexado |
-| `RepositorioCorpusPort` | Archivo JSONL | SQLite |
-| `RepositorioFuentesPort` | PostgreSQL | SQLite |
-| `RepositorioConsultasPort` | PostgreSQL | SQLite |
+| `RepositorioCorpusPort` | `CorpusJsonl` (local) · `RepositorioCorpusPostgres` (Neon) | Índice exportado |
+| `RepositorioFuentesPort` | `RepositorioFuentesSqlalchemy` (SQLite o PostgreSQL) | En línea, de la API |
+| `RepositorioConsultasPort` | SQLAlchemy (SQLite) · PostgreSQL con procedimientos | SQLite del teléfono |
 | `DetectorIdiomaPort` | Heurístico por palabras funcionales | El mismo |
 
 ## Historias de usuario implementadas
@@ -65,11 +79,11 @@ adaptador correspondiente y se resuelve en `infrastructure/contenedor.py`.
 
 | Rol | Responsabilidad en este proyecto | Componentes |
 |---|---|---|
-| Arquitecto de software | Estructura hexagonal, definición de los puertos y decisiones de sustitución entre incrementos | `domain/ports/`, `infrastructure/contenedor.py` |
-| Desarrollador back-end | Casos de uso, reglas de abstención y controladores REST | `application/`, `infrastructure/adapters/input/` |
+| Arquitecto de software | Estructura hexagonal, definición de los puertos y decisiones de sustitución entre incrementos | `backend/src/application/ports/`, `backend/src/infrastructure/contenedor.py` |
+| Desarrollador back-end | Casos de uso, reglas de abstención y controladores REST | `backend/src/application/use_cases/`, `backend/src/adapters/in/` |
 | Desarrollador front-end | Interfaz de consulta, gestión de fuentes e ingesta documental | `frontend/src/` |
-| Desarrollador de base de datos | Modelo relacional, repositorios y persistencia del historial | `infrastructure/adapters/output/persistencia/` |
-| Desarrollador de integración | Integración con el servicio de inferencia y el traductor | `infrastructure/adapters/output/ollama_*.py` |
+| Desarrollador de base de datos | Modelo relacional, repositorios y persistencia del historial | `backend/src/adapters/out/persistencia/`, `backend/db/postgres/` |
+| Desarrollador de integración | Integración con Ollama, Gemini, el traductor y los predictores | `backend/src/adapters/out/{generacion,traduccion,prediccion}/` |
 
 ## Resultados medidos
 
@@ -144,6 +158,17 @@ Evidencias en `docs/evidencias/pmv2/`.
   [docs/Asistente_Quechua_Wanka.postman_collection.json](docs/Asistente_Quechua_Wanka.postman_collection.json)
 - Guion de la demostración: [docs/GUION_DEMO.md](docs/GUION_DEMO.md)
 - Batería de pruebas: `pytest tests/` desde `backend/`
+
+## Documentación de la entrega
+
+| Carpeta | Qué contiene | Guía del docente |
+|---|---|---|
+| [`docs/`](docs/) | Documentación SDD: especificaciones, historias, ADR, sprints y evidencias de desarrollo | — |
+| [`docs_auditoria/`](docs_auditoria/) | Auditoría FURPS+ y OWASP (S13) y delta del PMV3 | Guía de calidad (S13) |
+| [`docs_ingenieria_inversa/`](docs_ingenieria_inversa/) | Ingeniería inversa: fases, UML v1.1, hallazgos y evidencias antes/después | Guía de ingeniería inversa |
+| [`docs_entrega_final/`](docs_entrega_final/) | Métricas, pruebas con usuarios, video, insumos del informe y del artículo, cifras oficiales, Kanban, ICACIT, logo y póster | Lista de cotejo U4 e informe final |
+
+Las guías piden `./docs`; se usan carpetas propias para no mezclarlas con la documentación SDD.
 
 ## Alcance declarado
 

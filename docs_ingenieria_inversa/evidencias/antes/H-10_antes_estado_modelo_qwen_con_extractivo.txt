@@ -1,0 +1,3 @@
+# commit 8088193
+$ ENTORNO=local GENERADOR=extractivo uvicorn ... ; curl -s 127.0.0.1:8000/api/estado
+{"generador": "extractivo", "modelo": "qwen3.5:4b", "generador_disponible": true}

@@ -1,0 +1,15 @@
+# commit 8088193 · clon limpio (git worktree), sin los corpus fuera de Git (ADR-015)
+$ ls backend/data
+evaluacion_v2.json
+negativas_prosa.json
+traduccion_en_es.json
+traduccion_es_en.json
+
+$ ls backend/scripts | grep reconstruir
+(no existe)
+
+$ cd backend && pytest -q -rs   (motivos de omision agrupados)
+      6 sin POSTGRES_PRUEBAS_URL
+      8 sin backend/data/fragmentos_v2.jsonl (fuera de Git)
+      2 sin backend/data/fragmentos_v3.jsonl (fuera de Git)
+406 passed, 16 skipped, 2 warnings in 12.37s

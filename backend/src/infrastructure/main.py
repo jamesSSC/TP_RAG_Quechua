@@ -33,7 +33,11 @@ def resolver_recurso_interfaz(raiz, recurso: str):
 # `in` es palabra reservada de Python: el paquete adapters/in solo se importa por cadena.
 routers = import_module("adapters.in.rest").routers
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s", datefmt="%H:%M:%S")
+logging.basicConfig(
+    level=getattr(logging, configuracion.nivel_log),
+    format="%(asctime)s %(levelname)-7s %(name)s %(message)s",
+    datefmt="%H:%M:%S",
+)
 
 
 @asynccontextmanager

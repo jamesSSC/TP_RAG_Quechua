@@ -69,6 +69,10 @@ class Configuracion(BaseSettings):
     entorno: str = "local"
 
     ruta_tabla_traduccion: Path = RAIZ / "data" / "traduccion_en_es.json"
+    # Adaptador de traduccion EN->ES: "tabla" (precalculada, defecto y nube) u "ollama".
+    traductor: Literal["tabla", "ollama"] = "tabla"
+    # H-09: nivel del registro (DEBUG, INFO, WARNING, ERROR). INFO muestra el log por capas.
+    nivel_log: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     ollama_url: str = "http://localhost:11434"
     ollama_modelo: str = "qwen3.5:4b"
 

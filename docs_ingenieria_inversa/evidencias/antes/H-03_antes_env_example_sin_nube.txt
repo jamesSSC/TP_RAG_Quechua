@@ -1,0 +1,25 @@
+# commit 8088193
+$ cat backend/.env.example
+# Copiar a .env y completar. El archivo .env no se versiona.
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=quechua_wanka
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=
+
+OLLAMA_URL=http://localhost:11434
+OLLAMA_MODELO=qwen3.5:4b
+
+# Umbral recalibrado sobre esta implementacion (ver scripts/calibrar_umbral.py)
+UMBRAL_ABSTENCION=0.48
+FRAGMENTOS_RECUPERADOS=5
+
+CORS_ORIGENES=http://localhost:5173
+
+# Motor de persistencia: sqlite (defecto) o postgres. Con postgres el historial se escribe y
+# se agrega mediante los procedimientos almacenados de db/postgres/procedimientos.sql.
+BASE_DATOS=sqlite
+
+# PMV2 · cortes de los modelos predictivos (ver modelos/metricas.json)
+PROBABILIDAD_MINIMA_COBERTURA=0.25
+PROBABILIDAD_MINIMA_PASAJES=0.50

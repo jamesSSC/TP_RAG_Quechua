@@ -1,0 +1,13 @@
+# commit 8088193
+$ grep -n "RepositorioFuentesPostgres" backend/src/infrastructure/contenedor.py
+43:    RepositorioFuentesPostgres,
+308:            self.repositorio_fuentes = RepositorioFuentesPostgres(sesion)
+(se usa tambien con BASE_DATOS=sqlite: el nombre engana)
+
+$ grep -n basicConfig backend/src/infrastructure/main.py
+36:logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s", datefmt="%H:%M:%S")
+(nivel fijo en INFO y sin el nivel en cada linea)
+
+$ grep -n "TRADUCTOR" render.yaml ; grep -n "traductor" backend/src/infrastructure/config.py
+40:      - key: TRADUCTOR
+(config.py no tiene el campo: TRADUCTOR se ignora)

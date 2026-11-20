@@ -1,0 +1,3 @@
+# rama fix/s14-arreglos-rapidos (sin commit aun; ver PR)
+$ cd frontend && npm audit
+found 0 vulnerabilities

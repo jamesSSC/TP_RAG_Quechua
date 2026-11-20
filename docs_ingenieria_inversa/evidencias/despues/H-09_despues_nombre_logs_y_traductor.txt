@@ -1,0 +1,32 @@
+# rama fix/s14-arreglos-rapidos
+$ grep -rn "RepositorioFuentes\(Postgres\|Sqlalchemy\)" backend/src
+backend/src/adapters/out/persistencia/repositorio_fuentes_sqlalchemy.py: class RepositorioFuentesSqlalchemy(RepositorioFuentesPort):
+backend/src/adapters/out/persistencia/repositorio_fuentes_sqlalchemy.py:11:    PostgreSQL/Neon (nube): el nombre anterior, `RepositorioFuentesPostgres`, sugeria que solo
+Binary file backend/src/adapters/out/persistencia/__pycache__/repositorio_fuentes_postgres.cpython-312.pyc matches
+Binary file backend/src/adapters/out/persistencia/__pycache__/repositorio_fuentes_sqlalchemy.cpython-312.pyc matches
+backend/src/infrastructure/contenedor.py:43:    RepositorioFuentesSqlalchemy,
+backend/src/infrastructure/contenedor.py:327:            self.repositorio_fuentes = RepositorioFuentesSqlalchemy(sesion)
+Binary file backend/src/infrastructure/__pycache__/contenedor.cpython-312.pyc matches
+
+$ grep -n -A4 basicConfig backend/src/infrastructure/main.py
+36:logging.basicConfig(
+37-    level=getattr(logging, configuracion.nivel_log),
+38-    format="%(asctime)s %(levelname)-7s %(name)s %(message)s",
+39-    datefmt="%H:%M:%S",
+40-)
+
+# registro real del backend local con el formato nuevo (nivel y modulo en cada linea):
+20:48:22 INFO    infrastructure.contenedor [REPOSITORIO] base de datos conectada
+20:48:23 INFO    infrastructure.contenedor [INDICE] construido con 3605 fragmentos (jsonl)
+20:48:23 INFO    infrastructure.contenedor [GENERADOR] extractivo sin modelo: fragmento literal citado
+20:48:23 INFO    infrastructure.contenedor [TRADUCTOR] tabla
+
+$ pytest tests/unit/infrastructure/test_arreglos_s14.py -v
+  test_h10_con_el_extractivo_el_estado_no_informa_el_modelo_de_ollama PASSED [ 14%]
+  test_h10_con_ollama_el_estado_sigue_informando_su_modelo PASSED [ 28%]
+  test_traductor_por_defecto_es_la_tabla PASSED [ 42%]
+  test_traductor_ollama_se_respeta PASSED [ 57%]
+  test_traductor_desconocido_se_rechaza_al_arrancar PASSED [ 71%]
+  test_h09_el_repositorio_de_fuentes_es_el_de_sqlalchemy_tambien_en_sqlite PASSED [ 85%]
+  test_h09_nivel_del_registro_configurable PASSED [100%]
+============================== 7 passed in 0.69s ==============================

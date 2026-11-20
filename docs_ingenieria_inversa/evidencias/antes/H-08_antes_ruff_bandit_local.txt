@@ -1,0 +1,6 @@
+# commit 8088193
+$ cd backend && ruff check src && bandit -q -r src
+
+Found 1 error.
+1 unsafe fix available with `--fix --unsafe-fixes`.
+F:\App Quechua Final\tp-rag-quechua\backend\.venv\Scripts\python.exe: No module named bandit

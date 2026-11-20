@@ -1,0 +1,12 @@
+# commit 8088193
+$ curl -sI https://quechua-web.onrender.com
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Connection: keep-alive
+cache-control: public, max-age=0, s-maxage=300
+Server: cloudflare
+strict-transport-security: max-age=315360000; includeSubdomains; preload
+x-content-type-options: nosniff
+x-frame-options: DENY
+cf-cache-status: HIT
+

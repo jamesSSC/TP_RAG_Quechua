@@ -1,0 +1,11 @@
+# rama fix/s14-arreglos-rapidos (sin commit aun; ver PR)
+$ python scripts/reconstruir_corpus.py <movil>/assets/indice/fragmentos.json
+3605 fragmentos escritos en <tmp>\reconstruido.jsonl
+sha256 6452e7b91347e7df039e9c32c23eb736c7b8a798e1766de908be4a0a0a5882f2
+coincide con la referencia
+
+$ pytest tests/unit/test_recuperacion_corpus_minimo.py -v (sin el corpus completo)
+tests/unit/test_recuperacion_corpus_minimo.py::test_a_recupera_el_oro_y_responde PASSED [ 33%]
+tests/unit/test_recuperacion_corpus_minimo.py::test_c_fuera_de_cobertura_se_abstiene_siempre PASSED [ 66%]
+tests/unit/test_recuperacion_corpus_minimo.py::test_zorro_cita_el_diccionario_pagina_37 PASSED [100%]
+============================== 3 passed in 0.14s ==============================
