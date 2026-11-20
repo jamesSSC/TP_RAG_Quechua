@@ -1,0 +1,66 @@
+@startuml
+!include common.iuml
+title Diagrama de componentes: arquitectura hexagonal reconstruida
+skinparam componentStyle uml2
+package "Clientes" {
+  [SPA React 19\n(frontend/src)] as SPA
+  [App Flutter\n(quechua-wanka-movil)] as MOV
+}
+package "backend/src" {
+  package "infrastructure" {
+    [main.py\n(7 middleware)] as MAIN
+    [Contenedor\n(inyección de dependencias)] as CONT
+    [Configuracion\n(pydantic-settings)] as CONF
+  }
+  package "adapters/in" {
+    [Controladores REST (6)] as REST
+    [CLI] as CLI
+  }
+  package "application" {
+    [8 casos de uso] as UC
+    () "7 puertos de entrada" as PIN
+    () "10 puertos de salida" as POUT
+  }
+  package "domain (solo stdlib)" {
+    [Entidades y objetos de valor] as ENT
+    [EvaluadorConfianza\nVerificadorFormaLiteral\nextraer_caracteristicas] as SRV
+  }
+  package "adapters/out" as AOUT {
+    [IndiceHibridoLexico] as IDX
+    [GeneradorLiteral ·\nExtractivo (Ollama | Gemini)] as GEN
+    [PredictorSklearn ×2] as PRE
+    [Repositorios SQLAlchemy] as REP
+    [CorpusJsonl ·\nRepositorioCorpusPostgres] as COR
+    [ExtractorPdf ·\nAlmacenDocumentosDisco] as DOC
+    [TraductorTabla ·\nDetectorIdiomaHeuristico] as TRA
+  }
+}
+database "SQLite | PostgreSQL 16 (Neon)" as BD
+node "Ollama (local) | Gemini (nube)" as LLM
+artifact "modelos/*.joblib" as JOB
+artifact "índice exportado\n(assets/indice)" as EXP
+
+UC - PIN
+REST ..> PIN : <<use>>
+CLI ..> PIN : <<use>>
+UC ..> POUT : <<use>>
+UC ..> ENT
+UC ..> SRV
+POUT -- IDX
+POUT -- GEN
+POUT -- PRE
+POUT -- REP
+POUT -- COR
+POUT -- DOC
+POUT -- TRA
+SPA ..> REST : REST/JSON
+MAIN ..> REST
+CONT ..> CONF : lee
+CONT ..> AOUT : <<create>> según GENERADOR,\nBASE_DATOS y CORPUS_ORIGEN
+REP ..> BD
+COR ..> BD
+GEN ..> LLM
+PRE ..> JOB
+IDX ..> EXP : exportar_indice_movil.py
+MOV ..> EXP : carga sin red
+@enduml

@@ -1,0 +1,14 @@
+# commit 8088193
+$ conteos de la arquitectura hexagonal
+  middleware (app.add_middleware): 7
+  controladores REST: 6
+  casos de uso: 8
+  puertos de entrada: 7 · de salida: 10
+  adaptadores de salida (archivos): 17
+
+$ pytest tests/architecture -v
+  test_el_dominio_solo_usa_la_biblioteca_estandar PASSED [ 25%]
+  test_la_aplicacion_no_importa_adaptadores_ni_infraestructura PASSED [ 50%]
+  test_dominio_y_aplicacion_no_conocen_postgresql_ni_sqlalchemy PASSED [ 75%]
+  test_el_codigo_del_dominio_y_la_aplicacion_no_nombra_postgres PASSED [100%]
+============================== 4 passed in 0.25s ==============================

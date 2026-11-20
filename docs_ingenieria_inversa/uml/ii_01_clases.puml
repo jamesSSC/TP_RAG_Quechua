@@ -1,0 +1,71 @@
+@startuml
+!include common.iuml
+title Diagrama de clases del dominio (backend/src/domain)
+hide empty members
+package "domain" {
+  class Consulta {
+    id
+    texto
+    idioma : Idioma
+    origen : OrigenConsulta
+    texto_traducido
+  }
+  class Respuesta {
+    consulta_id
+    texto
+    abstenida : bool
+    similitud_maxima
+    probabilidad_cobertura
+  }
+  class Fragmento {
+    id
+    texto
+    tipo : TipoFragmento
+  }
+  class FragmentoRecuperado {
+    coincidencia_lema : bool
+  }
+  class Fuente {
+    id
+    titulo
+    licenciamiento
+    fecha_extraccion
+  }
+  class Procedencia <<value>> {
+    documento
+    pagina
+    derivado_ocr
+    citar()
+  }
+  class PuntuacionSimilitud <<value>> {
+    valor
+    supera(umbral) : bool
+  }
+  class Veredicto <<value>> {
+    responder : bool
+    via_respaldo
+  }
+  class EvaluadorConfianza <<service>> {
+    umbral : τ (configuración)
+    evaluar(recuperados) : Veredicto
+    ofrecer_pasajes()
+  }
+  class VerificadorFormaLiteral <<service>> {
+    comprobar(forma, glosa, fragmentos)
+  }
+}
+Fragmento "1" *-- "1" Procedencia
+Fuente "1" -- "0..*" Procedencia : origen >
+FragmentoRecuperado "0..*" o-- "1" Fragmento
+FragmentoRecuperado "1" *-- "1" PuntuacionSimilitud
+Consulta "1" -- "1" Respuesta : produce >
+Respuesta "1" o-- "0..*" FragmentoRecuperado : respaldo
+Respuesta "1" o-- "0..*" FragmentoRecuperado : pasajes
+EvaluadorConfianza ..> FragmentoRecuperado : <<use>>
+EvaluadorConfianza ..> Veredicto : <<create>>
+VerificadorFormaLiteral ..> Fragmento : <<use>>
+note bottom of Respuesta
+  RN-03: si no es abstención, respaldo ≥ 1
+  RN-05: pasajes solo en una abstención
+end note
+@enduml

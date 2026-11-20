@@ -1,0 +1,20 @@
+# commit 8088193 · variante: sin corpus (clon limpio)
+$ cd backend && pytest -q -p no:cacheprovider -rs   (motivos de omisión agrupados)
+      6 sin POSTGRES_PRUEBAS_URL
+      8 sin backend/data/fragmentos_v2.jsonl (fuera de Git)
+      2 sin backend/data/fragmentos_v3.jsonl (fuera de Git)
+406 passed, 16 skipped, 2 warnings in 12.37s
+# commit 8088193 · variante: solo fragmentos_v3.jsonl
+$ cd backend && pytest -q -p no:cacheprovider -rs   (motivos de omisión agrupados)
+      6 sin POSTGRES_PRUEBAS_URL
+     10 sin backend/data/fragmentos_v2.jsonl (fuera de Git)
+406 passed, 16 skipped, 2 warnings in 11.58s
+# commit 8088193 · variante: solo fragmentos_v2.jsonl
+$ cd backend && pytest -q -p no:cacheprovider -rs   (motivos de omisión agrupados)
+      6 sin POSTGRES_PRUEBAS_URL
+      2 sin backend/data/fragmentos_v3.jsonl (fuera de Git)
+414 passed, 8 skipped, 2 warnings in 12.92s
+# commit 8088193 · variante: fragmentos_v2 + fragmentos_v3 (sin PostgreSQL)
+$ cd backend && pytest -q -p no:cacheprovider -rs   (motivos de omisión agrupados)
+      6 sin POSTGRES_PRUEBAS_URL
+416 passed, 6 skipped, 2 warnings in 13.30s

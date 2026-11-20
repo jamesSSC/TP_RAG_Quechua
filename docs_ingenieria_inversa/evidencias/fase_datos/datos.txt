@@ -1,0 +1,16 @@
+# commit 8088193
+$ grep -hoiE "create (or replace )?(function|procedure) [a-z_]+" backend/db/postgres/*.sql | sort -u
+CREATE OR REPLACE FUNCTION fn_conteo_por_origen
+CREATE OR REPLACE FUNCTION fn_demanda_insatisfecha
+CREATE OR REPLACE FUNCTION fn_fragmentos_por_documento
+CREATE OR REPLACE FUNCTION fn_respaldo_por_documento
+CREATE OR REPLACE FUNCTION fn_resumen_demanda
+CREATE OR REPLACE PROCEDURE sp_borrar_historial
+CREATE OR REPLACE PROCEDURE sp_registrar_consulta
+
+$ grep -c "class .*ORM" backend/src/adapters/out/persistencia/modelos.py
+class FuenteORM(Base):
+class ConsultaORM(Base):
+class RespaldoORM(Base):
+
+# corpus: fuera de Git (ADR-015); reconstruible exacto desde el índice móvil (H-02, rama fix/s14-arreglos-rapidos)

@@ -1,0 +1,56 @@
+@startuml
+!include common.iuml
+title Diagrama de secuencia: POST /api/consultas
+autonumber
+actor Usuario
+participant "SPA React" as UI
+participant "consultas_controller\n(adapters/in/rest)" as REST
+participant "ConsultarCorpusUseCase\n«ConsultarCorpusPort»" as UC
+participant "DetectorIdiomaHeuristico\n«DetectorIdiomaPort»" as DET
+participant "TraductorTabla\n«TraductorPort»" as TRA
+participant "IndiceHibridoLexico\n«IndiceRecuperacionPort»" as IDX
+participant "EvaluadorConfianza\n(dominio)" as EVA
+participant "PredictorSklearn\n«PredictorPort»" as PRE
+participant "Generador\n«GeneradorTextoPort»" as GEN
+participant "VerificadorFormaLiteral\n(dominio)" as VER
+participant "Repositorio\n«RepositorioConsultasPort»" as REP
+Usuario -> UI : escribe la consulta
+UI -> REST : POST /api/consultas {texto}
+REST -> UC : ejecutar(texto)
+UC -> DET : detectar(texto)
+DET --> UC : Idioma (es | en | xx)
+alt idioma no soportado (xx)
+  UC -> REP : registrar(consulta, idioma no soportado)
+  UC --> REST : Respuesta(abstenida)
+else idioma soportado (es | en)
+  opt idioma inglés (en)
+    UC -> TRA : candidatas(término depurado)
+    TRA --> UC : lecturas en español
+  end
+  UC -> IDX : recuperar(lectura, k = 5)
+  IDX --> UC : FragmentoRecuperado[5]
+  UC -> EVA : evaluar(recuperados)
+  EVA --> UC : Veredicto(responder, vía = similitud | lema | ninguna)
+  UC -> PRE : probabilidad(11 características)
+  PRE --> UC : P(cobertura), P(pasajes)
+  alt responder y P(cobertura) < 0,25\n(RN-06: el ML solo añade abstenciones)
+    UC -> REP : registrar(consulta, abstención por predictor)
+    UC --> REST : Respuesta(abstenida, generador_invocado = false)
+  else no responder (similitud < τ y sin lema)
+    UC -> IDX : recuperar_prosa(consulta)
+    IDX --> UC : pasajes
+    note right of UC : pasajes filtrados por P(pasajes) ≥ 0,5;\nel generador NO se invoca (RN-09)
+    UC -> REP : registrar(consulta, abstención + pasajes)
+    UC --> REST : Respuesta(abstenida, pasajes «no es una respuesta»)
+  else responder
+    UC -> GEN : redactar(consulta, respaldo)
+    GEN -> VER : comprobar(forma, glosa, fragmentos)
+    VER --> GEN : FormaVerificada | inválida → fragmento literal
+    GEN --> UC : texto citado (documento, página)
+    UC -> REP : registrar(consulta, respuesta con respaldo)
+    UC --> REST : Respuesta(respaldo ≥ 1)
+  end
+end
+REST --> UI : 200 RespuestaSalida (JSON)
+UI --> Usuario : forma literal + documento y página\n+ similitud + P(respaldo)
+@enduml

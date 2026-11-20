@@ -1,0 +1,33 @@
+# commit 8088193 · cada clase, atributo, puerto y adaptador de los UML v1.1 frente al código
+$ python verificar_uml.py   (búsqueda de "class X" / "def X" y de cada atributo en el cuerpo de la clase)
+ii_01_clases.puml
+  Consulta                 domain/entities/consulta.py                          OK
+  Respuesta                domain/entities/respuesta.py                         OK
+  Fragmento                domain/entities/fragmento.py                         OK
+  FragmentoRecuperado      domain/entities/fragmento.py                         OK
+  Fuente                   domain/entities/fuente.py                            OK
+  Procedencia              domain/value_objects/procedencia.py                  OK
+  PuntuacionSimilitud      domain/value_objects/puntuacion_similitud.py         OK
+  Veredicto                domain/services/evaluador_confianza.py               OK
+  EvaluadorConfianza       domain/services/evaluador_confianza.py               OK
+  VerificadorFormaLiteral  domain/services/verificador_forma_literal.py         OK
+ii_02_secuencia.puml / ii_03_componentes.puml
+  ConsultarCorpusPort          application/ports/in/consultar_corpus_port.py
+  DetectorIdiomaPort           application/ports/out/detector_idioma_port.py
+  TraductorPort                application/ports/out/traductor_port.py
+  IndiceRecuperacionPort       application/ports/out/indice_recuperacion_port.py
+  PredictorPort                application/ports/out/predictor_port.py
+  GeneradorTextoPort           application/ports/out/generador_texto_port.py
+  RepositorioConsultasPort     application/ports/out/repositorio_consultas_port.py
+  ConsultarCorpusUseCase       application/use_cases/consultar_corpus.py
+  DetectorIdiomaHeuristico     adapters/out/idioma/detector_idioma_heuristico.py
+  TraductorTabla               adapters/out/traduccion/traductor_tabla.py
+  IndiceHibridoLexico          adapters/out/recuperacion/indice_hibrido_lexico.py
+  PredictorSklearn             adapters/out/prediccion/predictor_sklearn.py
+  GeneradorLiteral             adapters/out/generacion/generador_literal.py
+  CorpusJsonl                  adapters/out/documentos/corpus_jsonl.py
+  RepositorioCorpusPostgres    adapters/out/persistencia/repositorio_corpus_postgres.py
+  ExtractorPdf                 adapters/out/documentos/extractor_pdf.py
+  AlmacenDocumentosDisco       adapters/out/documentos/almacen_documentos_disco.py
+  extraer_caracteristicas      domain/services/caracteristicas_consulta.py
+Resultado: todos los nombres existen. Los .puml no requieren corrección.
