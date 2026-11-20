@@ -107,17 +107,26 @@ de modo que adoptarla obligaría a recalibrar y a reexportar el índice móvil.
 | Ídem, abstenciones (no invocan el modelo) | Local | 28 | 7,0 ms | 8,5 ms | ídem |
 | Primera consulta (carga del modelo en VRAM) | Local | 1 | 12 537 ms | — | ídem (`calentamiento_ms`) |
 | Consulta completa con el redactor **extractivo** | Local | 248 | 6,8 ms | 15,0 ms | `evidencias/latencia_local_extractivo.json` |
-| Consulta completa con **Gemini** (servicio despierto) | Nube | — | 923 ms | 977 ms | `docs/17_REPORTE_METRICAS_U3.md:75` (N-02, U3) |
-| Abstención en la nube | Nube | — | 192 ms | 207 ms | ídem |
+| Consulta completa con **Gemini**, respuestas (20/11, desde Perú, origen `humo`, 20/min) | Nube | 220 | **6 424 ms** | **15 366 ms** | `evidencias/latencia_nube_gemini.json` |
+| Abstenciones en la nube (no invocan Gemini) | Nube | 28 | 158 ms | 349 ms | ídem |
+| Referencia U3 (02/11): consultas con Gemini / abstención | Nube | — | 923 / 192 ms | 977 / 207 ms | `docs/17_REPORTE_METRICAS_U3.md:75` (N-02) |
 | **Arranque en frío** de Render | Nube | 2 + 1 | 62,4 s y 72,4 s (U3); **67,6 s** el 19/11 (`GET /api/vivo` con `curl`, antes de la limpieza de Neon) | — | `docs/17_…:74`; bitácora del PMV3 |
 | Consulta sin conexión **en el dispositivo** | Emulador x86_64 | 248 | 0,80 ms | 2,71 ms | `docs/evidencias/pmv3/movil/HU-10.2_movil_arnes_248_resumen.txt` |
 | Tamaño del índice móvil | — | — | 12 MB (10 archivos) | — | `docs/18_REPORTE_PMV3.md` P3-10 |
 | APK release arm64 | — | — | 22,6 MB | — | ídem P3-09 |
 
-**Por medir, y por qué.**
-- Latencia en la nube con N ≥ 30 hecha hoy: exige `TOKEN_PRUEBAS` para no registrar 30 consultas como
-  demanda real (HU-09), y no hay acceso a Render.
-- Consulta en el **teléfono físico** ARM64: sin dispositivo conectado en esta sesión.
+**Arnés en la nube (20/11, 248 consultas, origen `humo`):** A, B y D con recall@5 = **1,000** y
+respondidas 220/220; **C: 0 falsos positivos** (0/28 respondidas); 0 errores HTTP. La salvaguarda se
+mantiene igual en local, en la nube y en el teléfono.
+
+**Lectura de la latencia en la nube.** Es unas 7 veces la de la U3: P50 6,4 s frente a 0,9 s. En 55 de
+las 220 respuestas (25 %), Gemini no respondió dentro del límite de 15 s (`gemini_timeout`) y redactó el
+respaldo extractivo, como prevé ADR-032; de ahí el P95 de 15,4 s. Las respuestas siguen siendo
+correctas, pero el tiempo del modelo externo empeoró desde la U3. Para el informe: P50 6,4 s cumple el
+RNF de 8 s, y el P95 no. Recomendación: bajar `GEMINI_TIMEOUT` a unos 6 s para que el respaldo actúe
+antes, o volver a medir otro día para descartar una congestión puntual del plan gratuito.
+
+**Por medir:** consulta en el **teléfono físico** ARM64, sin dispositivo conectado en esta sesión.
 
 Figura: `evidencias/histograma_latencias.png`.
 
