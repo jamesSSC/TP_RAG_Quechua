@@ -25,6 +25,7 @@ ejecutó el agente principal. Las decisiones de diseño que resultaron constan c
 | 7 | Aplicación del plan OWASP (agente principal) | Código, pruebas y [evidencias](evidencias/despues/) | [#24](https://github.com/omarpiero/TP_RAG_Quechua/pull/24) y [#26](https://github.com/omarpiero/TP_RAG_Quechua/pull/26) (validación del token en la interfaz, NV-06) |
 | 8 | Auditor de implementación OWASP | [06_auditoria_implementacion_owasp.md](06_auditoria_implementacion_owasp.md) | [#24](https://github.com/omarpiero/TP_RAG_Quechua/pull/24) |
 | 9 | Auditor final integral, con adenda de la verificación en la nube | [07_auditoria_final.md](07_auditoria_final.md) | [#24](https://github.com/omarpiero/TP_RAG_Quechua/pull/24) y [#25](https://github.com/omarpiero/TP_RAG_Quechua/pull/25) |
+| 10 | Auditoría delta del PMV3 (app móvil en dos modos y arreglos de la S14) | [08_auditoria_delta_pmv3.md](08_auditoria_delta_pmv3.md) | rama `docs/auditoria-delta-pmv3` |
 
 ## Estructura de `evidencias/`
 

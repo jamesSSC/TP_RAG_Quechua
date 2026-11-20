@@ -1,0 +1,9 @@
+# app (rama feat/pmv3-dos-modos, arreglo del manifiesto) · APK release arm64
+$ aapt dump permissions app-arm64-v8a-release.apk
+package: pe.edu.continental.quechua_wanka
+uses-permission: name='android.permission.INTERNET'
+permission: pe.edu.continental.quechua_wanka.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission: name='pe.edu.continental.quechua_wanka.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+$ aapt dump xmltree ... | grep -iE "allowBackup|fullBackup"
+      A: android:allowBackup(0x01010280)=(type 0x12)0x0
+      A: android:fullBackupContent(0x010104eb)=(type 0x12)0x0

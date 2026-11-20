@@ -1,0 +1,7 @@
+# app ccb4e29 · APK release arm64 antes del arreglo
+$ aapt dump permissions app-arm64-v8a-release.apk
+package: pe.edu.continental.quechua_wanka
+permission: pe.edu.continental.quechua_wanka.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission: name='pe.edu.continental.quechua_wanka.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+$ aapt dump xmltree ... AndroidManifest.xml | grep allowBackup
+(sin allowBackup: Android lo toma como true)
