@@ -1,0 +1,41 @@
+{
+ "etiqueta": "local_qwen_gpu",
+ "api": "http://127.0.0.1:8000",
+ "generador": "ollama",
+ "modelo": "qwen3.5:4b",
+ "fragmentos": 3605,
+ "calentamiento_ms": 12537.1,
+ "todas": {
+  "n": 248,
+  "p50_ms": 2735.7,
+  "p95_ms": 2827.7,
+  "max_ms": 3072.0,
+  "media_ms": 2441.1,
+  "energia_media_j": 39.23,
+  "energia_p50_j": 43.24,
+  "energia_total_j": 9728.7
+ },
+ "respuestas": {
+  "n": 220,
+  "p50_ms": 2743.8,
+  "p95_ms": 2829.9,
+  "max_ms": 3072.0,
+  "media_ms": 2750.9,
+  "energia_media_j": 44.21,
+  "energia_p50_j": 43.76,
+  "energia_total_j": 9726.7
+ },
+ "abstenciones": {
+  "n": 28,
+  "p50_ms": 7.0,
+  "p95_ms": 8.5,
+  "max_ms": 9.0,
+  "media_ms": 7.1,
+  "energia_media_j": 0.07,
+  "energia_p50_j": 0.07,
+  "energia_total_j": 2.0
+ },
+ "errores_http": 0,
+ "potencia_reposo_w": 19.73,
+ "fecha_utc": "2026-11-20T02:06:35Z"
+}

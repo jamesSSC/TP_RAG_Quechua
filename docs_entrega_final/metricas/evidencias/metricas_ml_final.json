@@ -1,0 +1,386 @@
+{
+ "semilla": 2026,
+ "remuestreos_bootstrap": 1000,
+ "corpus": "fragmentos_v3.jsonl (3605)",
+ "predictores": {
+  "cobertura": {
+   "tarea": "cobertura",
+   "n": 415,
+   "positivos": 280,
+   "corte_operacion": 0.25,
+   "fuera_de_particion_corte_operacion": {
+    "auc_roc": 0.9961,
+    "precision": 0.9685,
+    "exhaustividad": 0.9893,
+    "especificidad": 0.9333,
+    "f1": 0.9788,
+    "brier": 0.0266,
+    "matriz_confusion": {
+     "vp": 277,
+     "fp": 9,
+     "vn": 126,
+     "fn": 3
+    }
+   },
+   "fuera_de_particion_corte_05": {
+    "auc_roc": 0.9961,
+    "precision": 0.9851,
+    "exhaustividad": 0.9429,
+    "especificidad": 0.9704,
+    "f1": 0.9635,
+    "brier": 0.0266,
+    "matriz_confusion": {
+     "vp": 264,
+     "fp": 4,
+     "vn": 131,
+     "fn": 16
+    }
+   },
+   "validacion_cruzada_media_desv": {
+    "regresion_logistica": {
+     "auc_roc": {
+      "media": 0.997,
+      "desv": 0.0021
+     },
+     "precision": {
+      "media": 0.969,
+      "desv": 0.0221
+     },
+     "exhaustividad": {
+      "media": 0.9893,
+      "desv": 0.016
+     },
+     "especificidad": {
+      "media": 0.9333,
+      "desv": 0.0483
+     },
+     "f1": {
+      "media": 0.9789,
+      "desv": 0.0134
+     },
+     "brier": {
+      "media": 0.0266,
+      "desv": 0.013
+     }
+    },
+    "bosque_aleatorio": {
+     "auc_roc": {
+      "media": 0.9944,
+      "desv": 0.0053
+     },
+     "precision": {
+      "media": 0.9211,
+      "desv": 0.0327
+     },
+     "exhaustividad": {
+      "media": 0.9821,
+      "desv": 0.0219
+     },
+     "especificidad": {
+      "media": 0.8222,
+      "desv": 0.0803
+     },
+     "f1": {
+      "media": 0.9501,
+      "desv": 0.0103
+     },
+     "brier": {
+      "media": 0.0329,
+      "desv": 0.016
+     }
+    }
+   },
+   "por_particion_regresion_logistica": [
+    {
+     "auc_roc": 0.998,
+     "precision": 0.9818,
+     "exhaustividad": 0.9643,
+     "especificidad": 0.963,
+     "f1": 0.973,
+     "brier": 0.0453,
+     "particion": 1,
+     "n": 83
+    },
+    {
+     "auc_roc": 1.0,
+     "precision": 1.0,
+     "exhaustividad": 1.0,
+     "especificidad": 1.0,
+     "f1": 1.0,
+     "brier": 0.0101,
+     "particion": 2,
+     "n": 83
+    },
+    {
+     "auc_roc": 0.9967,
+     "precision": 0.9492,
+     "exhaustividad": 1.0,
+     "especificidad": 0.8889,
+     "f1": 0.9739,
+     "brier": 0.0206,
+     "particion": 3,
+     "n": 83
+    },
+    {
+     "auc_roc": 0.9954,
+     "precision": 0.9483,
+     "exhaustividad": 0.9821,
+     "especificidad": 0.8889,
+     "f1": 0.9649,
+     "brier": 0.0264,
+     "particion": 4,
+     "n": 83
+    },
+    {
+     "auc_roc": 0.9947,
+     "precision": 0.9655,
+     "exhaustividad": 1.0,
+     "especificidad": 0.9259,
+     "f1": 0.9825,
+     "brier": 0.0304,
+     "particion": 5,
+     "n": 83
+    }
+   ],
+   "ic95_bootstrap": {
+    "remuestreos": 1000,
+    "auc_roc": [
+     0.9925,
+     0.9986
+    ],
+    "f1": [
+     0.9663,
+     0.9895
+    ],
+    "brier": [
+     0.0175,
+     0.0367
+    ]
+   }
+  },
+  "pasajes": {
+   "tarea": "pasajes",
+   "n": 167,
+   "positivos": 60,
+   "corte_operacion": 0.5,
+   "fuera_de_particion_corte_operacion": {
+    "auc_roc": 0.9804,
+    "precision": 0.8507,
+    "exhaustividad": 0.95,
+    "especificidad": 0.9065,
+    "f1": 0.8976,
+    "brier": 0.0573,
+    "matriz_confusion": {
+     "vp": 57,
+     "fp": 10,
+     "vn": 97,
+     "fn": 3
+    }
+   },
+   "fuera_de_particion_corte_05": {
+    "auc_roc": 0.9804,
+    "precision": 0.8507,
+    "exhaustividad": 0.95,
+    "especificidad": 0.9065,
+    "f1": 0.8976,
+    "brier": 0.0573,
+    "matriz_confusion": {
+     "vp": 57,
+     "fp": 10,
+     "vn": 97,
+     "fn": 3
+    }
+   },
+   "validacion_cruzada_media_desv": {
+    "regresion_logistica": {
+     "auc_roc": {
+      "media": 0.9766,
+      "desv": 0.0185
+     },
+     "precision": {
+      "media": 0.8566,
+      "desv": 0.0948
+     },
+     "exhaustividad": {
+      "media": 0.95,
+      "desv": 0.0456
+     },
+     "especificidad": {
+      "media": 0.9065,
+      "desv": 0.0674
+     },
+     "f1": {
+      "media": 0.8996,
+      "desv": 0.0682
+     },
+     "brier": {
+      "media": 0.0573,
+      "desv": 0.032
+     }
+    },
+    "bosque_aleatorio": {
+     "auc_roc": {
+      "media": 0.9703,
+      "desv": 0.0232
+     },
+     "precision": {
+      "media": 0.8626,
+      "desv": 0.0787
+     },
+     "exhaustividad": {
+      "media": 0.9167,
+      "desv": 0.0834
+     },
+     "especificidad": {
+      "media": 0.9165,
+      "desv": 0.0502
+     },
+     "f1": {
+      "media": 0.8871,
+      "desv": 0.0682
+     },
+     "brier": {
+      "media": 0.0618,
+      "desv": 0.028
+     }
+    }
+   },
+   "por_particion_regresion_logistica": [
+    {
+     "auc_roc": 0.9773,
+     "precision": 0.8571,
+     "exhaustividad": 1.0,
+     "especificidad": 0.9091,
+     "f1": 0.9231,
+     "brier": 0.0614,
+     "particion": 1,
+     "n": 34
+    },
+    {
+     "auc_roc": 0.9811,
+     "precision": 0.8462,
+     "exhaustividad": 0.9167,
+     "especificidad": 0.9091,
+     "f1": 0.88,
+     "brier": 0.0618,
+     "particion": 2,
+     "n": 34
+    },
+    {
+     "auc_roc": 1.0,
+     "precision": 1.0,
+     "exhaustividad": 1.0,
+     "especificidad": 1.0,
+     "f1": 1.0,
+     "brier": 0.0051,
+     "particion": 3,
+     "n": 33
+    },
+    {
+     "auc_roc": 0.9484,
+     "precision": 0.7333,
+     "exhaustividad": 0.9167,
+     "especificidad": 0.8095,
+     "f1": 0.8148,
+     "brier": 0.0928,
+     "particion": 4,
+     "n": 33
+    },
+    {
+     "auc_roc": 0.9762,
+     "precision": 0.8462,
+     "exhaustividad": 0.9167,
+     "especificidad": 0.9048,
+     "f1": 0.88,
+     "brier": 0.0652,
+     "particion": 5,
+     "n": 33
+    }
+   ],
+   "ic95_bootstrap": {
+    "remuestreos": 1000,
+    "auc_roc": [
+     0.9637,
+     0.9931
+    ],
+    "f1": [
+     0.8387,
+     0.9467
+    ],
+    "brier": [
+     0.0362,
+     0.0795
+    ]
+   }
+  }
+ },
+ "tau": {
+  "formulacion": "tau* = argmax_tau cobertura(A,B,D)  sujeto a  FP(C) = 0",
+  "tau_vigente": 0.48,
+  "tau_minimo_con_fp0": 0.47,
+  "optimo": {
+   "tau": 0.47,
+   "cobertura_ABD": 1.0,
+   "fp_C": 0
+  },
+  "fila_tau_vigente": {
+   "tau": 0.48,
+   "cobertura_ABD": 1.0,
+   "fp_C": 0
+  },
+  "calibracion_C": {
+   "n": 28,
+   "fp": 0,
+   "cota_sup_95_clopper_pearson": 0.1234
+  },
+  "muestra_independiente_F": {
+   "origen": "negativas_prosa.json (107 preguntas de gramatica sobre otras lenguas); no intervino en la calibracion de tau",
+   "n": 107,
+   "fp_respuesta_afirmada": 0,
+   "ids_fp": [],
+   "cota_sup_95_clopper_pearson": 0.0339
+  }
+ },
+ "bm25_frente_hibrido": {
+  "bm25": {
+   "A": {
+    "n": 120,
+    "recall@5": 1.0,
+    "mrr@10": 0.9958
+   },
+   "B": {
+    "n": 60,
+    "recall@5": 1.0,
+    "mrr@10": 1.0
+   },
+   "D": {
+    "n": 40,
+    "recall@5": 1.0,
+    "mrr@10": 0.85
+   },
+   "umbral_minimo_con_0_fp_en_C": 9.8547,
+   "cobertura_ABD_con_0_fp": 0.9545,
+   "nota": "BM25 Okapi (k1 1,5; b 0,75) sobre las mismas variantes de consulta (traduccion en D); sin la capa de lema"
+  },
+  "hibrido_E4": {
+   "A": {
+    "n": 120,
+    "recall@5": 1.0,
+    "mrr@10": 0.9917
+   },
+   "B": {
+    "n": 60,
+    "recall@5": 1.0,
+    "mrr@10": 1.0
+   },
+   "D": {
+    "n": 40,
+    "recall@5": 1.0,
+    "mrr@10": 0.8333
+   },
+   "umbral_minimo_con_0_fp_en_C": 0.4698,
+   "cobertura_ABD_con_0_fp": 0.9318,
+   "nota": "puntuacion E4 (palabras + n-gramas 3-5) sobre las mismas variantes; sin la capa de lema"
+  }
+ }
+}
