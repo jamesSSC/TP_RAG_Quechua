@@ -76,3 +76,20 @@ COMMIT;   -- o ROLLBACK si la verificación no dio 31
 
 Las 6 consultas de la app del 20/11, 00:37–00:51 UTC (tabla de arriba), se pueden rotular igual si el
 equipo lo decide.
+
+## 2026-11-24 · S14-01: la web bloquea la gestión por defecto (ronda 2 de arreglos)
+
+Omar observó en la nube que, durante el arranque en frío (~1 min), «Fuentes del corpus» e «Incorporar
+documentos» aparecían con los formularios activos hasta que `/api/estado` respondía. Causa en
+`frontend/src/App.jsx`: `protegida = Boolean(estado?.escritura_protegida)` era `false` con
+`estado = null`, el `.catch` dejaba `estado = null` para siempre si la API fallaba, y
+`!datos?.escritura_protegida` pedía `/api/historial` también con `datos` indefinido. La API seguía
+devolviendo 401 a las escrituras sin token: fallo de diseño de la interfaz, no exposición de datos.
+
+- Reproducido sin tocar la nube: web compilada con una API remota simulada y `vite preview`;
+  Playwright intercepta `/api/estado` y lo retrasa 20 s o lo hace fallar
+  (`frontend/playwright.arranque.config.js`). Capturas de antes y después en
+  `docs_auditoria/evidencias/{antes,despues}/S14-01_*`.
+- Arreglo en `fix/web-bloqueo-por-defecto`; Vitest 48 → 53 (todas en verde).
+- App móvil revisada: no tiene el patrón (no administra nada ni pide `/api/historial`).
+- Pendiente: captura en la nube durante un arranque en frío real, después de fusionar y desplegar.
