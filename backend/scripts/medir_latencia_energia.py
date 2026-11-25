@@ -137,6 +137,9 @@ def main(base, salida: Path, energia: bool, etiqueta: str, origen=None, por_minu
             "abstenida": d.get("abstenida"),
             "generador_invocado": d.get("generador_invocado"),
             "redactado_por": d.get("redactado_por"),
+            # P4 (diagnostico): por que respondio el respaldo (429, 503, tiempo agotado o
+            # verificador). Lo devuelve la API; no contiene la clave ni datos personales.
+            "motivo_redaccion": d.get("motivo_redaccion") or "",
             "total_ms": round((t1 - t0) * 1000, 2),
             "servidor_ms": d.get("latencia_ms"),
             "oro_en_top5": bool(

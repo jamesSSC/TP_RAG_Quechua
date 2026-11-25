@@ -71,6 +71,11 @@ def analizar(filas: list[dict]) -> str:
     return "\n".join(lineas)
 
 
+def con_datos(filas: list[dict]) -> list[dict]:
+    """Descarta las filas preparadas de antemano (P05, P06…) que quedaron sin llenar."""
+    return [f for f in filas if any((f.get(f"sus{i}") or "").strip() for i in range(1, 11))]
+
+
 if __name__ == "__main__":
     with open(sys.argv[1], encoding="utf-8", newline="") as f:
-        print(analizar(list(csv.DictReader(f))))
+        print(analizar(con_datos(list(csv.DictReader(f)))))

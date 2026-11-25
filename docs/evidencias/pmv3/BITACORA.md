@@ -173,3 +173,27 @@ Vitest + 3. Pendiente tras desplegar `main`: capturas en la nube (logo, cabecera
   - Evidencia: `docs_entrega_final/metricas/evidencias/latencia_nube_gemini_adr039_manana.{json,csv}`.
 - Pendiente: franja de la noche; diagnóstico de 429/503 con los logs de Render (acceso de James).
 
+
+## 2026-11-25 · P4.1: diagnóstico desde el cliente (sin los logs de Render) y conteo de P6
+
+**Diagnóstico de la latencia** (CSV del 20/11 y de esta mañana, consulta por consulta):
+
+| Indicio | 20/11 (mediodía) | 25/11 (mañana) | Qué descarta o sugiere |
+|---|---|---|---|
+| Red cliente ↔ Render (`total_ms − servidor_ms`), P50 / P95 | 141 / 322 ms | 134 / 166 ms | **No es la red ni la región**: es menos del 3 % del tiempo |
+| Llamadas a Gemini **aceptadas**, P50 / P95 | 6 086 / 9 533 ms (98 de 165 superan 5 s) | 834 / 2 736 ms (5 de 169 superan 5 s) | Mismo modelo, misma instrucción y mismo contexto: la lentitud está **en la llamada a Gemini** y varía con el momento |
+| Respaldo «rápido» (verificador), P50 | 5 281 ms | 1 167 ms | Un 429 (cuota) falla en milisegundos; estos tardan lo que la llamada. **No hay indicio de cuota agotada** |
+| Tiempo agotado: IDs y posición | 18, dispersos (solo A035 se repite al día siguiente) | 16, dispersos | **No depende de la consulta ni de la longitud del contexto**; son picos sueltos |
+
+**Causa probable:** variabilidad de la latencia de Gemini 3.5 Flash-Lite (plan gratuito) según la carga
+del momento, con razonamiento «low». No la explican la red, la región, la cuota ni la longitud de la
+instrucción. **Falta confirmarlo:**
+- con los logs de Render (`[GEMINI] … resultado=HTTP 429|503 ms=…`, que existen desde ADR-039) y la cuota
+  en AI Studio, que son acceso de James;
+- con la franja de la noche, que además guarda `motivo_redaccion` por consulta (cambio en
+  `scripts/medir_latencia_energia.py`).
+
+**P6 · consultas `usuario` reales:** **54**, según `fn_conteo_por_origen()` en Neon (servida por
+`/api/estado`, 25/11). Si el equipo rotula como `humo` las 6 de la app del 20/11, quedan **48**. Esa es
+la cifra de HU-09 para el informe. La consulta de control de hoy quedó como `humo` y no cambia la
+cifra.
