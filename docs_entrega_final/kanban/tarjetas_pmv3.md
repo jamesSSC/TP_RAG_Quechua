@@ -120,7 +120,25 @@ Una tarjeta por hallazgo corregido (para el informe 8.9 y como portada, la captu
 | H-08 ruff, Bandit y `npm audit` en la CI | `H-08_despues_ci_con_ruff_bandit_npm_audit.png` |
 | H-09 Nombre del repositorio y nivel de logs | `H-09_despues_nombre_logs_y_traductor.png` |
 | H-10 Modelo en `/api/estado` | `H-10_despues_estado_modelo_extractivo.png` |
+| S14-01 Gestión bloqueada por defecto en el arranque en frío | `docs_auditoria/evidencias/despues/S14-01_despues_gestion_bloqueada_en_arranque.png` |
 | PMV3-D01 INTERNET en el release | `docs_auditoria/evidencias/delta_pmv3/PMV3-D01_despues_release_con_internet.png` |
+
+## S14-01 · La web bloquea la gestión mientras la nube arranca
+
+- **PMV:** PMV3 · Sprint 3 · **Responsable:** James Saenz · **Revisó:** Omar Terbullino (QA).
+- **Inicio y fin:** 2026-11-24.
+- **Checklist:**
+  - [x] Bloqueo por defecto: solo `escritura_protegida === false` confirmado o el token validado desbloquean.
+  - [x] Aviso neutro «Conectando con el servicio…» mientras `/api/estado` no responde.
+  - [x] Si `/api/estado` falla: «No se pudo confirmar el modo del servicio» y Reintentar.
+  - [x] Sin `/api/historial` ni «Borrar historial» del servidor hasta confirmar el modo.
+  - [x] Modo local sin cambios.
+  - [x] Revisión de la app móvil: no tiene el patrón.
+  - [ ] Captura en la nube durante un arranque en frío real (tras desplegar `main`).
+- **PR / rama:** `fix/web-bloqueo-por-defecto`. PR: por abrir.
+- **Capturas:** antes `docs_auditoria/evidencias/antes/S14-01_antes_gestion_desbloqueada_en_arranque.png` →
+  después `docs_auditoria/evidencias/despues/S14-01_despues_gestion_bloqueada_en_arranque.png`.
+- **Lista destino:** DONE al fusionar (la captura en la nube queda como verificación).
 
 ## Deuda técnica (una tarjeta, lista «Deuda»)
 

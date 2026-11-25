@@ -55,6 +55,7 @@ function instalarFetch(manejadorConsulta, historial = []) {
         generador_disponible: true,
         base_datos_disponible: true,
         modelo: "qwen3.5:4b",
+        escritura_protegida: false, // modo local: el backend siempre envia el campo
       });
     }
     if (url.endsWith("/api/historial") && metodo === "GET") return json(historial);
@@ -318,6 +319,7 @@ describe("base de demostración (HU-09)", () => {
               generador_disponible: true,
               base_datos_disponible: true,
               modelo: "qwen3.5:4b",
+              escritura_protegida: false,
               ...extra,
             })
           : json([]),
