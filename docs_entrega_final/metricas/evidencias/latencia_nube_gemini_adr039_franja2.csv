@@ -1,0 +1,249 @@
+id,subconjunto,http,abstenida,generador_invocado,redactado_por,motivo_redaccion,total_ms,servidor_ms,oro_en_top5
+A001,A,200,False,True,gemini,,1001.41,870.6,True
+A002,A,200,False,True,gemini,,3976.09,3837.8,True
+A003,A,200,False,True,gemini,,1688.14,1518.4,True
+A004,A,200,False,True,gemini,,2859.61,2708.2,True
+A005,A,200,False,True,gemini,,3719.19,3585.0,True
+A006,A,200,False,True,gemini,,1016.41,872.4,True
+A007,A,200,False,True,gemini,,821.79,687.2,True
+A008,A,200,False,True,gemini,,1331.38,1190.7,True
+A009,A,200,False,True,gemini,,1839.65,1707.8,True
+A010,A,200,False,True,extractivo,tiempo agotado (10 s),10360.16,10227.9,True
+A011,A,200,False,True,gemini,,991.35,858.9,True
+A012,A,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,1870.66,1738.4,True
+A013,A,200,False,True,gemini,,1507.71,1364.7,True
+A014,A,200,False,True,gemini,,2310.72,2183.1,True
+A015,A,200,False,True,gemini,,1121.56,946.6,True
+A016,A,200,False,True,gemini,,1111.63,974.7,True
+A017,A,200,False,True,gemini,,969.86,839.6,True
+A018,A,200,False,True,gemini,,951.0,813.6,True
+A019,A,200,False,True,gemini,,1130.05,996.5,True
+A020,A,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,863.27,721.7,True
+A021,A,200,False,True,gemini,,750.65,619.3,True
+A022,A,200,False,True,gemini,,1891.08,1755.9,True
+A023,A,200,False,True,gemini,,745.25,608.5,True
+A024,A,200,False,True,gemini,,886.83,740.2,True
+A025,A,200,False,True,gemini,,2404.06,2271.6,True
+A026,A,200,False,True,gemini,,1126.17,991.6,True
+A027,A,200,False,True,gemini,,801.33,666.6,True
+A028,A,200,False,True,gemini,,828.58,691.4,True
+A029,A,200,False,True,gemini,,1149.2,1019.1,True
+A030,A,200,False,True,extractivo,error HTTP 503,2519.05,2378.8,True
+A031,A,200,False,True,gemini,,835.23,702.5,True
+A032,A,200,False,True,gemini,,752.2,619.8,True
+A033,A,200,False,True,extractivo,error HTTP 503,3025.49,2889.5,True
+A034,A,200,False,True,gemini,,870.17,728.8,True
+A035,A,200,False,True,extractivo,cuota agotada (429),314.32,181.3,True
+A036,A,200,False,True,extractivo,cuota agotada (429),387.83,256.1,True
+A037,A,200,False,True,gemini,,926.81,791.4,True
+A038,A,200,False,True,gemini,,990.61,837.2,True
+A039,A,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,886.53,748.7,True
+A040,A,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,848.54,690.6,True
+A041,A,200,False,True,gemini,,870.66,738.2,True
+A042,A,200,False,True,gemini,,840.67,646.9,True
+A043,A,200,False,True,gemini,,738.58,609.1,True
+A044,A,200,False,True,gemini,,818.69,673.9,True
+A045,A,200,False,True,gemini,,1184.73,1052.3,True
+A046,A,200,False,True,gemini,,1596.44,1469.3,True
+A047,A,200,False,True,gemini,,800.63,671.4,True
+A048,A,200,False,True,gemini,,1701.55,1572.7,True
+A049,A,200,False,True,gemini,,1125.57,985.3,True
+A050,A,200,False,True,extractivo,error HTTP 503,2860.79,2731.3,True
+A051,A,200,False,True,gemini,,942.11,808.1,True
+A052,A,200,False,True,gemini,,802.27,674.7,True
+A053,A,200,False,True,gemini,,751.3,618.9,True
+A054,A,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,980.26,850.7,True
+A055,A,200,False,True,gemini,,915.28,784.3,True
+A056,A,200,False,True,gemini,,922.0,785.0,True
+A057,A,200,False,True,gemini,,801.55,664.6,True
+A058,A,200,False,True,gemini,,3183.53,3051.8,True
+A059,A,200,False,True,gemini,,822.54,691.6,True
+A060,A,200,False,True,gemini,,1437.02,1303.1,True
+A061,A,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,1360.55,1220.6,True
+A062,A,200,False,True,gemini,,702.0,573.7,True
+A063,A,200,False,True,gemini,,1612.85,1455.1,True
+A064,A,200,False,True,gemini,,984.76,854.9,True
+A065,A,200,False,True,extractivo,cuota agotada (429),416.73,265.9,True
+A066,A,200,False,True,gemini,,954.72,809.9,True
+A067,A,200,False,True,gemini,,965.01,836.7,True
+A068,A,200,False,True,gemini,,892.4,761.8,True
+A069,A,200,False,True,gemini,,933.0,800.4,True
+A070,A,200,False,True,gemini,,1076.69,946.5,True
+A071,A,200,False,True,gemini,,1948.44,1808.5,True
+A072,A,200,False,True,extractivo,error HTTP 503,2513.57,2384.7,True
+A073,A,200,False,True,gemini,,1078.98,949.5,True
+A074,A,200,False,True,gemini,,733.88,603.2,True
+A075,A,200,False,True,gemini,,721.68,591.7,True
+A076,A,200,False,True,extractivo,cuota agotada (429),349.65,219.1,True
+A077,A,200,False,True,extractivo,tiempo agotado (10 s),10358.47,10224.1,True
+A078,A,200,False,True,gemini,,1367.03,1230.5,True
+A079,A,200,False,True,gemini,,1158.44,1023.6,True
+A080,A,200,False,True,gemini,,1147.77,1019.3,True
+A081,A,200,False,True,gemini,,874.5,743.1,True
+A082,A,200,False,True,gemini,,2738.69,2601.3,True
+A083,A,200,False,True,gemini,,887.22,758.6,True
+A084,A,200,False,True,gemini,,920.7,784.1,True
+A085,A,200,False,True,gemini,,1729.77,1594.4,True
+A086,A,200,False,True,gemini,,956.76,809.1,True
+A087,A,200,False,True,gemini,,775.88,635.4,True
+A088,A,200,False,True,gemini,,2319.12,2179.8,True
+A089,A,200,False,True,gemini,,804.85,673.0,True
+A090,A,200,False,True,gemini,,1240.1,1105.4,True
+A091,A,200,False,True,gemini,,804.05,675.4,True
+A092,A,200,False,True,gemini,,854.99,715.1,True
+A093,A,200,False,True,gemini,,1246.49,1115.5,True
+A094,A,200,False,True,gemini,,874.39,743.7,True
+A095,A,200,False,True,gemini,,5304.07,5173.2,True
+A096,A,200,False,True,gemini,,4242.52,4106.9,True
+A097,A,200,False,True,gemini,,6577.81,6444.6,True
+A098,A,200,False,True,gemini,,1196.88,1052.8,True
+A099,A,200,False,True,gemini,,2471.8,2327.3,True
+A100,A,200,False,True,gemini,,768.89,641.4,True
+A101,A,200,False,True,gemini,,1469.9,1335.7,True
+A102,A,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,2137.45,2004.9,True
+A103,A,200,False,True,gemini,,894.39,755.8,True
+A104,A,200,False,True,gemini,,2284.13,2148.7,True
+A105,A,200,False,True,gemini,,900.57,761.6,True
+A106,A,200,False,True,gemini,,1156.81,1018.3,True
+A107,A,200,False,True,extractivo,tiempo agotado (10 s),10385.39,10248.2,True
+A108,A,200,False,True,gemini,,2847.05,2709.6,True
+A109,A,200,False,True,extractivo,error HTTP 503,2440.84,2312.5,True
+A110,A,200,False,True,gemini,,2457.63,2323.1,True
+A111,A,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,949.78,819.5,True
+A112,A,200,False,True,gemini,,8228.25,8097.3,True
+A113,A,200,False,True,extractivo,error HTTP 503,3076.89,2932.2,True
+A114,A,200,False,True,gemini,,1485.5,1349.3,True
+A115,A,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,1551.94,1415.7,True
+A116,A,200,False,True,gemini,,918.89,765.5,True
+A117,A,200,False,True,gemini,,1481.77,1347.0,True
+A118,A,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,945.16,804.6,True
+A119,A,200,False,True,gemini,,1060.36,922.8,True
+A120,A,200,False,True,gemini,,1386.57,1252.9,True
+B001,B,200,False,True,gemini,,1693.7,1553.1,True
+B002,B,200,False,True,gemini,,2463.33,2329.0,True
+B003,B,200,False,True,gemini,,842.87,713.3,True
+B004,B,200,False,True,gemini,,1332.23,1198.1,True
+B005,B,200,False,True,gemini,,2211.19,2062.6,True
+B006,B,200,False,True,gemini,,1384.08,1250.1,True
+B007,B,200,False,True,gemini,,1121.33,979.9,True
+B008,B,200,False,True,gemini,,735.83,597.1,True
+B009,B,200,False,True,gemini,,858.99,723.3,True
+B010,B,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,793.84,650.6,True
+B011,B,200,False,True,gemini,,3665.93,3531.8,True
+B012,B,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,2828.62,2683.6,True
+B013,B,200,False,True,gemini,,790.31,648.8,True
+B014,B,200,False,True,extractivo,tiempo agotado (10 s),10321.72,10194.2,True
+B015,B,200,False,True,gemini,,1530.84,1393.4,True
+B016,B,200,False,True,gemini,,750.19,615.1,True
+B017,B,200,False,True,gemini,,752.38,616.7,True
+B018,B,200,False,True,gemini,,825.32,682.9,True
+B019,B,200,False,True,gemini,,1014.79,880.7,True
+B020,B,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,944.84,814.8,True
+B021,B,200,False,True,gemini,,1056.17,918.8,True
+B022,B,200,False,True,gemini,,806.03,673.4,True
+B023,B,200,False,True,gemini,,942.95,807.0,True
+B024,B,200,False,True,gemini,,901.61,755.7,True
+B025,B,200,False,True,gemini,,1209.79,1076.5,True
+B026,B,200,False,True,gemini,,1084.5,950.6,True
+B027,B,200,False,True,gemini,,1018.85,875.7,True
+B028,B,200,False,True,gemini,,1351.37,1213.3,True
+B029,B,200,False,True,gemini,,1002.06,860.4,True
+B030,B,200,False,True,gemini,,997.29,856.5,True
+B031,B,200,False,True,gemini,,922.85,788.4,True
+B032,B,200,False,True,gemini,,1706.8,1563.1,True
+B033,B,200,False,True,gemini,,961.14,823.5,True
+B034,B,200,False,True,gemini,,1029.05,895.9,True
+B035,B,200,False,True,gemini,,1355.0,1220.6,True
+B036,B,200,False,True,gemini,,1352.81,1214.1,True
+B037,B,200,False,True,gemini,,8202.78,8059.9,True
+B038,B,200,False,True,gemini,,1010.06,861.7,True
+B039,B,200,False,True,extractivo,tiempo agotado (10 s),10353.5,10216.1,True
+B040,B,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,809.9,678.9,True
+B041,B,200,False,True,gemini,,911.02,774.8,True
+B042,B,200,False,True,gemini,,689.05,555.8,True
+B043,B,200,False,True,gemini,,768.06,620.6,True
+B044,B,200,False,True,gemini,,985.81,850.7,True
+B045,B,200,False,True,gemini,,890.45,755.8,True
+B046,B,200,False,True,gemini,,2448.83,2319.6,True
+B047,B,200,False,True,extractivo,error HTTP 503,2692.1,2554.1,True
+B048,B,200,False,True,gemini,,1269.31,1139.5,True
+B049,B,200,False,True,gemini,,1376.13,1240.9,True
+B050,B,200,False,True,gemini,,3551.18,3422.2,True
+B051,B,200,False,True,gemini,,960.09,822.5,True
+B052,B,200,False,True,gemini,,862.91,734.1,True
+B053,B,200,False,True,gemini,,926.22,794.5,True
+B054,B,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,857.95,715.8,True
+B055,B,200,False,True,gemini,,705.05,575.4,True
+B056,B,200,False,True,gemini,,1961.28,1822.9,True
+B057,B,200,False,True,extractivo,tiempo agotado (10 s),10331.12,10200.3,True
+B058,B,200,False,True,gemini,,915.73,786.2,True
+B059,B,200,False,True,gemini,,767.24,634.1,True
+B060,B,200,False,True,gemini,,1420.51,1291.2,True
+C001,C,200,True,False,,,160.33,13.8,
+C002,C,200,True,False,,,201.28,76.4,
+C003,C,200,True,False,,,142.24,11.9,
+C004,C,200,True,False,,,162.58,33.0,
+C005,C,200,True,False,,,139.21,12.0,
+C006,C,200,True,False,,,148.95,11.5,
+C007,C,200,True,False,,,241.09,71.9,
+C008,C,200,True,False,,,168.45,40.5,
+C009,C,200,True,False,,,182.67,13.3,
+C010,C,200,True,False,,,142.24,10.8,
+C011,C,200,True,False,,,140.18,10.8,
+C012,C,200,True,False,,,139.38,11.3,
+C013,C,200,True,False,,,145.88,11.0,
+C014,C,200,True,False,,,160.22,24.0,
+C015,C,200,True,False,,,169.04,12.3,
+C016,C,200,True,False,,,144.67,10.9,
+C017,C,200,True,False,,,170.13,22.0,
+C018,C,200,True,False,,,141.69,11.4,
+C019,C,200,True,False,,,157.54,28.3,
+C020,C,200,True,False,,,199.57,67.9,
+C021,C,200,True,False,,,200.62,75.2,
+C022,C,200,True,False,,,181.74,12.1,
+C023,C,200,True,False,,,229.01,98.5,
+C024,C,200,True,False,,,139.08,11.1,
+C025,C,200,True,False,,,155.03,22.5,
+C026,C,200,True,False,,,291.02,157.9,
+C027,C,200,True,False,,,144.49,10.7,
+C028,C,200,True,False,,,149.98,23.5,
+D001,D,200,False,True,gemini,,967.01,821.2,True
+D002,D,200,False,True,gemini,,879.54,735.6,True
+D003,D,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,2839.11,2695.6,True
+D004,D,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,839.34,710.5,True
+D005,D,200,False,True,gemini,,870.64,742.2,True
+D006,D,200,False,True,gemini,,875.99,731.3,True
+D007,D,200,False,True,gemini,,6629.94,6494.3,True
+D008,D,200,False,True,gemini,,2301.07,2163.2,True
+D009,D,200,False,True,gemini,,836.17,706.3,True
+D010,D,200,False,True,gemini,,6201.38,6071.5,True
+D011,D,200,False,True,gemini,,968.59,826.0,True
+D012,D,200,False,True,gemini,,885.74,754.1,True
+D013,D,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,1410.28,1279.7,True
+D014,D,200,False,True,gemini,,956.6,810.5,True
+D015,D,200,False,True,gemini,,2035.03,1893.1,True
+D016,D,200,False,True,gemini,,1092.16,959.3,True
+D017,D,200,False,True,gemini,,989.11,858.1,True
+D018,D,200,False,True,extractivo,cuota agotada (429),2174.57,2045.3,True
+D019,D,200,False,True,extractivo,cuota agotada (429),415.73,280.6,True
+D020,D,200,False,True,extractivo,cuota agotada (429),611.94,468.7,True
+D021,D,200,False,True,extractivo,cuota agotada (429),509.4,382.5,True
+D022,D,200,False,True,extractivo,cuota agotada (429),585.5,442.9,True
+D023,D,200,False,True,extractivo,cuota agotada (429),484.76,347.7,True
+D024,D,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,1427.85,1275.2,True
+D025,D,200,False,True,gemini,,1994.94,1854.6,True
+D026,D,200,False,True,extractivo,cuota agotada (429),486.08,354.9,True
+D027,D,200,False,True,extractivo,cuota agotada (429),411.95,281.0,True
+D028,D,200,False,True,gemini,,851.23,713.5,True
+D029,D,200,False,True,gemini,,784.18,640.1,True
+D030,D,200,False,True,extractivo,cuota agotada (429),470.81,339.1,True
+D031,D,200,False,True,gemini,,771.05,639.4,True
+D032,D,200,False,True,extractivo,cuota agotada (429),890.27,742.4,True
+D033,D,200,False,True,gemini,,1099.54,957.8,True
+D034,D,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,1329.63,1196.9,True
+D035,D,200,False,True,gemini,,894.47,763.8,True
+D036,D,200,False,True,gemini,,4079.87,3934.5,True
+D037,D,200,False,True,extractivo,cuota agotada (429),516.62,370.0,True
+D038,D,200,False,True,extractivo,verificador: forma o glosa ausentes del fragmento,959.38,829.6,True
+D039,D,200,False,True,gemini,,1087.64,954.7,True
+D040,D,200,False,True,extractivo,cuota agotada (429),430.91,301.0,True

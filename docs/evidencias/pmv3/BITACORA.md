@@ -197,3 +197,39 @@ instrucción. **Falta confirmarlo:**
 `/api/estado`, 25/11). Si el equipo rotula como `humo` las 6 de la app del 20/11, quedan **48**. Esa es
 la cifra de HU-09 para el informe. La consulta de control de hoy quedó como `humo` y no cambia la
 cifra.
+
+## 2026-11-25 · P4, segunda franja (media mañana) y corrección del diagnóstico
+
+**Medición** (10:36–10:54 de Perú; 248 consultas, origen `humo` validado antes con una consulta de control;
+20/min). Es la segunda franja que pide P4. Fue **solo dos horas después** de la primera: no es una franja
+de noche.
+- Respuestas (N = 220): **P50 997 ms, P95 5 304 ms**; abstenciones: P50 160 ms; 0 errores HTTP.
+- Arnés: recall@5 1,000 en A, B y D; **0 FP en C**.
+- Respaldo: 50 (22,7 %). Ahora con su motivo, porque el guion guarda `motivo_redaccion`:
+
+| Motivo | n | `servidor_ms` (mediana) | Patrón |
+|---|---|---|---|
+| Verificador: la forma o la glosa no están en el fragmento | 21 | 830 | Disperso. Es la salvaguarda funcionando, no una falla |
+| `cuota agotada (429)` | 16 | 348 | **12 de 16 al final** (consultas 225–247) |
+| `error HTTP 503` (también falló el reintento de ADR-039) | 7 | 2 554 | Disperso |
+| `tiempo agotado (10 s)` | 6 | 10 224 | Disperso |
+
+**Corrección del diagnóstico de P4.1** (la entrada anterior decía «no hay indicio de cuota agotada»):
+**sí hay 429.** La cuota del plan gratuito de Gemini se agota cuando hay muchas llamadas seguidas: esta
+corrida era la tercera del día (unas 500 llamadas en unas 2 h), y los 429 se concentraron al final. Hay,
+además, 503 sueltos (modelo saturado) y picos de latencia del propio Gemini que varían con el momento.
+La red y la longitud de la instrucción siguen descartadas.
+
+**Causas probables, por orden de peso:**
+1. Latencia variable de Gemini 3.5 Flash-Lite según la carga (20/11: P50 de las llamadas aceptadas
+   6,1 s; hoy, 0,8–0,9 s).
+2. Límite de cuota del plan gratuito (429) bajo ráfagas como las de las mediciones. Un uso normal no
+   llega a ese ritmo.
+3. 503 sueltos y tiempos agotados (menos del 6 % de las respuestas).
+
+**Implicación:** con el plan gratuito, la cifra depende del momento y de cuántas llamadas se hayan hecho
+antes. No se contrata un plan de pago sin decisión del equipo (regla del MD). Los logs de Render
+(`[GEMINI] … resultado=HTTP 429|503`) permitirían confirmar las cifras del 20/11, que no guardaron el
+motivo.
+
+Evidencia: `docs_entrega_final/metricas/evidencias/latencia_nube_gemini_adr039_franja2.{json,csv}`.
