@@ -13,8 +13,9 @@ documental**, desplegados también en la nube:
 - API: <https://quechua-api.onrender.com> (`/docs`, `/api/estado`, `/api/vivo`)
 - Base: Neon PostgreSQL (AWS us-east-1). Redacción en la nube: Gemini 3.5 Flash-Lite.
 
-La aplicación móvil (PMV3, ADR-038) vive en
-[quechua-wanka-movil](https://github.com/DalgomXD-byte/quechua-wanka-movil). Tiene dos modos:
+La aplicación móvil (PMV3, ADR-038) está en [`mobile/`](mobile/) (traída con su historial desde
+[quechua-wanka-movil](https://github.com/DalgomXD-byte/quechua-wanka-movil)). El APK release está en la
+[Release v1.1.0](https://github.com/DalgomXD-byte/quechua-wanka-movil/releases/tag/v1.1.0), con su SHA-256. Tiene dos modos:
 
 - **En línea:** cliente de esta API.
 - **Sin conexión:** resuelve en el teléfono con los artefactos que aquí se generan con
