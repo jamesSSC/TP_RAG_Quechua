@@ -1,0 +1,5 @@
+sprint,inicio,fin,dias,items,items_en_DONE_en_trello,lista_actual
+Sprint 1 · PMV1,2026-09-21,2026-10-12,21,HU-01 HU-02 HU-03 HU-04 HU-05 HU-06 HU-07,7,DONE
+Sprint 2 · PMV2 + nube,2026-10-12,2026-11-06,25,HU-08.1 HU-08.2 HU-09 RF-15,4,DONE
+Sprint S13 · calidad y seguridad,2026-11-09,2026-11-13,4,RM-01 RM-02 RM-03 RM-04 M-01 M-02-a-M-08 Entregables-01-a-07,7,DONE (RM-05 a RM-08 parciales en QA-TESTING)
+Sprint 3 · PMV3,2026-11-06,2026-12-14,38,HU-10.1 HU-10.2 HU-10.3 HU-11,0,Product Backlog
