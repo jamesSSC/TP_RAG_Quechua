@@ -1,0 +1,76 @@
+{
+  "version_formato": 1,
+  "umbral_abstencion": 0.48,
+  "n_fragmentos": 3605,
+  "plantillas_depuracion": [
+    "\\bcomo\\s+se\\s+dice\\b",
+    "\\bque\\s+significa\\b",
+    "\\bnecesito\\s+el\\s+termino\\s+wanka\\s+para\\s+referirme\\s+a\\b",
+    "\\bestoy\\s+buscando\\s+la\\s+palabra\\s+que\\s+designa\\b",
+    "\\bcual\\s+es\\s+la\\s+palabra\\b",
+    "\\bhow\\s+do\\s+you\\s+say\\b",
+    "\\bwhat\\s+is\\s+the\\s+wanka\\s+quechua\\s+word\\s+for\\b",
+    "\\bwhat\\s+is\\s+the\\s+word\\s+for\\b",
+    "\\bin\\s+wanka\\s+quechua\\b",
+    "\\ben\\s+la\\s+variedad\\s+wanka\\b",
+    "\\ben\\s+quechua\\s+wanka\\b",
+    "\\bquechua\\s+wanka\\b",
+    "\\bwanka\\s+quechua\\b",
+    "\\bvariedad\\s+wanka\\b"
+  ],
+  "analizadores": {
+    "palabras": {
+      "tipo": "word",
+      "patron_token": "\\b\\w+\\b"
+    },
+    "caracteres": {
+      "tipo": "char_wb",
+      "n_min": 3,
+      "n_max": 5
+    }
+  },
+  "combinacion": "promedio",
+  "idf_palabras": {
+    "archivo": "idf_palabras.bin",
+    "n": 21509,
+    "bytes": 86036
+  },
+  "matriz_palabras": {
+    "archivo": "matriz_palabras.bin",
+    "columnas": 21509,
+    "filas": 3605,
+    "nnz": 75865,
+    "bytes": 692960
+  },
+  "vocab_palabras": {
+    "archivo": "vocab_palabras.json",
+    "n": 21509,
+    "bytes": 260533
+  },
+  "idf_caracteres": {
+    "archivo": "idf_caracteres.bin",
+    "n": 102129,
+    "bytes": 408516
+  },
+  "matriz_caracteres": {
+    "archivo": "matriz_caracteres.bin",
+    "columnas": 102129,
+    "filas": 3605,
+    "nnz": 1041233,
+    "bytes": 8738384
+  },
+  "vocab_caracteres": {
+    "archivo": "vocab_caracteres.json",
+    "n": 102129,
+    "bytes": 896870
+  },
+  "fragmentos": {
+    "archivo": "fragmentos.json",
+    "bytes": 1114954
+  },
+  "lemario": {
+    "archivo": "lemario.json",
+    "n": 2342,
+    "bytes": 43579
+  }
+}
