@@ -67,6 +67,14 @@ class Configuracion(BaseSettings):
     corpus_origen: Literal["jsonl", "postgres"] = "jsonl"
     # Rotulo del entorno que se muestra en /api/estado y en el pie de la interfaz.
     entorno: str = "local"
+    # P5 (ronda 2): commit desplegado. Render define RENDER_GIT_COMMIT en cada despliegue; en local
+    # no existe y la version se informa como "local".
+    render_git_commit: str = ""
+
+    @property
+    def version(self) -> str:
+        commit = self.render_git_commit.strip()
+        return commit[:7] if commit else "local"
 
     ruta_tabla_traduccion: Path = RAIZ / "data" / "traduccion_en_es.json"
     # Adaptador de traduccion EN->ES: "tabla" (precalculada, defecto y nube) u "ollama".

@@ -76,7 +76,8 @@ def qr():
     destinos = {
         "qr_web_render.png": "https://quechua-web.onrender.com",
         "qr_repositorio.png": "https://github.com/omarpiero/TP_RAG_Quechua",
-        "qr_app_movil.png": "https://github.com/DalgomXD-byte/quechua-wanka-movil",
+        # P2 (ronda 2): la Release con el APK, no el repositorio: se escanea y se descarga.
+        "qr_app_movil.png": "https://github.com/DalgomXD-byte/quechua-wanka-movil/releases/tag/v1.1.0",
     }
     for archivo, url in destinos.items():
         codigo = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=40,

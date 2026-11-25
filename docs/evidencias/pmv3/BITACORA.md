@@ -77,15 +77,11 @@ COMMIT;   -- o ROLLBACK si la verificación no dio 31
 Las 6 consultas de la app del 20/11, 00:37–00:51 UTC (tabla de arriba), se pueden rotular igual si el
 equipo lo decide.
 
-## 2026-11-24 · P4: mitigaciones de la latencia de la nube (ADR-039)
+## 2026-11-24 · P5: versión desplegada en `/api/estado` y en el pie de la web
 
-- `GEMINI_TIMEOUT`: 15 s → 10 s. Reintento único ante 503, dentro del mismo presupuesto. Registro
-  `[GEMINI] modelo=… resultado=… ms=…` por llamada, sin la clave ni la consulta.
-- pytest: 6 casos nuevos en `test_gemini_generador.py`; suite completa en verde.
-- **Diagnóstico pendiente:** leer los logs de Render del 20/11 (429/503, duración por llamada) y la
-  cuota en Google AI Studio. Requiere el acceso de James al panel; con este cambio desplegado, los
-  logs ya muestran la duración de cada llamada.
-- **Medición pendiente:** N ≥ 30 en dos franjas (mañana y noche, hora de Perú), origen `humo`,
-  ≤ 20/min, después de desplegar. Luego C-24 en `cifras_oficiales.md`.
-- Si en el panel de Render hay una variable `GEMINI_TIMEOUT` puesta a mano, tiene prioridad sobre el
-  valor por defecto: hay que borrarla o ponerla en 10.
+`/api/estado` informa `version`: los 7 primeros caracteres de `RENDER_GIT_COMMIT`, que Render define en
+cada despliegue, o `"local"`. El pie de la web muestra «versión: API <commit> · web <commit>». La web
+toma su commit al compilarse (`vite.config.js`, `__VERSION_WEB__`), porque el sitio estático y la API
+se despliegan por separado y pueden quedar en commits distintos. pytest 430 + 4 (todas en verde);
+Vitest + 3. Pendiente tras desplegar `main`: capturas en la nube (logo, cabeceras con
+`curl -sI`, `/api/estado` con 3 605 fragmentos, 8 documentos y el commit).
