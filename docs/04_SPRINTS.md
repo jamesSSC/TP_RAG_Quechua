@@ -5,7 +5,7 @@
 > anota con fecha en ambos archivos.
 >
 > Mantenido por: **archivista** · Las fechas y los resultados solo se modifican con evidencia · Última
-> revisión: 2026-10-01 · Versión 1.1
+> revisión: 2026-11-24 · Versión 1.2 (§1.4: ejecución real según Trello)
 
 ---
 
@@ -44,10 +44,27 @@ parte de su capacidad, lo que se tiene en cuenta en el compromiso del §3.
 
 | Sprint | Fechas | PMV | Objetivo | Estado |
 |---|---|---|---|---|
-| Sprint 1 | 2026-09-21 → 2026-10-11 | PMV1 | Entorno operativo; corpus indexado y consultable, con procedencia y arnés de evaluación | **En curso** |
-| Sprint 2 | 2026-10-12 → 2026-11-01 | PMV1 | Flujo de consulta completo con traducción, trazabilidad y abstención · Hito 1 | Planificado |
-| Sprint 3 | 2026-11-02 → 2026-11-22 | PMV2 | Analítica predictiva y artefactos móviles equivalentes · Hito 2 | Planificado |
-| Sprint 4 | 2026-11-23 → 2026-12-13 | PMV3 | Aplicación móvil sin conexión validada en dispositivo · Hito 3 | Planificado |
+| Sprint 1 | 2026-09-21 → 2026-10-11 | PMV1 | Entorno operativo; corpus indexado y consultable, con procedencia y arnés de evaluación | Cerrado (ver §1.4) |
+| Sprint 2 | 2026-10-12 → 2026-11-01 | PMV1 | Flujo de consulta completo con traducción, trazabilidad y abstención · Hito 1 | Cerrado (ver §1.4) |
+| Sprint 3 | 2026-11-02 → 2026-11-22 | PMV2 | Analítica predictiva y artefactos móviles equivalentes · Hito 2 | Cerrado (ver §1.4) |
+| Sprint 4 | 2026-11-23 → 2026-12-13 | PMV3 | Aplicación móvil sin conexión validada en dispositivo · Hito 3 | En curso: en Trello es el **Sprint 3, 06/11 → 13/12** (§1.4) |
+
+### 1.4 Ejecución real según Trello (alineado el 2026-11-24)
+
+El plan de arriba tenía cuatro sprints de tres semanas. En el tablero de Trello (exportado el 20/11: 68
+tarjetas y 498 acciones, `docs_entrega_final/icacit/avance_sprints.csv`) el trabajo quedó en **tres
+sprints**, más uno corto de calidad y seguridad (S13). Las fechas oficiales del informe son las de Trello:
+
+| Sprint (Trello) | Fechas | PMV | Ítems | Estado |
+|---|---|---|---|---|
+| Sprint 1 · PMV1 | 2026-09-21 → 2026-10-12 | PMV1 | HU-01 a HU-07 | Cerrado: 7/7 en DONE |
+| Sprint 2 · PMV2 + nube | 2026-10-12 → 2026-11-06 | PMV2 | HU-08.1, HU-08.2, HU-09, RF-15 | Cerrado: 4/4 en DONE |
+| Sprint S13 · calidad y seguridad | 2026-11-09 → 2026-11-13 | — | RM-01 a RM-04, M-01 a M-08, entregables 01–07 | Cerrado (RM-05 a RM-08 parciales) |
+| **Sprint 3 · PMV3** | **2026-11-06 → 2026-12-13** | PMV3 | HU-10.1, HU-10.2, HU-10.3, HU-11 | En curso: las 4 HU hechas en el emulador el 19–20/11; faltan el teléfono físico y la prueba con usuarios |
+
+El export de Trello termina el Sprint 3 el 14/12. El cierre se fija en el **13/12**, el día del Hito 3,
+que es la fecha acordada en el equipo. El PMV3 está registrado en §6 como «Sprint 4», el nombre del
+plan original.
 
 ### 1.3 Ceremonias adaptadas al trabajo con agentes
 
@@ -180,7 +197,7 @@ resolverla antes de construir la interfaz.
 
 ---
 
-## 6. Sprint 4 · PMV3 — 2026-11-23 → 2026-12-13 · **Hito 3**
+## 6. Sprint 4 · PMV3 — 2026-11-23 → 2026-12-13 · **Hito 3** (en Trello: Sprint 3, 2026-11-06 → 2026-12-13)
 
 **Objetivo.** Integrar los artefactos en la aplicación móvil y validarla en un dispositivo de gama media.
 
@@ -196,11 +213,11 @@ resolverla antes de construir la interfaz.
 
 | Resultado | Valor medido | Medio de verificación |
 |---|---|---|
-| Latencia de respuesta en dispositivo | por registrar | instrumentación |
-| Latencia de recuperación en dispositivo | por registrar | instrumentación |
-| Tamaño del paquete | por registrar | artefacto |
-| Requisitos mínimos verificados | por registrar | dispositivo de prueba |
-| Prueba de usabilidad | por registrar | sesión con usuarios |
+| Latencia de respuesta en dispositivo | 20 ms en modo avión (`zorro`, emulador); teléfono físico por medir | instrumentación (`18_REPORTE_PMV3.md`, P3-12) |
+| Latencia de recuperación en dispositivo | P50 0,80 ms / P95 2,71 ms (N = 248, emulador); teléfono físico por medir | arnés en el dispositivo (P3-05) |
+| Tamaño del paquete | 22,6 MB (APK release arm64), frente a 1,2 GB de límite | artefacto (P3-09); Release v1.1.0 |
+| Requisitos mínimos verificados | por registrar en el teléfono físico | dispositivo de prueba |
+| Prueba de usabilidad | por registrar | sesión con usuarios (acta del anexo B) |
 
 ---
 
@@ -230,3 +247,4 @@ origen → destino, agente, evidencia (PR, informe, commit).
 | 2026-09-24 | Creación con fecha ancla supuesta 2026-09-28 | Calendario académico no confirmado | — |
 | 2026-09-24 | Fecha ancla corregida a 2026-09-21; la Iteración 0 se integra en la semana 1 del sprint 1 | El usuario confirmó que esta es la primera semana del PMV1 | Usuario |
 | 2026-10-01 | Cierre del PMV1: lista P0 de `13_BRECHAS_RUBRICA.md` §7 sustituye a la del prompt §5; fila de FP en C del §3 con la línea base; movimientos en §7 | Revisión de brechas frente a la rúbrica; línea base congelada | Usuario (vía orquestador) |
+| 2026-11-24 | §1.4: ejecución real según Trello (tres sprints y S13; PMV3 = Sprint 3, 06/11–13/12); estados del §1.2 y resultados medidos del §6 | Alinear el plan con el tablero para el informe final | Ronda 2 de Omar (P7) |
