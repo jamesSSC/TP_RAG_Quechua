@@ -15,6 +15,7 @@ de error solo llevan el codigo HTTP o el tipo de excepcion.
 
 import json
 import logging
+import time
 from contextvars import ContextVar
 
 import httpx
@@ -29,6 +30,10 @@ log = logging.getLogger("rag.generador")
 URL_API = "https://generativelanguage.googleapis.com/v1beta"
 # Tokens extra para el razonamiento interno de los modelos Gemini 3.x (nivel "low").
 MARGEN_RAZONAMIENTO = 1024
+# P4 (ADR-039): ante un 503 (modelo saturado) se reintenta UNA vez tras esta espera, solo si al
+# presupuesto de tiempo le quedan al menos REINTENTO_MINIMO_S. El total nunca supera `timeout`.
+ESPERA_REINTENTO_503_S = 1.0
+REINTENTO_MINIMO_S = 2.0
 
 # BYOK: clave que el usuario aporta en la cabecera X-Gemini-Key de UNA peticion. La fija el
 # middleware de infrastructure/main.py y caduca con la peticion.
@@ -51,7 +56,7 @@ class GeminiGenerador(GeneradorTextoPort):
         clave: str = "",
         modelo: str = "gemini-3.5-flash-lite",
         temperatura: float = 0.1,
-        timeout: float = 15.0,
+        timeout: float = 10.0,
         cliente: httpx.Client | None = None,
     ):
         self._clave = clave
@@ -121,20 +126,15 @@ class GeminiGenerador(GeneradorTextoPort):
         return extraido
 
     def _llamar(self, cuerpo: dict, clave: str) -> dict:
-        url = f"{URL_API}/models/{self._modelo}:generateContent"
-        # La clave va en cabecera y no en la URL: asi no aparece en ningun registro de acceso.
-        cabeceras = {"x-goog-api-key": clave, "Content-Type": "application/json"}
-        try:
-            if self._cliente is not None:
-                respuesta = self._cliente.post(
-                    url, json=cuerpo, headers=cabeceras, timeout=self._timeout
-                )
-            else:
-                respuesta = httpx.post(url, json=cuerpo, headers=cabeceras, timeout=self._timeout)
-        except httpx.TimeoutException as exc:
-            raise GeneradorNoDisponible(f"tiempo agotado ({self._timeout:.0f} s)") from exc
-        except httpx.HTTPError as exc:
-            raise GeneradorNoDisponible(f"error de red ({type(exc).__name__})") from exc
+        inicio = time.monotonic()
+        respuesta = self._enviar(cuerpo, clave, self._timeout)
+        if respuesta.status_code == 503:
+            # P4 (ADR-039): un solo reintento, dentro del mismo presupuesto de tiempo.
+            restante = self._timeout - (time.monotonic() - inicio) - ESPERA_REINTENTO_503_S
+            if restante >= REINTENTO_MINIMO_S:
+                log.warning("[GEMINI] 503: un reintento en %.1f s", ESPERA_REINTENTO_503_S)
+                time.sleep(ESPERA_REINTENTO_503_S)
+                respuesta = self._enviar(cuerpo, clave, restante)
         if respuesta.status_code == 429:
             self.errores_429 += 1
             raise GeneradorNoDisponible("cuota agotada (429)")
@@ -144,6 +144,32 @@ class GeminiGenerador(GeneradorTextoPort):
             return respuesta.json()
         except ValueError as exc:
             raise GeneradorNoDisponible("respuesta no es JSON") from exc
+
+    def _enviar(self, cuerpo: dict, clave: str, timeout: float) -> httpx.Response:
+        url = f"{URL_API}/models/{self._modelo}:generateContent"
+        # La clave va en cabecera y no en la URL: asi no aparece en ningun registro de acceso.
+        cabeceras = {"x-goog-api-key": clave, "Content-Type": "application/json"}
+        inicio = time.monotonic()
+        try:
+            if self._cliente is not None:
+                respuesta = self._cliente.post(url, json=cuerpo, headers=cabeceras, timeout=timeout)
+            else:
+                respuesta = httpx.post(url, json=cuerpo, headers=cabeceras, timeout=timeout)
+        except httpx.TimeoutException as exc:
+            self._registrar_llamada("tiempo agotado", inicio)
+            raise GeneradorNoDisponible(f"tiempo agotado ({timeout:.0f} s)") from exc
+        except httpx.HTTPError as exc:
+            self._registrar_llamada(type(exc).__name__, inicio)
+            raise GeneradorNoDisponible(f"error de red ({type(exc).__name__})") from exc
+        self._registrar_llamada(f"HTTP {respuesta.status_code}", inicio)
+        return respuesta
+
+    def _registrar_llamada(self, resultado: str, inicio: float) -> None:
+        # P4 (diagnostico): modelo, resultado y duracion de cada llamada, para leerlos en los logs
+        # de Render (429/503, lentitud por modelo). Nunca la clave ni el texto de la consulta.
+        ms = (time.monotonic() - inicio) * 1000
+        nivel = logging.INFO if resultado == "HTTP 200" else logging.WARNING
+        log.log(nivel, "[GEMINI] modelo=%s resultado=%s ms=%.0f", self._modelo, resultado, ms)
 
     def precalentar(self) -> bool:
         return True

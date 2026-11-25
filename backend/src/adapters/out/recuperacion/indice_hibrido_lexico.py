@@ -9,6 +9,7 @@ from application.ports.out.indice_recuperacion_port import IndiceRecuperacionPor
 from domain.entities.fragmento import Fragmento, FragmentoRecuperado, TipoFragmento
 from domain.services.depurador_consulta import DepuradorConsulta
 from domain.services.entradas_lexicas import PATRON_LEMA
+from domain.services.sugerencia_errata import sugerir
 from domain.value_objects.puntuacion_similitud import PuntuacionSimilitud
 
 SIN_INDICE = "El indice no ha sido construido; invoque indexar() primero"
@@ -170,3 +171,11 @@ class IndiceHibridoLexico(IndiceRecuperacionPort):
 
     def es_lema(self, termino: str) -> bool:
         return self._depurador.depurar(termino) in self._lemario
+
+    def lemas_parecidos(self, termino: str) -> list[str]:
+        # REF-08 (ADR-041): solo del lemario castellano; nada si el termino ya esta en el corpus.
+        e = self._estado
+        if e is None:
+            return []
+        lemas = {lema: len(posiciones) for lema, posiciones in e.lemario.items()}
+        return sugerir(self._depurador.depurar(termino), lemas, e.vec_palabras.vocabulary_)

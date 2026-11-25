@@ -10,7 +10,8 @@
 
 | Dato | Valor |
 |---|---|
-| Repositorio de la app | `jamesSSC/quechua-wanka-movil`, rama `feat/pmv3-dos-modos` (fork de `DalgomXD-byte/quechua-wanka-movil@3c6e976`) |
+| Repositorio de la app | `mobile/` de este repositorio (con su historial, `git subtree`) y `DalgomXD-byte/quechua-wanka-movil` (`master`, PR #1 desde `feat/pmv3-dos-modos`) |
+| APK release | [Release v1.1.0](https://github.com/DalgomXD-byte/quechua-wanka-movil/releases/tag/v1.1.0): `QuechuaWanka-1.1.0-arm64.apk`, SHA-256 `2acd0b56ea9c2d0b68479d2b4895d2d2710164882058655134fdf8f4c7146790` |
 | Commits de la app | `e7005b5` (dos modos), `b3f4d64` (ícono), `ccb4e29` (arnés en el dispositivo) |
 | Backend de referencia | `omarpiero/TP_RAG_Quechua@8088193` |
 | Flutter / Dart | Flutter 3.44.9 (stable) |

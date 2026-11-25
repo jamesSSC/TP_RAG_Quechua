@@ -11,6 +11,7 @@ from . import (
     historial_controller,
     prediccion_controller,
     sistema_controller,
+    valoraciones_controller,
 )
 
 routers = [
@@ -20,4 +21,5 @@ routers = [
     corpus_controller.router,
     fuentes_controller.router,
     prediccion_controller.router,
+    valoraciones_controller.router,
 ]

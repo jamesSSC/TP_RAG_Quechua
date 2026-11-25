@@ -1,7 +1,11 @@
 # B10 · Evidencias para el reporte de cumplimiento ICACIT
 
-Atiende `Reporte_Cumplimiento_ICACIT_2025.pdf`. **Ese PDF no vino en el paquete**: este índice sigue los
-6 puntos que enumera el bloque B10 del prompt. La guía pide `./docs`; se usó `./docs_entrega_final`.
+Atiende la consigna `S14. Evaluación de evidencias de ICACIT.docx`: un reporte de cumplimiento de 7
+competencias (Conocimientos de Ingeniería, Medioambiente y Sostenibilidad, El Ingeniero y la Sociedad,
+Gestión de Proyectos, Diseño y Desarrollo de Soluciones, Análisis de Problemas y Uso de Herramientas
+Modernas), con hallazgos y mejoras por atributo y la sección del informe donde va cada uno.
+
+**Matriz por competencia: `matriz_competencias.md`.** Los 6 puntos del bloque B10 están abajo. La guía pide `./docs`; se usó `./docs_entrega_final`.
 
 Cada cifra viene con el comando que la produjo.
 
@@ -51,9 +55,20 @@ Los datos de Git (`main` = `8088193`) están en:
 - **Observación:** Yeferson Serpa no figura como autor de commits en `main`. Si trabajó en ramas
   propias, en Trello o en diseño, conviene declararlo en el informe con su propia evidencia.
 - **Fuera de este conteo:** los commits de esta entrega (19–20/11, ramas de James aún sin fusionar).
-- **HU cerradas por sprint y duración de cada sprint:** salen de Trello (`docs/04_SPRINTS.md` usa otra
-  numeración). **Por confirmar** con el tablero; las fechas de Trello que da el paquete son S1 21/09–11/10,
-  S2 12/10–05/11, S13 09/11–12/11 y S3 06/11–13/12.
+- **HU cerradas por sprint y duración de cada sprint** (del tablero de Trello exportado el 20/11; 68
+  tarjetas y 498 acciones). Datos en `avance_sprints.csv` y gráfico en `burndown_sprints.png`:
+
+  | Sprint | Fechas (Trello) | Días | Ítems | En DONE |
+  |---|---|---|---|---|
+  | Sprint 1 · PMV1 | 21/09 – 12/10 | 21 | HU-01 a HU-07 | 7/7 |
+  | Sprint 2 · PMV2 + nube | 12/10 – 06/11 | 25 | HU-08.1, HU-08.2, HU-09, RF-15 | 4/4 |
+  | Sprint S13 · calidad y seguridad | 09/11 – 13/11 | 4 | RM-01 a RM-04, M-01 a M-08 y entregables 01–07 | 7 (RM-05 a RM-08 parciales, en QA-TESTING) |
+  | Sprint 3 · PMV3 | 06/11 – 14/12 | 38 | HU-10.1 a HU-10.3, HU-11 | 0 en Trello. Hechas en el emulador el 19–20/11: moverlas con `../kanban/tarjetas_pmv3.md` |
+
+- **Acciones en Trello por semana e integrante:** `avance_trello_por_semana.csv`. Totales: Omar 453,
+  Yeferson 28 y James 14.
+- **Discrepancia:** Trello fija **WIP = 3** («una tarjeta por integrante») y `docs/05_KANBAN.md:20` dice
+  WIP 1. Hay que unificarlo en el informe (ver `../cifras_oficiales.md`, C-07).
 
 ## 5. Herramientas (H-01, H-02)
 

@@ -28,6 +28,11 @@ class RespaldoSalida(BaseModel):
     rotulo: str | None = None
 
 
+class SugerenciaSalida(BaseModel):
+    termino: str
+    consulta: str
+
+
 class RespuestaSalida(BaseModel):
     consulta_id: str
     texto: str
@@ -55,6 +60,8 @@ class RespuestaSalida(BaseModel):
     probabilidad_cobertura: float | None = None
     probabilidad_pasajes: float | None = None
     abstencion_por_predictor: bool = False
+    # REF-08 (ADR-041): «¿quiso escribir…?» (solo en abstenciones de consultas en espanol).
+    sugerencias: list[SugerenciaSalida] = []
 
 
 class EntradaHistorial(BaseModel):
@@ -119,6 +126,8 @@ class EstadoSistema(BaseModel):
     base_demostracion: bool = False
     # Nube (ADR-030 a 032). Solo nombres y conteos: ningun secreto ni cadena de conexion.
     entorno: str = "local"
+    # P5: commit desplegado (7 caracteres de RENDER_GIT_COMMIT) o "local".
+    version: str = "local"
     motor_base_datos: str = "sqlite"
     origen_corpus: str = "jsonl"
     generador: str = "ollama"
@@ -127,3 +136,16 @@ class EstadoSistema(BaseModel):
     # S13 · ADR-035: en modo nube las escrituras exigen X-Admin-Token (la interfaz pasa a solo
     # lectura sin token). Solo el booleano: nunca el token.
     escritura_protegida: bool = False
+
+
+class ValoracionEntrada(BaseModel):
+    """REF-07 (ADR-040): solo el id de la consulta y si sirvió. Sin texto libre."""
+
+    model_config = {"extra": "forbid"}
+
+    consulta_id: str = Field(min_length=1, max_length=36)
+    util: bool
+
+
+class ValoracionSalida(BaseModel):
+    registrada: bool

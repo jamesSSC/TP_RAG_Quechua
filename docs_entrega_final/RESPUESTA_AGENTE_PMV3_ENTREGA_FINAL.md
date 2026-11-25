@@ -23,7 +23,7 @@ A a I).
 | B7 · Cifras oficiales | `docs/entrega-final` | `docs_entrega_final/cifras_oficiales.md` | **Hecho** |
 | B8 · Insumos del artículo | `docs/entrega-final` | `docs_entrega_final/articulo/insumos_pmv3.md` | **Hecho** |
 | B9 · Kanban | `docs/entrega-final` | `docs_entrega_final/kanban/tarjetas_pmv3.md` | **Hecho** (lo aplica Omar) |
-| B10 · ICACIT | `docs/entrega-final` | `docs_entrega_final/icacit/` | **Parcial**: el PDF del reporte ICACIT no vino en el paquete; HU por sprint, por confirmar con Trello |
+| B10 · ICACIT | `docs/entrega-final` | `docs_entrega_final/icacit/` (matriz de las 7 competencias, energía, cambios, sprints de Trello, burndown) | **Hecho** |
 | B11 · Logo | `feat/logo-proyecto` (`df6cf5e`) y app `b3f4d64` | `docs_entrega_final/logo/` | **Hecho**; falta la captura en la nube tras desplegar |
 | B12 · Póster | `docs/entrega-final` | `docs_entrega_final/poster/` | **Hecho**; falta el QR del video |
 | B13 · Arreglos rápidos | `fix/s14-arreglos-rapidos` (`54385b0`, `d23098a`, `d43a553`) | `docs_entrega_final/calidad/arreglos_rapidos.md`, `docs_ingenieria_inversa/evidencias/{antes,despues}/` | **Hecho**; los ID H-03 y H-05 a H-08 hay que cotejarlos con el reporte v1.1 |
@@ -134,7 +134,7 @@ final de la bitácora o del registro de ADR, así que pueden pedir resolver conf
 |---|---|---|
 | A. Experto | Informe U3 | Ya estaba |
 | B. Usuarios | `pruebas_usuarios/acta_plantilla.md` | Pendiente: la hace el equipo |
-| C. Matriz ICACIT | `icacit/` | Parcial: falta el PDF de referencia |
+| C. Matriz ICACIT | `icacit/matriz_competencias.md` | Hecho (el equipo redacta el reporte a partir de ella) |
 | D. Video | `video_u4/guion.md` | Por grabar |
 | E. Kanban | `kanban/tarjetas_pmv3.md` | Lo aplica Omar |
 | F. Repositorio | README raíz con enlaces a `docs_auditoria/`, `docs_ingenieria_inversa/` y `docs_entrega_final/` (rama de los arreglos) | Hecho |

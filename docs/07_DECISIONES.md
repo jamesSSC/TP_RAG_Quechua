@@ -535,6 +535,68 @@ los dos y es el que inyecta el contenedor.
 - La dependencia nueva es solo de desarrollo (`flutter_launcher_icons`, para el ícono). La conectividad
   se infiere del propio fallo HTTP, sin paquetes de red adicionales.
 
+## ADR-040 · REF-07: valoración «¿le sirvió esta respuesta?» sin datos personales — Propuesta (S14, P8)
+
+**Contexto.** El experto temático pidió saber si las respuestas le sirven a quien consulta (REF-07).
+HU-09 cuenta la demanda, pero no si la respuesta fue útil. La regla del proyecto es no guardar datos
+personales (RNF de privacidad, ADR-036).
+
+**Decisión.**
+- Debajo de cada respuesta de la web, «¿Le sirvió esta respuesta?» con **Sí** y **No** (botones de
+  44 px o más). No hay campo de texto libre, para que nadie escriba datos personales.
+- `POST /api/valoraciones {consulta_id, util}` (201). Responde 404 si la consulta no existe, 409 si ya
+  se valoró, 422 ante cualquier campo extra y 503 sin base de datos.
+- Tabla nueva `valoraciones`: `consulta_id` (clave primaria y clave foránea a `consultas`, con borrado
+  en cascada), `util` y `momento`. **Una valoración por consulta.** No guarda IP, texto ni comentario.
+  `create_all()` la crea al arrancar, también en Neon: es una tabla nueva y no altera ninguna otra, así
+  que no hace falta ejecutar SQL a mano.
+- En la nube es **pública**, como la consulta (`POST_PUBLICOS`), con el mismo límite por minuto
+  (ADR-037). El `consulta_id` es un UUID que solo recibe quien hizo la consulta.
+- Puerto de entrada `ValorarRespuestaPort`, caso de uso `ValorarRespuestaUseCase` y puerto de salida
+  `RepositorioValoracionesPort`, con un adaptador SQLAlchemy común a SQLite y PostgreSQL.
+- **No cambia** la respuesta, τ, RN-06 ni el registro de HU-09. La app móvil v1.1.0 no la incluye.
+
+**Consecuencias.**
+- La utilidad percibida se puede medir con
+  `SELECT util, COUNT(*) FROM valoraciones GROUP BY util`, o con `RepositorioValoracionesPort.resumen()`.
+  Junto con el origen de HU-09, separa la de usuarios reales de la de las pruebas.
+- Con pocas valoraciones, el dato es un indicio y no una métrica (igual que el SUS con n < 10).
+- Para borrar las valoraciones basta con borrar la consulta (cascada). «Borrar todo el historial» las
+  elimina también.
+
+## ADR-041 · REF-08: «¿quiso escribir…?» ante erratas en la consulta en español, nunca en quechua — Propuesta (S14, P8)
+
+**Contexto.** El experto temático pidió tolerar erratas (REF-08): «zoro» o «mujr» terminaban en una
+abstención aunque «zorro» y «mujer» están en el diccionario. Corregir por cuenta propia podría hacer
+que el sistema responda algo que no se preguntó (por ejemplo, «caza» por «casa») y, sobre todo, nunca
+debe alterar una forma quechua.
+
+**Decisión.**
+- El sistema **no corrige**. Cuando se abstiene ante una consulta **en español**, propone hasta 3 lemas
+  del diccionario («¿Quiso escribir…?») y la consulta reescrita con cada uno. Solo se consulta de nuevo
+  si la persona elige una propuesta, y esa nueva consulta pasa por τ y la regla de lema como cualquier
+  otra.
+- **Candidatos:** solo los **lemas castellanos** (las palabras que encabezan las entradas:
+  «ZORRO: Atuq.»), nunca el cuerpo con las formas quechuas. Distancia de edición con transposiciones
+  de **1** si el término tiene hasta 5 letras y de **2** si tiene más. Desempate: misma primera letra y,
+  luego, mayor frecuencia en el diccionario.
+- **No se propone nada** cuando:
+  - el término tiene menos de 4 letras o más de una palabra;
+  - ya es un lema;
+  - ya figura en el vocabulario del corpus (no es una errata; puede ser quechua);
+  - tiene ortografía quechua (k, w, o q sin u);
+  - la consulta es en inglés o se tradujo.
+- Lógica pura en `domain/services/sugerencia_errata.py`. `IndiceRecuperacionPort.lemas_parecidos()` es
+  no abstracto y por defecto no devuelve nada. Campo nuevo `sugerencias` en la respuesta.
+- **No cambia:** la abstención, τ = 0,48, RN-06, el verificador, el registro de HU-09 ni el
+  predictor. La app móvil v1.1.0 no lo incluye.
+
+**Consecuencias.**
+- 0 FP en C se mantiene por construcción: la decisión es la misma con o sin sugerencias. La suite con
+  el corpus real (marcador `salvaguarda`) pasa entera.
+- Puede proponer una palabra que no era la buscada («zoro» → «zorro» y «oro»). Por eso es una propuesta
+  explícita y la interfaz aclara que son palabras en español parecidas a la escrita.
+
 ---
 
 ## Registro de cambios
@@ -549,3 +611,5 @@ los dos y es el que inyecta el contenedor.
 | 2026-11-12 | S13 fase 1 (FURPS+): ADR-033 (aviso de arranque en frío, REF-02) y ADR-034 (`/api/vivo` y presupuesto de horas del ping, REF-01) propuestas en `s13/furps-owasp` |
 | 2026-11-12 | S13 fase 2 (OWASP): ADR-035 (token de administración), ADR-036 (historial por sesión) y ADR-037 (límite de peticiones) propuestas en `s13/owasp` |
 | 2026-11-19 | PMV3 (B0): ADR-038 propuesta (app móvil: cliente de la nube con respaldo sin conexión) en `feat/pmv3-app-movil` |
+| 2026-11-24 | S14 ronda 2 (P8): ADR-040 propuesta (REF-07, valoración «¿le sirvió?» sin datos personales) en `feat/p8-ref-05-07-08` |
+| 2026-11-24 | S14 ronda 2 (P8): ADR-041 propuesta (REF-08, «¿quiso escribir…?» ante erratas en español, nunca en quechua) en `feat/p8-ref-05-07-08` |

@@ -13,7 +13,8 @@ log_seguridad = logging.getLogger("rag.seguridad")
 
 METODOS_DE_LECTURA = {"GET", "HEAD", "OPTIONS"}
 # POST de solo lectura que siguen siendo publicos (Consultar y Prediccion ML).
-POST_PUBLICOS = {"/api/consultas", "/api/predicciones"}
+# REF-07 (ADR-040): la valoración es pública como la consulta, y lleva el mismo límite.
+POST_PUBLICOS = {"/api/consultas", "/api/predicciones", "/api/valoraciones"}
 # GET que tambien exigen token en la nube: el historial del servidor (ADR-036).
 GET_PROTEGIDOS = {"/api/historial"}
 CABECERA_ADMIN = b"x-admin-token"

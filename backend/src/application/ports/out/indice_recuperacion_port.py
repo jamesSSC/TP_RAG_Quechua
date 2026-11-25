@@ -43,3 +43,9 @@ class IndiceRecuperacionPort(ABC):
         figura en el corpus y "perro" si. No es abstracto por la misma razon que
         recuperar_prosa: un indice que no la calcule devuelve 0 y el predictor la ignora."""
         return 0.0
+
+    def lemas_parecidos(self, termino: str) -> list[str]:
+        """REF-08 (ADR-041): lemas castellanos a una o dos letras del término consultado, para
+        proponer «¿quiso escribir…?» tras una abstención. Nunca formas quechuas. Por defecto,
+        ninguno (los dobles de prueba y otros índices no necesitan implementarlo)."""
+        return []

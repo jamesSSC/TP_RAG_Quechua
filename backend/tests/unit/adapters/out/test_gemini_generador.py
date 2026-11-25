@@ -196,3 +196,79 @@ def test_gemini_3_usa_razonamiento_bajo_con_margen_de_salida():
     config = json.loads(peticiones[0].content)["generationConfig"]
     assert config["thinkingConfig"] == {"thinkingLevel": "low"}
     assert config["maxOutputTokens"] > 300
+
+
+# --- P4 (ADR-039): mitigaciones de latencia, sin tocar τ ni el verificador literal ------------
+
+
+def _secuencia(*respuestas):
+    pendientes = iter(respuestas)
+    peticiones: list[httpx.Request] = []
+
+    def manejador(peticion):
+        peticiones.append(peticion)
+        return next(pendientes)
+
+    cliente = httpx.Client(transport=httpx.MockTransport(manejador))
+    return GeminiGenerador(clave=CLAVE, modelo="gemini-prueba", cliente=cliente), peticiones
+
+
+@pytest.fixture
+def sin_espera(monkeypatch):
+    esperas: list[float] = []
+    monkeypatch.setattr("adapters.out.generacion.gemini_generador.time.sleep", esperas.append)
+    return esperas
+
+
+def test_p4_un_503_se_reintenta_una_vez(sin_espera):
+    gemini, peticiones = _secuencia(
+        httpx.Response(503),
+        httpx.Response(200, json=_respuesta_gemini({"forma": "Atuq", "glosa": "ZORRO"})),
+    )
+    assert gemini.extraer("zorro", [_zorro()])["forma"] == "Atuq"
+    assert len(peticiones) == 2
+    assert sin_espera == [1.0]
+
+
+def test_p4_dos_503_seguidos_degradan_sin_un_tercer_intento(sin_espera):
+    gemini, peticiones = _secuencia(httpx.Response(503), httpx.Response(503))
+    with pytest.raises(GeneradorNoDisponible, match="503"):
+        gemini.extraer("zorro", [_zorro()])
+    assert len(peticiones) == 2
+
+
+def test_p4_sin_presupuesto_de_tiempo_no_se_reintenta(sin_espera):
+    gemini, peticiones = _secuencia(httpx.Response(503), httpx.Response(200))
+    gemini._timeout = 2.5  # 2,5 - 1 s de espera < 2 s minimos
+    with pytest.raises(GeneradorNoDisponible, match="503"):
+        gemini.extraer("zorro", [_zorro()])
+    assert len(peticiones) == 1
+    assert sin_espera == []
+
+
+def test_p4_otros_errores_no_se_reintentan(sin_espera):
+    for codigo in (429, 500):
+        gemini, peticiones = _secuencia(httpx.Response(codigo), httpx.Response(200))
+        with pytest.raises(GeneradorNoDisponible):
+            gemini.extraer("zorro", [_zorro()])
+        assert len(peticiones) == 1
+
+
+def test_p4_el_timeout_por_defecto_es_menor_que_antes():
+    assert GeminiGenerador(clave=CLAVE)._timeout == 10.0
+
+
+def test_p4_cada_llamada_registra_modelo_resultado_y_duracion_sin_la_clave(caplog, sin_espera):
+    gemini, _ = _secuencia(
+        httpx.Response(503),
+        httpx.Response(200, json=_respuesta_gemini({"forma": "Atuq", "glosa": "ZORRO"})),
+    )
+    with caplog.at_level(logging.INFO, logger="rag.generador"):
+        gemini.extraer("zorro", [_zorro()])
+    mensajes = [r.getMessage() for r in caplog.records]
+    lineas = [m for m in mensajes if m.startswith("[GEMINI] modelo")]
+    assert len(lineas) == 2
+    assert "resultado=HTTP 503" in lineas[0] and "resultado=HTTP 200" in lineas[1]
+    assert all("modelo=gemini-prueba" in linea and "ms=" in linea for linea in lineas)
+    assert CLAVE not in caplog.text
+    assert "zorro" not in " ".join(lineas)
