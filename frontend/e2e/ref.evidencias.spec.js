@@ -39,3 +39,20 @@ test("REF-07 valoracion de la respuesta", async ({ page }) => {
     await respuesta.screenshot({ path: ruta("REF-07_FASE_respuesta_sin_valoracion") });
   }
 });
+
+test("REF-08 errata en la consulta en espanol", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel(/Escriba su consulta/).fill("¿cómo se dice zoro en quechua wanka?");
+  await page.getByLabel(/Escriba su consulta/).press("Enter");
+  const respuesta = page.locator(".respuesta").first();
+  await expect(respuesta).toBeVisible();
+  if (FASE === "despues") {
+    await expect(page.getByTestId("sugerencias")).toBeVisible();
+    await respuesta.screenshot({ path: ruta("REF-08_FASE_abstencion_con_sugerencia") });
+    await page.getByTestId("sugerencias").getByRole("button", { name: "zorro" }).click();
+    await expect(page.locator(".respaldo__origen").first()).toContainText("página 37");
+    await page.locator(".respuesta").first().screenshot({ path: ruta("REF-08_FASE_sugerencia_elegida_responde") });
+  } else {
+    await respuesta.screenshot({ path: ruta("REF-08_FASE_abstencion_sin_sugerencia") });
+  }
+});

@@ -28,6 +28,11 @@ class RespaldoSalida(BaseModel):
     rotulo: str | None = None
 
 
+class SugerenciaSalida(BaseModel):
+    termino: str
+    consulta: str
+
+
 class RespuestaSalida(BaseModel):
     consulta_id: str
     texto: str
@@ -55,6 +60,8 @@ class RespuestaSalida(BaseModel):
     probabilidad_cobertura: float | None = None
     probabilidad_pasajes: float | None = None
     abstencion_por_predictor: bool = False
+    # REF-08 (ADR-041): «¿quiso escribir…?» (solo en abstenciones de consultas en espanol).
+    sugerencias: list[SugerenciaSalida] = []
 
 
 class EntradaHistorial(BaseModel):

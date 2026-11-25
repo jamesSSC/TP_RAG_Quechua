@@ -64,3 +64,16 @@ en la CI), que `07_auditoria_final.md:99-100` registraba como no implementadas.
 
 Las comprobaciones contra la nube fueron inocuas: un `GET` y un `POST` sin cuerpo ni token, que el
 middleware rechaza con 401 antes de llegar al caso de uso.
+
+## Ronda 2 · P8 (si queda tiempo): mejoras del experto temático
+
+Evidencias contra la **API local real**, levantada sobre una **copia** de la base (no se tocó la nube):
+`docs_entrega_final/calidad/evidencias_ref/{antes,despues}/`, con `frontend/playwright.ref.config.js`.
+
+| ID | Mejora | Rama | Antes | Después | Verificación |
+|---|---|---|---|---|---|
+| REF-05 | La web muestra, como la app, el valor y el **peso** de cada variable del modelo de cobertura, ordenados y con una barra con signo. Es el coeficiente estandarizado y no coeficiente × valor: la API no expone el estandarizador, y la app hace lo mismo | `feat/p8-ref-05-07-08` | `REF-05_antes_variables_prediccion_web.png` (solo valores, plegados) | `REF-05_despues_variables_prediccion_web.png` | Vitest `Variables.ref05.test.jsx` (2) |
+| REF-07 | «¿Le sirvió esta respuesta?» Sí/No, sin datos personales. `POST /api/valoraciones` y tabla nueva `valoraciones` (ADR-040) | ídem | `REF-07_antes_respuesta_sin_valoracion.png` | `REF-07_despues_pregunta_le_sirvio.png`, `REF-07_despues_valoracion_registrada.png` | pytest `test_ref07_valoraciones.py` (12); Vitest `Valoracion.ref07.test.jsx` (4) |
+| REF-08 | «¿Quiso escribir…?» ante erratas **en la consulta en español**: propone lemas castellanos sin corregir por su cuenta y nunca toca formas quechuas (ADR-041) | ídem | `REF-08_antes_abstencion_sin_sugerencia.png` | `REF-08_despues_abstencion_con_sugerencia.png`, `REF-08_despues_sugerencia_elegida_responde.png` | pytest `test_ref08_erratas.py` (22, varios con el marcador `salvaguarda`); Vitest `Sugerencias.ref08.test.jsx` (3) |
+
+**Suites tras P8:** `pytest` → 459 aprobadas y 6 omitidas (con corpus); `ruff` sin errores; Vitest 57/57.

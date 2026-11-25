@@ -564,6 +564,39 @@ personales (RNF de privacidad, ADR-036).
 - Para borrar las valoraciones basta con borrar la consulta (cascada). «Borrar todo el historial» las
   elimina también.
 
+## ADR-041 · REF-08: «¿quiso escribir…?» ante erratas en la consulta en español, nunca en quechua — Propuesta (S14, P8)
+
+**Contexto.** El experto temático pidió tolerar erratas (REF-08): «zoro» o «mujr» terminaban en una
+abstención aunque «zorro» y «mujer» están en el diccionario. Corregir por cuenta propia podría hacer
+que el sistema responda algo que no se preguntó (por ejemplo, «caza» por «casa») y, sobre todo, nunca
+debe alterar una forma quechua.
+
+**Decisión.**
+- El sistema **no corrige**. Cuando se abstiene ante una consulta **en español**, propone hasta 3 lemas
+  del diccionario («¿Quiso escribir…?») y la consulta reescrita con cada uno. Solo se consulta de nuevo
+  si la persona elige una propuesta, y esa nueva consulta pasa por τ y la regla de lema como cualquier
+  otra.
+- **Candidatos:** solo los **lemas castellanos** (las palabras que encabezan las entradas:
+  «ZORRO: Atuq.»), nunca el cuerpo con las formas quechuas. Distancia de edición con transposiciones
+  de **1** si el término tiene hasta 5 letras y de **2** si tiene más. Desempate: misma primera letra y,
+  luego, mayor frecuencia en el diccionario.
+- **No se propone nada** cuando:
+  - el término tiene menos de 4 letras o más de una palabra;
+  - ya es un lema;
+  - ya figura en el vocabulario del corpus (no es una errata; puede ser quechua);
+  - tiene ortografía quechua (k, w, o q sin u);
+  - la consulta es en inglés o se tradujo.
+- Lógica pura en `domain/services/sugerencia_errata.py`. `IndiceRecuperacionPort.lemas_parecidos()` es
+  no abstracto y por defecto no devuelve nada. Campo nuevo `sugerencias` en la respuesta.
+- **No cambia:** la abstención, τ = 0,48, RN-06, el verificador, el registro de HU-09 ni el
+  predictor. La app móvil v1.1.0 no lo incluye.
+
+**Consecuencias.**
+- 0 FP en C se mantiene por construcción: la decisión es la misma con o sin sugerencias. La suite con
+  el corpus real (marcador `salvaguarda`) pasa entera.
+- Puede proponer una palabra que no era la buscada («zoro» → «zorro» y «oro»). Por eso es una propuesta
+  explícita y la interfaz aclara que son palabras en español parecidas a la escrita.
+
 ---
 
 ## Registro de cambios
@@ -579,3 +612,4 @@ personales (RNF de privacidad, ADR-036).
 | 2026-11-12 | S13 fase 2 (OWASP): ADR-035 (token de administración), ADR-036 (historial por sesión) y ADR-037 (límite de peticiones) propuestas en `s13/owasp` |
 | 2026-11-19 | PMV3 (B0): ADR-038 propuesta (app móvil: cliente de la nube con respaldo sin conexión) en `feat/pmv3-app-movil` |
 | 2026-11-24 | S14 ronda 2 (P8): ADR-040 propuesta (REF-07, valoración «¿le sirvió?» sin datos personales) en `feat/p8-ref-05-07-08` |
+| 2026-11-24 | S14 ronda 2 (P8): ADR-041 propuesta (REF-08, «¿quiso escribir…?» ante erratas en español, nunca en quechua) en `feat/p8-ref-05-07-08` |

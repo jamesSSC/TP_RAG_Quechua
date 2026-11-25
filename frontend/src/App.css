@@ -830,3 +830,10 @@ input[type="checkbox"] { width: 1.5rem; height: 1.5rem; }
 }
 .valoracion__boton:hover:not(:disabled) { background: var(--acento-claro); }
 .valoracion__error { width: 100%; margin: 0; color: var(--abstencion); }
+
+/* REF-08: «¿Quiso escribir…?» */
+.sugerencias { margin: 0.75rem 0 0.25rem; }
+.sugerencias__titulo { margin: 0 0 0.4rem; font-weight: 600; }
+.sugerencias__botones { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.sugerencias__botones .caja__ejemplo { min-height: 44px; }
+.sugerencias__nota { margin: 0.4rem 0 0; font-size: 0.85em; color: var(--tinta-suave); }
