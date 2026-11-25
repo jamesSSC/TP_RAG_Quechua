@@ -4,15 +4,18 @@ El informe, el artículo, el póster y el video se corrigen **contra este archiv
 comando y dice en qué commit se midió. Si una cifra del informe no coincide con esta, manda esta. La
 guía pide `./docs`; se usó `./docs_entrega_final`.
 
-Fecha de medición: 19 y 20/11/2026. Repositorio base: `omarpiero/TP_RAG_Quechua@8088193`.
+Fecha de medición: 19 y 20/11/2026; actualizado el 24/11/2026 (ronda 2, P7) sobre `main` = `4448478`.
+Repositorio base original: `omarpiero/TP_RAG_Quechua@8088193`. **Al fusionar los PR #35 a #40 hay que
+volver a contar C-02, C-03, C-10/C-11, C-13** con los mismos comandos; abajo se dan los valores medidos en
+cada rama.
 
 ## Producto y proceso
 
 | # | Cifra | Valor | Comando | Commit / rama |
 |---|---|---|---|---|
 | C-01 | Historias de usuario | **14** HU (HU-01 a HU-07, HU-08.1, HU-08.2, HU-09, HU-10.1 a HU-10.3, HU-11) y **9** historias técnicas (HT-00 a HT-08) | `grep -cE '^\| HU-[0-9]+(\.[0-9]+)? \|' docs/03_HISTORIAS_USUARIO.md` | `8088193` |
-| C-02 | Pull requests | **27**: 26 fusionados y 1 abierto (#22, keep-alive, no se fusiona). Más los PR de esta entrega, por abrir | `gh pr list -R omarpiero/TP_RAG_Quechua --state all` | 20/11 |
-| C-03 | Commits en `main` | **137** | `git log --oneline 8088193 \| wc -l` | `8088193` |
+| C-02 | Pull requests | **40**: 33 fusionados (#1–#34 salvo #22), 1 cerrado sin fusionar (#22, keep-alive) y 6 abiertos de la ronda 2 (#35 a #40). Más el PR #1 de `DalgomXD-byte/quechua-wanka-movil` (fusionado) | `gh pr list -R omarpiero/TP_RAG_Quechua --state all` | 24/11 |
+| C-03 | Commits en `main` | **157** (137 en `8088193`) | `git log --oneline main \| wc -l` | `4448478` |
 | C-04 | Puertos | **17**: 7 de entrada y 10 de salida | `ls backend/src/application/ports/{in,out}/*.py` | `8088193` |
 | C-05 | Casos de uso / controladores REST / middleware | **8 / 6 / 7** | ver `docs_ingenieria_inversa/evidencias/fase_arquitectura/` | `8088193` |
 | C-06 | Rutinas en PostgreSQL | **7**: 2 procedimientos y 5 funciones | `grep -hoiE "create (or replace )?(function\|procedure) [a-z_]+" backend/db/postgres/*.sql` | `8088193` |
@@ -27,8 +30,9 @@ Fecha de medición: 19 y 20/11/2026. Repositorio base: `omarpiero/TP_RAG_Quechua
 | C-10 | pytest sin corpus | **406** aprobadas, **16** omitidas | `cd backend && pytest -q` en un clon limpio | `8088193` |
 | C-11 | pytest con corpus (v2 + v3, sin PostgreSQL) | **416** aprobadas, **6** omitidas | ídem con `data/fragmentos_v2.jsonl` y `v3` | `8088193` |
 | C-12 | pytest tras los arreglos de la S14 | **416** aprobadas, **16** omitidas (sin corpus; incluye la prueba sobre el corpus mínimo) | `pytest -q` | `fix/s14-arreglos-rapidos` (`54385b0`) |
-| C-13 | Vitest | **46** en `main`; **48** con el logo | `npx vitest run` | `8088193` / `feat/logo-proyecto` |
-| C-14 | Pruebas de Flutter | **45** (widget, adaptador de la nube, conmutador, seguridad, paridad, compositor) + 1 de integración en el dispositivo | `flutter test` | app `ccb4e29` / `48f5c63` |
+| C-12b | pytest en `main` con corpus (24/11) y en las ramas de la ronda 2 | **426**/6 en `main`; **430** (#37, P5), **432** (#39, P4), **459** (#40, P8), siempre con 6 omitidas | `cd backend && pytest -q` | `4448478` / ramas de los PR |
+| C-13 | Vitest | **48** en `main`. En las ramas de la ronda 2: **53** (#35, P1), **51** (#37, P5), **57** (#40, P8) | `npx vitest run` | `4448478` / ramas de los PR |
+| C-14 | Pruebas de Flutter | **45** (widget, adaptador de la nube, conmutador, seguridad, paridad, compositor) + 1 de integración en el dispositivo; `flutter analyze` sin avisos | `flutter test` | app `aead5e8` (v1.1.0, `master` de `DalgomXD-byte/quechua-wanka-movil` y `mobile/` en el #38) |
 | C-15 | Arnés del sistema (248) | recall@5 **1,000** en A, B y D; **0 FP** en C | `metricas_ml_final.py` (barrido con τ = 0,48) | `docs/metricas-ml-final` |
 | C-16 | Arnés en el teléfono (248, sin red) | recall@5 **1,000** en A, B y D; **0 FP** en C | `flutter test integration_test/arnes_dispositivo_test.dart -d emulator-5554` | app `ccb4e29` |
 | C-17 | Paridad móvil ↔ web | **10/10** archivos del índice idénticos (sha256); paridad Dart **5/5**; `paridad_esperada.json` idéntico | `docs/evidencias/pmv3/movil/HT-05_movil_paridad_indice.txt` | `8088193` / `ccb4e29` |
@@ -54,6 +58,16 @@ Fecha de medición: 19 y 20/11/2026. Repositorio base: `omarpiero/TP_RAG_Quechua
 | C-26 | Mediana sin conexión en el dispositivo (N = 248) | **0,80 ms** (P95 2,71) | `HU-10.2_movil_arnes_248_resumen.txt` |
 | C-27 | APK release arm64 | **22,6 MB** | `flutter build apk --release --split-per-abi` |
 | C-28 | Energía de GPU por respuesta / por abstención | **44,2 J / 0,07 J** | `latencia_local_qwen_gpu.json` |
+
+## Teléfono físico (P3 de la ronda 2, por medir)
+
+| # | Cifra | Valor | Fuente |
+|---|---|---|---|
+| C-33 | Teléfono (modelo, Android, RAM) | por medir | `docs/18_REPORTE_PMV3.md` §1 |
+| C-34 | Latencia en línea y en modo avión, P50 / P95 (N ≥ 30 por modo) | por medir | `docs/evidencias/pmv3/movil/*_fisico*` |
+| C-35 | Arnés de 248 consultas en el teléfono, sin red (FP en C) | por medir | ídem |
+| C-36 | Tamaño instalado y memoria (`dumpsys meminfo`) | por medir | ídem |
+| C-37 | Accessibility Scanner | por medir | ídem |
 
 ## Calidad y seguridad
 

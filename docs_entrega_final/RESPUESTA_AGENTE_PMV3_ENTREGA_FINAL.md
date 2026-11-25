@@ -3,7 +3,8 @@
 Índice de todo lo producido, ordenado según `03_ESTRUCTURA_INFORME_S14.md` (secciones I a X y anexos
 A a I).
 
-- **Hecho por:** el agente de James Saenz (Lead Backend & AI), 19–20/11/2026.
+- **Hecho por:** el agente de James Saenz (Lead Backend & AI), 19–20/11/2026. Actualizado el 24/11/2026
+  con la ronda 2 de arreglos (`06_PROMPT_JAMES_ARREGLOS_PENDIENTES.md`, P1 a P8).
 - **Fork:** `jamesSSC/TP_RAG_Quechua`. App: `jamesSSC/quechua-wanka-movil`.
 - **Estados:** **hecho** · **parcial** (falta algo que se indica) · **sin evidencia** (no se pudo medir y se
   dice por qué).
@@ -27,9 +28,25 @@ A a I).
 | B12 · Póster | `docs/entrega-final` | `docs_entrega_final/poster/` | **Hecho**; falta el QR del video |
 | B13 · Arreglos rápidos | `fix/s14-arreglos-rapidos` (`54385b0`, `d23098a`, `d43a553`) | `docs_entrega_final/calidad/arreglos_rapidos.md`, `docs_ingenieria_inversa/evidencias/{antes,despues}/` | **Hecho**; los ID H-03 y H-05 a H-08 hay que cotejarlos con el reporte v1.1 |
 
-**PR:** ninguno abierto todavía. Las ramas están en el fork de James, con la CI en verde. Abrirlos hacia
-`omarpiero/TP_RAG_Quechua:main` es el paso siguiente: uno por rama, en el orden de la tabla. La app va
-por PR al repositorio móvil o por la decisión de Omar sobre `mobile/` (regla 7 del prompt).
+**PR de la primera ronda:** #28 (B0), #29 (B11), #30 (B13), #31 (B2), #32 (B1), #33 (entrega final) y #34 (B3).
+Todos **fusionados** en `main` el 20/11 (`4448478`).
+
+### 1.1 Ronda 2 (24/11): arreglos pedidos por Omar antes del video
+
+| Punto | Qué | PR · rama | Estado |
+|---|---|---|---|
+| P1 | La web bloquea la gestión por defecto mientras la nube arranca o si `/api/estado` falla (hallazgo S14-01, A04/A01) | #35 · `fix/web-bloqueo-por-defecto` | Abierto; Vitest 53. Falta la captura en la nube tras desplegar |
+| — | Matriz ICACIT (B10) y cifras de la nube del 20/11, que habían quedado fuera de `main` | #36 · `docs/icacit-y-cifras-nube` | Abierto |
+| P5 | Commit desplegado en `/api/estado.version` y en el pie de la web | #37 · `feat/version-desplegada` | Abierto. Faltan las capturas en la nube (logo, cabeceras y versión) |
+| P2 | App en `mobile/` con su historial; QR a la Release | #38 · `feat/app-movil-en-mobile` | Abierto. Repositorio de la app: PR #1 **fusionado** y **Release v1.1.0** publicada con los APK y su SHA-256 |
+| P4 | Gemini con tiempo máximo de 10 s, un reintento ante 503 y registro por llamada (ADR-039) | #39 · `fix/latencia-gemini` | Abierto. Faltan el diagnóstico con los logs de Render y la nueva medición |
+| P8 | REF-05 (variables en la web), REF-07 («¿le sirvió?», ADR-040) y REF-08 (erratas en español, ADR-041) | #40 · `feat/p8-ref-05-07-08` | Abierto; pytest 459, Vitest 57 |
+| P7 | Documentos y cifras al día | `docs/p7-documentos-al-dia` | Este PR. Las cifras del teléfono y de la nube nueva quedan «por medir» |
+| P3 | Pruebas en el teléfono físico | — | **Pendiente** (lo último, con el teléfono de James) |
+| P6 | Acciones manuales en Neon y Render | — | **Pendiente**: las hace James, sin el agente |
+
+Orden de fusión recomendado: #35 → #37 → #38 → #39 → #40 → #36 → P7. Varios PR añaden una entrada al
+final de la bitácora o del registro de ADR, así que pueden pedir resolver conflictos triviales.
 
 ## 2. Evidencias por sección del informe
 
@@ -136,7 +153,8 @@ por PR al repositorio móvil o por la decisión de Omar sobre `mobile/` (regla 7
 7. Energía de GPU: **44,2 J por respuesta** y **0,07 J por abstención**.
 8. APK release arm64: **22,6 MB**, frente a un presupuesto de 1,2 GB.
 9. Índice móvil **idéntico byte a byte** al del backend (10/10 archivos).
-10. Pruebas: **416** pytest · **48** Vitest · **45** Flutter.
+10. Pruebas en `main`: **426** pytest (con corpus) · **48** Vitest · **45** Flutter. Con la ronda 2: 459 pytest
+    y 57 Vitest en la rama de P8.
 11. FURPS+ **7,4 → 7,6** · OWASP **79 → 82** (en la rama).
 12. `npm audit` **3 altas → 0**; `pip-audit` **0**.
 13. Conteos de pruebas cuadrados: sin corpus **406/16**; con corpus **416/6** (el 408/14 no se reproduce).
@@ -148,16 +166,20 @@ por PR al repositorio móvil o por la decisión de Omar sobre `mobile/` (regla 7
 
 | HU | Estado |
 |---|---|
-| HU-10.1 | Hecha en emulador (en línea, modo avión, cambio automático, selector, 429). Teléfono físico pendiente |
-| HU-10.2 | Hecha: 0 FP en el dispositivo |
-| HU-10.3 | Hecha: 22,6 MB e INTERNET en el release. Teléfono físico pendiente |
-| HU-11 | Hecha. Falta Accessibility Scanner en el teléfono |
+| HU-10.1 | Hecha en emulador (en línea, modo avión, cambio automático, selector, 429). Teléfono físico pendiente (P3) |
+| HU-10.2 | Hecha: 0 FP en el dispositivo (emulador). Teléfono físico pendiente (P3) |
+| HU-10.3 | Hecha: 22,6 MB e INTERNET en el release; **Release v1.1.0 publicada**. Instalación en teléfono físico pendiente (P3) |
+| HU-11 | Hecha. Falta Accessibility Scanner en el teléfono (P3) |
 | HT-05 | Hecha |
-| REF-05, REF-07, REF-08 y REF-03 | **No abordadas** (eran «si queda tiempo») |
+| REF-05, REF-07, REF-08 | **Hechas** en la web (PR #40; ADR-040 y ADR-041) |
+| REF-03 | No abordada |
+
+Sprint: en Trello el PMV3 es el **Sprint 3 (06/11–13/12)**; ver `docs/04_SPRINTS.md` §1.4.
 
 ## 5. Lo que requiere intervención humana
 
-1. **Prueba con usuarios** (B4, 6 puntos): protocolo, consentimientos, SUS y acta firmada.
+1. **Prueba con usuarios** (B4, 6 puntos): protocolo, consentimientos, SUS y acta firmada. El acta oficial es
+   el Word de Omar. `pruebas_usuarios/llenar_acta.py` escribe en ella las tablas 6.1 y 6.2 desde el CSV.
 2. **Grabar el video** (B5) y confirmar la duración con el docente.
 3. **Dailies:** cada integrante publica los suyos. Los de James están sugeridos en
    `docs/evidencias/pmv3/DAILIES_EQUIPO.md`.
@@ -165,12 +187,17 @@ por PR al repositorio móvil o por la decisión de Omar sobre `mobile/` (regla 7
 5. **Consultas mal rotuladas en Neon:** las 6 de la app (bitácora) y las de la grabación del 05/11 y la
    S13 (guía 02, paso 4).
 6. **Render** (quien tenga la cuenta):
-   - regenerar `ADMIN_TOKEN` y `TOKEN_PRUEBAS`;
+   - regenerar `ADMIN_TOKEN` y `TOKEN_PRUEBAS` (P6);
    - desplegar `main` cuando se fusionen los PR;
-   - capturar la CSP y el logo en la nube.
-7. **Teléfono físico de James:** mediciones y Accessibility Scanner.
+   - capturar la CSP y el logo en la nube;
+   - si existe `GEMINI_TIMEOUT` puesta a mano, borrarla o ponerla en 10 (ADR-039).
+7. **Teléfono físico de James (P3):** mediciones, arnés sin red, instalación y Accessibility Scanner.
 8. **Cotejar con el reporte v1.1** los ID H-03, H-05 a H-08, H-04, H-11 a H-13 y H-15.
-9. **Abrir los PR** hacia `omarpiero/TP_RAG_Quechua`. Omar revisa y fusiona.
+9. **Fusionar los PR #35 a #40 y el de P7** en el orden de §1.1 (Omar revisa y fusiona).
+10. **Después del despliegue** (lo hace el agente):
+    - medir la nube con N ≥ 30 en dos franjas (C-24);
+    - capturar S14-01 durante un arranque en frío real;
+    - capturar las cabeceras y la versión (P5).
 
 ## 6. Comprobación de rutas
 

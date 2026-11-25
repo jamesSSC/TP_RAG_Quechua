@@ -1,6 +1,8 @@
 # Reporte del PMV3 · App móvil en dos modos
 
-> Responsable: James Saenz Castro (Lead Backend & AI). Fecha: 20/11/2026.
+> Responsable: James Saenz Castro (Lead Backend & AI). Fecha: 20/11/2026; revisado el 24/11/2026.
+> **Última medición:** 20/11/2026 en el emulador, la PC y la nube. **Teléfono físico:** por medir (P3 de la
+> ronda 2); la columna «Teléfono físico» de §3 se completa con esa medición.
 > Decisión de arquitectura: ADR-038. Criterios: `03_HISTORIAS_USUARIO.md` §7 y §7.1.
 > Bitácora: `evidencias/pmv3/BITACORA.md`. Evidencias: `evidencias/pmv3/{movil,nube}/`.
 
@@ -41,28 +43,29 @@ En la interfaz:
 
 ## 3. Métricas (P3)
 
-| ID | Métrica | Valor | Unidad | Comando | Evidencia | Commit | Entorno |
-|---|---|---|---|---|---|---|---|
-| P3-01 | Pruebas de Flutter (unitarias, widget, adaptador, conmutador, seguridad, paridad) | 45/45 | pruebas | `flutter test` | `movil/HU-10_movil_flutter_test.txt` | `ccb4e29` | PC |
-| P3-02 | Avisos del analizador | 0 | avisos | `flutter analyze` | `movil/HU-10_movil_flutter_analyze.txt` | `ccb4e29` | PC |
-| P3-03 | Recall@5 sin conexión, A / B / D | 1,000 / 1,000 / 1,000 | proporción | arnés en el dispositivo | `movil/HU-10.2_movil_arnes_248_resumen.png` | `ccb4e29` | emulador |
-| P3-04 | Falsos positivos en C sin conexión | 0 de 28 | consultas | ídem | ídem | `ccb4e29` | emulador |
-| P3-05 | Latencia por consulta sin conexión (N = 248), P50 / P95 | 0,80 / 2,71 | ms | ídem | ídem | `ccb4e29` | emulador (depuración) |
-| P3-06 | Carga del índice en el arranque | 140–175 | ms | `adb logcat \| grep MEDICION` | `movil/HU-10.3_movil_mediciones_emulador.txt` | `ccb4e29` | emulador (profile) |
-| P3-07 | Arranque en frío de la app (5 corridas) | 682–788 | ms | `adb shell am start -W` | ídem | `ccb4e29` | emulador (profile) |
-| P3-08 | Memoria PSS tras una consulta | 137,8 | MB | `adb shell dumpsys meminfo` | ídem | `ccb4e29` | emulador (profile) |
-| P3-09 | APK release arm64-v8a / armeabi-v7a / x86_64 | 22,6 / 20,2 / 24,0 | MB | `flutter build apk --release --split-per-abi` | ídem | `ccb4e29` | PC |
-| P3-10 | Índice incorporado (`assets/indice`) | 12 | MB | `du -sh` | ídem | `ccb4e29` | PC |
-| P3-11 | Paridad del índice app ↔ backend | 10/10 archivos idénticos (sha256) | archivos | `exportar_indice_movil.py` + `sha256sum` | `movil/HT-05_movil_paridad_indice.txt` | `8088193` / `ccb4e29` | PC |
-| P3-12 | Consulta en modo avión, de la pulsación a la respuesta (`zorro`) | 20 | ms | `MEDICION total_ms` | `movil/HU-10.1_movil_modo_avion_cambio_automatico.png` | `ccb4e29` | emulador (profile) |
-| P3-13 | Consulta en línea, nube despierta (`zorro`), de la pulsación a la respuesta | 822–987 | ms | `MEDICION total_ms` (3 consultas) | `BITACORA.md` | `ccb4e29` | emulador → Render |
-| P3-14 | Primera consulta en línea con Render dormido | 19 406 | ms | `MEDICION total_ms` | `BITACORA.md` | `ccb4e29` | emulador → Render |
-| P3-15 | Reintentos automáticos tras un 429 | 0 | peticiones | registro del backend local | `movil/HU-10_movil_429_registro_backend_local.txt` | `ccb4e29` | emulador → backend local |
+| ID | Métrica | Valor | Unidad | Comando | Evidencia | Commit | Entorno | Teléfono físico |
+|---|---|---|---|---|---|---|---|---|
+| P3-01 | Pruebas de Flutter (unitarias, widget, adaptador, conmutador, seguridad, paridad) | 45/45 | pruebas | `flutter test` | `movil/HU-10_movil_flutter_test.txt` | `ccb4e29` | PC | — (no depende del dispositivo) |
+| P3-02 | Avisos del analizador | 0 | avisos | `flutter analyze` | `movil/HU-10_movil_flutter_analyze.txt` | `ccb4e29` | PC | — (no depende del dispositivo) |
+| P3-03 | Recall@5 sin conexión, A / B / D | 1,000 / 1,000 / 1,000 | proporción | arnés en el dispositivo | `movil/HU-10.2_movil_arnes_248_resumen.png` | `ccb4e29` | emulador | por medir (P3) |
+| P3-04 | Falsos positivos en C sin conexión | 0 de 28 | consultas | ídem | ídem | `ccb4e29` | emulador | por medir (P3) |
+| P3-05 | Latencia por consulta sin conexión (N = 248), P50 / P95 | 0,80 / 2,71 | ms | ídem | ídem | `ccb4e29` | emulador (depuración) | por medir (P3) |
+| P3-06 | Carga del índice en el arranque | 140–175 | ms | `adb logcat \| grep MEDICION` | `movil/HU-10.3_movil_mediciones_emulador.txt` | `ccb4e29` | emulador (profile) | por medir (P3) |
+| P3-07 | Arranque en frío de la app (5 corridas) | 682–788 | ms | `adb shell am start -W` | ídem | `ccb4e29` | emulador (profile) | por medir (P3) |
+| P3-08 | Memoria PSS tras una consulta | 137,8 | MB | `adb shell dumpsys meminfo` | ídem | `ccb4e29` | emulador (profile) | por medir (P3) |
+| P3-09 | APK release arm64-v8a / armeabi-v7a / x86_64 | 22,6 / 20,2 / 24,0 | MB | `flutter build apk --release --split-per-abi` | ídem | `ccb4e29` | PC | — (no depende del dispositivo) |
+| P3-10 | Índice incorporado (`assets/indice`) | 12 | MB | `du -sh` | ídem | `ccb4e29` | PC | — (no depende del dispositivo) |
+| P3-11 | Paridad del índice app ↔ backend | 10/10 archivos idénticos (sha256) | archivos | `exportar_indice_movil.py` + `sha256sum` | `movil/HT-05_movil_paridad_indice.txt` | `8088193` / `ccb4e29` | PC | — (no depende del dispositivo) |
+| P3-12 | Consulta en modo avión, de la pulsación a la respuesta (`zorro`) | 20 | ms | `MEDICION total_ms` | `movil/HU-10.1_movil_modo_avion_cambio_automatico.png` | `ccb4e29` | emulador (profile) | por medir (P3) |
+| P3-13 | Consulta en línea, nube despierta (`zorro`), de la pulsación a la respuesta | 822–987 | ms | `MEDICION total_ms` (3 consultas) | `BITACORA.md` | `ccb4e29` | emulador → Render | por medir (P3) |
+| P3-14 | Primera consulta en línea con Render dormido | 19 406 | ms | `MEDICION total_ms` | `BITACORA.md` | `ccb4e29` | emulador → Render | por medir (P3) |
+| P3-15 | Reintentos automáticos tras un 429 | 0 | peticiones | registro del backend local | `movil/HU-10_movil_429_registro_backend_local.txt` | `ccb4e29` | emulador → backend local | por medir (P3) |
 
 **Lo que no se midió y por qué.**
-- Latencia en línea con N ≥ 30: haría falta `TOKEN_PRUEBAS` para que esas consultas no cuenten como
-  demanda real (HU-09), y no hay acceso a Render. **Por medir.**
-- Todo lo del teléfono físico ARM64: **por medir**.
+- Latencia en línea con N ≥ 30: se midió en la nube el 20/11 con origen `humo`: **P50 6,4 s y P95 15,4 s,
+  con el 25 % por el respaldo** (C-24 en `cifras_oficiales.md`). Las mitigaciones de ADR-039 (P4, PR #39)
+  se vuelven a medir tras el despliegue, en dos franjas.
+- Todo lo del teléfono físico ARM64: **por medir** (P3 de la ronda 2).
 
 ## 4. Comparación entre entornos
 
@@ -163,10 +166,12 @@ En la interfaz:
 
 1. Mediciones en el teléfono físico de James (latencia en modo avión, arranque, memoria, Accessibility
    Scanner).
-2. Latencia en línea con N ≥ 30 desde la app (requiere `TOKEN_PRUEBAS`).
+2. Latencia en línea con N ≥ 30 desde la app (requiere `TOKEN_PRUEBAS`). La de la nube con Gemini ya se
+   midió (20/11) y se vuelve a medir tras ADR-039.
 3. Captura del aviso de arranque en frío contra Render dormido. El comportamiento lo cubre una prueba
    de widget.
 4. La contribución exacta de cada variable por consulta requeriría que la API exponga la media y la
-   desviación del estandarizador. Hoy se muestran los coeficientes.
+   desviación del estandarizador. Hoy se muestran los coeficientes, en la app y, desde REF-05 (PR #40),
+   también en la web.
 5. Rotular como `humo` las 6 consultas de prueba de la app que quedaron como `usuario` (decisión del
    equipo; ver la bitácora).

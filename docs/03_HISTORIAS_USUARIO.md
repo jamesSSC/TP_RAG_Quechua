@@ -83,10 +83,10 @@ estimada.
 | HU-08.1 | Anticipar si hay respaldo antes de generar | E-08 | Analítica predictiva | 2 | 3 | Alta | Backlog |
 | HU-08.2 | Ajustar el umbral con la experiencia acumulada | E-08 | Analítica predictiva | 2 | 3 | Alta | Backlog |
 | HU-09 | Saber qué material conviene incorporar | E-09 | Analítica predictiva | 2 | 3 | Media | Backlog |
-| HU-10.1 | Consultar desde el teléfono sin conexión | E-10 | Despliegue móvil | 3 | 4 | Alta | Backlog |
-| HU-10.2 | Misma salvaguarda en el teléfono | E-10 | Despliegue móvil | 3 | 4 | Alta | Backlog |
-| HU-10.3 | Instalación que no queda a medias | E-10 | Despliegue móvil | 3 | 4 | Alta | Backlog |
-| HU-11 | Interfaz simple y legible | E-11 | Despliegue móvil | 3 | 4 | Media | Backlog |
+| HU-10.1 | Consultar desde el teléfono sin conexión | E-10 | Despliegue móvil | 3 | 4 (Trello: S3) | Alta | Hecha en emulador (dos modos, ADR-038); teléfono físico pendiente |
+| HU-10.2 | Misma salvaguarda en el teléfono | E-10 | Despliegue móvil | 3 | 4 (Trello: S3) | Alta | Hecha: 0 FP en C en el dispositivo (emulador); teléfono físico pendiente |
+| HU-10.3 | Instalación que no queda a medias | E-10 | Despliegue móvil | 3 | 4 (Trello: S3) | Alta | Hecha: APK arm64 22,6 MB, Release v1.1.0; instalación en teléfono físico pendiente |
+| HU-11 | Interfaz simple y legible | E-11 | Despliegue móvil | 3 | 4 (Trello: S3) | Media | Hecha (A−/A/A+, objetivos ≥ 48 px); Accessibility Scanner en teléfono físico pendiente |
 | HT-00 | Repositorio, integración continua y entorno de agentes | — | Habilitador | 1 | 1 | Alta | Listo |
 | HT-01 | Arnés de evaluación reproducible | — | Habilitador | 1 | 1 | Alta | Backlog |
 | HT-02 | Conjunto de evaluación externo (docentes de EIB) | — | Habilitador | 1 | 1–2 | Alta | Backlog |
@@ -96,6 +96,10 @@ estimada.
 | HT-06 | Medición de rendimiento y recursos | — | Habilitador | 1, 3 | 2, 4 | Alta | Backlog |
 | HT-07 | Evaluar bge-m3 como complemento de la recuperación | — | Espiga | 1 | 2 | Baja | Backlog |
 | HT-08 | Servidor MCP de desarrollo (solo lectura) | — | Habilitador | 1 | 1–2 | Media | Backlog |
+
+Estado de HU-10.x y HU-11 al 24/11/2026: ver `18_REPORTE_PMV3.md` (fichas por historia) y
+`docs_entrega_final/RESPUESTA_AGENTE_PMV3_ENTREGA_FINAL.md` §4. En Trello el PMV3 es el **Sprint 3
+(06/11–13/12)**; en el plan de `04_SPRINTS.md` figura como Sprint 4 (ver su §1.4).
 
 \* Ver la tensión de prioridad de RF-04 en `02_REQUERIMIENTOS.md` §2 y ADR-008.
 
@@ -918,3 +922,4 @@ Característica: Servidor MCP de desarrollo
 | 2026-09-24 | 1.0 | Creación; división de HU-08 y HU-10; historias técnicas HT-00…HT-07 | — |
 | 2026-09-24 | 1.1 | HT-00 en la semana 1 del sprint 1; escenario de identificadores en HU-02; nueva HT-08 | ADR-017, ADR-018 |
 | 2026-11-19 | 1.2 | §7.1: criterios Gherkin del PMV3 en dos modos (en línea y sin conexión) | ADR-038 |
+| 2026-11-24 | 1.3 | Estado final de HU-10.1 a HU-10.3 y HU-11 en el índice; sprint alineado con Trello (S3, 06/11–13/12) | Ronda 2 (P7) |
