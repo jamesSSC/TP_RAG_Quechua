@@ -42,6 +42,9 @@ from adapters.out.persistencia.repositorio_corpus_postgres import (
 from adapters.out.persistencia.repositorio_fuentes_sqlalchemy import (
     RepositorioFuentesSqlalchemy,
 )
+from adapters.out.persistencia.repositorio_valoraciones_sqlalchemy import (
+    RepositorioValoracionesSqlalchemy,
+)
 from adapters.out.prediccion.predictor_sklearn import PredictorSklearn
 from adapters.out.recuperacion.indice_hibrido_lexico import IndiceHibridoLexico
 from adapters.out.traduccion.ollama_traductor import OllamaTraductor
@@ -53,6 +56,7 @@ from application.use_cases.gestionar_fuentes import GestionarFuentesUseCase
 from application.use_cases.ingestar_documento import IngestarDocumentoUseCase
 from application.use_cases.predecir_consulta import PredecirConsultaUseCase
 from application.use_cases.reindexar_corpus import ReindexarCorpusUseCase
+from application.use_cases.valorar_respuesta import ValorarRespuestaUseCase
 from application.use_cases.verificar_consistencia_datos import VerificarConsistenciaDatos
 from domain.services.evaluador_confianza import EvaluadorConfianza
 from domain.value_objects.origen_consulta import OrigenConsulta
@@ -77,6 +81,7 @@ class Contenedor:
         self.gestionar_fuentes = None
         self.repositorio_fuentes = None
         self.analizar_demanda = None
+        self.valorar_respuesta = None
         self._motor = None
         # La base va primero: con CORPUS_ORIGEN=postgres el corpus sale de ella (ADR-031).
         self.base_datos_disponible = self._conectar_base_datos()
@@ -330,6 +335,10 @@ class Contenedor:
             self.gestionar_fuentes = GestionarFuentesUseCase(self.repositorio_fuentes)
             self.consultar_historial = ConsultarHistorialUseCase(self.repositorio_consultas)
             self.analizar_demanda = AnalizarDemandaUseCase(self.repositorio_consultas)
+            # REF-07 (ADR-040): valoraciones «¿te sirvió?» (tabla nueva, la crea create_all).
+            self.valorar_respuesta = ValorarRespuestaUseCase(
+                RepositorioValoracionesSqlalchemy(sesion)
+            )
             log.info("[REPOSITORIO] base de datos conectada")
             return True
         except Exception as exc:  # noqa: BLE001

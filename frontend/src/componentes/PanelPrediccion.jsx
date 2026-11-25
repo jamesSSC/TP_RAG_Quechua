@@ -24,6 +24,68 @@ const NOMBRES_CARACTERISTICAS = {
   coincidencia_lema: "Coincidencia de lema",
 };
 
+// REF-05 (ronda 2): misma tabla que la app (vista_prediccion.dart): valor que recibio el modelo y
+// peso de cada variable (coeficiente estandarizado de la regresion logistica de cobertura, de
+// /api/modelos). Es el peso de la variable en el modelo, no su contribucion exacta a esta consulta:
+// para eso haria falta la media y la desviacion del estandarizador, que la API no expone.
+const coma = (v, d) => v.toFixed(d).replace(".", ",");
+
+function BarraPeso({ valor, maximo }) {
+  const fraccion = Math.min(1, Math.abs(valor) / maximo) * 100;
+  const positivo = valor >= 0;
+  return (
+    <span className="peso" data-testid="peso">
+      <span className="peso__mitad peso__mitad--negativa">
+        {!positivo && <span className="peso__barra peso__barra--negativa" style={{ width: `${fraccion}%` }} />}
+      </span>
+      <span className="peso__eje" aria-hidden="true" />
+      <span className="peso__mitad">
+        {positivo && <span className="peso__barra" style={{ width: `${fraccion}%` }} />}
+      </span>
+      <span className="peso__valor">
+        {positivo ? "+" : "−"}
+        {coma(Math.abs(valor), 2)}
+      </span>
+    </span>
+  );
+}
+
+function TablaVariables({ caracteristicas, pesos }) {
+  const claves = Object.keys(caracteristicas ?? {});
+  if (!claves.length) return null;
+  const peso = (k) => (typeof pesos?.[k] === "number" ? pesos[k] : null);
+  claves.sort((a, b) => Math.abs(peso(b) ?? 0) - Math.abs(peso(a) ?? 0));
+  const maximo = Math.max(0.0001, ...claves.map((k) => Math.abs(peso(k) ?? 0)));
+  return (
+    <section className="variables" data-testid="tabla-variables">
+      <h3 className="modelo__subtitulo">Variables del modelo de cobertura</h3>
+      <p className="indicadores__linea">
+        Valor que recibió el modelo y peso de cada variable (coeficiente estandarizado de la
+        regresión logística): un peso positivo empuja hacia «hay respaldo» y uno negativo hacia la
+        abstención.
+      </p>
+      <table className="tabla">
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Valor</th>
+            <th>Peso en el modelo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {claves.map((k) => (
+            <tr key={k}>
+              <td>{NOMBRES_CARACTERISTICAS[k] ?? k}</td>
+              <td>{typeof caracteristicas[k] === "number" ? coma(caracteristicas[k], 3) : "—"}</td>
+              <td>{peso(k) === null ? "—" : <BarraPeso valor={peso(k)} maximo={maximo} />}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  );
+}
+
 const NOMBRES_MODELOS = {
   regresion_logistica: "Regresión logística (elegido)",
   bosque_aleatorio: "Bosque aleatorio",
@@ -366,19 +428,10 @@ export default function PanelPrediccion() {
             testId="p-pasajes"
           />
           <p className="indicadores__linea">{prediccion.pasajes?.decision}</p>
-          <details className="caracteristicas">
-            <summary>Características que recibió el modelo</summary>
-            <table className="tabla">
-              <tbody>
-                {Object.entries(prediccion.caracteristicas ?? {}).map(([k, v]) => (
-                  <tr key={k}>
-                    <td>{NOMBRES_CARACTERISTICAS[k] ?? k}</td>
-                    <td>{num(v, 4)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </details>
+          <TablaVariables
+            caracteristicas={prediccion.caracteristicas}
+            pesos={modelos.find((m) => m.clave === "cobertura")?.coeficientes}
+          />
         </section>
       )}
 

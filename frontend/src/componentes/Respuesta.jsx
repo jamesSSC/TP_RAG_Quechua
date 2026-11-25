@@ -1,4 +1,5 @@
 import Probabilidad from "./Probabilidad";
+import Valoracion from "./Valoracion";
 
 function Indicadores({ resultado }) {
   const { similitud_maxima, umbral, latencia_ms, via_respaldo, abstenida } = resultado;
@@ -120,7 +121,34 @@ function tituloDeLaRespuesta(abstenida, hayPasajes) {
   return hayPasajes ? "Sin respuesta confirmada" : "Sin respaldo documental";
 }
 
-export default function Respuesta({ resultado }) {
+// REF-08 (ADR-041): tras una abstención de una consulta en español, lemas castellanos parecidos
+// al término. Es una propuesta: solo se consulta de nuevo si la persona la elige.
+function Sugerencias({ sugerencias, onConsultar }) {
+  if (!sugerencias?.length || !onConsultar) return null;
+  return (
+    <div className="sugerencias" data-testid="sugerencias">
+      <p className="sugerencias__titulo">¿Quiso escribir…?</p>
+      <div className="sugerencias__botones">
+        {sugerencias.map((s) => (
+          <button
+            key={s.termino}
+            type="button"
+            className="caja__ejemplo"
+            onClick={() => onConsultar(s.consulta)}
+          >
+            {s.termino}
+          </button>
+        ))}
+      </div>
+      <p className="sugerencias__nota">
+        Son palabras en español del diccionario parecidas a la escrita. El sistema no corrige por
+        su cuenta ni cambia formas en quechua.
+      </p>
+    </div>
+  );
+}
+
+export default function Respuesta({ resultado, onConsultar }) {
   if (!resultado) return null;
 
   const {
@@ -165,6 +193,10 @@ export default function Respuesta({ resultado }) {
 
       {/* En una abstencion solo hay un mensaje de ausencia: ninguna forma destacada. */}
       <p className={abstenida ? "respuesta__ausencia" : "respuesta__texto"}>{texto}</p>
+
+      {abstenida && (
+        <Sugerencias sugerencias={resultado.sugerencias} onConsultar={onConsultar} />
+      )}
 
       {!abstenida && respaldo.length > 0 && (
         <div className="respaldo">
@@ -211,6 +243,8 @@ export default function Respuesta({ resultado }) {
       <Indicadores resultado={resultado} />
 
       <PrediccionMl resultado={resultado} />
+
+      <Valoracion key={resultado.consulta_id} consultaId={resultado.consulta_id} />
 
       <footer className="respuesta__pie">
         <p className="respuesta__aviso">{aviso}</p>

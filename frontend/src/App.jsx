@@ -300,7 +300,7 @@ export default function App() {
               </output>
             )}
 
-            <Respuesta resultado={resultado} />
+            <Respuesta resultado={resultado} onConsultar={lanzarConsulta} />
             <Historial
               enLaNube={Boolean(estado?.entorno && estado.entorno !== "local")}
               porSesion={protegida}

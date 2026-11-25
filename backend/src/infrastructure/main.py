@@ -70,6 +70,7 @@ app.add_middleware(
     limites={
         "/api/consultas": configuracion.limite_consultas_por_minuto,
         "/api/predicciones": configuracion.limite_predicciones_por_minuto,
+        "/api/valoraciones": configuracion.limite_consultas_por_minuto,
     }
     if configuracion.modo_nube
     else {},

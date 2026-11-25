@@ -238,7 +238,7 @@ def test_los_controladores_solo_importan_puertos():
     carpeta = Path(rest.__file__).parent
     prohibidos = ("application.use_cases", "adapters.out", "infrastructure")
     controladores = list(carpeta.glob("*_controller.py"))
-    assert len(controladores) == 6
+    assert len(controladores) == 7  # REF-07 agrega valoraciones_controller
     for archivo in controladores:
         arbol = ast.parse(archivo.read_text(encoding="utf-8"))
         for nodo in ast.walk(arbol):

@@ -14,6 +14,7 @@ from application.ports import (
     IngestarDocumentoPort,
     PredecirConsultaPort,
     ReindexarCorpusPort,
+    ValorarRespuestaPort,
 )
 
 
@@ -66,3 +67,10 @@ def analizar_demanda(request: Request) -> AnalizarDemandaPort:
 
 def estado_sistema(request: Request) -> dict:
     return _contenedor(request).estado()
+
+
+def valorar_respuesta(request: Request) -> ValorarRespuestaPort:
+    puerto = getattr(_contenedor(request), "valorar_respuesta", None)
+    if puerto is None:
+        raise HTTPException(503, "La valoración requiere la base de datos y no está conectada")
+    return puerto

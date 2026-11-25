@@ -52,6 +52,10 @@ class Respuesta:
     probabilidad_cobertura: float | None = None
     probabilidad_pasajes: float | None = None
     abstencion_por_predictor: bool = False
+    # REF-08 (ADR-041): solo en una abstencion de una consulta en espanol, lemas castellanos
+    # parecidos al termino («¿quiso escribir…?») y la consulta reescrita con cada uno. Es una
+    # propuesta: el sistema no la ejecuta ni cambia la abstencion.
+    sugerencias: list[dict] = field(default_factory=list)
 
     def __post_init__(self):
         # RNF-08: ninguna respuesta afirmativa puede emitirse sin fuente verificable.

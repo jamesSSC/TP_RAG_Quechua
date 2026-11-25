@@ -1,4 +1,5 @@
 import logging
+import re
 import time
 
 from application.ports import ConsultarCorpusPort
@@ -223,8 +224,31 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
             )
         return abstiene
 
-    @staticmethod
-    def _respuesta_por_predictor(consulta, idioma, veredicto, p_cobertura) -> Respuesta:
+    def _sugerencias(self, consulta: Consulta, idioma: Idioma) -> list[dict]:
+        """REF-08 (ADR-041): «¿quiso escribir…?» tras una abstencion, solo si la consulta es en
+        espanol. Las propuestas salen del lemario castellano; la abstencion no cambia."""
+        if idioma is not Idioma.ESPANOL or consulta.texto_traducido:
+            return []
+        termino = self._depurador.depurar(consulta.texto)
+        lemas = self._indice.lemas_parecidos(termino)
+        if lemas:
+            log.info("[CASO-USO] REF-08: %d sugerencia(s) para el termino consultado", len(lemas))
+        return [
+            {"termino": lema, "consulta": self._reescribir(consulta.texto, termino, lema)}
+            for lema in lemas
+        ]
+
+    def _reescribir(self, texto: str, termino: str, lema: str) -> str:
+        """La consulta original con la palabra mal escrita cambiada por el lema propuesto."""
+        def cambiar(palabra):
+            if self._depurador.normalizar(palabra.group(0)) == termino:
+                return lema
+            return palabra.group(0)
+
+        reescrita = re.sub(r"\w+", cambiar, texto)
+        return reescrita if reescrita != texto else lema
+
+    def _respuesta_por_predictor(self, consulta, idioma, veredicto, p_cobertura) -> Respuesta:
         return Respuesta(
             consulta_id=consulta.id,
             texto=MENSAJE_PREDICTOR[idioma],
@@ -234,6 +258,7 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
             consulta_traducida=consulta.texto_traducido,
             probabilidad_cobertura=p_cobertura,
             abstencion_por_predictor=True,
+            sugerencias=self._sugerencias(consulta, idioma),
         )
 
     def _pasajes_de_prosa(self, consulta: Consulta) -> list:
@@ -283,6 +308,7 @@ class ConsultarCorpusUseCase(ConsultarCorpusPort):
             pasajes=pasajes,
             probabilidad_cobertura=prediccion["cobertura"],
             probabilidad_pasajes=p_pasajes,
+            sugerencias=self._sugerencias(consulta, idioma),
         )
 
     def _seleccionar_respaldo(self, veredicto, recuperados: list) -> list:

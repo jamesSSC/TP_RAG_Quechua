@@ -77,11 +77,17 @@ COMMIT;   -- o ROLLBACK si la verificación no dio 31
 Las 6 consultas de la app del 20/11, 00:37–00:51 UTC (tabla de arriba), se pueden rotular igual si el
 equipo lo decide.
 
-## 2026-11-24 · P5: versión desplegada en `/api/estado` y en el pie de la web
+## 2026-11-24 · P8: REF-05, REF-07 y REF-08
 
-`/api/estado` informa `version`: los 7 primeros caracteres de `RENDER_GIT_COMMIT`, que Render define en
-cada despliegue, o `"local"`. El pie de la web muestra «versión: API <commit> · web <commit>». La web
-toma su commit al compilarse (`vite.config.js`, `__VERSION_WEB__`), porque el sitio estático y la API
-se despliegan por separado y pueden quedar en commits distintos. pytest 430 + 4 (todas en verde);
-Vitest + 3. Pendiente tras desplegar `main`: capturas en la nube (logo, cabeceras con
-`curl -sI`, `/api/estado` con 3 605 fragmentos, 8 documentos y el commit).
+- **REF-05:** la tabla de variables de la web es ahora igual a la de la app: valor y peso
+  (coeficiente estandarizado). El MD pedía «coeficiente × valor», pero la app muestra el peso, porque
+  la API no expone la media ni la desviación del estandarizador. Se igualó a la app para que coincidan
+  en el video.
+- **REF-07 (ADR-040):** «¿Le sirvió esta respuesta?». La tabla `valoraciones` la crea `create_all()` al
+  arrancar, también en Neon, sin ejecutar SQL a mano. Pública en la nube con el límite de la consulta.
+- **REF-08 (ADR-041):** «¿Quiso escribir…?» solo en abstenciones de consultas en español, desde el
+  lemario castellano. Probado con el corpus real:
+  - «zoro» → zorro y oro; «perrro» → perro; «mujr» → mujer;
+  - «criptomoneda», «atuk» y el inglés no reciben sugerencias.
+- Evidencias con la API local sobre una copia de `quechua_wanka.db`.
+- pytest 459/6, Vitest 57.

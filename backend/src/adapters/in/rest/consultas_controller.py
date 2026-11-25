@@ -60,6 +60,7 @@ def consultar(
         probabilidad_cobertura=_redondear(respuesta.probabilidad_cobertura),
         probabilidad_pasajes=_redondear(respuesta.probabilidad_pasajes),
         abstencion_por_predictor=respuesta.abstencion_por_predictor,
+        sugerencias=respuesta.sugerencias,
     )
 
 
