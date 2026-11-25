@@ -85,7 +85,8 @@ class Configuracion(BaseSettings):
     # ADR-032. La clave es un secreto del servicio (panel de Render); nunca se registra.
     gemini_api_key: str = ""
     gemini_modelo: str = "gemini-3.5-flash-lite"
-    gemini_timeout: float = 15.0
+    # P4 (ADR-039): 10 s (antes 15). Pasado ese tiempo responde el fragmento literal citado.
+    gemini_timeout: float = 10.0
     # Secreto que autoriza a las pruebas contra la nube a registrar sus consultas como `carga` o
     # `humo` (cabeceras X-Token-Pruebas y X-Origen-Consultas). Vacio: desactivado.
     token_pruebas: str = ""

@@ -535,6 +535,35 @@ los dos y es el que inyecta el contenedor.
 - La dependencia nueva es solo de desarrollo (`flutter_launcher_icons`, para el ícono). La conectividad
   se infiere del propio fallo HTTP, sin paquetes de red adicionales.
 
+## ADR-039 · Latencia de la nube: tiempo máximo de Gemini, un reintento ante 503 y registro por llamada — Propuesta (S14, P4)
+
+**Contexto.** Medido el 20/11 en la nube con N = 220 (origen `humo`): P50 6,4 s y P95 15,4 s, frente a
+0,9 s en la U3. 55 respuestas (25 %) agotaron los 15 s de `GEMINI_TIMEOUT` y cayeron al fragmento
+literal citado: esas consultas esperaron el tiempo máximo completo para recibir lo mismo que el
+respaldo daría al instante. Los registros no decían cuánto tardaba cada llamada ni si hubo 429 o 503,
+así que la causa no se podía separar entre cuota, saturación del modelo y red.
+
+**Decisión.**
+- `GEMINI_TIMEOUT` pasa de **15 s a 10 s** (sigue configurable). Pasado ese tiempo responde el
+  respaldo extractivo, como hasta ahora.
+- Ante un **503** (modelo saturado) se reintenta **una sola vez** tras 1 s, y solo si al presupuesto
+  de 10 s le quedan al menos 2 s. El total nunca supera el tiempo máximo. Un 429 (cuota) o cualquier
+  otro error no se reintenta: reintentar un 429 gasta más cuota.
+- Cada llamada registra `[GEMINI] modelo=… resultado=… ms=…` (INFO si es 200; WARNING si no). Nunca
+  registra la clave ni el texto de la consulta.
+- **No cambia:** τ = 0,48, RN-06, el verificador literal (ADR-028), la instrucción ni el número de
+  fragmentos. No se recortó el contexto: el verificador busca la forma en todos los fragmentos
+  recuperados, y recortar lo que ve Gemini bajaría la tasa de extracciones aceptadas sin una medición
+  que lo respalde. No se contrata ningún plan de pago.
+
+**Consecuencias.**
+- La cola de latencia baja: la peor respuesta pasa de ~15 s a ~10 s.
+- Puede subir el porcentaje de respuestas por el respaldo, porque las llamadas de 10 a 15 s que antes
+  terminaban bien ahora caen al fragmento literal. El respaldo sigue citando documento y página, y la
+  salvaguarda no cambia (0 FP en C).
+- Hay que volver a medir con N ≥ 30 en dos franjas (P50, P95 y % de respaldo) y actualizar C-24.
+- Con el registro por llamada, los logs de Render permiten atribuir la lentitud a 429, 503 o red.
+
 ---
 
 ## Registro de cambios
@@ -549,3 +578,4 @@ los dos y es el que inyecta el contenedor.
 | 2026-11-12 | S13 fase 1 (FURPS+): ADR-033 (aviso de arranque en frío, REF-02) y ADR-034 (`/api/vivo` y presupuesto de horas del ping, REF-01) propuestas en `s13/furps-owasp` |
 | 2026-11-12 | S13 fase 2 (OWASP): ADR-035 (token de administración), ADR-036 (historial por sesión) y ADR-037 (límite de peticiones) propuestas en `s13/owasp` |
 | 2026-11-19 | PMV3 (B0): ADR-038 propuesta (app móvil: cliente de la nube con respaldo sin conexión) en `feat/pmv3-app-movil` |
+| 2026-11-24 | S14 ronda 2 (P4): ADR-039 propuesta (latencia de la nube: tiempo máximo de Gemini 10 s, un reintento ante 503 y registro por llamada) en `fix/latencia-gemini` |
