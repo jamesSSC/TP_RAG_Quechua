@@ -151,4 +151,4 @@ Una tarjeta por hallazgo corregido (para el informe 8.9 y como portada, la captu
 4. Regenerar los PNG de los UML con PlantUML. Los `.puml` se verificaron contra el código y no cambiaron.
 5. Rotular como `humo` las 6 consultas de prueba de la app (bitácora del PMV3).
 6. Cuarentena del corpus (OW-17) y k-anonimato de la analítica (OW-03): trabajo futuro.
-7. Fechas de inicio en Trello anteriores al 19/11: por confirmar con el tablero.
+7. Fechas del Sprint 3 confirmadas con el tablero (06/11 – 14/12). Las HU-10.x y HU-11 siguen en **Product Backlog**: moverlas a DONE con estas tarjetas.
