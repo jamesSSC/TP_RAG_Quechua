@@ -809,3 +809,14 @@ input[type="checkbox"] { width: 1.5rem; height: 1.5rem; }
   gap: 0.5rem;
   align-items: center;
 }
+
+/* REF-05: peso de cada variable (como en la app): barra a la izquierda si empuja a la abstencion,
+   a la derecha si empuja a «hay respaldo». */
+.variables { margin-top: 1rem; }
+.peso { display: grid; grid-template-columns: 1fr 1px 1fr 3.2rem; align-items: center; gap: 0; min-width: 9rem; }
+.peso__mitad { display: flex; height: 0.5rem; }
+.peso__mitad--negativa { justify-content: flex-end; }
+.peso__barra { display: block; height: 100%; background: var(--acento); }
+.peso__barra--negativa { background: var(--abstencion); opacity: 0.7; }
+.peso__eje { height: 0.9rem; background: var(--tinta); }
+.peso__valor { text-align: right; font-variant-numeric: tabular-nums; }
