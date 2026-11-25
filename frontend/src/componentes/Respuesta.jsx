@@ -1,4 +1,5 @@
 import Probabilidad from "./Probabilidad";
+import Valoracion from "./Valoracion";
 
 function Indicadores({ resultado }) {
   const { similitud_maxima, umbral, latencia_ms, via_respaldo, abstenida } = resultado;
@@ -211,6 +212,8 @@ export default function Respuesta({ resultado }) {
       <Indicadores resultado={resultado} />
 
       <PrediccionMl resultado={resultado} />
+
+      <Valoracion key={resultado.consulta_id} consultaId={resultado.consulta_id} />
 
       <footer className="respuesta__pie">
         <p className="respuesta__aviso">{aviso}</p>

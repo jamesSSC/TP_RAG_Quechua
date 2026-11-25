@@ -820,3 +820,13 @@ input[type="checkbox"] { width: 1.5rem; height: 1.5rem; }
 .peso__barra--negativa { background: var(--abstencion); opacity: 0.7; }
 .peso__eje { height: 0.9rem; background: var(--tinta); }
 .peso__valor { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* REF-07: «¿Le sirvió esta respuesta?» */
+.valoracion { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; margin-top: 1rem; font-size: 0.92em; }
+.valoracion__botones { display: flex; gap: 0.5rem; }
+.valoracion__boton {
+  min-width: 44px; min-height: 44px; padding: 0.3rem 1rem; border-radius: 6px;
+  border: 1px solid var(--acento); background: transparent; color: var(--acento); font: inherit; cursor: pointer;
+}
+.valoracion__boton:hover:not(:disabled) { background: var(--acento-claro); }
+.valoracion__error { width: 100%; margin: 0; color: var(--abstencion); }

@@ -28,6 +28,10 @@ PredecirConsultaPort = import_module(_entrada + "predecir_consulta_port").Predec
 
 AnalizarDemandaPort = import_module(_entrada + "analizar_demanda_port").AnalizarDemandaPort
 
+_valorar = import_module(_entrada + "valorar_respuesta_port")
+ValorarRespuestaPort = _valorar.ValorarRespuestaPort
+ResultadoValoracion = _valorar.ResultadoValoracion
+
 __all__ = [
     "AnalizarDemandaPort",
     "PredecirConsultaPort",
@@ -38,4 +42,6 @@ __all__ = [
     "IngestarDocumentoPort",
     "ReindexarCorpusPort",
     "ResultadoIngesta",
+    "ResultadoValoracion",
+    "ValorarRespuestaPort",
 ]

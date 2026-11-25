@@ -91,6 +91,13 @@ export const consultar = (texto) =>
 
 export const obtenerEstado = () => pedir("/api/estado");
 
+// REF-07 (ADR-040): «¿te sirvió?». Solo el id de la consulta y sí/no.
+export const valorar = (consultaId, util) =>
+  pedir("/api/valoraciones", {
+    method: "POST",
+    body: JSON.stringify({ consulta_id: consultaId, util }),
+  });
+
 export const obtenerHistorial = () => pedir("/api/historial");
 
 // S13 · ADR-035: antes de desbloquear la gestion, el token se comprueba contra el servidor con una

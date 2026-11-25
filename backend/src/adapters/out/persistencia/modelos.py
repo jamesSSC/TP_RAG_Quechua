@@ -52,6 +52,10 @@ class ConsultaORM(Base):
     respaldos: Mapped[list["RespaldoORM"]] = relationship(
         back_populates="consulta", cascade="all, delete-orphan", lazy="selectin"
     )
+    # REF-07: al borrar la consulta se borra su valoracion. En PostgreSQL ya lo hace la clave
+    # foranea (ON DELETE CASCADE); en SQLite las claves foraneas no se aplican sin PRAGMA, asi
+    # que la cascada la hace el ORM.
+    valoracion: Mapped["ValoracionORM | None"] = relationship(cascade="all, delete-orphan")
 
 
 class RespaldoORM(Base):
@@ -72,6 +76,20 @@ class RespaldoORM(Base):
     derivado_ocr: Mapped[bool] = mapped_column(Boolean, default=False)
 
     consulta: Mapped[ConsultaORM] = relationship(back_populates="respaldos")
+
+
+class ValoracionORM(Base):
+    """REF-07 (ADR-040): «¿te sirvió?». Una fila por consulta y sin datos personales: solo el
+    id de la consulta, si sirvió y la hora. create_all() la crea al arrancar en las bases que
+    ya existen (tabla nueva: no altera ninguna otra)."""
+
+    __tablename__ = "valoraciones"
+
+    consulta_id: Mapped[str] = mapped_column(
+        String(36), ForeignKey("consultas.id", ondelete="CASCADE"), primary_key=True
+    )
+    util: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    momento: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
 
 
 # Columnas que el PMV2 añadio a una tabla que ya existe en las bases creadas por el PMV1.

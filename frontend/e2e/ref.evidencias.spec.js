@@ -22,3 +22,20 @@ test("REF-05 variables del modelo de cobertura", async ({ page }) => {
   if (await resumen.count()) await resumen.click(); // antes: la tabla estaba plegada
   await resultado.screenshot({ path: ruta("REF-05_FASE_variables_prediccion_web") });
 });
+
+test("REF-07 valoracion de la respuesta", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel(/Escriba su consulta/).fill("¿cómo se dice zorro en quechua wanka?");
+  await page.getByLabel(/Escriba su consulta/).press("Enter");
+  const respuesta = page.locator(".respuesta").first();
+  await expect(respuesta).toBeVisible();
+  if (FASE === "despues") {
+    await expect(page.getByTestId("valoracion")).toBeVisible();
+    await respuesta.screenshot({ path: ruta("REF-07_FASE_pregunta_le_sirvio") });
+    await page.getByRole("button", { name: "Sí" }).click();
+    await expect(page.getByText(/Gracias: su valoración se registró/)).toBeVisible();
+    await respuesta.screenshot({ path: ruta("REF-07_FASE_valoracion_registrada") });
+  } else {
+    await respuesta.screenshot({ path: ruta("REF-07_FASE_respuesta_sin_valoracion") });
+  }
+});
