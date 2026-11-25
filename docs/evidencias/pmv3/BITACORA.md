@@ -77,15 +77,11 @@ COMMIT;   -- o ROLLBACK si la verificación no dio 31
 Las 6 consultas de la app del 20/11, 00:37–00:51 UTC (tabla de arriba), se pueden rotular igual si el
 equipo lo decide.
 
-## 2026-11-24 · P2: la app en el repositorio oficial
+## 2026-11-24 · P5: versión desplegada en `/api/estado` y en el pie de la web
 
-- PR #1 en `DalgomXD-byte/quechua-wanka-movil`: `feat/pmv3-dos-modos` → `master` (fast-forward de
-  6 commits sobre `3c6e976`). `flutter analyze`: sin avisos. `flutter test`: 45/45.
-- La app también queda en `mobile/` de este repositorio, traída con `git subtree add` (conserva los
-  14 commits de su historial), como pidió Omar. `flutter analyze` y `flutter test` también pasan
-  desde `mobile/`.
-- Release `v1.1.0` (por publicar al fusionar el PR #1). Los APK no se suben al repositorio:
-  - `QuechuaWanka-1.1.0-arm64.apk`, SHA-256 `2acd0b56ea9c2d0b68479d2b4895d2d2710164882058655134fdf8f4c7146790`;
-  - `QuechuaWanka-1.1.0-arm32.apk`, SHA-256 `4dbb622c84c73851f28046a8d3ffebfb4d888596ec1b613e11c0c8c95d2bc934`.
-- `qr_app_movil.png` regenerado: apunta a la Release. README, `docs/18` y el guion del video
-  actualizados.
+`/api/estado` informa `version`: los 7 primeros caracteres de `RENDER_GIT_COMMIT`, que Render define en
+cada despliegue, o `"local"`. El pie de la web muestra «versión: API <commit> · web <commit>». La web
+toma su commit al compilarse (`vite.config.js`, `__VERSION_WEB__`), porque el sitio estático y la API
+se despliegan por separado y pueden quedar en commits distintos. pytest 430 + 4 (todas en verde);
+Vitest + 3. Pendiente tras desplegar `main`: capturas en la nube (logo, cabeceras con
+`curl -sI`, `/api/estado` con 3 605 fragmentos, 8 documentos y el commit).

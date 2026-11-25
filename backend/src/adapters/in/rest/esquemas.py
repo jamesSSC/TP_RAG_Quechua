@@ -119,6 +119,8 @@ class EstadoSistema(BaseModel):
     base_demostracion: bool = False
     # Nube (ADR-030 a 032). Solo nombres y conteos: ningun secreto ni cadena de conexion.
     entorno: str = "local"
+    # P5: commit desplegado (7 caracteres de RENDER_GIT_COMMIT) o "local".
+    version: str = "local"
     motor_base_datos: str = "sqlite"
     origen_corpus: str = "jsonl"
     generador: str = "ollama"

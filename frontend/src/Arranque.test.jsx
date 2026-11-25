@@ -11,6 +11,7 @@ const ESTADO = {
   generador_disponible: true,
   base_datos_disponible: true,
   modelo: "qwen3.5:4b",
+  escritura_protegida: false,
 };
 
 const json = (cuerpo, estado = 200) =>
