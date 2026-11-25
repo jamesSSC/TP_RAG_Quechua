@@ -215,6 +215,8 @@ class Contenedor:
             "modelo": self._modelo_redactor(),
             # Nube (ADR-030 a 032): solo nombres y conteos, ningun secreto.
             "entorno": configuracion.entorno,
+            # P5: commit desplegado (RENDER_GIT_COMMIT) o "local".
+            "version": configuracion.version,
             "escritura_protegida": configuracion.modo_nube,
             "motor_base_datos": configuracion.base_datos,
             "origen_corpus": self.origen_corpus,

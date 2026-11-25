@@ -9,6 +9,7 @@ import {
   hayTokenAdmin,
   obtenerHistorial,
   URL_API,
+  VERSION_WEB,
 } from "./api";
 import AccesoAdministracion from "./componentes/AccesoAdministracion";
 import ConfiguracionNube from "./componentes/ConfiguracionNube";
@@ -75,6 +76,16 @@ function AvisoEspera({ visible }) {
   );
 }
 
+// P5: version desplegada (commit de la API y de la web) para comprobar que esta en la nube.
+function Version({ estado }) {
+  return (
+    <span data-testid="pie-version">
+      {" "}
+      · versión: API {estado.version ?? "sin dato"} · web {VERSION_WEB}
+    </span>
+  );
+}
+
 function PieEstado({ estado, conectando }) {
   if (!estado) {
     if (conectando) return <span>Conectando con el servicio…</span>;
@@ -91,6 +102,7 @@ function PieEstado({ estado, conectando }) {
         {estado.generador === "gemini" ? ` (${estado.modelo})` : ""} · modelos ML{" "}
         {estado.predictores_disponibles ? "cargados" : "no cargados"} · umbral{" "}
         {estado.umbral_abstencion}
+        <Version estado={estado} />
       </span>
     );
   }
@@ -100,6 +112,7 @@ function PieEstado({ estado, conectando }) {
       umbral de abstención {estado.umbral_abstencion} · modelo {estado.modelo} ·
       {estado.predictores_disponibles ? " predictores ML activos ·" : ""}
       procesamiento local
+      <Version estado={estado} />
     </span>
   );
 }
