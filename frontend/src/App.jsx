@@ -9,6 +9,7 @@ import {
   hayTokenAdmin,
   obtenerHistorial,
   URL_API,
+  VERSION_WEB,
 } from "./api";
 import AccesoAdministracion from "./componentes/AccesoAdministracion";
 import ConfiguracionNube from "./componentes/ConfiguracionNube";
@@ -16,6 +17,7 @@ import CajaConsulta from "./componentes/CajaConsulta";
 import EstadoInicial from "./componentes/EstadoInicial";
 import GestionCorpus from "./componentes/GestionCorpus";
 import GestionFuentes from "./componentes/GestionFuentes";
+import GestionPendiente from "./componentes/GestionPendiente";
 import Historial from "./componentes/Historial";
 import PanelPrediccion from "./componentes/PanelPrediccion";
 import Respuesta from "./componentes/Respuesta";
@@ -75,6 +77,16 @@ function AvisoEspera({ visible }) {
   );
 }
 
+// P5: version desplegada (commit de la API y de la web) para comprobar que esta en la nube.
+function Version({ estado }) {
+  return (
+    <span data-testid="pie-version">
+      {" "}
+      · versión: API {estado.version ?? "sin dato"} · web {VERSION_WEB}
+    </span>
+  );
+}
+
 function PieEstado({ estado, conectando }) {
   if (!estado) {
     if (conectando) return <span>Conectando con el servicio…</span>;
@@ -91,6 +103,7 @@ function PieEstado({ estado, conectando }) {
         {estado.generador === "gemini" ? ` (${estado.modelo})` : ""} · modelos ML{" "}
         {estado.predictores_disponibles ? "cargados" : "no cargados"} · umbral{" "}
         {estado.umbral_abstencion}
+        <Version estado={estado} />
       </span>
     );
   }
@@ -100,6 +113,7 @@ function PieEstado({ estado, conectando }) {
       umbral de abstención {estado.umbral_abstencion} · modelo {estado.modelo} ·
       {estado.predictores_disponibles ? " predictores ML activos ·" : ""}
       procesamiento local
+      <Version estado={estado} />
     </span>
   );
 }
@@ -119,7 +133,12 @@ export default function App() {
   // base solo lo lee el administrador. En local sigue siendo el de la base (RF-11).
   const [historialSesion, setHistorialSesion] = useState([]);
   const [administrando, setAdministrando] = useState(hayTokenAdmin);
-  const protegida = Boolean(estado?.escritura_protegida);
+  // S14-01: bloqueada por defecto. Solo se considera abierta (modo local) cuando la API respondio
+  // y dijo explicitamente escritura_protegida === false. Mientras /api/estado no responde (nube
+  // arrancando) o si fallo, se trata como protegida: nada de gestion ni historial del servidor.
+  const modoConfirmado = estado !== null;
+  const abierta = modoConfirmado && estado.escritura_protegida === false;
+  const protegida = !abierta;
 
   const cambiarTamano = (indice) => {
     const acotado = Math.min(TAMANOS.length - 1, Math.max(0, indice));
@@ -141,17 +160,20 @@ export default function App() {
       .catch(() => setEstado(null))
       .finally(() => setConectando(false));
 
+  // El historial de la base solo se pide con el modo abierto confirmado (S14-01): si /api/estado
+  // no respondio, `datos` es undefined y antes eso bastaba para pedirlo.
+  const cargarEstadoEHistorial = () =>
+    cargarEstado().then((datos) => {
+      if (datos && datos.escritura_protegida === false) cargarHistorial();
+    });
+
   const reintentarEstado = () => {
     setConectando(true);
-    cargarEstado().then((datos) => {
-      if (!datos?.escritura_protegida) cargarHistorial();
-    });
+    cargarEstadoEHistorial();
   };
 
   useEffect(() => {
-    cargarEstado().then((datos) => {
-      if (!datos?.escritura_protegida) cargarHistorial();
-    });
+    cargarEstadoEHistorial();
   }, []);
 
   const esperaLarga = useEsperaLarga(conectando || cargando);
@@ -196,12 +218,17 @@ export default function App() {
     }
   };
 
-  const soloLectura = protegida && !administrando;
-  const acceso = <AccesoAdministracion onAcceso={() => setAdministrando(true)} />;
+  // Gestion visible solo con el modo confirmado: abierto (local) o protegido con token validado.
+  const gestionHabilitada = modoConfirmado && (abierta || administrando);
+  const bloqueo = !modoConfirmado ? (
+    <GestionPendiente conectando={conectando} onReintentar={reintentarEstado} />
+  ) : (
+    <AccesoAdministracion onAcceso={() => setAdministrando(true)} />
+  );
   const otrasVistas = {
     prediccion: <PanelPrediccion />,
-    fuentes: soloLectura ? acceso : <GestionFuentes />,
-    corpus: soloLectura ? acceso : <GestionCorpus />,
+    fuentes: gestionHabilitada ? <GestionFuentes /> : bloqueo,
+    corpus: gestionHabilitada ? <GestionCorpus /> : bloqueo,
   };
 
   return (

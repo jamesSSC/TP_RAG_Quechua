@@ -116,8 +116,11 @@ HU-03/HU-07, consulta con cita, recorriendo el código en GitHub:
    `domain/entities/respuesta.py` (RN-03: sin abstención, respaldo ≥ 1).
 5. **Adaptadores de salida:** `adapters/out/recuperacion/indice_hibrido_lexico.py`,
    `adapters/out/generacion/gemini_generador.py`, `adapters/out/prediccion/predictor_sklearn.py`.
-6. **Composición:** `backend/src/infrastructure/contenedor.py`. En la app, `lib/infraestructura/contenedor.dart`:
+6. **Composición:** `backend/src/infrastructure/contenedor.py`. En la app, `mobile/lib/infraestructura/contenedor.dart`:
    el mismo puerto cumplido por la nube o por el teléfono.
+7. **La app en el mismo repositorio:** carpeta `mobile/` (traída con su historial) y la
+   [Release v1.1.0](https://github.com/DalgomXD-byte/quechua-wanka-movil/releases/tag/v1.1.0) con el
+   APK y su SHA-256; es el destino del QR del póster.
 
 ## Lista de tomas
 

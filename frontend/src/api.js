@@ -4,6 +4,9 @@ const BASE = import.meta.env.VITE_API_URL ?? "";
 export const URL_API = BASE || "mismo origen";
 // La version web habla con una API remota (Render); el escritorio, con la del propio equipo.
 export const API_REMOTA = BASE !== "";
+// P5: commit de la web (vite.config.js) y, en el pie, el de la API (`/api/estado.version`).
+// eslint-disable-next-line no-undef
+export const VERSION_WEB = typeof __VERSION_WEB__ === "undefined" ? "local" : __VERSION_WEB__;
 // REF-02 (ADR-033): pasado este tiempo sin respuesta, la interfaz avisa de la espera.
 export const AVISO_ESPERA_MS = 4000;
 

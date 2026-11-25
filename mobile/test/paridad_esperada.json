@@ -1,0 +1,707 @@
+[
+ {
+  "consulta": "como se dice perro en quechua wanka",
+  "depurada": "perro",
+  "es_lema": true,
+  "similitud_maxima": 0.271344,
+  "top": [
+   {
+    "id": "19eb27356311",
+    "puntuacion": 0.271344,
+    "lema": true
+   },
+   {
+    "id": "ac8dffe03cd5",
+    "puntuacion": 0.229388,
+    "lema": false
+   },
+   {
+    "id": "060c48ea6f83",
+    "puntuacion": 0.2129,
+    "lema": false
+   },
+   {
+    "id": "539ac10c25be",
+    "puntuacion": 0.191652,
+    "lema": false
+   },
+   {
+    "id": "337427a4ea5d",
+    "puntuacion": 0.166129,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "ac8dffe03cd5",
+    "puntuacion": 0.229388
+   },
+   {
+    "id": "060c48ea6f83",
+    "puntuacion": 0.2129
+   },
+   {
+    "id": "337427a4ea5d",
+    "puntuacion": 0.166129
+   }
+  ]
+ },
+ {
+  "consulta": "¿cómo se dice agua?",
+  "depurada": "agua",
+  "es_lema": true,
+  "similitud_maxima": 0.617483,
+  "top": [
+   {
+    "id": "454acbb90e28",
+    "puntuacion": 0.571413,
+    "lema": true
+   },
+   {
+    "id": "92278b512518",
+    "puntuacion": 0.617483,
+    "lema": false
+   },
+   {
+    "id": "f462ca02b9c0",
+    "puntuacion": 0.292937,
+    "lema": false
+   },
+   {
+    "id": "fd08de9d4aeb",
+    "puntuacion": 0.276978,
+    "lema": false
+   },
+   {
+    "id": "04f0b77fff09",
+    "puntuacion": 0.260888,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "92278b512518",
+    "puntuacion": 0.617483
+   },
+   {
+    "id": "f462ca02b9c0",
+    "puntuacion": 0.292937
+   },
+   {
+    "id": "27c91fb7368f",
+    "puntuacion": 0.201988
+   }
+  ]
+ },
+ {
+  "consulta": "casa",
+  "depurada": "casa",
+  "es_lema": true,
+  "similitud_maxima": 0.362517,
+  "top": [
+   {
+    "id": "3dae2198b582",
+    "puntuacion": 0.304566,
+    "lema": true
+   },
+   {
+    "id": "81d49aa0eb50",
+    "puntuacion": 0.362517,
+    "lema": false
+   },
+   {
+    "id": "c58ba83fd354",
+    "puntuacion": 0.198044,
+    "lema": false
+   },
+   {
+    "id": "1dbfed27e589",
+    "puntuacion": 0.18819,
+    "lema": false
+   },
+   {
+    "id": "de3003e3079d",
+    "puntuacion": 0.181938,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "81d49aa0eb50",
+    "puntuacion": 0.362517
+   },
+   {
+    "id": "1dbfed27e589",
+    "puntuacion": 0.18819
+   },
+   {
+    "id": "de3003e3079d",
+    "puntuacion": 0.181938
+   }
+  ]
+ },
+ {
+  "consulta": "¿cómo se dice niño en quechua wanka?",
+  "depurada": "nino",
+  "es_lema": true,
+  "similitud_maxima": 0.574258,
+  "top": [
+   {
+    "id": "2c28d09e6314",
+    "puntuacion": 0.574258,
+    "lema": true
+   },
+   {
+    "id": "ec19995faa19",
+    "puntuacion": 0.102508,
+    "lema": false
+   },
+   {
+    "id": "79755577ce00",
+    "puntuacion": 0.100984,
+    "lema": false
+   },
+   {
+    "id": "85804e0e0c28",
+    "puntuacion": 0.082706,
+    "lema": false
+   },
+   {
+    "id": "10638c7e40fa",
+    "puntuacion": 0.077885,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "ec19995faa19",
+    "puntuacion": 0.102508
+   },
+   {
+    "id": "79755577ce00",
+    "puntuacion": 0.100984
+   },
+   {
+    "id": "85804e0e0c28",
+    "puntuacion": 0.082706
+   }
+  ]
+ },
+ {
+  "consulta": "corazón",
+  "depurada": "corazon",
+  "es_lema": true,
+  "similitud_maxima": 0.775792,
+  "top": [
+   {
+    "id": "0cde389eb103",
+    "puntuacion": 0.775792,
+    "lema": true
+   },
+   {
+    "id": "e4c204759e45",
+    "puntuacion": 0.20074,
+    "lema": false
+   },
+   {
+    "id": "b16d66c1cd6b",
+    "puntuacion": 0.180515,
+    "lema": false
+   },
+   {
+    "id": "eb5a69dad63a",
+    "puntuacion": 0.118538,
+    "lema": false
+   },
+   {
+    "id": "82cb1ddd5151",
+    "puntuacion": 0.097548,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "e4c204759e45",
+    "puntuacion": 0.20074
+   },
+   {
+    "id": "eb5a69dad63a",
+    "puntuacion": 0.118538
+   },
+   {
+    "id": "ce9f3e682c59",
+    "puntuacion": 0.086841
+   }
+  ]
+ },
+ {
+  "consulta": "araña",
+  "depurada": "arana",
+  "es_lema": true,
+  "similitud_maxima": 0.382423,
+  "top": [
+   {
+    "id": "869b33606b5f",
+    "puntuacion": 0.382423,
+    "lema": true
+   },
+   {
+    "id": "c7d90716527d",
+    "puntuacion": 0.188757,
+    "lema": false
+   },
+   {
+    "id": "13bd4f47fe68",
+    "puntuacion": 0.169029,
+    "lema": false
+   },
+   {
+    "id": "050a35fa32fa",
+    "puntuacion": 0.117324,
+    "lema": false
+   },
+   {
+    "id": "e4a61824aa3f",
+    "puntuacion": 0.111097,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "968bcb4f5ead",
+    "puntuacion": 0.060921
+   },
+   {
+    "id": "2eca37d629ab",
+    "puntuacion": 0.048884
+   },
+   {
+    "id": "e2c1d5d4e6af",
+    "puntuacion": 0.029556
+   }
+  ]
+ },
+ {
+  "consulta": "allqu",
+  "depurada": "allqu",
+  "es_lema": false,
+  "similitud_maxima": 0.521534,
+  "top": [
+   {
+    "id": "19eb27356311",
+    "puntuacion": 0.521534,
+    "lema": false
+   },
+   {
+    "id": "ee9a6dc38021",
+    "puntuacion": 0.329033,
+    "lema": false
+   },
+   {
+    "id": "539ac10c25be",
+    "puntuacion": 0.216266,
+    "lema": false
+   },
+   {
+    "id": "8b409374d635",
+    "puntuacion": 0.140136,
+    "lema": false
+   },
+   {
+    "id": "060c48ea6f83",
+    "puntuacion": 0.12048,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "060c48ea6f83",
+    "puntuacion": 0.12048
+   },
+   {
+    "id": "6ba1dc27cadb",
+    "puntuacion": 0.116233
+   },
+   {
+    "id": "e2c1d5d4e6af",
+    "puntuacion": 0.106808
+   }
+  ]
+ },
+ {
+  "consulta": "yaku",
+  "depurada": "yaku",
+  "es_lema": false,
+  "similitud_maxima": 0.384631,
+  "top": [
+   {
+    "id": "454acbb90e28",
+    "puntuacion": 0.384631,
+    "lema": false
+   },
+   {
+    "id": "1a554ccd8bec",
+    "puntuacion": 0.304525,
+    "lema": false
+   },
+   {
+    "id": "7a59a9ff5fb4",
+    "puntuacion": 0.240656,
+    "lema": false
+   },
+   {
+    "id": "92278b512518",
+    "puntuacion": 0.190879,
+    "lema": false
+   },
+   {
+    "id": "5bacc56dde3b",
+    "puntuacion": 0.177438,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "7a59a9ff5fb4",
+    "puntuacion": 0.240656
+   },
+   {
+    "id": "92278b512518",
+    "puntuacion": 0.190879
+   },
+   {
+    "id": "5bacc56dde3b",
+    "puntuacion": 0.177438
+   }
+  ]
+ },
+ {
+  "consulta": "como se forma el plural de los pronombres",
+  "depurada": "como se forma el plural de los pronombres",
+  "es_lema": false,
+  "similitud_maxima": 0.467328,
+  "top": [
+   {
+    "id": "097395698cd4",
+    "puntuacion": 0.467328,
+    "lema": false
+   },
+   {
+    "id": "b7acbc6b2bc4",
+    "puntuacion": 0.321062,
+    "lema": false
+   },
+   {
+    "id": "3ced3d869728",
+    "puntuacion": 0.312968,
+    "lema": false
+   },
+   {
+    "id": "20457bf0ecf3",
+    "puntuacion": 0.282329,
+    "lema": false
+   },
+   {
+    "id": "fb656f529f79",
+    "puntuacion": 0.242765,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "097395698cd4",
+    "puntuacion": 0.467328
+   },
+   {
+    "id": "b7acbc6b2bc4",
+    "puntuacion": 0.321062
+   },
+   {
+    "id": "3ced3d869728",
+    "puntuacion": 0.312968
+   }
+  ]
+ },
+ {
+  "consulta": "que es el sufijo ablativo",
+  "depurada": "que es el sufijo ablativo",
+  "es_lema": false,
+  "similitud_maxima": 0.209872,
+  "top": [
+   {
+    "id": "2e7292457478",
+    "puntuacion": 0.209872,
+    "lema": false
+   },
+   {
+    "id": "6bd37bce2eef",
+    "puntuacion": 0.207997,
+    "lema": false
+   },
+   {
+    "id": "080eda69dad6",
+    "puntuacion": 0.203698,
+    "lema": false
+   },
+   {
+    "id": "574384ea6ff7",
+    "puntuacion": 0.198049,
+    "lema": false
+   },
+   {
+    "id": "dca9a264967a",
+    "puntuacion": 0.187697,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "2e7292457478",
+    "puntuacion": 0.209872
+   },
+   {
+    "id": "6bd37bce2eef",
+    "puntuacion": 0.207997
+   },
+   {
+    "id": "080eda69dad6",
+    "puntuacion": 0.203698
+   }
+  ]
+ },
+ {
+  "consulta": "cual es la capital de francia",
+  "depurada": "cual es la capital de francia",
+  "es_lema": false,
+  "similitud_maxima": 0.188459,
+  "top": [
+   {
+    "id": "3d3df1015253",
+    "puntuacion": 0.188459,
+    "lema": false
+   },
+   {
+    "id": "54b666da2fb1",
+    "puntuacion": 0.148675,
+    "lema": false
+   },
+   {
+    "id": "f940ccc65918",
+    "puntuacion": 0.146834,
+    "lema": false
+   },
+   {
+    "id": "9c3039d94a01",
+    "puntuacion": 0.143942,
+    "lema": false
+   },
+   {
+    "id": "b2fc187eeb21",
+    "puntuacion": 0.143744,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "54b666da2fb1",
+    "puntuacion": 0.148675
+   },
+   {
+    "id": "f940ccc65918",
+    "puntuacion": 0.146834
+   },
+   {
+    "id": "9c3039d94a01",
+    "puntuacion": 0.143942
+   }
+  ]
+ },
+ {
+  "consulta": "panel solar",
+  "depurada": "panel solar",
+  "es_lema": false,
+  "similitud_maxima": 0.096073,
+  "top": [
+   {
+    "id": "6cab7dfeefc9",
+    "puntuacion": 0.096073,
+    "lema": false
+   },
+   {
+    "id": "3236428f7219",
+    "puntuacion": 0.039354,
+    "lema": false
+   },
+   {
+    "id": "f5ed6269ff70",
+    "puntuacion": 0.036659,
+    "lema": false
+   },
+   {
+    "id": "89f0d8ec8745",
+    "puntuacion": 0.036402,
+    "lema": false
+   },
+   {
+    "id": "561997df576b",
+    "puntuacion": 0.035583,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "3236428f7219",
+    "puntuacion": 0.039354
+   },
+   {
+    "id": "089ab015e4c0",
+    "puntuacion": 0.032832
+   },
+   {
+    "id": "64fd96a8cb25",
+    "puntuacion": 0.032656
+   }
+  ]
+ },
+ {
+  "consulta": "en quechua wanka",
+  "depurada": "en quechua wanka",
+  "es_lema": false,
+  "similitud_maxima": 0.398773,
+  "top": [
+   {
+    "id": "a642b9ec397e",
+    "puntuacion": 0.398773,
+    "lema": false
+   },
+   {
+    "id": "7fe7ca63efd8",
+    "puntuacion": 0.394885,
+    "lema": false
+   },
+   {
+    "id": "c918b5fc7f82",
+    "puntuacion": 0.389479,
+    "lema": false
+   },
+   {
+    "id": "d00030b320a7",
+    "puntuacion": 0.336451,
+    "lema": false
+   },
+   {
+    "id": "8ffe91cf0ee0",
+    "puntuacion": 0.328853,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "7fe7ca63efd8",
+    "puntuacion": 0.394885
+   },
+   {
+    "id": "c918b5fc7f82",
+    "puntuacion": 0.389479
+   },
+   {
+    "id": "8ffe91cf0ee0",
+    "puntuacion": 0.328853
+   }
+  ]
+ },
+ {
+  "consulta": "love",
+  "depurada": "love",
+  "es_lema": false,
+  "similitud_maxima": 0.150223,
+  "top": [
+   {
+    "id": "327e893c5285",
+    "puntuacion": 0.150223,
+    "lema": false
+   },
+   {
+    "id": "3cd905672ae3",
+    "puntuacion": 0.062713,
+    "lema": false
+   },
+   {
+    "id": "35edd5db7f03",
+    "puntuacion": 0.041261,
+    "lema": false
+   },
+   {
+    "id": "5422f1fe941d",
+    "puntuacion": 0.04076,
+    "lema": false
+   },
+   {
+    "id": "ebcd4b4b05f9",
+    "puntuacion": 0.033994,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "3cd905672ae3",
+    "puntuacion": 0.062713
+   },
+   {
+    "id": "ee7ad8be316a",
+    "puntuacion": 0.02687
+   },
+   {
+    "id": "9587b9128329",
+    "puntuacion": 0.02672
+   }
+  ]
+ },
+ {
+  "consulta": "how do you say water in wanka quechua",
+  "depurada": "water",
+  "es_lema": false,
+  "similitud_maxima": 0.081842,
+  "top": [
+   {
+    "id": "6fef80274e45",
+    "puntuacion": 0.081842,
+    "lema": false
+   },
+   {
+    "id": "8fdc6775f33d",
+    "puntuacion": 0.068819,
+    "lema": false
+   },
+   {
+    "id": "24709170a433",
+    "puntuacion": 0.068495,
+    "lema": false
+   },
+   {
+    "id": "a2b5679ca51b",
+    "puntuacion": 0.062371,
+    "lema": false
+   },
+   {
+    "id": "bf219bc6a5a4",
+    "puntuacion": 0.061215,
+    "lema": false
+   }
+  ],
+  "prosa": [
+   {
+    "id": "cb7d824803c2",
+    "puntuacion": 0.036403
+   },
+   {
+    "id": "c2acccc8f378",
+    "puntuacion": 0.034904
+   },
+   {
+    "id": "e55dfb940809",
+    "puntuacion": 0.0336
+   }
+  ]
+ }
+]

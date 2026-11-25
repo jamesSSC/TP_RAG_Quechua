@@ -67,6 +67,14 @@ class Configuracion(BaseSettings):
     corpus_origen: Literal["jsonl", "postgres"] = "jsonl"
     # Rotulo del entorno que se muestra en /api/estado y en el pie de la interfaz.
     entorno: str = "local"
+    # P5 (ronda 2): commit desplegado. Render define RENDER_GIT_COMMIT en cada despliegue; en local
+    # no existe y la version se informa como "local".
+    render_git_commit: str = ""
+
+    @property
+    def version(self) -> str:
+        commit = self.render_git_commit.strip()
+        return commit[:7] if commit else "local"
 
     ruta_tabla_traduccion: Path = RAIZ / "data" / "traduccion_en_es.json"
     # Adaptador de traduccion EN->ES: "tabla" (precalculada, defecto y nube) u "ollama".
@@ -85,7 +93,8 @@ class Configuracion(BaseSettings):
     # ADR-032. La clave es un secreto del servicio (panel de Render); nunca se registra.
     gemini_api_key: str = ""
     gemini_modelo: str = "gemini-3.5-flash-lite"
-    gemini_timeout: float = 15.0
+    # P4 (ADR-039): 10 s (antes 15). Pasado ese tiempo responde el fragmento literal citado.
+    gemini_timeout: float = 10.0
     # Secreto que autoriza a las pruebas contra la nube a registrar sus consultas como `carga` o
     # `humo` (cabeceras X-Token-Pruebas y X-Origen-Consultas). Vacio: desactivado.
     token_pruebas: str = ""

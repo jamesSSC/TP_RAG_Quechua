@@ -16,7 +16,7 @@ Fecha de medición: 19 y 20/11/2026. Repositorio base: `omarpiero/TP_RAG_Quechua
 | C-04 | Puertos | **17**: 7 de entrada y 10 de salida | `ls backend/src/application/ports/{in,out}/*.py` | `8088193` |
 | C-05 | Casos de uso / controladores REST / middleware | **8 / 6 / 7** | ver `docs_ingenieria_inversa/evidencias/fase_arquitectura/` | `8088193` |
 | C-06 | Rutinas en PostgreSQL | **7**: 2 procedimientos y 5 funciones | `grep -hoiE "create (or replace )?(function\|procedure) [a-z_]+" backend/db/postgres/*.sql` | `8088193` |
-| C-07 | WIP del Kanban | **1** en desarrollo; 2 en especificación, auditoría y revisión humana | `docs/05_KANBAN.md:15-24` | `8088193` |
+| C-07 | WIP del Kanban | **Trello: 3** («una tarjeta por integrante», tarjeta en IN PROGRESS). `docs/05_KANBAN.md:15-24` dice 1 en desarrollo y 2 en las demás columnas: **unificar** (el tablero real usa 3) | Export JSON del tablero (20/11); `docs/05_KANBAN.md` | 20/11 |
 | C-08 | Corpus | **3 605** fragmentos, **8** documentos (nube tras la limpieza H-14) | `curl -s https://quechua-api.onrender.com/api/estado` | 20/11 00:59 UTC |
 | C-09 | Umbral τ | **0,48** (en local, en la nube y en el teléfono) | `config.py:75`; `manifiesto.json` de la app | `8088193` |
 
@@ -48,7 +48,8 @@ Fecha de medición: 19 y 20/11/2026. Repositorio base: `omarpiero/TP_RAG_Quechua
 |---|---|---|---|
 | C-22 | **Mediana de latencia** local con Qwen3.5 4B en GPU (respuestas, N = 220) | **2 744 ms** (P95 2 830) | `metricas/evidencias/latencia_local_qwen_gpu.json` |
 | C-23 | Mediana local con el redactor extractivo (N = 248) | 6,8 ms (P95 15,0) | `…/latencia_local_extractivo.json` |
-| C-24 | Mediana en la nube con Gemini (U3) | 923 ms (P95 977) | `docs/17_REPORTE_METRICAS_U3.md:75` |
+| C-24 | Mediana en la nube con Gemini (20/11, N = 220 respuestas, origen `humo`) | **6 424 ms** (P95 15 366; 55 de 220 por el respaldo extractivo, por el límite de 15 s). Abstenciones: P50 158 ms. Referencia U3: 923 ms | `metricas/evidencias/latencia_nube_gemini.json`; `docs/17_…:75` |
+| C-24b | Arnés de 248 consultas **en la nube** | recall@5 **1,000** en A, B y D; **0 FP** en C; 0 errores HTTP | ídem |
 | C-25 | Arranque en frío de Render | 62,4 s y 72,4 s (U3); 67,6 s (19/11) | `docs/17_…:74`; bitácora del PMV3 |
 | C-26 | Mediana sin conexión en el dispositivo (N = 248) | **0,80 ms** (P95 2,71) | `HU-10.2_movil_arnes_248_resumen.txt` |
 | C-27 | APK release arm64 | **22,6 MB** | `flutter build apk --release --split-per-abi` |
