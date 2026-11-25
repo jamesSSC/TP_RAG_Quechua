@@ -134,7 +134,7 @@ Una tarjeta por hallazgo corregido (para el informe 8.9 y como portada, la captu
   - [x] Sin `/api/historial` ni «Borrar historial» del servidor hasta confirmar el modo.
   - [x] Modo local sin cambios.
   - [x] Revisión de la app móvil: no tiene el patrón.
-  - [ ] Captura en la nube durante un arranque en frío real (tras desplegar `main`).
+  - [x] Captura en la nube durante un arranque en frío real (25/11, `8d8969d`): gestión bloqueada a los 6,4 s; «Modo solo lectura» al responder la API (56,3 s).
 - **PR / rama:** `fix/web-bloqueo-por-defecto`. PR: por abrir.
 - **Capturas:** antes `docs_auditoria/evidencias/antes/S14-01_antes_gestion_desbloqueada_en_arranque.png` →
   después `docs_auditoria/evidencias/despues/S14-01_despues_gestion_bloqueada_en_arranque.png`.

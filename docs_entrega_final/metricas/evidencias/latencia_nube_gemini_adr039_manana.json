@@ -1,0 +1,55 @@
+{
+ "etiqueta": "nube_gemini_adr039_manana",
+ "api": "https://quechua-api.onrender.com",
+ "generador": "gemini",
+ "modelo": "gemini-3.5-flash-lite",
+ "fragmentos": 3605,
+ "calentamiento_ms": 802.6,
+ "todas": {
+  "n": 248,
+  "p50_ms": 967.6,
+  "p95_ms": 10336.8,
+  "max_ms": 10462.6,
+  "media_ms": 2002.0
+ },
+ "respuestas": {
+  "n": 220,
+  "p50_ms": 1014.6,
+  "p95_ms": 10346.1,
+  "max_ms": 10462.6,
+  "media_ms": 2230.4
+ },
+ "abstenciones": {
+  "n": 28,
+  "p50_ms": 202.7,
+  "p95_ms": 297.6,
+  "max_ms": 351.2,
+  "media_ms": 207.4
+ },
+ "errores_http": 0,
+ "origen": "humo",
+ "arnes": {
+  "A": {
+   "n": 120,
+   "respondidas": 120,
+   "recall@5": 1.0
+  },
+  "B": {
+   "n": 60,
+   "respondidas": 60,
+   "recall@5": 1.0
+  },
+  "C": {
+   "n": 28,
+   "respondidas": 0,
+   "falsos_positivos": 0
+  },
+  "D": {
+   "n": 40,
+   "respondidas": 40,
+   "recall@5": 1.0
+  }
+ },
+ "potencia_reposo_w": null,
+ "fecha_utc": "2026-11-25T13:49:42Z"
+}

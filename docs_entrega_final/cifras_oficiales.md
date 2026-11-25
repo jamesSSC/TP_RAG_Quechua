@@ -51,9 +51,9 @@ Fecha de medición: 19 y 20/11/2026; actualizado el 24/11 (ronda 2, P7) y **reco
 |---|---|---|---|
 | C-22 | **Mediana de latencia** local con Qwen3.5 4B en GPU (respuestas, N = 220) | **2 744 ms** (P95 2 830) | `metricas/evidencias/latencia_local_qwen_gpu.json` |
 | C-23 | Mediana local con el redactor extractivo (N = 248) | 6,8 ms (P95 15,0) | `…/latencia_local_extractivo.json` |
-| C-24 | Mediana en la nube con Gemini (20/11, N = 220 respuestas, origen `humo`) | **6 424 ms** (P95 15 366; 55 de 220 por el respaldo extractivo, por el límite de 15 s). Abstenciones: P50 158 ms. Referencia U3: 923 ms. **Tras ADR-039 (tiempo máximo de Gemini 10 s, PR #39):** por medir con N ≥ 30 en dos franjas | `metricas/evidencias/latencia_nube_gemini.json`; `docs/17_…:75` |
+| C-24 | Mediana en la nube con Gemini (20/11, N = 220 respuestas, origen `humo`) | **6 424 ms** (P95 15 366; 55 de 220 por el respaldo extractivo, por el límite de 15 s). Abstenciones: P50 158 ms. Referencia U3: 923 ms. Del respaldo del 20/11, solo 18 fueron por tiempo agotado; 37 fueron rechazos rápidos del verificador. **Tras ADR-039 (tope de 10 s), mañana del 25/11 (N = 220):** P50 **1 015 ms**, P95 **10 346 ms**, respaldo 51 (23 %; 16 por tiempo agotado); arnés 0 FP en C. La bajada del P50 no se atribuye al cambio (ver bitácora). Franja de la noche: por medir | `metricas/evidencias/latencia_nube_gemini_adr039_manana.json` | `metricas/evidencias/latencia_nube_gemini.json`; `docs/17_…:75` |
 | C-24b | Arnés de 248 consultas **en la nube** | recall@5 **1,000** en A, B y D; **0 FP** en C; 0 errores HTTP | ídem |
-| C-25 | Arranque en frío de Render | 62,4 s y 72,4 s (U3); 67,6 s (19/11) | `docs/17_…:74`; bitácora del PMV3 |
+| C-25 | Arranque en frío de Render | 62,4 s y 72,4 s (U3); 67,6 s (19/11); **56,3 s** (25/11, desde que se abre la web hasta que la API responde) | `docs/17_…:74`; bitácora del PMV3 |
 | C-26 | Mediana sin conexión en el dispositivo (N = 248) | **0,80 ms** (P95 2,71) | `HU-10.2_movil_arnes_248_resumen.txt` |
 | C-27 | APK release arm64 | **22,6 MB** | `flutter build apk --release --split-per-abi` |
 | C-28 | Energía de GPU por respuesta / por abstención | **44,2 J / 0,07 J** | `latencia_local_qwen_gpu.json` |

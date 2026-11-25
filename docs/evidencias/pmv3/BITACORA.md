@@ -143,3 +143,33 @@ Vitest + 3. Pendiente tras desplegar `main`: capturas en la nube (logo, cabecera
   - «criptomoneda», «atuk» y el inglés no reciben sugerencias.
 - Evidencias con la API local sobre una copia de `quechua_wanka.db`.
 - pytest 459/6, Vitest 57.
+
+## 2026-11-25 · Verificación en la nube tras desplegar `main` (`8d8969d`) y medición de P4 (mañana)
+
+- **P5:**
+  - `/api/estado` informa `version: 8d8969d`, 3 605 fragmentos, 8 documentos y `escritura_protegida: true`
+    (`nube/P5_despues_nube_api_estado_version.{txt,png}`);
+  - el pie de la web dice «versión: API 8d8969d · web 8d8969d», con el logo
+    (`docs_entrega_final/logo/B11_web_nube_despues_con_logo.png`);
+  - las cabeceras CSP, Referrer-Policy y Permissions-Policy están activas en el sitio estático
+    (`docs_ingenieria_inversa/evidencias/despues/H-07_despues_nube_cabeceras.{txt,png}`). Render aplicó
+    `render.yaml`: no hizo falta configurarlas a mano.
+- **P1 (S14-01) con un arranque en frío real:** la API estuvo 16 min sin tráfico. Al abrir la web,
+  «Fuentes del corpus» mostró a los 6,4 s el aviso neutro, sin formularios (0 controles). A los 56,3 s
+  la API respondió y la pestaña pasó sola a «Modo solo lectura»
+  (`docs_auditoria/evidencias/despues/S14-01_despues_nube_*`).
+- **P4, franja de la mañana** (08:37–08:49 de Perú; 248 consultas, origen `humo`, 20/min):
+  - comprobación previa del token: una consulta de control subió `humo` +1 y `usuario` +0. Sin ese
+    control, un token inválido las habría contado como demanda real (el middleware no rechaza);
+  - respuestas (N = 220): **P50 1 015 ms, P95 10 346 ms**; respaldo extractivo en 51 (23 %), 16 de ellas
+    por tiempo agotado (10 s) y 35 rápidas (el verificador descartó la extracción);
+  - abstenciones: P50 203 ms; arnés: recall@5 1,000 en A, B y D, **0 FP en C**, 0 errores HTTP;
+  - frente al 20/11 (mediodía): P50 6 424 → 1 015 ms y P95 15 366 → 10 346 ms. La bajada del P95 es el
+    efecto del tope de 10 s (ADR-039). La del P50 **no se atribuye al cambio**, porque el tope no actúa
+    sobre las respuestas rápidas: probablemente refleja menos carga de Gemini a esa hora. La franja de
+    la noche lo contrastará;
+  - corrección de la cifra del 20/11: de las 55 respuestas por el respaldo, solo **18** agotaron los
+    15 s; las otras 37 fueron rechazos rápidos del verificador.
+  - Evidencia: `docs_entrega_final/metricas/evidencias/latencia_nube_gemini_adr039_manana.{json,csv}`.
+- Pendiente: franja de la noche; diagnóstico de 429/503 con los logs de Render (acceso de James).
+

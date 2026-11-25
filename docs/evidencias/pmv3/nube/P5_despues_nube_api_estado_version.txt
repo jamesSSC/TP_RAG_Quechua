@@ -1,0 +1,30 @@
+$ curl -s https://quechua-api.onrender.com/api/estado | python -m json.tool
+{
+    "fragmentos_indexados": 3605,
+    "umbral_abstencion": 0.48,
+    "generador_disponible": true,
+    "base_datos_disponible": true,
+    "modelo": "gemini-3.5-flash-lite",
+    "predictores_disponibles": true,
+    "consistencia": {
+        "estado": "ok",
+        "avisos": []
+    },
+    "consultas_por_origen": {
+        "carga": 1005,
+        "humo": 556,
+        "usuario": 54
+    },
+    "base_demostracion": true,
+    "entorno": "staging",
+    "version": "8d8969d",
+    "motor_base_datos": "postgres",
+    "origen_corpus": "postgres",
+    "generador": "gemini",
+    "modelos_ml": {
+        "cobertura_hu08_1": true,
+        "pasajes_rf15": true
+    },
+    "documentos_corpus": 8,
+    "escritura_protegida": true
+}

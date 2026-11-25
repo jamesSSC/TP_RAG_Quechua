@@ -1,0 +1,27 @@
+$ curl -sI https://quechua-web.onrender.com/
+HTTP/1.1 200 OK
+Date: Wed, 25 Nov 2026 13:29:27 GMT
+Content-Type: text/html; charset=utf-8
+Connection: keep-alive
+Cache-Control: public, max-age=0, s-maxage=300
+cf-cache-status: EXPIRED
+etag: W/"cf4cfbe6a93a9c5e43d4ed43f3550757"
+content-security-policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://quechua-api.onrender.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
+last-modified: Wed, 25 Nov 2026 06:51:21 UTC
+permissions-policy: camera=(), microphone=(), geolocation=()
+referrer-policy: no-referrer
+rndr-id: a882009a-99a7-44a0
+Server: cloudflare
+strict-transport-security: max-age=315360000; includeSubdomains; preload
+vary: Accept-Encoding
+vary: Accept-Encoding
+x-content-type-options: nosniff
+x-frame-options: DENY
+CF-RAY: a601009c1f15a9ea-LIM
+alt-svc: h3=":443"; ma=86400
+
+
+$ curl -sI https://quechua-web.onrender.com/ | grep -iE "content-security-policy|referrer-policy|permissions-policy"
+content-security-policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://quechua-api.onrender.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
+permissions-policy: camera=(), microphone=(), geolocation=()
+referrer-policy: no-referrer
