@@ -65,6 +65,12 @@ en la CI), que `07_auditoria_final.md:99-100` registraba como no implementadas.
 Las comprobaciones contra la nube fueron inocuas: un `GET` y un `POST` sin cuerpo ni token, que el
 middleware rechaza con 401 antes de llegar al caso de uso.
 
+## Ronda 2 · Arreglos pedidos por Omar antes del video
+
+| ID | Arreglo | PR | Rama | Antes | Después | Verificación (comando → resultado) |
+|---|---|---|---|---|---|---|
+| S14-01 | La web bloquea la gestión por defecto: mientras `/api/estado` no responde o si falla, «Fuentes del corpus» e «Incorporar documentos» muestran un aviso neutro, sin formularios ni botones; con el fallo, «Reintentar». El historial del servidor solo se pide con `escritura_protegida === false` confirmado. Una respuesta sin el campo tampoco desbloquea | por abrir | `fix/web-bloqueo-por-defecto` | `docs_auditoria/evidencias/antes/S14-01_antes_gestion_desbloqueada_en_arranque.png`, `…/antes/S14-01_antes_estado_fallido_desbloqueado.png` | `docs_auditoria/evidencias/despues/S14-01_despues_gestion_bloqueada_en_arranque.png`, `…/despues/S14-01_despues_estado_fallido_bloqueado.png` | `npx vitest run` → 53/53 (5 nuevas en `BloqueoPorDefecto.s14.test.jsx`). `FASE=despues npx playwright test -c playwright.arranque.config.js` (web compilada para la nube, `/api/estado` retrasado 20 s o caído) → 2/2, sin controles de gestión y sin pedir `/api/historial` |
+
 ## Ronda 2 · P8 (si queda tiempo): mejoras del experto temático
 
 Evidencias contra la **API local real**, levantada sobre una **copia** de la base (no se tocó la nube):

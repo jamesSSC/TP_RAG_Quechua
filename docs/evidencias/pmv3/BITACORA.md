@@ -77,6 +77,58 @@ COMMIT;   -- o ROLLBACK si la verificación no dio 31
 Las 6 consultas de la app del 20/11, 00:37–00:51 UTC (tabla de arriba), se pueden rotular igual si el
 equipo lo decide.
 
+## 2026-11-24 · S14-01: la web bloquea la gestión por defecto (ronda 2 de arreglos)
+
+Omar observó en la nube que, durante el arranque en frío (~1 min), «Fuentes del corpus» e «Incorporar
+documentos» aparecían con los formularios activos hasta que `/api/estado` respondía. Causa en
+`frontend/src/App.jsx`: `protegida = Boolean(estado?.escritura_protegida)` era `false` con
+`estado = null`, el `.catch` dejaba `estado = null` para siempre si la API fallaba, y
+`!datos?.escritura_protegida` pedía `/api/historial` también con `datos` indefinido. La API seguía
+devolviendo 401 a las escrituras sin token: fallo de diseño de la interfaz, no exposición de datos.
+
+- Reproducido sin tocar la nube: web compilada con una API remota simulada y `vite preview`;
+  Playwright intercepta `/api/estado` y lo retrasa 20 s o lo hace fallar
+  (`frontend/playwright.arranque.config.js`). Capturas de antes y después en
+  `docs_auditoria/evidencias/{antes,despues}/S14-01_*`.
+- Arreglo en `fix/web-bloqueo-por-defecto`; Vitest 48 → 53 (todas en verde).
+- App móvil revisada: no tiene el patrón (no administra nada ni pide `/api/historial`).
+- Pendiente: captura en la nube durante un arranque en frío real, después de fusionar y desplegar.
+
+## 2026-11-24 · P5: versión desplegada en `/api/estado` y en el pie de la web
+
+`/api/estado` informa `version`: los 7 primeros caracteres de `RENDER_GIT_COMMIT`, que Render define en
+cada despliegue, o `"local"`. El pie de la web muestra «versión: API <commit> · web <commit>». La web
+toma su commit al compilarse (`vite.config.js`, `__VERSION_WEB__`), porque el sitio estático y la API
+se despliegan por separado y pueden quedar en commits distintos. pytest 430 + 4 (todas en verde);
+Vitest + 3. Pendiente tras desplegar `main`: capturas en la nube (logo, cabeceras con
+`curl -sI`, `/api/estado` con 3 605 fragmentos, 8 documentos y el commit).
+
+## 2026-11-24 · P2: la app en el repositorio oficial
+
+- PR #1 en `DalgomXD-byte/quechua-wanka-movil`: `feat/pmv3-dos-modos` → `master` (fast-forward de
+  6 commits sobre `3c6e976`). `flutter analyze`: sin avisos. `flutter test`: 45/45.
+- La app también queda en `mobile/` de este repositorio, traída con `git subtree add` (conserva los
+  14 commits de su historial), como pidió Omar. `flutter analyze` y `flutter test` también pasan
+  desde `mobile/`.
+- Release `v1.1.0` (por publicar al fusionar el PR #1). Los APK no se suben al repositorio:
+  - `QuechuaWanka-1.1.0-arm64.apk`, SHA-256 `2acd0b56ea9c2d0b68479d2b4895d2d2710164882058655134fdf8f4c7146790`;
+  - `QuechuaWanka-1.1.0-arm32.apk`, SHA-256 `4dbb622c84c73851f28046a8d3ffebfb4d888596ec1b613e11c0c8c95d2bc934`.
+- `qr_app_movil.png` regenerado: apunta a la Release. README, `docs/18` y el guion del video
+  actualizados.
+
+## 2026-11-24 · P4: mitigaciones de la latencia de la nube (ADR-039)
+
+- `GEMINI_TIMEOUT`: 15 s → 10 s. Reintento único ante 503, dentro del mismo presupuesto. Registro
+  `[GEMINI] modelo=… resultado=… ms=…` por llamada, sin la clave ni la consulta.
+- pytest: 6 casos nuevos en `test_gemini_generador.py`; suite completa en verde.
+- **Diagnóstico pendiente:** leer los logs de Render del 20/11 (429/503, duración por llamada) y la
+  cuota en Google AI Studio. Requiere el acceso de James al panel; con este cambio desplegado, los
+  logs ya muestran la duración de cada llamada.
+- **Medición pendiente:** N ≥ 30 en dos franjas (mañana y noche, hora de Perú), origen `humo`,
+  ≤ 20/min, después de desplegar. Luego C-24 en `cifras_oficiales.md`.
+- Si en el panel de Render hay una variable `GEMINI_TIMEOUT` puesta a mano, tiene prioridad sobre el
+  valor por defecto: hay que borrarla o ponerla en 10.
+
 ## 2026-11-24 · P8: REF-05, REF-07 y REF-08
 
 - **REF-05:** la tabla de variables de la web es ahora igual a la de la app: valor y peso
